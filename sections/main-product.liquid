@@ -14,13 +14,13 @@
     <div class="gallery">
       <div class="galleryMain">
         {% if section.settings.show_ribbon %}<span class="ribbon">{{ section.settings.ribbon_text | default: "Nieuw binnen!" }}</span>{% endif %}
-        <img id="mainImg" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}">
+        <img id="mainImg" src="{{ product.featured_image | image_url: width: 900 }}" width="900" height="900" alt="{{ product.featured_image.alt | default: product.title | escape }}">
       </div>
       {% if product.media.size > 1 %}
         <div class="thumbs">
           {% for media in product.media %}
             <div class="thumb{% if forloop.first %} active{% endif %}" data-img="{{ media | image_url: width: 900 }}">
-              <img src="{{ media | image_url: width: 200 }}" alt="{{ product.title | escape }} foto {{ forloop.index }}">
+              <img src="{{ media | image_url: width: 200 }}" width="200" height="200" alt="{{ product.title | escape }} foto {{ forloop.index }}">
             </div>
           {% endfor %}
         </div>

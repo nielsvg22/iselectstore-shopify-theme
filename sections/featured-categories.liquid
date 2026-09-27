@@ -10,9 +10,9 @@
     {% for block in section.blocks %}
       <a class="cat" href="{{ block.settings.collection.url }}" {{ block.shopify_attributes }}>
         {% if block.settings.collection.featured_image %}
-          <img src="{{ block.settings.collection.featured_image | image_url: width: 600 }}" alt="{{ block.settings.collection.title }}">
+          <img src="{{ block.settings.collection.featured_image | image_url: width: 600 }}" width="600" height="600" alt="{{ block.settings.collection.title }}">
         {% elsif block.settings.image %}
-          <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.label }}">
+          <img src="{{ block.settings.image | image_url: width: 600 }}" width="600" height="600" alt="{{ block.settings.label }}">
         {% endif %}
         <div class="catcopy"><b>{{ block.settings.label | default: block.settings.collection.title }}</b><span>Winkel nu →</span></div>
       </a>

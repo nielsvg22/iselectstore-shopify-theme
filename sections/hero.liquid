@@ -10,7 +10,7 @@
     <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: "607" }} WebwinkelKeur-reviews</span></div>
   </div>
   {% if section.settings.image %}
-    <div class="heroImg"><img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>
+    <div class="heroImg"><img src="{{ section.settings.image | image_url: width: 900 }}" width="900" height="900" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>
   {% endif %}
 </div></section>
 

@@ -14,7 +14,7 @@
         <div>
           {% for item in cart.items %}
             <div class="cartItem">
-              <a href="{{ item.url }}"><img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}"></a>
+              <a href="{{ item.url }}"><img src="{{ item.image | image_url: width: 200 }}" width="200" height="200" alt="{{ item.title | escape }}"></a>
               <div class="info">
                 <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
                 <div class="meta">{{ item.variant.title | replace: 'Default Title', '' }}</div>

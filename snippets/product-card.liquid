@@ -3,9 +3,7 @@
   <button class="heart" type="button" aria-label="Favoriet">♡</button>
   <a href="{{ product.url }}">
     {% if product.featured_image %}
-      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
-    {% else %}
-      <img src="{{ 'placeholder.svg' | asset_url }}" alt="">
+      <img src="{{ product.featured_image | image_url: width: 600 }}" width="600" height="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
     {% endif %}
   </a>
   {% if product.metafields.custom.badge_text %}
@@ -13,7 +11,6 @@
   {% endif %}
   <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
   <div class="meta">
-    {%- assign meta_parts = "" -%}
     {%- if product.metafields.custom.condition -%}{{ product.metafields.custom.condition }}{%- endif -%}
     {%- if product.metafields.custom.battery_percentage %} · {{ product.metafields.custom.battery_percentage }}% batt{% endif -%}
     {%- if product.metafields.custom.warranty_months %} · incl. {{ product.metafields.custom.warranty_months }} mnd garantie{% endif -%}
