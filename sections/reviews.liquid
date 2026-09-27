@@ -21,26 +21,59 @@
 {
   "name": "Reviews",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Titel" },
-    { "type": "textarea", "id": "subtext", "label": "Subtekst" }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titel"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtekst"
+    }
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Reviewtekst" },
-        { "type": "text", "id": "name", "label": "Naam" }
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Reviewtekst"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Naam"
+        }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "review", "settings": { "quote": "Snelle en vriendelijke service geweldig!!", "name": "Marco de Kleine" } },
-      { "type": "review", "settings": { "quote": "Snelle reactie, plezierig contact en mooie telefoon voor een mooie prijs.", "name": "Aja B" } },
-      { "type": "review", "settings": { "quote": "Vriendelijk. Goede service. Goede communicatie.", "name": "Ramon van der Horst" } }
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Snelle en vriendelijke service geweldig!!",
+          "name": "Marco de Kleine"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Snelle reactie, plezierig contact en mooie telefoon voor een mooie prijs.",
+          "name": "Aja B"
+        }
+      },
+      {
+        "type": "review",
+        "settings": {
+          "quote": "Vriendelijk. Goede service. Goede communicatie.",
+          "name": "Ramon van der Horst"
+        }
+      }
     ]
-  },
-  "presets": [{ "name": "Reviews" }]
+  }
 }
 {% endschema %}
