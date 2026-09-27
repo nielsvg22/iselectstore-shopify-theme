@@ -1,23 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "trust": { "type": "trust-bar" },
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {}
+    },
     "categories": {
       "type": "featured-categories",
       "blocks": {
-        "cat-iphone": { "type": "category", "settings": { "collection": "apple-iphone", "label": "Apple iPhone" } },
-        "cat-ipad": { "type": "category", "settings": { "collection": "apple-ipad", "label": "Tablets | Apple iPad" } },
-        "cat-macbook": { "type": "category", "settings": { "collection": "apple-macbooks", "label": "Apple MacBooks" } },
-        "cat-watch": { "type": "category", "settings": { "collection": "apple-watch", "label": "Apple Watch" } }
+        "cat-iphone": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-iphone",
+            "label": "Apple iPhone"
+          }
+        },
+        "cat-ipad": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-ipad",
+            "label": "Tablets | Apple iPad"
+          }
+        },
+        "cat-macbook": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-macbooks",
+            "label": "Apple MacBooks"
+          }
+        },
+        "cat-watch": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-watch",
+            "label": "Apple Watch"
+          }
+        }
       },
-      "block_order": ["cat-iphone", "cat-ipad", "cat-macbook", "cat-watch"]
+      "block_order": [
+        "cat-iphone",
+        "cat-ipad",
+        "cat-macbook",
+        "cat-watch"
+      ],
+      "settings": {}
     },
     "products": {
       "type": "featured-products",
-      "settings": { "collection": "alle-voorraad", "count": 4 }
+      "settings": {
+        "collection": "alle-voorraad",
+        "count": 4
+      }
     },
-    "tradein": { "type": "trade-in-banner" },
-    "reviews": { "type": "reviews" },
+    "tradein": {
+      "type": "trade-in-banner",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
     "whyus": {
       "type": "rich-text",
       "settings": {
@@ -27,5 +81,13 @@
       }
     }
   },
-  "order": ["hero", "trust", "categories", "products", "tradein", "reviews", "whyus"]
+  "order": [
+    "hero",
+    "trust",
+    "categories",
+    "products",
+    "tradein",
+    "reviews",
+    "whyus"
+  ]
 }
