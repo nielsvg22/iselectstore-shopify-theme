@@ -19,11 +19,50 @@
     },
     "categories": {
       "type": "featured-categories",
+      "blocks": {
+        "cat-iphone": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-iphone",
+            "label": "Apple iPhone"
+          }
+        },
+        "cat-ipad": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-ipad",
+            "label": "Tablets | Apple iPad"
+          }
+        },
+        "cat-macbook": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-macbooks",
+            "label": "Apple MacBooks"
+          }
+        },
+        "cat-watch": {
+          "type": "category",
+          "settings": {
+            "collection": "apple-watch",
+            "label": "Apple Watch"
+          }
+        }
+      },
+      "block_order": [
+        "cat-iphone",
+        "cat-ipad",
+        "cat-macbook",
+        "cat-watch"
+      ],
       "settings": {}
     },
     "products": {
       "type": "featured-products",
-      "settings": {}
+      "settings": {
+        "collection": "alle-voorraad",
+        "count": 4
+      }
     },
     "tradein": {
       "type": "trade-in-banner",
