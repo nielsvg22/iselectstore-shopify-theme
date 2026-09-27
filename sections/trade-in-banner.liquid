@@ -1,0 +1,25 @@
+<section><div class="wrap reveal">
+  <div class="trade">
+    <div class="tradecopy">
+      <div class="eye">Inruilservice</div>
+      <h2>{{ section.settings.heading | default: "Je oude iPhone inruilen?" }}</h2>
+      <p class="lead" style="font-size:16px">{{ section.settings.subtext | default: "Ontvang een eerlijke inruilwaarde en gebruik het bedrag direct voor je volgende toestel." }}</p>
+      <a class="btn primary js-tradein-trigger" href="#" style="margin-top:20px">Start inruilwaarde →</a>
+    </div>
+    {% if section.settings.image %}
+      <img src="{{ section.settings.image | image_url: width: 800 }}" alt="Apple producten inruilen">
+    {% endif %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Inruil-banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "subtext", "label": "Subtekst" },
+    { "type": "image_picker", "id": "image", "label": "Afbeelding" }
+  ],
+  "presets": [{ "name": "Inruil-banner" }]
+}
+{% endschema %}

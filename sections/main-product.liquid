@@ -1,0 +1,144 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<section style="padding-top:32px;padding-bottom:0"><div class="wrap">
+  <div class="breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a><span>/</span>
+    <a href="{{ routes.all_products_collection_url }}">Voorraad</a><span>/</span>
+    {% if product.type %}<a href="{{ routes.all_products_collection_url }}?filter.p.product_type={{ product.type | url_encode }}">{{ product.type }}</a><span>/</span>{% endif %}
+    <span style="color:var(--navy)">{{ product.title }}</span>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="pdp">
+    <div class="gallery">
+      <div class="galleryMain">
+        {% if section.settings.show_ribbon %}<span class="ribbon">{{ section.settings.ribbon_text | default: "Nieuw binnen!" }}</span>{% endif %}
+        <img id="mainImg" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}">
+      </div>
+      {% if product.media.size > 1 %}
+        <div class="thumbs">
+          {% for media in product.media %}
+            <div class="thumb{% if forloop.first %} active{% endif %}" data-img="{{ media | image_url: width: 900 }}">
+              <img src="{{ media | image_url: width: 200 }}" alt="{{ product.title | escape }} foto {{ forloop.index }}">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="pdpInfo">
+      <b class="brand">{{ shop.name | default: 'Apple' }}{% if product.type %} · {{ product.type }}{% endif %}</b>
+      <h1>{{ product.title }}</h1>
+      <div class="pdpRating"><span class="stars">★★★★★</span><span>{{ section.settings.rating | default: "9,8/10 · 607 reviews" }}</span></div>
+
+      <div class="pdpPrice">
+        <b>{{ current_variant.price | money }}</b>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span class="old">{{ current_variant.compare_at_price | money }}</span>
+        {% endif %}
+        {% if current_variant.compare_at_price > current_variant.price %}
+          {% assign saving = current_variant.compare_at_price | minus: current_variant.price %}
+          <span class="pdpSaving">Bespaar {{ saving | money }}</span>
+        {% endif %}
+      </div>
+      <p class="pdpTaxNote">incl. belasting (marge) · gratis verzending</p>
+      {% if current_variant.inventory_management and current_variant.inventory_quantity <= 1 %}
+        <p class="stockNote">Nog maar 1 op voorraad — dit exacte toestel is uniek</p>
+      {% endif %}
+
+      <div class="specs">
+        {% if product.metafields.custom.storage_gb %}<div><small>Opslag</small><b>{{ product.metafields.custom.storage_gb }}GB</b></div>{% endif %}
+        {% if product.metafields.custom.battery_percentage %}<div><small>Batterijconditie</small><b>{{ product.metafields.custom.battery_percentage }}%</b></div>{% endif %}
+        {% if product.metafields.custom.condition %}<div><small>Staat</small><b>{{ product.metafields.custom.condition }}</b></div>{% endif %}
+        {% if product.metafields.custom.warranty_months %}<div><small>Garantie</small><b>{{ product.metafields.custom.warranty_months }} maanden</b></div>{% endif %}
+      </div>
+
+      {% if section.settings.accessory_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
+        <div class="optionGroup">
+          <label>Accessoires toevoegen</label>
+          <div class="accessories" id="accessoryList">
+            {% if section.settings.accessory_1 %}{% render 'accessory-option', accessory: section.settings.accessory_1 %}{% endif %}
+            {% if section.settings.accessory_2 %}{% render 'accessory-option', accessory: section.settings.accessory_2 %}{% endif %}
+            {% if section.settings.accessory_3 %}{% render 'accessory-option', accessory: section.settings.accessory_3 %}{% endif %}
+          </div>
+          <div class="accTotal">Totaal incl. accessoires: <b class="js-total">{{ current_variant.price | money }}</b></div>
+        </div>
+      {% endif %}
+
+      {% form 'product', product, id: 'productForm' %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        <div class="buyRow" data-base-price="{{ current_variant.price }}" data-currency="{{ cart.currency.iso_code }}">
+          <button class="add" type="submit" id="addToCart">In winkelwagen — <span class="js-total-inline">{{ current_variant.price | money }}</span></button>
+        </div>
+      {% endform %}
+      <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:26px" href="#">Start inruilwaarde voor je oude toestel →</a>
+
+      <div class="pdpFeatures">
+        <div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>Originele premium pre-owned {{ product.type | default: "Apple-product" }}: niet refurbished en geen onderdelen vervangen</div>
+        {% if product.metafields.custom.battery_percentage %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ product.metafields.custom.battery_percentage }}% batterijcapaciteit</div>{% endif %}
+        {% if product.metafields.custom.condition %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="16" height="8" rx="2"/><path d="M19 10.5h2v3h-2"/></svg>{{ product.metafields.custom.condition }} — zie de fotoreportage voor de exacte staat</div>{% endif %}
+        {% if product.metafields.custom.warranty_months %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Incl. {{ product.metafields.custom.warranty_months }} maanden garantie</div>{% endif %}
+      </div>
+
+      <div class="accordion">
+        <div class="accItem open">
+          <div class="accHead">Productbeschrijving</div>
+          <div class="accBody" style="max-height:400px">{{ product.description }}</div>
+        </div>
+        {% if product.metafields.custom.storage_gb or product.metafields.custom.battery_percentage %}
+        <div class="accItem">
+          <div class="accHead">Specificaties</div>
+          <div class="accBody">
+            <ul>
+              {% if product.metafields.custom.storage_gb %}<li>Opslag: {{ product.metafields.custom.storage_gb }}GB</li>{% endif %}
+              {% if product.metafields.custom.battery_percentage %}<li>Batterijconditie: {{ product.metafields.custom.battery_percentage }}%</li>{% endif %}
+              {% if product.metafields.custom.condition %}<li>Staat: {{ product.metafields.custom.condition }}</li>{% endif %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+        <div class="accItem">
+          <div class="accHead">Verzending & garantie</div>
+          <div class="accBody"><p>{{ section.settings.shipping_text | default: "Gratis verzending binnen Nederland, of persoonlijk afhalen op afspraak. Elk toestel wordt geleverd met garantie en persoonlijke service via WhatsApp of telefoon." }}</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+{% assign related_collection = product.collections.first %}
+{% if related_collection %}
+  <section style="background:var(--ivory)"><div class="wrap reveal">
+    <div class="head"><div><p class="eyebrow">Ook interessant</p><h2>Vergelijkbare toestellen</h2></div><a class="link" href="{{ related_collection.url }}">Bekijk alle voorraad →</a></div>
+    <div class="products">
+      {% assign shown = 0 %}
+      {% for related in related_collection.products %}
+        {% if related.id != product.id and shown < 4 %}
+          {% render 'product-card', product: related %}
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div></section>
+{% endif %}
+
+<div class="mobileBuy" id="mobileBuy">
+  <div class="mbPrice"><b class="js-total">{{ current_variant.price | money }}</b>{% if current_variant.compare_at_price > current_variant.price %}<span>{{ current_variant.compare_at_price | money }}</span>{% endif %}</div>
+  <button class="add" id="addToCartMobile" data-form="productForm">In winkelwagen</button>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "checkbox", "id": "show_ribbon", "label": "Toon 'Nieuw binnen!'-ribbon", "default": true },
+    { "type": "text", "id": "ribbon_text", "label": "Ribbon-tekst" },
+    { "type": "text", "id": "rating", "label": "Reviewtekst onder titel" },
+    { "type": "textarea", "id": "shipping_text", "label": "Verzending & garantie-tekst" },
+    { "type": "product", "id": "accessory_1", "label": "Accessoire 1 (bv. screenprotector)" },
+    { "type": "product", "id": "accessory_2", "label": "Accessoire 2 (bv. oplaadkabel)" },
+    { "type": "product", "id": "accessory_3", "label": "Accessoire 3 (bv. USB-C adapter)" }
+  ]
+}
+{% endschema %}

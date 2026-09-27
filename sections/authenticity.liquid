@@ -1,0 +1,52 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:#fff">Originele iPhone?</span></div>
+  <p class="eyebrow">Betrouwbaarheid voorop</p>
+  <h1>{{ section.settings.heading | default: "Gegarandeerd origineel" }}</h1>
+  <p>{{ section.settings.subtext }}</p>
+</div></section>
+
+<section><div class="wrap reveal">
+  <p class="eyebrow">Waarom ons vertrouwen</p>
+  <h2 style="margin-bottom:18px">Wat maakt onze iPhones origineel?</h2>
+  <div class="sub" style="max-width:760px;font-size:16px;line-height:1.7;margin-bottom:40px">{{ section.settings.intro }}</div>
+
+  <div class="checklist" style="display:flex;flex-direction:column;gap:18px;max-width:720px">
+    {% for block in section.blocks %}
+      <div class="checkStep" style="display:flex;gap:18px;align-items:flex-start" {{ block.shopify_attributes }}>
+        <div class="checkNum" style="width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex:none">{{ forloop.index }}</div>
+        <div><h4 style="margin:0 0 4px;color:var(--navy);font-size:15.5px">{{ block.settings.title }}</h4><p style="margin:0;color:var(--muted);font-size:14px;line-height:1.6">{{ block.settings.text }}</p></div>
+      </div>
+    {% endfor %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Authenticiteit",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "subtext", "label": "Subtekst (hero)" },
+    { "type": "richtext", "id": "intro", "label": "Introtekst" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Stap",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Tekst" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "title": "IMEI- en Apple-serienummercontrole", "text": "Elk toestel wordt gecontroleerd op een geldig, niet-geblokkeerd IMEI- en serienummer, rechtstreeks bij Apple." } },
+      { "type": "step", "settings": { "title": "Officiële Apple-diagnose", "text": "We draaien de originele Apple-diagnosetools om batterijconditie, schermwerking en onderdelen te verifiëren." } },
+      { "type": "step", "settings": { "title": "Geen ongecertificeerde onderdelen", "text": "Is er ooit iets vervangen, dan gebeurt dat met originele Apple-onderdelen — nooit met goedkope kopieën." } },
+      { "type": "step", "settings": { "title": "Unieke fotoreportage per toestel", "text": "Je ziet het daadwerkelijke toestel dat je koopt: geen stockfoto's, maar duidelijke foto's van de werkelijke staat." } },
+      { "type": "step", "settings": { "title": "6–12 maanden garantie", "text": "Mocht er toch iets zijn, dan staan we persoonlijk voor je klaar — met garantie op elk toestel." } }
+    ]
+  },
+  "presets": [{ "name": "Authenticiteit" }]
+}
+{% endschema %}

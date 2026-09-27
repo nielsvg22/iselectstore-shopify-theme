@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact",
+      "settings": {
+        "whatsapp": "31643295022",
+        "phone": "+31 6 43295022",
+        "address": "Oude Apeldoornseweg 45-067, 7333 NR Apeldoorn"
+      }
+    }
+  },
+  "order": ["main"]
+}

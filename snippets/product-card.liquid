@@ -1,0 +1,26 @@
+{% comment %} Verwacht: product {% endcomment %}
+<article class="card" data-category="{{ product.type | escape }}">
+  <button class="heart" type="button" aria-label="Favoriet">♡</button>
+  <a href="{{ product.url }}">
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
+    {% else %}
+      <img src="{{ 'placeholder.svg' | asset_url }}" alt="">
+    {% endif %}
+  </a>
+  {% if product.metafields.custom.badge_text %}
+    <span class="badge">{{ product.metafields.custom.badge_text }}</span>
+  {% endif %}
+  <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+  <div class="meta">
+    {%- assign meta_parts = "" -%}
+    {%- if product.metafields.custom.condition -%}{{ product.metafields.custom.condition }}{%- endif -%}
+    {%- if product.metafields.custom.battery_percentage %} · {{ product.metafields.custom.battery_percentage }}% batt{% endif -%}
+    {%- if product.metafields.custom.warranty_months %} · incl. {{ product.metafields.custom.warranty_months }} mnd garantie{% endif -%}
+  </div>
+  <div class="price">
+    <b>{{ product.price | money }}</b>
+    {% if product.compare_at_price > product.price %}<span class="old">{{ product.compare_at_price | money }}</span>{% endif %}
+  </div>
+  <a class="add" href="{{ product.url }}" style="text-align:center">Bekijk toestel</a>
+</article>

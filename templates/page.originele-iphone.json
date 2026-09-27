@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "authenticity",
+      "settings": {
+        "heading": "Gegarandeerd origineel",
+        "subtext": "Geen imitaties, geen ongecertificeerde onderdelen. Zo weet je zeker dat je een écht, origineel Apple-product in handen krijgt."
+      }
+    }
+  },
+  "order": ["main"]
+}

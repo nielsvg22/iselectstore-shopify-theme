@@ -1,0 +1,43 @@
+<section style="padding-top:32px"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:var(--navy)">Winkelwagen</span></div>
+  <h1 style="margin-bottom:32px">Je winkelwagen</h1>
+
+  {% if cart.item_count == 0 %}
+    <div class="cartEmpty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 18px;display:block;width:56px;height:56px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <p>Je winkelwagen is nog leeg.</p>
+      <a class="btn primary" href="{{ routes.all_products_collection_url }}">Bekijk voorraad →</a>
+    </div>
+  {% else %}
+    {% form 'cart', cart, id: 'cartForm' %}
+      <div class="cartLayout">
+        <div>
+          {% for item in cart.items %}
+            <div class="cartItem">
+              <a href="{{ item.url }}"><img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}"></a>
+              <div class="info">
+                <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
+                <div class="meta">{{ item.variant.title | replace: 'Default Title', '' }}</div>
+                <div class="itemPrice">{{ item.final_line_price | money }}</div>
+              </div>
+              <a class="remove" href="{{ item.url_to_remove }}">Verwijderen</a>
+            </div>
+          {% endfor %}
+        </div>
+
+        <aside class="cartSummary">
+          <h3>Overzicht</h3>
+          <div class="sumRow"><span>Subtotaal</span><b>{{ cart.total_price | money }}</b></div>
+          <div class="sumRow"><span>Verzending</span><b>Gratis</b></div>
+          <div class="sumRow total"><span>Totaal</span><b>{{ cart.total_price | money }}</b></div>
+          <button class="btn primary" type="submit" name="checkout" style="width:100%;margin-top:18px;justify-content:center">Afrekenen →</button>
+          <a class="link" href="{{ routes.all_products_collection_url }}" style="justify-content:center;margin-top:16px;width:100%">← Verder winkelen</a>
+        </aside>
+      </div>
+    {% endform %}
+  {% endif %}
+</div></section>
+
+{% schema %}
+{ "name": "Winkelwagen" }
+{% endschema %}

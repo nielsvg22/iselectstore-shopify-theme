@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1f3049">
+<title>{{ page_title }}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+{% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+<link rel="canonical" href="{{ canonical_url }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+<style>
+  :root{
+    --navy: {{ settings.color_navy | default: "#1f3049" }};
+    --coral: {{ settings.color_coral | default: "#f9858b" }};
+    --ivory: {{ settings.color_ivory | default: "#f7f7f7" }};
+    --soft: {{ settings.color_ivory | default: "#f7f7f7" }};
+  }
+</style>
+{% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% endif %}
+{{ content_for_header }}
+</head>
+<body>
+{% section 'header' %}
+
+<main>
+  {{ content_for_layout }}
+</main>
+
+{% section 'footer' %}
+
+{{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

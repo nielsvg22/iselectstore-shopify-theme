@@ -1,0 +1,55 @@
+<div class="top"><div class="topin">
+  <span>Originele Apple producten</span><span>Exacte batterijconditie</span><span>6–12 maanden garantie</span><span>Inruil mogelijk</span>
+</div></div>
+
+<header id="siteHeader"><div class="nav">
+  <a class="logo" href="{{ routes.root_url }}">
+    <svg class="mark" viewBox="0 0 24 24"><path d="M12 0c.9 3.2 2 5.6 3.4 7.1C16.9 8.6 19.2 9.7 22.4 10.6c-3.2.9-5.5 2-7 3.5C13.9 15.6 12.8 18 12 21.1c-.8-3.1-1.9-5.5-3.4-7C7.1 12.6 4.8 11.5 1.6 10.6c3.2-.9 5.5-2 7-3.5C10.1 5.6 11.2 3.2 12 0z"/></svg>
+    {{ shop.name | default: 'iSelectStore' }}
+  </a>
+  <nav class="links">
+    <a href="{{ routes.root_url }}">Home</a>
+    <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Voorraad</a>
+    {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">Originele iPhone?</a>{% endif %}
+    {% if pages.faq %}<a href="{{ pages.faq.url }}">Veel gestelde vragen</a>{% endif %}
+    <a class="js-tradein-trigger" href="#">iPhone verkopen/inruilen</a>
+    {% if pages.contact %}<a href="{{ pages.contact.url }}">Contact</a>{% endif %}
+  </nav>
+  <div class="icons">
+    <button class="ic" aria-label="Zoeken" id="searchIcon">🔍</button>
+    <a class="ic" href="{{ routes.search_url }}" style="display:none" id="searchLink"></a>
+    <a class="ic" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Account">♡</a>
+    <a class="ic" href="{{ routes.cart_url }}" aria-label="Winkelwagen">🛍<span class="count">{{ cart.item_count }}</span></a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+
+<nav class="mnav" id="mnav">
+  <a href="{{ routes.root_url }}">Home</a>
+  <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Voorraad</a>
+  {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">Originele iPhone?</a>{% endif %}
+  {% if pages.faq %}<a href="{{ pages.faq.url }}">Veel gestelde vragen</a>{% endif %}
+  <a class="js-tradein-trigger" href="#">iPhone verkopen/inruilen</a>
+  {% if pages.contact %}<a href="{{ pages.contact.url }}">Contact</a>{% endif %}
+  <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Bekijk voorraad →</a>
+</nav>
+
+<form action="{{ routes.search_url }}" method="get" role="search" class="tiOverlay" id="searchOverlay">
+  <div class="tiModal" style="max-width:560px">
+    <button type="button" class="tiClose" id="searchClose" aria-label="Sluiten">×</button>
+    <p class="tiEyebrow">Zoeken</p>
+    <h3>Zoek een toestel</h3>
+    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="Bijv. iPhone 15 Pro" value="{{ search.terms | escape }}" autofocus>
+    <input type="hidden" name="type" value="product">
+    <button type="submit" class="btn primary" style="width:100%;margin-top:14px;justify-content:center">Zoeken →</button>
+  </div>
+</form>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "collection", "id": "shop_collection", "label": "Voorraad-collectie (koppeling 'Voorraad' in menu)" }
+  ]
+}
+{% endschema %}

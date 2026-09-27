@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "trust": { "type": "trust-bar" },
+    "categories": { "type": "featured-categories" },
+    "products": { "type": "featured-products" },
+    "tradein": { "type": "trade-in-banner" },
+    "reviews": { "type": "reviews" },
+    "whyus": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Waarom {{ shop.name }}",
+        "heading": "Wat maakt ons uniek?",
+        "text": "<p>Wij bieden een onderscheidend vermogen dat reguliere refurbished concurrenten niet kunnen leveren. We leveren premium pre-owned originele Apple-producten tegen de allerbeste prijs-kwaliteitverhouding, zonder compromissen te sluiten over de staat van het product. Bij ons vindt u geen ongecertificeerde gerepareerde onderdelen. Selected by us, ready for you.</p>"
+      }
+    }
+  },
+  "order": ["hero", "trust", "categories", "products", "tradein", "reviews", "whyus"]
+}

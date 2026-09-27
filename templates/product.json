@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_ribbon": true,
+        "ribbon_text": "Nieuw binnen!"
+      }
+    }
+  },
+  "order": ["main"]
+}

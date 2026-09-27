@@ -1,0 +1,27 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:#fff">Zoeken</span></div>
+  <p class="eyebrow">Zoekresultaten</p>
+  <h1>"{{ search.terms }}"</h1>
+  <p>{{ search.results_count }} resultaten gevonden</p>
+</div></section>
+
+<section><div class="wrap">
+  <form action="{{ routes.search_url }}" method="get" style="margin-bottom:32px;max-width:420px">
+    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="Zoek een toestel…" value="{{ search.terms | escape }}">
+    <input type="hidden" name="type" value="product">
+  </form>
+
+  {% if search.results.size == 0 %}
+    <p class="noResults">Geen resultaten gevonden voor "{{ search.terms }}".</p>
+  {% else %}
+    <div class="products">
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div></section>
+
+{% schema %}
+{ "name": "Zoeken" }
+{% endschema %}

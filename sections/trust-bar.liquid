@@ -1,0 +1,36 @@
+<div class="trust"><div class="wrap trustgrid">
+  {% for block in section.blocks %}
+    <div class="trustitem" {{ block.shopify_attributes }}>
+      <div class="bubble">{{ block.settings.icon }}</div>
+      <div><b>{{ block.settings.title }}</b><small>{{ block.settings.subtitle }}</small></div>
+    </div>
+  {% endfor %}
+</div></div>
+
+{% schema %}
+{
+  "name": "Trust-balk",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "html", "id": "icon", "label": "Icoon (SVG of emoji)" },
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "text", "id": "subtitle", "label": "Ondertitel" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "title": "Originele Apple producten", "subtitle": "Zorgvuldig geverifieerd" } },
+      { "type": "item", "settings": { "title": "Gedetailleerde productfoto's", "subtitle": "Van wat je koopt" } },
+      { "type": "item", "settings": { "title": "Beste prijs, altijd kwaliteit", "subtitle": "Scherp geprijsd, nooit ingeleverd op staat" } },
+      { "type": "item", "settings": { "title": "Exacte batterijconditie", "subtitle": "Per toestel vermeld" } },
+      { "type": "item", "settings": { "title": "Inruil mogelijk", "subtitle": "Voor je oude product" } },
+      { "type": "item", "settings": { "title": "6–12 maanden garantie", "subtitle": "Met persoonlijke service" } }
+    ]
+  },
+  "presets": [{ "name": "Trust-balk" }]
+}
+{% endschema %}

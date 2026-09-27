@@ -1,0 +1,79 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:#fff">{{ collection.title }}</span></div>
+  <p class="eyebrow">Volledige voorraad</p>
+  <h1>{{ collection.title | default: "Alle producten" }}</h1>
+  <p>{{ collection.description | default: "Elk toestel is uniek en persoonlijk gecontroleerd. Filter op categorie, batterijconditie, opslag en prijs om precies te vinden wat je zoekt." }}</p>
+</div></section>
+
+{% paginate collection.products by 24 %}
+<section style="padding-top:36px"><div class="wrap">
+  <div class="shopLayout">
+    <aside class="filterSidebar" id="filterSidebar">
+      <button class="filterCloseBtn" id="filterClose" type="button">✕ Sluiten</button>
+      {% for filter in collection.filters %}
+        <div class="filterGroup">
+          <h4>{{ filter.label }}</h4>
+          {% if filter.type == 'list' %}
+            {% for value in filter.values %}
+              <label class="checkRow">
+                <input type="checkbox" onchange="window.location.href='{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}'" {% if value.active %}checked{% endif %}>
+                {{ value.label }}<span class="cnt">{{ value.count }}</span>
+              </label>
+            {% endfor %}
+          {% elsif filter.type == 'price_range' %}
+            <div class="rangeRow">
+              <form>
+                <input type="number" name="{{ filter.min_value.param_name }}" placeholder="Van €" value="{{ filter.min_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
+                <input type="number" name="{{ filter.max_value.param_name }}" placeholder="Tot €" value="{{ filter.max_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
+                <button class="clearAllBtn" type="submit" style="margin-top:8px">Toepassen</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% if collection.current_vendor or collection.current_type %}
+        <a class="clearAllBtn" href="{{ collection.url }}">Wis alle filters</a>
+      {% endif %}
+    </aside>
+
+    <div class="shopMain">
+      <div class="shopToolbar">
+        <form action="{{ collection.url }}" method="get" style="flex:1 1 220px">
+          <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="Zoek een toestel…" value="{{ search.terms }}">
+        </form>
+        <div class="toolbarRight">
+          <span class="resultCount"><b>{{ collection.products.size }}</b> van {{ collection.all_products_count }} producten</span>
+          <select class="sortSelect" onchange="window.location.href=this.value">
+            <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Sorteer: Nieuwste</option>
+            <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Prijs laag - hoog</option>
+            <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Prijs hoog - laag</option>
+          </select>
+          <button class="filterToggle" id="filterToggle" type="button">⚙ Filters</button>
+        </div>
+      </div>
+
+      {% if collection.products.size == 0 %}
+        <p class="noResults">Geen toestellen gevonden met deze filters.</p>
+      {% else %}
+        <div class="products shopProductsGrid">
+          {% for product in collection.products %}
+            {% render 'product-card', product: product %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <div class="snapdots" style="display:flex;margin-top:32px">
+          {% for part in paginate.parts %}
+            {% if part.is_link %}<a class="link" href="{{ part.url }}">{{ part.title }}</a>{% else %}<b style="color:var(--navy)">{{ part.title }}</b>{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div></section>
+{% endpaginate %}
+
+{% schema %}
+{ "name": "Collectie" }
+{% endschema %}

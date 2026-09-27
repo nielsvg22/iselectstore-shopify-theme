@@ -1,0 +1,60 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:#fff">Contact</span></div>
+  <p class="eyebrow">Persoonlijk contact</p>
+  <h1>Neem contact op</h1>
+  <p>Heb je een vraag over een toestel, je bestelling of een inruil? We reageren snel en persoonlijk.</p>
+</div></section>
+
+<section><div class="wrap reveal">
+  <div class="cartLayout">
+    <div>
+      {% form 'contact', id: 'contactForm' %}
+        {% if form.posted_successfully? %}
+          <div class="orderDone" style="padding:30px 0">
+            <div class="checkIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <h2 style="font-size:22px">Bericht verstuurd!</h2>
+            <p>Bedankt voor je bericht. We reageren binnen 24 uur persoonlijk terug.</p>
+          </div>
+        {% else %}
+          <div class="checkoutBlock">
+            <h3>Jouw gegevens</h3>
+            <div class="formGrid">
+              <input type="text" name="contact[name]" placeholder="Naam" required>
+              <input type="email" name="contact[email]" placeholder="E-mailadres" required value="{{ form.email }}">
+            </div>
+          </div>
+          <div class="checkoutBlock">
+            <h3>Onderwerp</h3>
+            <div class="formRow"><input type="text" name="contact[subject]" placeholder="Bijv. vraag over iPhone 15 Pro"></div>
+          </div>
+          <div class="checkoutBlock">
+            <h3>Bericht</h3>
+            <div class="formRow"><textarea name="contact[body]" rows="6" placeholder="Waar kunnen we je mee helpen?" required style="width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;font-size:14px;resize:vertical"></textarea></div>
+          </div>
+          <button class="add" type="submit" style="width:100%;height:52px;font-size:15px">Bericht versturen →</button>
+        {% endif %}
+      {% endform %}
+    </div>
+
+    <aside class="cartSummary">
+      <h3>Direct contact</h3>
+      {% if section.settings.whatsapp %}<a href="https://wa.me/{{ section.settings.whatsapp }}" target="_blank" rel="noopener" class="btn primary" style="width:100%;justify-content:center;margin-bottom:14px">WhatsApp ons →</a>{% endif %}
+      {% if section.settings.phone %}<div class="sumRow"><span>Telefoon</span><b>{{ section.settings.phone }}</b></div>{% endif %}
+      <div class="sumRow"><span>E-mail</span><b>{{ shop.email }}</b></div>
+      {% if section.settings.address %}<div class="sumRow" style="margin-bottom:0"><span>Adres</span><b style="text-align:right">{{ section.settings.address }}</b></div>{% endif %}
+      <p style="color:var(--muted);font-size:12.5px;margin-top:16px">Bezoek op afspraak. We reageren doorgaans binnen 24 uur.</p>
+    </aside>
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp nummer (bv. 31643295022)" },
+    { "type": "text", "id": "phone", "label": "Telefoonnummer" },
+    { "type": "text", "id": "address", "label": "Adres" }
+  ],
+  "presets": [{ "name": "Contact" }]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Zoek een toestel…"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "In winkelwagen",
+      "sold_out": "Uitverkocht"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Winkelwagen"
+    }
+  }
+}

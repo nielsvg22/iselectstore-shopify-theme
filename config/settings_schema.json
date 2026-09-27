@@ -1,0 +1,31 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "iSelectStore",
+    "theme_version": "1.0.0",
+    "theme_author": "iSelectStore",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Kleuren",
+    "settings": [
+      { "type": "color", "id": "color_navy", "label": "Navy", "default": "#1f3049" },
+      { "type": "color", "id": "color_coral", "label": "Coral", "default": "#f9858b" },
+      { "type": "color", "id": "color_ivory", "label": "Ivory (achtergrond)", "default": "#f7f7f7" }
+    ]
+  },
+  {
+    "name": "Logo & favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram URL" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook URL" }
+    ]
+  }
+]

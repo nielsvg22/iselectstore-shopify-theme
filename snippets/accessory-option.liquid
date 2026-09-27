@@ -1,0 +1,8 @@
+{% comment %} Verwacht: accessory (product) {% endcomment %}
+{% assign av = accessory.selected_or_first_available_variant %}
+<label class="accessory">
+  <input type="checkbox" data-variant-id="{{ av.id }}" data-price="{{ av.price }}">
+  <span class="accCheck"></span>
+  <span class="accInfo"><b>{{ accessory.title }}</b><small>{{ accessory.description | strip_html | truncate: 60 }}</small></span>
+  <span class="accPrice">+ {{ av.price | money }}</span>
+</label>

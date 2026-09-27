@@ -1,0 +1,51 @@
+<section id="categorie"><div class="wrap reveal">
+  <div class="head">
+    <div>
+      <p class="eyebrow">Assortiment</p>
+      <h2>{{ section.settings.heading | default: "Categorieën" }}</h2>
+      <p class="sub">{{ section.settings.subtext }}</p>
+    </div>
+  </div>
+  <div class="cats">
+    {% for block in section.blocks %}
+      <a class="cat" href="{{ block.settings.collection.url }}" {{ block.shopify_attributes }}>
+        {% if block.settings.collection.featured_image %}
+          <img src="{{ block.settings.collection.featured_image | image_url: width: 600 }}" alt="{{ block.settings.collection.title }}">
+        {% elsif block.settings.image %}
+          <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.label }}">
+        {% endif %}
+        <div class="catcopy"><b>{{ block.settings.label | default: block.settings.collection.title }}</b><span>Winkel nu →</span></div>
+      </a>
+    {% endfor %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Categorieën",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "subtext", "label": "Subtekst" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categorie",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collectie" },
+        { "type": "text", "id": "label", "label": "Label (optioneel, overschrijft collectienaam)" },
+        { "type": "image_picker", "id": "image", "label": "Afbeelding (optioneel, anders collectie-afbeelding)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "category", "settings": { "label": "Apple iPhone" } },
+      { "type": "category", "settings": { "label": "Tablets | Apple iPad" } },
+      { "type": "category", "settings": { "label": "Apple MacBooks" } },
+      { "type": "category", "settings": { "label": "Apple Watch" } }
+    ]
+  },
+  "presets": [{ "name": "Categorieën" }]
+}
+{% endschema %}
