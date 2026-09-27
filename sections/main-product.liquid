@@ -43,7 +43,9 @@
         {% endif %}
       </div>
       <p class="pdpTaxNote">incl. belasting (marge) · gratis verzending</p>
-      {% if current_variant.inventory_management and current_variant.inventory_quantity <= 1 %}
+      {% if current_variant.available == false %}
+        <p class="stockNote stockNote--sold">Uitverkocht</p>
+      {% elsif current_variant.inventory_management and current_variant.inventory_quantity <= 1 %}
         <p class="stockNote">Nog maar 1 op voorraad — dit exacte toestel is uniek</p>
       {% endif %}
 
@@ -69,7 +71,13 @@
       {% form 'product', product, id: 'productForm' %}
         <input type="hidden" name="id" value="{{ current_variant.id }}">
         <div class="buyRow" data-base-price="{{ current_variant.price }}" data-currency="{{ cart.currency.iso_code }}">
-          <button class="add" type="submit" id="addToCart">In winkelwagen — <span class="js-total-inline">{{ current_variant.price | money }}</span></button>
+          <button class="add" type="submit" id="addToCart" {% unless current_variant.available %}disabled{% endunless %}>
+            {% if current_variant.available %}
+              In winkelwagen — <span class="js-total-inline">{{ current_variant.price | money }}</span>
+            {% else %}
+              Uitverkocht
+            {% endif %}
+          </button>
         </div>
       {% endform %}
       <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:26px" href="#">Start inruilwaarde voor je oude toestel →</a>
@@ -125,7 +133,7 @@
 
 <div class="mobileBuy" id="mobileBuy">
   <div class="mbPrice"><b class="js-total">{{ current_variant.price | money }}</b>{% if current_variant.compare_at_price > current_variant.price %}<span>{{ current_variant.compare_at_price | money }}</span>{% endif %}</div>
-  <button class="add" id="addToCartMobile" data-form="productForm">In winkelwagen</button>
+  <button class="add" id="addToCartMobile" data-form="productForm" {% unless current_variant.available %}disabled{% endunless %}>{% if current_variant.available %}In winkelwagen{% else %}Uitverkocht{% endif %}</button>
 </div>
 
 {% schema %}

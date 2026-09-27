@@ -125,6 +125,10 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .old{font-size:12.5px;text-decoration:line-through;color:#9ca2aa}
 .add{margin-top:auto;border:0;border-radius:980px;padding:13px;background:var(--navy);color:#fff;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,transform .2s}
 .add:hover{background:var(--coral);transform:translateY(-1px)}
+.add:disabled{background:#c7cbd1;color:#6b7280;cursor:not-allowed;transform:none}
+.add:disabled:hover{background:#c7cbd1;transform:none}
+.stockNote--sold{color:#6b7280}
+.stockNote--sold::before{background:#9ca2aa;animation:none}
 
 .snapdots{display:none;justify-content:center;gap:6px;margin-top:14px}
 .snapdots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
