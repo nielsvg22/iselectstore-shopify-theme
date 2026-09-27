@@ -1,19 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "trust": { "type": "trust-bar" },
-    "categories": { "type": "featured-categories" },
-    "products": { "type": "featured-products" },
-    "tradein": { "type": "trade-in-banner" },
-    "reviews": { "type": "reviews" },
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "categories": {
+      "type": "featured-categories",
+      "settings": {}
+    },
+    "products": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "tradein": {
+      "type": "trade-in-banner",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
     "whyus": {
       "type": "rich-text",
       "settings": {
-        "eyebrow": "Waarom {{ shop.name }}",
+        "eyebrow": "Waarom iSelectStore",
         "heading": "Wat maakt ons uniek?",
         "text": "<p>Wij bieden een onderscheidend vermogen dat reguliere refurbished concurrenten niet kunnen leveren. We leveren premium pre-owned originele Apple-producten tegen de allerbeste prijs-kwaliteitverhouding, zonder compromissen te sluiten over de staat van het product. Bij ons vindt u geen ongecertificeerde gerepareerde onderdelen. Selected by us, ready for you.</p>"
       }
     }
   },
-  "order": ["hero", "trust", "categories", "products", "tradein", "reviews", "whyus"]
+  "order": [
+    "hero",
+    "trust",
+    "categories",
+    "products",
+    "tradein",
+    "reviews",
+    "whyus"
+  ]
 }
