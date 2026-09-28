@@ -114,7 +114,7 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .card:hover{transform:translateY(-6px);box-shadow:0 26px 44px -22px rgba(31,48,73,.24);border-color:transparent}
 .card>a{display:block}
 .card img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:18px;background:#f6f6f6}
-.shopProductsGrid .card img{object-fit:contain}
+.shopProductsGrid .card img{aspect-ratio:4/3;object-fit:contain}
 .badge{position:absolute;top:30px;right:30px;z-index:2;display:inline-flex;align-items:center;background:var(--coral);color:#fff;padding:7px 14px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:.01em;width:fit-content;box-shadow:0 8px 20px -8px rgba(249,133,139,.6)}
 .card h3{font-size:16.5px;line-height:1.3;margin:0 0 4px;font-weight:600;letter-spacing:-.01em;color:var(--navy)}
 .meta{color:var(--muted);font-size:12.5px}
