@@ -18,7 +18,11 @@
 
   <div class="products">
     {% assign limit = section.settings.count | default: 4 %}
-    {% for product in section.settings.collection.products limit: limit %}
+    {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan. {% endcomment %}
+    {% assign available_products = section.settings.collection.products | where: "available", true %}
+    {% assign sold_out_products = section.settings.collection.products | where: "available", false %}
+    {% assign sorted_products = available_products | concat: sold_out_products %}
+    {% for product in sorted_products limit: limit %}
       {% render 'product-card', product: product %}
     {% endfor %}
   </div>

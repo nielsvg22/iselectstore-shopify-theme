@@ -55,8 +55,12 @@
       {% if collection.products.size == 0 %}
         <p class="noResults">Geen toestellen gevonden met deze filters.</p>
       {% else %}
+        {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan, ongeacht de gekozen sortering. {% endcomment %}
+        {% assign available_products = collection.products | where: "available", true %}
+        {% assign sold_out_products = collection.products | where: "available", false %}
+        {% assign sorted_products = available_products | concat: sold_out_products %}
         <div class="products shopProductsGrid">
-          {% for product in collection.products %}
+          {% for product in sorted_products %}
             {% render 'product-card', product: product %}
           {% endfor %}
         </div>
