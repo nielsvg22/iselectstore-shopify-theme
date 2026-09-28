@@ -1,0 +1,60 @@
+{% comment %}
+  Taalkeuze
+  - Toont alleen meerdere talen als Shopify Markets meerdere locales heeft
+  - Gebruikt Shopify's native localization form
+{% endcomment %}
+
+{% if shop.enabled_locales.size > 1 %}
+  <section class="language-selector" data-section-id="{{ section.id }}">
+    <div class="wrap">
+      <div class="language-selector__inner">
+        <label for="LocaleSelector" class="language-selector__label">{{ section.settings.label | default: "Taal" }}</label>
+        <form method="post" action="/{{ request.locale.iso_code }}/localization" accept-charset="UTF-8" enctype="multipart/form-data">
+          <input type="hidden" name="return_to" value="{{ request.path }}">
+          <select id="LocaleSelector" name="locale_code" class="sortSelect" aria-label="Taal">
+            {% for locale in shop.enabled_locales %}
+              <option value="{{ locale.iso_code }}" {% if locale.iso_code == request.locale.iso_code %}selected{% endif %}>
+                {{ locale.endonym_name | default: locale.name }}
+              </option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn" style="padding:10px 18px;font-size:13px;">{{ section.settings.button_text | default: "Wijzig" }}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .language-selector { padding: 18px 0; }
+    .language-selector__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .language-selector__label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .language-selector form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Taalkeuze",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Taal" },
+    { "type": "text", "id": "button_text", "label": "Knoptekst", "default": "Wijzig" }
+  ],
+  "presets": [
+    { "name": "Taalkeuze" }
+  ]
+}
+{% endschema %}

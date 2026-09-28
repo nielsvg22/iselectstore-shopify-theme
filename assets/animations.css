@@ -1,0 +1,40 @@
+/* Subtiele animaties — vallen terug naar geen animatie bij prefers-reduced-motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+
+/* Subtiele hover lift voor cards — past binnen bestaande card hover */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -16px rgba(31, 48, 73, 0.18);
+}
