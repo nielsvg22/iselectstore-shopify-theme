@@ -72,6 +72,10 @@
       "type": "reviews",
       "settings": {}
     },
+    "webwinkelkeur": {
+      "type": "webwinkelkeur",
+      "settings": {}
+    },
     "whyus": {
       "type": "rich-text",
       "settings": {
@@ -88,6 +92,7 @@
     "products",
     "tradein",
     "reviews",
+    "webwinkelkeur",
     "whyus"
   ]
 }

@@ -1,0 +1,49 @@
+{% comment %}
+  Custom pixel code voor Meta Pixel via Shopify Customer Events.
+  Kopieer de inhoud van dit snippet naar:
+  Shopify Admin → Instellingen → Customer Events → Custom pixel toevoegen
+  Plak deze code in het pixel-veld en koppel aan de juiste Customer Events.
+{% endcomment %}
+
+{% if settings.meta_pixel_id != blank %}
+<script>
+  (function () {
+    var PIXEL_ID = '{{ settings.meta_pixel_id }}';
+
+    function loadFbPixel() {
+      if (window.fbq) return;
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+        t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
+      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL_ID);
+    }
+
+    function consentAccepted() {
+      return window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.userCanBeTracked();
+    }
+
+    if (consentAccepted()) {
+      loadFbPixel();
+      fbq('track', 'PageView');
+    }
+
+    window.Shopify = window.Shopify || {};
+    window.Shopify.customerEvents = window.Shopify.customerEvents || [];
+    window.Shopify.customerEvents.push(function (event) {
+      if (!consentAccepted()) return;
+      if (!window.fbq) loadFbPixel();
+
+      var name = event.name;
+      var data = event.data || {};
+
+      if (name === 'page_viewed') fbq('track', 'PageView');
+      if (name === 'product_viewed') fbq('track', 'ViewContent', { content_ids: [data.productVariant?.id], content_type: 'product', value: data.productVariant?.price?.amount, currency: data.productVariant?.price?.currencyCode });
+      if (name === 'product_added_to_cart') fbq('track', 'AddToCart', { content_ids: [data.cartLine?.merchandise?.productVariant?.id], content_type: 'product', value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
+      if (name === 'checkout_started') fbq('track', 'InitiateCheckout');
+      if (name === 'checkout_completed') fbq('track', 'Purchase', { value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
+    });
+  })();
+</script>
+{% endif %}

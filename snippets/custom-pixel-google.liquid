@@ -1,0 +1,53 @@
+{% comment %}
+  Custom pixel code voor Google Analytics 4 + Google Ads via Shopify Customer Events.
+  Kopieer de inhoud van dit snippet naar:
+  Shopify Admin → Instellingen → Customer Events → Custom pixel toevoegen
+  Plak deze code in het pixel-veld en koppel aan de juiste Customer Events.
+{% endcomment %}
+
+{% if settings.google_analytics_id != blank or settings.google_ads_id != blank %}
+<script>
+  (function () {
+    var GA_ID = '{{ settings.google_analytics_id }}';
+    var AW_ID = '{{ settings.google_ads_id }}';
+
+    function loadGtag() {
+      if (window.gtag) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + (GA_ID || AW_ID);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      if (GA_ID) gtag('config', GA_ID, { send_page_view: false });
+      if (AW_ID) gtag('config', AW_ID, { send_page_view: false });
+    }
+
+    function consentAccepted() {
+      return window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.userCanBeTracked();
+    }
+
+    if (consentAccepted()) {
+      loadGtag();
+      gtag('event', 'page_view');
+    }
+
+    window.Shopify = window.Shopify || {};
+    window.Shopify.customerEvents = window.Shopify.customerEvents || [];
+    window.Shopify.customerEvents.push(function (event) {
+      if (!consentAccepted()) return;
+      if (!window.gtag) loadGtag();
+
+      var name = event.name;
+      var data = event.data || {};
+
+      if (name === 'page_viewed') gtag('event', 'page_view');
+      if (name === 'product_viewed') gtag('event', 'view_item', { value: data.productVariant?.price?.amount, currency: data.productVariant?.price?.currencyCode });
+      if (name === 'product_added_to_cart') gtag('event', 'add_to_cart', { value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
+      if (name === 'checkout_started') gtag('event', 'begin_checkout');
+      if (name === 'checkout_completed') gtag('event', 'purchase', { transaction_id: data.checkout?.order?.id, value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
+    });
+  })();
+</script>
+{% endif %}

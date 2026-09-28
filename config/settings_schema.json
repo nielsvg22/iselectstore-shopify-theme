@@ -27,5 +27,24 @@
       { "type": "text", "id": "social_instagram_link", "label": "Instagram URL" },
       { "type": "text", "id": "social_facebook_link", "label": "Facebook URL" }
     ]
+  },
+  {
+    "name": "Contact & reviews",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp nummer", "default": "31643295022", "info": "Internationaal formaat, zonder +" },
+      { "type": "text", "id": "whatsapp_default_message", "label": "WhatsApp standaardbericht", "default": "Hoi%20iSelectStore%2C%20ik%20heb%20een%20vraag." },
+      { "type": "text", "id": "webwinkelkeur_shop_id", "label": "WebwinkelKeur shop ID", "info": "Alleen cijfers. Leeg = widget wordt niet geladen." },
+      { "type": "text", "id": "stock_notify_backend_url", "label": "Backend app URL (voorraadmeldingen)", "default": "https://iselectstore-marktplaats-app.vercel.app" }
+    ]
+  },
+  {
+    "name": "Marketing & tracking",
+    "settings": [
+      { "type": "header", "content": "Tracking IDs" },
+      { "type": "paragraph", "content": "Deze IDs worden gebruikt in Shopify Customer Events custom pixels. Geen scripts worden direct in het thema geïnjecteerd." },
+      { "type": "text", "id": "meta_pixel_id", "label": "Meta Pixel ID", "info": "Alleen cijfers, bv. 1234567890" },
+      { "type": "text", "id": "google_analytics_id", "label": "Google Analytics 4 ID", "info": "bv. G-XXXXXXXXXX" },
+      { "type": "text", "id": "google_ads_id", "label": "Google Ads conversion ID", "info": "bv. AW-XXXXXXXXXX" }
+    ]
   }
 ]
