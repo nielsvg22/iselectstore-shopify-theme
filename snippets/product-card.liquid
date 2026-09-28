@@ -1,5 +1,7 @@
-{% comment %} Verwacht: product {% endcomment %}
-<article class="card" data-category="{{ product.type | escape }}">
+{% comment %} Verwacht: product, optioneel index (positie in de grid, voor staggered reveal) {% endcomment %}
+{% assign stagger_index = index | default: 0 | at_most: 8 %}
+{% assign stagger_delay = stagger_index | times: 0.06 %}
+<article class="card reveal" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
   <a href="{{ product.url }}">
     {% if product.featured_image %}
       <img src="{{ product.featured_image | image_url: width: 600 }}" width="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">

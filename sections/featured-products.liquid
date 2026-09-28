@@ -23,7 +23,7 @@
     {% assign sold_out_products = section.settings.collection.products | where: "available", false %}
     {% assign sorted_products = available_products | concat: sold_out_products %}
     {% for product in sorted_products limit: limit %}
-      {% render 'product-card', product: product %}
+      {% render 'product-card', product: product, index: forloop.index0 %}
     {% endfor %}
   </div>
 </div></section>

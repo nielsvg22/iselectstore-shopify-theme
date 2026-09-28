@@ -1,6 +1,7 @@
 <div class="trust"><div class="wrap trustgrid">
   {% for block in section.blocks %}
-    <div class="trustitem" {{ block.shopify_attributes }}>
+    {% assign stagger_delay = forloop.index0 | times: 0.06 %}
+    <div class="trustitem reveal" style="transition-delay:{{ stagger_delay }}s" {{ block.shopify_attributes }}>
       <div class="bubble">{{ block.settings.icon }}</div>
       <div><b>{{ block.settings.title }}</b><small>{{ block.settings.subtitle }}</small></div>
     </div>
