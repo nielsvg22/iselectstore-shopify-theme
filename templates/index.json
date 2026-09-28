@@ -121,6 +121,19 @@
     },
     "reviews": {
       "type": "reviews",
+      "blocks": {
+        "review-1": { "type": "review", "settings": { "quote": "Snelle en vriendelijke service geweldig!!", "name": "Marco de Kleine" } },
+        "review-2": { "type": "review", "settings": { "quote": "Top & snel geholpen", "name": "Naomi Majoor" } },
+        "review-3": { "type": "review", "settings": { "quote": "Snelle reactie, plezierig contact en mooie telefoon voor een mooie prijs.", "name": "Aja B" } },
+        "review-4": { "type": "review", "settings": { "quote": "iPad 2022 gekocht. Prima prijs en vriendelijke jongeman.", "name": "Ludy Meijer" } },
+        "review-5": { "type": "review", "settings": { "quote": "Heel erg tevreden over onze aankoop (2 x iPhone 14 Pro). Twan geeft duidelijk uitleg.", "name": "Amadee Pelgrim" } },
+        "review-6": { "type": "review", "settings": { "quote": "iPad 9 nieuw met garantie. Snelle reactie, net product en zeker niet te duur.", "name": "Gerrit Molenaar" } },
+        "review-7": { "type": "review", "settings": { "quote": "Vriendelijk. Goede service. Goede communicatie.", "name": "Ramon van der Horst" } },
+        "review-8": { "type": "review", "settings": { "quote": "Deal snel geregeld. Mooie nieuwe iPad tegen een zeer scherpe prijs!", "name": "Fred Buitenkamp" } },
+        "review-9": { "type": "review", "settings": { "quote": "Bij Twan een iPhone 13 gekocht die jong gebruikt is. Nette prijs.", "name": "Roy van Heteren" } },
+        "review-10": { "type": "review", "settings": { "quote": "Top service, top product en erg betaalbaar. Absolute aanrader.", "name": "Jeroen Dijkman" } }
+      },
+      "block_order": ["review-1", "review-2", "review-3", "review-4", "review-5", "review-6", "review-7", "review-8", "review-9", "review-10"],
       "settings": {}
     },
     "webwinkelkeur": {
