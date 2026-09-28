@@ -66,6 +66,7 @@ h1 span{color:var(--coral)}
 .rating b{color:var(--navy)}
 .stars{color:var(--coral);letter-spacing:2px}
 .heroImg{display:flex;justify-content:center;perspective:1200px}
+@media(max-width:899px) and (orientation:portrait){.heroImg{display:none}}
 .heroImg img{width:min(540px,94%);aspect-ratio:1;object-fit:cover;border-radius:32px;box-shadow:0 40px 80px -20px rgba(31,48,73,.32),0 10px 30px -10px rgba(31,48,73,.14);transition:transform .6s var(--ease);will-change:transform}
 .heroImg:hover img{transform:rotateY(-4deg) rotateX(2deg) scale(1.015)}
 
