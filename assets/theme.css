@@ -387,7 +387,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 
  .products.shopProductsGrid{display:grid;grid-template-columns:1fr;gap:16px;margin:0;padding:0}
  .products.shopProductsGrid .card{min-width:0}
- .products.shopProductsGrid .card img{aspect-ratio:8/3}
+ .products.shopProductsGrid .card img{aspect-ratio:32/9}
 }
 
 @media(max-width:900px){
