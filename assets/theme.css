@@ -336,6 +336,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 
 .shopLayout{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:start}
 .shopMain{min-width:0}
+.products.shopProductsGrid{grid-template-columns:repeat(2,1fr)}
 .filterSidebar{border:1px solid var(--line);border-radius:20px;padding:24px;position:sticky;top:calc(var(--header-h) + 24px);background:#fff}
 .filterSidebar h4{font-size:12px;color:var(--navy);margin:0 0 14px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
 .filterGroup{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}
