@@ -56,11 +56,20 @@
     .invNotify__form .shopSearchInput {
       flex: 1;
       min-width: 200px;
-      border-color: var(--coral);
+      background: #fff;
+      color: var(--ink);
+      border: 1.5px solid var(--coral);
+    }
+    .invNotify__form .shopSearchInput::placeholder {
+      color: var(--muted);
+      opacity: 1;
     }
     .invNotify__form .shopSearchInput:focus {
       border-color: var(--coral-ink);
       box-shadow: 0 0 0 3px rgba(249, 133, 139, .22);
+    }
+    .invNotify__form .btn.primary {
+      color: var(--navy);
     }
     .invNotify__form .btn {
       white-space: nowrap;
