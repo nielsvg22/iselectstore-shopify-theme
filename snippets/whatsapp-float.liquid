@@ -1,0 +1,179 @@
+{% comment %}
+  Zwevende WhatsApp-knop (rechtsonder) met compacte popup.
+  - Ronde knop met officieel WhatsApp-icoon
+  - Klik opent een kleine chat-popup met directe start-knop naar wa.me
+  - Werkt desktop + mobiel; op productpagina's blijft hij boven de
+    mobiele "In winkelwagen"-balk
+  - Nummer/bericht komen uit de thema-instellingen
+{% endcomment %}
+
+{% assign wa_number = settings.whatsapp_number | default: '31643295022' %}
+{% assign wa_message = settings.whatsapp_default_message | default: 'Hoi%20iSelectStore%2C%20ik%20heb%20een%20vraag.' %}
+
+{% if wa_number != blank %}
+<div class="waFloat" data-wa-float>
+  <div class="waFloat__pop" id="waFloatPop" role="dialog" aria-labelledby="waFloatTitle" hidden>
+    <div class="waFloat__head">
+      <span class="waFloat__headIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+      </span>
+      <span class="waFloat__headText">
+        <b id="waFloatTitle">WhatsApp</b>
+        <small>iSelectStore · meestal direct antwoord</small>
+      </span>
+      <button type="button" class="waFloat__close" data-wa-close aria-label="Sluiten">&times;</button>
+    </div>
+    <div class="waFloat__body">
+      <p>Heb je een vraag over een toestel? Stuur ons een bericht, we reageren meestal binnen enkele minuten.</p>
+      <a class="btn primary waFloat__cta" href="https://wa.me/{{ wa_number }}?text={{ wa_message }}" target="_blank" rel="noopener">Start gesprek →</a>
+    </div>
+  </div>
+
+  <button type="button" class="waFloat__btn" data-wa-open aria-expanded="false" aria-controls="waFloatPop" aria-label="Open WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+  </button>
+</div>
+
+<style>
+  .waFloat {
+    position: fixed;
+    right: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .waFloat__btn {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: #25d366;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 26px -10px rgba(31, 48, 73, .45), 0 4px 10px -4px rgba(37, 211, 102, .5);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    padding: 0;
+  }
+  .waFloat__btn svg { width: 30px; height: 30px; display: block; }
+  .waFloat__btn:hover { transform: scale(1.06); box-shadow: 0 14px 30px -10px rgba(31, 48, 73, .5); }
+  .waFloat__btn:active { transform: scale(.96); }
+  .waFloat__btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
+  .waFloat__pop {
+    width: min(300px, calc(100vw - 36px));
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -20px rgba(31, 48, 73, .4);
+    transform-origin: bottom right;
+    animation: waPop .18s var(--ease);
+  }
+  .waFloat__pop[hidden] { display: none; }
+  .waFloat__head {
+    background: #25d366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 12px 12px 14px;
+  }
+  .waFloat__headIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .22);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .waFloat__headIcon svg { width: 20px; height: 20px; }
+  .waFloat__headText { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .waFloat__headText b { font-size: 15px; font-weight: 700; }
+  .waFloat__headText small { font-size: 11.5px; opacity: .92; }
+  .waFloat__close {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex: none;
+    transition: background .2s;
+  }
+  .waFloat__close:hover { background: rgba(255, 255, 255, .2); }
+  .waFloat__close:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+  .waFloat__body { padding: 14px 16px 16px; }
+  .waFloat__body p {
+    margin: 0 0 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .waFloat__cta { width: 100%; }
+
+  @keyframes waPop {
+    from { opacity: 0; transform: translateY(8px) scale(.96); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 640px) {
+    .waFloat { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+    .waFloat__btn { width: 52px; height: 52px; }
+    .waFloat__btn svg { width: 28px; height: 28px; }
+    /* Op productpagina's: blijf boven de mobiele bestelbalk */
+    body:has(#mobileBuy) .waFloat { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .waFloat__btn { transition: none; }
+    .waFloat__pop { animation: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-wa-float]');
+    if (!root) return;
+    var pop = root.querySelector('#waFloatPop');
+    var openBtn = root.querySelector('[data-wa-open]');
+    var closeBtn = root.querySelector('[data-wa-close]');
+    if (!pop || !openBtn || !closeBtn) return;
+
+    function open() {
+      pop.hidden = false;
+      openBtn.setAttribute('aria-expanded', 'true');
+      closeBtn.focus();
+      document.addEventListener('click', onOutside, true);
+    }
+    function close(refocus) {
+      if (pop.hidden) return;
+      pop.hidden = true;
+      openBtn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('click', onOutside, true);
+      if (refocus) openBtn.focus();
+    }
+    function onOutside(e) {
+      if (!root.contains(e.target)) close(false);
+    }
+
+    openBtn.addEventListener('click', function () {
+      if (pop.hidden) open();
+      else close(true);
+    });
+    closeBtn.addEventListener('click', function () { close(true); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !pop.hidden) close(true);
+    });
+  })();
+</script>
+{% endif %}

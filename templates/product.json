@@ -6,11 +6,7 @@
         "show_ribbon": true,
         "ribbon_text": "Nieuw binnen!"
       }
-    },
-    "inventory-notification": {
-      "type": "inventory-notification",
-      "settings": {}
     }
   },
-  "order": ["main", "inventory-notification"]
+  "order": ["main"]
 }

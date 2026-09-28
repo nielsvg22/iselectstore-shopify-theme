@@ -76,10 +76,6 @@
       "type": "webwinkelkeur",
       "settings": {}
     },
-    "whatsapp": {
-      "type": "whatsapp-section",
-      "settings": {}
-    },
     "whyus": {
       "type": "rich-text",
       "settings": {
@@ -97,7 +93,6 @@
     "tradein",
     "reviews",
     "webwinkelkeur",
-    "whatsapp",
     "whyus"
   ]
 }

@@ -1,0 +1,132 @@
+{% comment %}
+  Voorraadmelding formulier — verschijnt boven de "Uitverkocht"-knop.
+  Verstuurt e-mail + product-id naar de backend; de backend lost de
+  productidentiteit zelf op zodat meldingen altijd kloppen.
+{% endcomment %}
+
+{% if current_variant.available == false %}
+  {% assign wa_backend = settings.stock_notify_backend_url | default: 'https://iselectstore-marktplaats-app.vercel.app' %}
+  <div class="invNotify" data-invnotify>
+    <h3 class="invNotify__title">Ontvang een melding wanneer dit product weer beschikbaar is</h3>
+    <p class="invNotify__text">Vul je e-mailadres in. We sturen je één bericht zodra dit model en opslag weer op voorraad is.</p>
+
+    <form class="invNotify__form" data-invnotify-form>
+      <input type="hidden" name="productId" value="{{ product.id }}">
+      <input
+        type="email"
+        name="email"
+        class="shopSearchInput"
+        placeholder="je@email.nl"
+        required
+        autocomplete="email"
+        aria-label="E-mailadres"
+      >
+      <button type="submit" class="btn primary" data-invnotify-submit>Houd mij op de hoogte</button>
+    </form>
+
+    <p class="invNotify__msg" data-invnotify-msg role="status" hidden></p>
+  </div>
+
+  <style>
+    .invNotify {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      margin: 0 0 16px;
+    }
+    .invNotify__title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+    .invNotify__text {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 16px;
+      line-height: 1.5;
+    }
+    .invNotify__form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .invNotify__form .shopSearchInput {
+      flex: 1;
+      min-width: 200px;
+    }
+    .invNotify__form .btn {
+      white-space: nowrap;
+    }
+    .invNotify__form .btn[disabled] {
+      opacity: .6;
+      pointer-events: none;
+    }
+    .invNotify__msg {
+      margin: 14px 0 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.45;
+    }
+    .invNotify__msg.is-error {
+      color: #dc2626;
+    }
+    @media (max-width: 640px) {
+      .invNotify__form { flex-direction: column; }
+      .invNotify__form .btn { width: 100%; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-invnotify]');
+      if (!root) return;
+      var form = root.querySelector('[data-invnotify-form]');
+      var message = root.querySelector('[data-invnotify-msg]');
+      var button = root.querySelector('[data-invnotify-submit]');
+      var appUrl = {{ wa_backend | json }};
+
+      if (!form || !message || !button) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        button.disabled = true;
+        message.hidden = true;
+        message.classList.remove('is-error');
+
+        fetch(appUrl.replace(/\/$/, '') + '/api/inventory/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: form.email.value,
+            productId: form.productId.value
+          })
+        })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (data) {
+              if (!r.ok || data.ok !== true) {
+                throw new Error(data.error || 'Er ging iets mis. Probeer het later opnieuw.');
+              }
+              return data;
+            });
+          })
+          .then(function (data) {
+            message.hidden = false;
+            message.textContent = data.message || 'Bedankt! Je krijgt een melding zodra dit product weer beschikbaar is.';
+            form.reset();
+          })
+          .catch(function (err) {
+            message.hidden = false;
+            message.classList.add('is-error');
+            message.textContent = (err && err.message) || 'Er ging iets mis. Probeer het later opnieuw.';
+          })
+          .then(function () {
+            button.disabled = false;
+          });
+      });
+    })();
+  </script>
+{% endif %}
