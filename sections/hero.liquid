@@ -4,10 +4,10 @@
     <h1>{{ section.settings.heading | default: "Originele Apple." }}<br><span>{{ section.settings.heading_accent | default: "Voor een betere prijs." }}</span></h1>
     <p class="lead">{{ section.settings.subtext | default: "Koop scherp geprijsde premium pre-owned originele Apple-producten met volledige transparantie over de conditie en batterijstatus." }}</p>
     <div class="ctas">
-      <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Alle iPhones →</a>
-      <a class="btn" href="#categorie">Bekijk categorieën</a>
+      <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'hero.cta_primary' | t }}</a>
+      <a class="btn" href="#categorie">{{ 'hero.cta_secondary' | t }}</a>
     </div>
-    <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: "607" }} WebwinkelKeur-reviews</span></div>
+    <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: "607" }} {{ 'hero.review_suffix' | t }}</span></div>
   </div>
   {% if section.settings.image %}
     <div class="heroImg"><img src="{{ section.settings.image | image_url: width: 900 }}" width="900" height="900" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>

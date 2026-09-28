@@ -1,15 +1,15 @@
 <section class="shopHero"><div class="wrap">
-  <div class="breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span style="color:#fff">{{ collection.title }}</span></div>
-  <p class="eyebrow">Volledige voorraad</p>
-  <h1>{{ collection.title | default: "Alle producten" }}</h1>
-  <p>{{ collection.description | default: "Elk toestel is uniek en persoonlijk gecontroleerd. Filter op categorie, batterijconditie, opslag en prijs om precies te vinden wat je zoekt." }}</p>
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">{{ collection.title }}</span></div>
+  <p class="eyebrow">{{ 'collection.eyebrow' | t }}</p>
+  <h1>{% if collection.title != blank %}{{ collection.title }}{% else %}{{ 'collection.default_title' | t }}{% endif %}</h1>
+  <p>{% if collection.description != blank %}{{ collection.description }}{% else %}{{ 'collection.default_description' | t }}{% endif %}</p>
 </div></section>
 
 {% paginate collection.products by 24 %}
 <section style="padding-top:36px"><div class="wrap">
   <div class="shopLayout">
     <aside class="filterSidebar" id="filterSidebar">
-      <button class="filterCloseBtn" id="filterClose" type="button">✕ Sluiten</button>
+      <button class="filterCloseBtn" id="filterClose" type="button">{{ 'collection.filters_close' | t }}</button>
       {% for filter in collection.filters %}
         <div class="filterGroup">
           <h4>{{ filter.label }}</h4>
@@ -25,14 +25,14 @@
               <form>
                 <input type="number" name="{{ filter.min_value.param_name }}" placeholder="Van €" value="{{ filter.min_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
                 <input type="number" name="{{ filter.max_value.param_name }}" placeholder="Tot €" value="{{ filter.max_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
-                <button class="clearAllBtn" type="submit" style="margin-top:8px">Toepassen</button>
+                <button class="clearAllBtn" type="submit" style="margin-top:8px">{{ 'collection.filters_apply' | t }}</button>
               </form>
             </div>
           {% endif %}
         </div>
       {% endfor %}
       {% if collection.current_vendor or collection.current_type %}
-        <a class="clearAllBtn" href="{{ collection.url }}">Wis alle filters</a>
+        <a class="clearAllBtn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>
       {% endif %}
     </aside>
 
@@ -42,27 +42,27 @@
           <span class="searchIcon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </span>
-          <input type="search" name="q" class="shopSearchInput" placeholder="Zoek een toestel…" value="{{ search.terms }}">
-          <button type="submit" class="searchSubmit" aria-label="Zoeken">
+          <input type="search" name="q" class="shopSearchInput" placeholder="{{ 'collection.search_placeholder' | t }}" value="{{ search.terms }}">
+          <button type="submit" class="searchSubmit" aria-label="{{ 'collection.search_aria' | t }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
         </form>
         <div class="toolbarRow">
           <select class="sortSelect" onchange="window.location.href=this.value">
-            <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Sorteer: Nieuwste</option>
-            <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Prijs laag - hoog</option>
-            <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Prijs hoog - laag</option>
+            <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>{{ 'collection.sort_newest' | t }}</option>
+            <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>{{ 'collection.sort_price_asc' | t }}</option>
+            <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>{{ 'collection.sort_price_desc' | t }}</option>
           </select>
           <button class="filterToggle" id="filterToggle" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="11" y1="18" x2="13" y2="18"></line></svg>
-            Filters
+            {{ 'collection.filters_toggle' | t }}
           </button>
-          <span class="resultCount">{{ collection.products.size }} producten</span>
+          <span class="resultCount">{{ 'collection.results_count' | t: count: collection.products.size }}</span>
         </div>
       </div>
 
       {% if collection.products.size == 0 %}
-        <p class="noResults">Geen toestellen gevonden met deze filters.</p>
+        <p class="noResults">{{ 'collection.no_results' | t }}</p>
       {% else %}
         {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan, ongeacht de gekozen sortering. {% endcomment %}
         {% assign available_products = collection.products | where: "available", true %}

@@ -1,0 +1,173 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Search a device…",
+      "title": "Search a device",
+      "input_placeholder": "E.g. iPhone 15 Pro",
+      "cta": "Search →",
+      "aria": "Search",
+      "close_aria": "Close"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Cart"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "stock": "Shop",
+      "original_iphone": "Original iPhone?",
+      "faq": "FAQ",
+      "trade_in": "Sell/trade in your iPhone",
+      "contact": "Contact"
+    },
+    "account_aria": "Account",
+    "cart_aria": "Cart",
+    "menu_aria": "Menu",
+    "mobile_cta": "View shop →"
+  },
+  "footer": {
+    "headings": {
+      "iphones": "iPhones",
+      "information": "Information",
+      "contact": "Contact"
+    },
+    "links": {
+      "stock": "Shop",
+      "original_iphone": "Original iPhone?",
+      "trade_in": "Sell/trade in your iPhone",
+      "value_estimate": "Request a valuation",
+      "homepage": "Homepage",
+      "faq": "FAQ"
+    },
+    "newsletter": {
+      "title": "Stay in the loop",
+      "subtext": "Get notified as soon as new devices arrive.",
+      "placeholder": "your@email.com",
+      "cta": "Sign up →",
+      "thanks": "Thanks! We'll let you know as soon as new devices arrive."
+    },
+    "badges": {
+      "reviews_suffix": "on WebwinkelKeur",
+      "reviews_count_suffix": "reviews",
+      "kvk": "Chamber of Commerce",
+      "btw": "VAT"
+    }
+  },
+  "featured_products": {
+    "view_shop_cta": "Browse the full shop →",
+    "tab_all": "All"
+  },
+  "hero": {
+    "cta_primary": "All iPhones →",
+    "cta_secondary": "Browse categories",
+    "review_suffix": "WebwinkelKeur reviews"
+  },
+  "reviews_slider": {
+    "prev_aria": "Previous review",
+    "next_aria": "Next review",
+    "dot_aria": "Go to review {{ index }}"
+  },
+  "product_card": {
+    "cta": "View device",
+    "battery_suffix": "% battery",
+    "warranty_suffix": "mo warranty",
+    "meta_battery_suffix": "% batt",
+    "meta_warranty_prefix": "incl."
+  },
+  "collection": {
+    "breadcrumb_home": "Home",
+    "eyebrow": "Full inventory",
+    "default_title": "All products",
+    "default_description": "Every device is unique and personally inspected. Filter by category, battery condition, storage and price to find exactly what you're looking for.",
+    "filters_close": "✕ Close",
+    "filters_apply": "Apply",
+    "filters_clear_all": "Clear all filters",
+    "search_placeholder": "Search a device…",
+    "search_aria": "Search",
+    "sort_newest": "Sort: Newest",
+    "sort_price_asc": "Price low - high",
+    "sort_price_desc": "Price high - low",
+    "filters_toggle": "Filters",
+    "results_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "no_results": "No devices found matching these filters."
+  },
+  "product_page": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_stock": "Shop",
+    "ribbon_default": "New arrival!",
+    "rating_default": "9.8/10 · 607 reviews",
+    "saving_prefix": "Save",
+    "tax_note": "incl. tax (margin scheme) · free shipping",
+    "low_stock": "Only 1 left in stock — this exact device is unique",
+    "spec_storage": "Storage",
+    "spec_battery": "Battery condition",
+    "spec_condition": "Condition",
+    "spec_warranty": "Warranty",
+    "spec_warranty_unit": "months",
+    "apple_product_default": "Apple product",
+    "accessories_label": "Add accessories",
+    "accessories_total": "Total incl. accessories:",
+    "add_to_cart": "Add to cart —",
+    "trade_in_cta": "Get a trade-in value for your old device →",
+    "feature_original": "Original premium pre-owned {{ type }}: not refurbished, no replaced parts",
+    "feature_battery": "{{ percentage }}% battery capacity",
+    "feature_condition": "{{ condition }} — see the photo report for the exact condition",
+    "feature_warranty": "Incl. {{ months }} months warranty",
+    "accordion_description": "Product description",
+    "accordion_specs": "Specifications",
+    "accordion_shipping": "Shipping & warranty",
+    "spec_list_storage": "Storage: {{ value }}GB",
+    "spec_list_battery": "Battery condition: {{ value }}%",
+    "spec_list_condition": "Condition: {{ value }}",
+    "shipping_text_default": "Free shipping within the Netherlands, or pick up in person by appointment. Every device comes with a warranty and personal support via WhatsApp or phone.",
+    "related_eyebrow": "You might also like",
+    "related_heading": "Similar devices",
+    "related_cta": "View full inventory →"
+  },
+  "cart_page": {
+    "breadcrumb": "Cart",
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "empty_cta": "View shop →",
+    "remove": "Remove",
+    "summary_title": "Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shipping_free": "Free",
+    "total": "Total",
+    "checkout": "Checkout →",
+    "continue_shopping": "← Continue shopping"
+  },
+  "search_page": {
+    "breadcrumb": "Search",
+    "eyebrow": "Search results",
+    "results_count": {
+      "one": "{{ count }} result found",
+      "other": "{{ count }} results found"
+    },
+    "no_results": "No results found for \"{{ terms }}\"."
+  },
+  "errors": {
+    "404": {
+      "eyebrow": "404",
+      "heading": "Page not found",
+      "lead_before": "This page no longer exists. Go back to the",
+      "home_link": "homepage",
+      "lead_middle": "or browse the",
+      "stock_link": "shop",
+      "lead_after": "."
+    }
+  }
+}

@@ -14,23 +14,23 @@
     </div>
 
     <div>
-      <h4>iPhones</h4>
-      <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Voorraad</a>
-      {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">Originele iPhone?</a>{% endif %}
-      <a class="js-tradein-trigger" href="#">iPhone verkopen/inruilen</a>
-      <a class="js-tradein-trigger" href="#">Waardeschatting aanvragen</a>
+      <h4>{{ 'footer.headings.iphones' | t }}</h4>
+      <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'footer.links.stock' | t }}</a>
+      {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'footer.links.original_iphone' | t }}</a>{% endif %}
+      <a class="js-tradein-trigger" href="#">{{ 'footer.links.trade_in' | t }}</a>
+      <a class="js-tradein-trigger" href="#">{{ 'footer.links.value_estimate' | t }}</a>
     </div>
 
     <div>
-      <h4>Informatie</h4>
-      <a href="{{ routes.root_url }}">Homepage</a>
-      {% if pages.contact %}<a href="{{ pages.contact.url }}">Contact</a>{% endif %}
-      {% if pages.faq %}<a href="{{ pages.faq.url }}">Veel gestelde vragen</a>{% endif %}
+      <h4>{{ 'footer.headings.information' | t }}</h4>
+      <a href="{{ routes.root_url }}">{{ 'footer.links.homepage' | t }}</a>
+      {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
+      {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'footer.links.faq' | t }}</a>{% endif %}
       {% for policy in shop.policies %}<a href="{{ policy.url }}">{{ policy.title }}</a>{% endfor %}
     </div>
 
     <div>
-      <h4>Contact</h4>
+      <h4>{{ 'footer.headings.contact' | t }}</h4>
       <p>{{ section.settings.phone }}</p>
       <p>{{ shop.email }}</p>
       <p>{{ section.settings.address }}</p>
@@ -38,25 +38,25 @@
   </div>
 
   <div class="newsletter">
-    <div><b>Blijf op de hoogte</b><p>Ontvang een seintje zodra er nieuwe toestellen binnenkomen.</p></div>
+    <div><b>{{ 'footer.newsletter.title' | t }}</b><p>{{ 'footer.newsletter.subtext' | t }}</p></div>
     {% form 'customer', id: 'footerNewsletter' %}
       {% if form.posted_successfully? %}
-        <span class="newsletterDone">Bedankt! We laten je weten zodra er nieuwe toestellen binnenkomen.</span>
+        <span class="newsletterDone">{{ 'footer.newsletter.thanks' | t }}</span>
       {% else %}
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="newsletterForm">
-          <input type="email" name="contact[email]" placeholder="jouw@email.nl" required>
-          <button class="btn primary" type="submit">Aanmelden →</button>
+          <input type="email" name="contact[email]" placeholder="{{ 'footer.newsletter.placeholder' | t }}" required>
+          <button class="btn primary" type="submit">{{ 'footer.newsletter.cta' | t }}</button>
         </div>
       {% endif %}
     {% endform %}
   </div>
 
   <div class="footerBadges">
-    <span>★★★★★ {{ section.settings.rating | default: "9,8/10" }} op WebwinkelKeur</span>
-    <span>{{ section.settings.review_count | default: "607+" }} reviews</span>
-    {% if section.settings.kvk %}<span>KVK {{ section.settings.kvk }}</span>{% endif %}
-    {% if section.settings.btw %}<span>BTW {{ section.settings.btw }}</span>{% endif %}
+    <span>★★★★★ {{ section.settings.rating | default: "9,8/10" }} {{ 'footer.badges.reviews_suffix' | t }}</span>
+    <span>{{ section.settings.review_count | default: "607+" }} {{ 'footer.badges.reviews_count_suffix' | t }}</span>
+    {% if section.settings.kvk %}<span>{{ 'footer.badges.kvk' | t }} {{ section.settings.kvk }}</span>{% endif %}
+    {% if section.settings.btw %}<span>{{ 'footer.badges.btw' | t }} {{ section.settings.btw }}</span>{% endif %}
   </div>
 
   <div class="finePrint">Copyright © {{ 'now' | date: '%Y' }} {{ shop.name }}</div>

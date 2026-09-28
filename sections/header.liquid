@@ -8,40 +8,40 @@
     {{ shop.name | default: 'iSelectStore' }}
   </a>
   <nav class="links">
-    <a href="{{ routes.root_url }}">Home</a>
-    <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Voorraad</a>
-    {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">Originele iPhone?</a>{% endif %}
-    {% if pages.faq %}<a href="{{ pages.faq.url }}">Veel gestelde vragen</a>{% endif %}
-    <a class="js-tradein-trigger" href="#">iPhone verkopen/inruilen</a>
-    {% if pages.contact %}<a href="{{ pages.contact.url }}">Contact</a>{% endif %}
+    <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
+    <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
+    {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
+    {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
+    <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
+    {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
   </nav>
   <div class="icons">
-    <button class="ic" aria-label="Zoeken" id="searchIcon">🔍</button>
+    <button class="ic" aria-label="{{ 'general.search.aria' | t }}" id="searchIcon">🔍</button>
     <a class="ic" href="{{ routes.search_url }}" style="display:none" id="searchLink"></a>
-    <a class="ic" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Account">♡</a>
-    <a class="ic" href="{{ routes.cart_url }}" aria-label="Winkelwagen">🛍<span class="count">{{ cart.item_count }}</span></a>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a class="ic" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{{ 'header.account_aria' | t }}">♡</a>
+    <a class="ic" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_aria' | t }}">🛍<span class="count">{{ cart.item_count }}</span></a>
+    <button class="burger" id="burger" aria-label="{{ 'header.menu_aria' | t }}"><span></span><span></span><span></span></button>
   </div>
 </div></header>
 
 <nav class="mnav" id="mnav">
-  <a href="{{ routes.root_url }}">Home</a>
-  <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Voorraad</a>
-  {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">Originele iPhone?</a>{% endif %}
-  {% if pages.faq %}<a href="{{ pages.faq.url }}">Veel gestelde vragen</a>{% endif %}
-  <a class="js-tradein-trigger" href="#">iPhone verkopen/inruilen</a>
-  {% if pages.contact %}<a href="{{ pages.contact.url }}">Contact</a>{% endif %}
-  <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">Bekijk voorraad →</a>
+  <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
+  <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
+  {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
+  {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
+  <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
+  {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
+  <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.mobile_cta' | t }}</a>
 </nav>
 
 <form action="{{ routes.search_url }}" method="get" role="search" class="tiOverlay" id="searchOverlay">
   <div class="tiModal" style="max-width:560px">
-    <button type="button" class="tiClose" id="searchClose" aria-label="Sluiten">×</button>
-    <p class="tiEyebrow">Zoeken</p>
-    <h3>Zoek een toestel</h3>
-    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="Bijv. iPhone 15 Pro" value="{{ search.terms | escape }}" autofocus>
+    <button type="button" class="tiClose" id="searchClose" aria-label="{{ 'general.search.close_aria' | t }}">×</button>
+    <p class="tiEyebrow">{{ 'general.search.aria' | t }}</p>
+    <h3>{{ 'general.search.title' | t }}</h3>
+    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="{{ 'general.search.input_placeholder' | t }}" value="{{ search.terms | escape }}" autofocus>
     <input type="hidden" name="type" value="product">
-    <button type="submit" class="btn primary" style="width:100%;margin-top:14px;justify-content:center">Zoeken →</button>
+    <button type="submit" class="btn primary" style="width:100%;margin-top:14px;justify-content:center">{{ 'general.search.cta' | t }}</button>
   </div>
 </form>
 

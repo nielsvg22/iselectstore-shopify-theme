@@ -5,11 +5,11 @@
       <h2>{{ section.settings.heading | default: "Onze producten" }}</h2>
       <p class="sub">{{ section.settings.subtext }}</p>
     </div>
-    <a class="link" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">Bekijk de volledige webshop →</a>
+    <a class="link" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">{{ 'featured_products.view_shop_cta' | t }}</a>
   </div>
 
   <div class="tabs" id="catTabs">
-    <span class="tab active" data-cat="Alle">Alle</span>
+    <span class="tab active" data-cat="Alle">{{ 'featured_products.tab_all' | t }}</span>
     <span class="tab" data-cat="iPhone">iPhone</span>
     <span class="tab" data-cat="iPad">iPad</span>
     <span class="tab" data-cat="MacBook">MacBook</span>

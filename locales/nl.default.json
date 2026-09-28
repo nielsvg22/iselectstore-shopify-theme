@@ -1,7 +1,12 @@
 {
   "general": {
     "search": {
-      "placeholder": "Zoek een toestel…"
+      "placeholder": "Zoek een toestel…",
+      "title": "Zoek een toestel",
+      "input_placeholder": "Bijv. iPhone 15 Pro",
+      "cta": "Zoeken →",
+      "aria": "Zoeken",
+      "close_aria": "Sluiten"
     }
   },
   "products": {
@@ -13,6 +18,156 @@
   "cart": {
     "general": {
       "title": "Winkelwagen"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "stock": "Voorraad",
+      "original_iphone": "Originele iPhone?",
+      "faq": "Veel gestelde vragen",
+      "trade_in": "iPhone verkopen/inruilen",
+      "contact": "Contact"
+    },
+    "account_aria": "Account",
+    "cart_aria": "Winkelwagen",
+    "menu_aria": "Menu",
+    "mobile_cta": "Bekijk voorraad →"
+  },
+  "footer": {
+    "headings": {
+      "iphones": "iPhones",
+      "information": "Informatie",
+      "contact": "Contact"
+    },
+    "links": {
+      "stock": "Voorraad",
+      "original_iphone": "Originele iPhone?",
+      "trade_in": "iPhone verkopen/inruilen",
+      "value_estimate": "Waardeschatting aanvragen",
+      "homepage": "Homepage",
+      "faq": "Veel gestelde vragen"
+    },
+    "newsletter": {
+      "title": "Blijf op de hoogte",
+      "subtext": "Ontvang een seintje zodra er nieuwe toestellen binnenkomen.",
+      "placeholder": "jouw@email.nl",
+      "cta": "Aanmelden →",
+      "thanks": "Bedankt! We laten je weten zodra er nieuwe toestellen binnenkomen."
+    },
+    "badges": {
+      "reviews_suffix": "op WebwinkelKeur",
+      "reviews_count_suffix": "reviews",
+      "kvk": "KVK",
+      "btw": "BTW"
+    }
+  },
+  "featured_products": {
+    "view_shop_cta": "Bekijk de volledige webshop →",
+    "tab_all": "Alle"
+  },
+  "hero": {
+    "cta_primary": "Alle iPhones →",
+    "cta_secondary": "Bekijk categorieën",
+    "review_suffix": "WebwinkelKeur-reviews"
+  },
+  "reviews_slider": {
+    "prev_aria": "Vorige review",
+    "next_aria": "Volgende review",
+    "dot_aria": "Ga naar review {{ index }}"
+  },
+  "product_card": {
+    "cta": "Bekijk toestel",
+    "battery_suffix": "% batterij",
+    "warranty_suffix": "mnd garantie",
+    "meta_battery_suffix": "% batt",
+    "meta_warranty_prefix": "incl."
+  },
+  "collection": {
+    "breadcrumb_home": "Home",
+    "eyebrow": "Volledige voorraad",
+    "default_title": "Alle producten",
+    "default_description": "Elk toestel is uniek en persoonlijk gecontroleerd. Filter op categorie, batterijconditie, opslag en prijs om precies te vinden wat je zoekt.",
+    "filters_close": "✕ Sluiten",
+    "filters_apply": "Toepassen",
+    "filters_clear_all": "Wis alle filters",
+    "search_placeholder": "Zoek een toestel…",
+    "search_aria": "Zoeken",
+    "sort_newest": "Sorteer: Nieuwste",
+    "sort_price_asc": "Prijs laag - hoog",
+    "sort_price_desc": "Prijs hoog - laag",
+    "filters_toggle": "Filters",
+    "results_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} producten"
+    },
+    "no_results": "Geen toestellen gevonden met deze filters."
+  },
+  "product_page": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_stock": "Voorraad",
+    "ribbon_default": "Nieuw binnen!",
+    "rating_default": "9,8/10 · 607 reviews",
+    "saving_prefix": "Bespaar",
+    "tax_note": "incl. belasting (marge) · gratis verzending",
+    "low_stock": "Nog maar 1 op voorraad — dit exacte toestel is uniek",
+    "spec_storage": "Opslag",
+    "spec_battery": "Batterijconditie",
+    "spec_condition": "Staat",
+    "spec_warranty": "Garantie",
+    "spec_warranty_unit": "maanden",
+    "apple_product_default": "Apple-product",
+    "accessories_label": "Accessoires toevoegen",
+    "accessories_total": "Totaal incl. accessoires:",
+    "add_to_cart": "In winkelwagen —",
+    "trade_in_cta": "Start inruilwaarde voor je oude toestel →",
+    "feature_original": "Originele premium pre-owned {{ type }}: niet refurbished en geen onderdelen vervangen",
+    "feature_battery": "{{ percentage }}% batterijcapaciteit",
+    "feature_condition": "{{ condition }} — zie de fotoreportage voor de exacte staat",
+    "feature_warranty": "Incl. {{ months }} maanden garantie",
+    "accordion_description": "Productbeschrijving",
+    "accordion_specs": "Specificaties",
+    "accordion_shipping": "Verzending & garantie",
+    "spec_list_storage": "Opslag: {{ value }}GB",
+    "spec_list_battery": "Batterijconditie: {{ value }}%",
+    "spec_list_condition": "Staat: {{ value }}",
+    "shipping_text_default": "Gratis verzending binnen Nederland, of persoonlijk afhalen op afspraak. Elk toestel wordt geleverd met garantie en persoonlijke service via WhatsApp of telefoon.",
+    "related_eyebrow": "Ook interessant",
+    "related_heading": "Vergelijkbare toestellen",
+    "related_cta": "Bekijk alle voorraad →"
+  },
+  "cart_page": {
+    "breadcrumb": "Winkelwagen",
+    "title": "Je winkelwagen",
+    "empty": "Je winkelwagen is nog leeg.",
+    "empty_cta": "Bekijk voorraad →",
+    "remove": "Verwijderen",
+    "summary_title": "Overzicht",
+    "subtotal": "Subtotaal",
+    "shipping": "Verzending",
+    "shipping_free": "Gratis",
+    "total": "Totaal",
+    "checkout": "Afrekenen →",
+    "continue_shopping": "← Verder winkelen"
+  },
+  "search_page": {
+    "breadcrumb": "Zoeken",
+    "eyebrow": "Zoekresultaten",
+    "results_count": {
+      "one": "{{ count }} resultaat gevonden",
+      "other": "{{ count }} resultaten gevonden"
+    },
+    "no_results": "Geen resultaten gevonden voor \"{{ terms }}\"."
+  },
+  "errors": {
+    "404": {
+      "eyebrow": "404",
+      "heading": "Pagina niet gevonden",
+      "lead_before": "Deze pagina bestaat niet (meer). Ga terug naar de",
+      "home_link": "homepage",
+      "lead_middle": "of bekijk de",
+      "stock_link": "voorraad",
+      "lead_after": "."
     }
   }
 }
