@@ -62,6 +62,35 @@ var io = new IntersectionObserver(function (entries) {
 }, { threshold: .12 });
 document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
+// Reviews slider (one review at a time, with arrows + dots)
+document.querySelectorAll('.reviewsSlider').forEach(function (slider) {
+  var track = slider.querySelector('.reviewsTrack');
+  var slides = slider.querySelectorAll('.review');
+  var dots = slider.querySelectorAll('.reviewsDot');
+  var prev = slider.querySelector('.reviewsArrow.prev');
+  var next = slider.querySelector('.reviewsArrow.next');
+  if (!track || slides.length < 2) return;
+  var index = 0;
+
+  function go(i) {
+    index = (i + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    dots.forEach(function (d, di) { d.classList.toggle('active', di === index); });
+  }
+  if (prev) prev.addEventListener('click', function () { go(index - 1); });
+  if (next) next.addEventListener('click', function () { go(index + 1); });
+  dots.forEach(function (d, di) { d.addEventListener('click', function () { go(di); }); });
+
+  var startX = null;
+  track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    var diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 40) go(index + (diff < 0 ? 1 : -1));
+    startX = null;
+  });
+});
+
 // Accordion (FAQ, product description, specs)
 document.querySelectorAll('.accHead').forEach(function (h) {
   h.addEventListener('click', function () {

@@ -6,14 +6,31 @@
       <p class="sub">{{ section.settings.subtext }}</p>
     </div>
   </div>
-  <div class="reviews">
-    {% for block in section.blocks %}
-      <div class="review" {{ block.shopify_attributes }}>
-        <div class="stars">★★★★★</div>
-        <p>"{{ block.settings.quote }}"</p>
-        <b>{{ block.settings.name }}</b>
+  <div class="reviewsSlider" id="reviewsSlider-{{ section.id }}">
+    <div class="reviewsViewport">
+      <div class="reviewsTrack">
+        {% for block in section.blocks %}
+          <div class="review" {{ block.shopify_attributes }}>
+            <div class="stars">★★★★★</div>
+            <p>"{{ block.settings.quote }}"</p>
+            <b>{{ block.settings.name }}</b>
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
+    {% if section.blocks.size > 1 %}
+      <button class="reviewsArrow prev" type="button" aria-label="Vorige review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="reviewsArrow next" type="button" aria-label="Volgende review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <div class="reviewsDots">
+        {% for block in section.blocks %}
+          <button class="reviewsDot{% if forloop.first %} active{% endif %}" type="button" aria-label="Ga naar review {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 </div></section>
 
