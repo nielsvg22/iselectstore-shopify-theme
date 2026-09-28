@@ -5,7 +5,7 @@
       <img src="{{ product.featured_image | image_url: width: 600 }}" width="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
     {% endif %}
   </a>
-  {% if product.metafields.custom.badge_text %}
+  {% if product.metafields.custom.badge_text and product.available %}
     <span class="badge">{{ product.metafields.custom.badge_text }}</span>
   {% endif %}
   <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>

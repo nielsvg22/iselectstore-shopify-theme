@@ -16,7 +16,7 @@
         {% comment %} Per-product badge_text metafield wint van de algemene sectie-tekst, zodat
         de productpagina hetzelfde label toont als de productkaart op de shop/homepage. {% endcomment %}
         {% assign ribbon_text = product.metafields.custom.badge_text | default: section.settings.ribbon_text | default: "Nieuw binnen!" %}
-        {% if section.settings.show_ribbon and ribbon_text != blank %}<span class="ribbon">{{ ribbon_text }}</span>{% endif %}
+        {% if section.settings.show_ribbon and ribbon_text != blank and product.available %}<span class="ribbon">{{ ribbon_text }}</span>{% endif %}
         <img id="mainImg" src="{{ product.featured_image | image_url: width: 900 }}" width="900" height="900" alt="{{ product.featured_image.alt | default: product.title | escape }}">
       </div>
       {% if product.media.size > 1 %}
