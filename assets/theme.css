@@ -385,8 +385,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 
  .sortSelect{flex:1}
 
- .products.shopProductsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0;padding:0}
- .products.shopProductsGrid .card{min-width:0;padding:10px}
+ .products.shopProductsGrid{display:grid;grid-template-columns:1fr;gap:16px;margin:0;padding:0}
+ .products.shopProductsGrid .card{min-width:0}
 }
 
 @media(max-width:900px){
@@ -430,12 +430,5 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
  .mobileBuy{display:flex}
  .pdp{padding-bottom:76px}
 
- .shopProductsGrid .card h3{font-size:14px}
- .shopProductsGrid .card .price b{font-size:18px}
- .shopProductsGrid .card .price .old{font-size:11px}
- .shopProductsGrid .card .meta{font-size:11px}
- .shopProductsGrid .card .featureChips{gap:4px}
- .shopProductsGrid .card .chip{font-size:10px;padding:4px 7px}
- .shopProductsGrid .card .add{font-size:12.5px;padding:10px}
  .shopProductsGrid .card .badge{font-size:10px;padding:6px 10px;top:20px;right:20px}
 }
