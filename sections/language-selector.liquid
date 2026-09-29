@@ -1,25 +1,24 @@
 {% comment %}
-  Taalkeuze
-  - Toont alleen meerdere talen als Shopify Markets meerdere locales heeft
-  - Gebruikt Shopify's native localization form
+  Taalkeuze — Shopify's native localization form (Shopify Markets).
+  Alleen zichtbaar als de shop meerdere locales heeft ingeschakeld.
 {% endcomment %}
 
 {% if shop.enabled_locales.size > 1 %}
   <section class="language-selector" data-section-id="{{ section.id }}">
     <div class="wrap">
       <div class="language-selector__inner">
-        <label for="LocaleSelector" class="language-selector__label">{{ section.settings.label | default: "Taal" }}</label>
-        <form method="post" action="/{{ request.locale.iso_code }}/localization" accept-charset="UTF-8" enctype="multipart/form-data">
+        {% form 'localization', class: 'language-selector__form' %}
           <input type="hidden" name="return_to" value="{{ request.path }}">
-          <select id="LocaleSelector" name="locale_code" class="sortSelect" aria-label="Taal">
+          <label for="LocaleSelector-{{ section.id }}" class="language-selector__label">{{ 'language_selector.label' | t }}</label>
+          <select id="LocaleSelector-{{ section.id }}" name="locale_code" class="sortSelect" aria-label="{{ 'language_selector.label' | t }}">
             {% for locale in shop.enabled_locales %}
               <option value="{{ locale.iso_code }}" {% if locale.iso_code == request.locale.iso_code %}selected{% endif %}>
                 {{ locale.endonym_name | default: locale.name }}
               </option>
             {% endfor %}
           </select>
-          <button type="submit" class="btn" style="padding:10px 18px;font-size:13px;">{{ section.settings.button_text | default: "Wijzig" }}</button>
-        </form>
+          <button type="submit" class="btn" style="padding:10px 18px;font-size:13px;">{{ 'language_selector.button' | t }}</button>
+        {% endform %}
       </div>
     </div>
   </section>
@@ -38,7 +37,7 @@
       font-weight: 600;
       color: var(--navy);
     }
-    .language-selector form {
+    .language-selector__form {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -49,10 +48,6 @@
 {% schema %}
 {
   "name": "Taalkeuze",
-  "settings": [
-    { "type": "text", "id": "label", "label": "Label", "default": "Taal" },
-    { "type": "text", "id": "button_text", "label": "Knoptekst", "default": "Wijzig" }
-  ],
   "presets": [
     { "name": "Taalkeuze" }
   ]

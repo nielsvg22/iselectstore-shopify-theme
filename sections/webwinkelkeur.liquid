@@ -9,11 +9,13 @@
 {% if shop_id != blank %}
   <section class="webwinkelkeur" data-section-id="{{ section.id }}">
     <div class="wrap">
-      {% if section.settings.heading != blank %}
+      {% assign wkw_heading_default = 'webwinkelkeur.heading_default' | t %}
+      {% assign wkw_heading = section.settings.heading | default: wkw_heading_default %}
+      {% if wkw_heading != blank %}
         <div class="head">
           <div>
             <p class="eyebrow">WebwinkelKeur</p>
-            <h2>{{ section.settings.heading }}</h2>
+            <h2>{{ wkw_heading }}</h2>
           </div>
         </div>
       {% endif %}
@@ -39,7 +41,7 @@
 {
   "name": "WebwinkelKeur",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Titel", "default": "Wat klanten van ons vinden" },
+    { "type": "text", "id": "heading", "label": "Titel" },
     { "type": "text", "id": "shop_id", "label": "WebwinkelKeur shop ID", "info": "Als leeg wordt de waarde uit thema-instellingen gebruikt." }
   ],
   "presets": [

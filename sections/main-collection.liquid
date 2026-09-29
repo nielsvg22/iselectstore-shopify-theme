@@ -23,8 +23,8 @@
           {% elsif filter.type == 'price_range' %}
             <div class="rangeRow">
               <form>
-                <input type="number" name="{{ filter.min_value.param_name }}" placeholder="Van €" value="{{ filter.min_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
-                <input type="number" name="{{ filter.max_value.param_name }}" placeholder="Tot €" value="{{ filter.max_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
+                <input type="number" name="{{ filter.min_value.param_name }}" placeholder="{{ 'collection.price_min' | t }}" value="{{ filter.min_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
+                <input type="number" name="{{ filter.max_value.param_name }}" placeholder="{{ 'collection.price_max' | t }}" value="{{ filter.max_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
                 <button class="clearAllBtn" type="submit" style="margin-top:8px">{{ 'collection.filters_apply' | t }}</button>
               </form>
             </div>

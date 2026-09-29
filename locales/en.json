@@ -7,7 +7,8 @@
       "cta": "Search →",
       "aria": "Search",
       "close_aria": "Close"
-    }
+    },
+    "breadcrumb_home": "Home"
   },
   "products": {
     "product": {
@@ -32,7 +33,13 @@
     "account_aria": "Account",
     "cart_aria": "Cart",
     "menu_aria": "Menu",
-    "mobile_cta": "View shop →"
+    "mobile_cta": "View shop →",
+    "top": {
+      "original_products": "Original Apple products",
+      "battery_condition": "Exact battery health",
+      "warranty": "6–12 months warranty",
+      "trade_in": "Trade-in available"
+    }
   },
   "footer": {
     "headings": {
@@ -60,21 +67,29 @@
       "reviews_count_suffix": "reviews",
       "kvk": "Chamber of Commerce",
       "btw": "VAT"
-    }
+    },
+    "brand_text": "Premium pre-owned original Apple products with full transparency on condition and battery health."
   },
   "featured_products": {
     "view_shop_cta": "Browse the full shop →",
-    "tab_all": "All"
+    "tab_all": "All",
+    "eyebrow": "Stock",
+    "heading_default": "Our products"
   },
   "hero": {
     "cta_primary": "All iPhones →",
     "cta_secondary": "Browse categories",
-    "review_suffix": "WebwinkelKeur reviews"
+    "review_suffix": "WebwinkelKeur reviews",
+    "heading_default": "Original Apple.",
+    "heading_accent_default": "For a better price.",
+    "subtext_default": "Shop competitively priced premium pre-owned original Apple products with full transparency on condition and battery health."
   },
   "reviews_slider": {
     "prev_aria": "Previous review",
     "next_aria": "Next review",
-    "dot_aria": "Go to review {{ index }}"
+    "dot_aria": "Go to review {{ index }}",
+    "eyebrow": "Reviews",
+    "heading_default": "What do our customers say?"
   },
   "product_card": {
     "cta": "View device",
@@ -101,7 +116,9 @@
       "one": "{{ count }} product",
       "other": "{{ count }} products"
     },
-    "no_results": "No devices found matching these filters."
+    "no_results": "No devices found matching these filters.",
+    "price_min": "From €",
+    "price_max": "To €"
   },
   "product_page": {
     "breadcrumb_home": "Home",
@@ -169,5 +186,149 @@
       "stock_link": "shop",
       "lead_after": "."
     }
+  },
+  "featured_categories": {
+    "eyebrow": "Our range",
+    "heading_default": "Categories",
+    "cta": "Shop now →"
+  },
+  "trade_in": {
+    "banner_eyebrow": "Trade-in service",
+    "banner_heading_default": "Trade in your old iPhone?",
+    "banner_subtext_default": "Get a fair trade-in value and put the amount straight towards your next device.",
+    "banner_cta": "Start trade-in value →",
+    "banner_image_alt": "Trade in Apple products",
+    "modal": {
+      "step_of": "Step {{ current }} of {{ total }}",
+      "choose_model": "Which device do you want to trade in?",
+      "condition_question": "What condition is your {{ model }} in?",
+      "back": "Back",
+      "restart": "Start over",
+      "estimated": "Estimated trade-in value",
+      "note": "For your {{ model }} in \"{{ condition }}\" condition. This is an estimate — the final value is determined after a personal assessment.",
+      "whatsapp_cta": "Request this trade-in value via WhatsApp",
+      "close_aria": "Close"
+    },
+    "models": {
+      "ipad": "iPad (2020 or newer)",
+      "macbook": "MacBook Air/Pro (M1 or newer)",
+      "watch": "Apple Watch (Series 6 or newer)"
+    },
+    "conditions": {
+      "like_new": "Like new",
+      "light_wear": "Light signs of use",
+      "visible_wear": "Visible wear",
+      "damaged": "Damaged, still works"
+    }
+  },
+  "webwinkelkeur": {
+    "heading_default": "What customers think of us"
+  },
+  "contact": {
+    "eyebrow": "Personal contact",
+    "heading": "Get in touch",
+    "intro": "Do you have a question about a device, your order or a trade-in? We reply quickly and personally.",
+    "success_title": "Message sent!",
+    "success_text": "Thanks for your message. We'll get back to you personally within 24 hours.",
+    "your_details": "Your details",
+    "name_placeholder": "Name",
+    "email_placeholder": "Email address",
+    "subject": "Subject",
+    "subject_placeholder": "e.g. question about iPhone 15 Pro",
+    "message": "Message",
+    "message_placeholder": "How can we help you?",
+    "submit": "Send message →",
+    "direct_contact": "Direct contact",
+    "whatsapp": "WhatsApp us →",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "visit_note": "Visits by appointment. We usually reply within 24 hours."
+  },
+  "faq": {
+    "eyebrow": "Need help?",
+    "heading": "Frequently asked questions",
+    "help_before": "Can't find your question? Feel free to",
+    "help_link": "contact us personally",
+    "help_after": ".",
+    "items": {
+      "1": {
+        "question": "Are your iPhones original or refurbished?",
+        "answer": "<p>All our devices are original premium pre-owned Apple products: not refurbished and without replaced parts.</p>"
+      },
+      "2": {
+        "question": "How is battery health determined?",
+        "answer": "<p>We measure battery capacity with the original Apple diagnostic tools and clearly list this percentage on every product.</p>"
+      },
+      "3": {
+        "question": "What does the warranty cover?",
+        "answer": "<p>Every device comes with 6 to 12 months of warranty, depending on the product.</p>"
+      },
+      "4": {
+        "question": "Can I trade in my old device?",
+        "answer": "<p>Sure! Use our trade-in estimator for an indication of the value.</p>"
+      }
+    }
+  },
+  "authenticity": {
+    "hero_eyebrow": "Reliability first",
+    "hero_heading_default": "Guaranteed original",
+    "eyebrow": "Why trust us",
+    "heading": "What makes our iPhones original?",
+    "steps": {
+      "1": {
+        "title": "IMEI and Apple serial number check",
+        "text": "Every device is checked for a valid, non-blocked IMEI and serial number, directly at Apple."
+      },
+      "2": {
+        "title": "Official Apple diagnostics",
+        "text": "We run the original Apple diagnostic tools to verify battery health, screen performance and components."
+      },
+      "3": {
+        "title": "No uncertified parts",
+        "text": "If anything has ever been replaced, it is done with original Apple parts — never with cheap copies."
+      },
+      "4": {
+        "title": "Unique photo report per device",
+        "text": "You see the actual device you buy: no stock photos, but clear photos of its real condition."
+      },
+      "5": {
+        "title": "6–12 months warranty",
+        "text": "If anything does come up, we're there for you personally — with warranty on every device."
+      }
+    }
+  },
+  "password_page": {
+    "title_line_1": "Only the",
+    "title_line_2": "good ones.",
+    "message_default": "Our webshop is almost ready. Did you receive an access code? Enter it below.",
+    "password_placeholder": "Password",
+    "submit": "Open store →"
+  },
+  "inventory_notify": {
+    "title": "Get a notification when this product is available again",
+    "description": "Enter your email address. We'll send you one message as soon as this model and storage is back in stock.",
+    "email_placeholder": "email",
+    "email_aria": "Email address",
+    "submit": "Notify me when available",
+    "success": "You'll get a notification as soon as this product is available again.",
+    "errors": {
+      "generic": "Something went wrong. Please try again later.",
+      "invalid_email": "Enter a valid email address.",
+      "invalid_product": "Invalid product.",
+      "unrecognized_product": "This product could not be recognized. Please try again later."
+    }
+  },
+  "whatsapp_float": {
+    "subtitle": "iSelectStore · usually an instant reply",
+    "body": "Got a question about a device? Send us a message, we usually reply within a few minutes.",
+    "start_cta": "Start chat →",
+    "open_aria": "Open WhatsApp",
+    "close_aria": "Close",
+    "default_message": "Hi iSelectStore, I have a question."
+  },
+  "language_selector": {
+    "label": "Language",
+    "button": "Change"
   }
 }

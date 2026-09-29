@@ -7,8 +7,8 @@
 {% if current_variant.available == false %}
   {% assign wa_backend = settings.stock_notify_backend_url | default: 'https://iselectstore-marktplaats-app.vercel.app' %}
   <div class="invNotify" data-invnotify>
-    <h3 class="invNotify__title">Ontvang een melding wanneer dit product weer beschikbaar is</h3>
-    <p class="invNotify__text">Vul je e-mailadres in. We sturen je één bericht zodra dit model en opslag weer op voorraad is.</p>
+    <h3 class="invNotify__title">{{ 'inventory_notify.title' | t }}</h3>
+    <p class="invNotify__text">{{ 'inventory_notify.description' | t }}</p>
 
     <form class="invNotify__form" data-invnotify-form>
       <input type="hidden" name="productId" value="{{ product.id }}">
@@ -16,12 +16,12 @@
         type="email"
         name="email"
         class="shopSearchInput"
-        placeholder="email"
+        placeholder="{{ 'inventory_notify.email_placeholder' | t }}"
         required
         autocomplete="email"
-        aria-label="E-mailadres"
+        aria-label="{{ 'inventory_notify.email_aria' | t }}"
       >
-      <button type="submit" class="btn primary" data-invnotify-submit>Houd mij op de hoogte</button>
+      <button type="submit" class="btn primary" data-invnotify-submit>{{ 'inventory_notify.submit' | t }}</button>
     </form>
 
     <p class="invNotify__msg" data-invnotify-msg role="status" hidden></p>
@@ -102,6 +102,14 @@
       var message = root.querySelector('[data-invnotify-msg]');
       var button = root.querySelector('[data-invnotify-submit]');
       var appUrl = {{ wa_backend | json }};
+      var successText = {{ 'inventory_notify.success' | t | json }};
+      var genericError = {{ 'inventory_notify.errors.generic' | t | json }};
+
+      // themeStrings staat pas onderaan de pagina; daarom pas bij het uitlezen.
+      function codeMessage(code) {
+        var strings = (window.themeStrings && window.themeStrings.inventoryErrors) || {};
+        return (code && strings[code]) || null;
+      }
 
       if (!form || !message || !button) return;
 
@@ -122,20 +130,20 @@
           .then(function (r) {
             return r.json().catch(function () { return {}; }).then(function (data) {
               if (!r.ok || data.ok !== true) {
-                throw new Error(data.error || 'Er ging iets mis. Probeer het later opnieuw.');
+                throw new Error(codeMessage(data.code) || data.error || data.message || genericError);
               }
               return data;
             });
           })
           .then(function (data) {
             message.hidden = false;
-            message.textContent = data.message || 'Bedankt! Je krijgt een melding zodra dit product weer beschikbaar is.';
+            message.textContent = successText;
             form.reset();
           })
           .catch(function (err) {
             message.hidden = false;
             message.classList.add('is-error');
-            message.textContent = (err && err.message) || 'Er ging iets mis. Probeer het later opnieuw.';
+            message.textContent = (err && err.message) || genericError;
           })
           .then(function () {
             button.disabled = false;

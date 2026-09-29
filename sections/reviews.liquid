@@ -1,8 +1,9 @@
 <section style="background:var(--ivory)"><div class="wrap reveal">
   <div class="head">
     <div>
-      <p class="eyebrow">Reviews</p>
-      <h2>{{ section.settings.heading | default: "Wat vinden onze klanten?" }}</h2>
+      <p class="eyebrow">{{ 'reviews_slider.eyebrow' | t }}</p>
+      {% assign reviews_heading_default = 'reviews_slider.heading_default' | t %}
+      <h2>{{ section.settings.heading | default: reviews_heading_default }}</h2>
       <p class="sub">{{ section.settings.subtext }}</p>
     </div>
   </div>

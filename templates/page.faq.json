@@ -11,7 +11,13 @@
   "sections": {
     "main": {
       "type": "faq",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "faq-1": { "type": "faq", "settings": {} },
+        "faq-2": { "type": "faq", "settings": {} },
+        "faq-3": { "type": "faq", "settings": {} },
+        "faq-4": { "type": "faq", "settings": {} }
+      }
     }
   },
   "order": [

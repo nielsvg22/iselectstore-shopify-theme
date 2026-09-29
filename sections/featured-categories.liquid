@@ -1,8 +1,9 @@
 <section id="categorie"><div class="wrap reveal">
   <div class="head">
     <div>
-      <p class="eyebrow">Assortiment</p>
-      <h2>{{ section.settings.heading | default: "Categorieën" }}</h2>
+      <p class="eyebrow">{{ 'featured_categories.eyebrow' | t }}</p>
+      {% assign categories_heading_default = 'featured_categories.heading_default' | t %}
+      <h2>{{ section.settings.heading | default: categories_heading_default }}</h2>
       <p class="sub">{{ section.settings.subtext }}</p>
     </div>
   </div>
@@ -14,7 +15,7 @@
         {% elsif block.settings.image %}
           <img src="{{ block.settings.image | image_url: width: 600 }}" width="600" height="600" alt="{{ block.settings.label }}">
         {% endif %}
-        <div class="catcopy"><b>{{ block.settings.label | default: block.settings.collection.title }}</b><span>Winkel nu →</span></div>
+        <div class="catcopy"><b>{{ block.settings.label | default: block.settings.collection.title }}</b><span>{{ 'featured_categories.cta' | t }}</span></div>
       </a>
     {% endfor %}
   </div>

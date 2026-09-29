@@ -30,10 +30,46 @@
   {{ content_for_layout }}
 </main>
 
+{% section 'language-selector' %}
 {% section 'footer' %}
 
 {% render 'whatsapp-float' %}
 
+<script>
+  window.themeStrings = {
+    locale: {{ request.locale.iso_code | json }},
+    strings: {
+      tradeIn: {
+        step_of: {{ 'trade_in.modal.step_of' | t | json }},
+        choose_model: {{ 'trade_in.modal.choose_model' | t | json }},
+        condition_question: {{ 'trade_in.modal.condition_question' | t | json }},
+        back: {{ 'trade_in.modal.back' | t | json }},
+        restart: {{ 'trade_in.modal.restart' | t | json }},
+        estimated: {{ 'trade_in.modal.estimated' | t | json }},
+        note: {{ 'trade_in.modal.note' | t | json }},
+        whatsapp_cta: {{ 'trade_in.modal.whatsapp_cta' | t | json }},
+        close_aria: {{ 'trade_in.modal.close_aria' | t | json }}
+      },
+      tradeInModels: {
+        ipad: {{ 'trade_in.models.ipad' | t | json }},
+        macbook: {{ 'trade_in.models.macbook' | t | json }},
+        watch: {{ 'trade_in.models.watch' | t | json }}
+      },
+      tradeInConditions: {
+        like_new: {{ 'trade_in.conditions.like_new' | t | json }},
+        light_wear: {{ 'trade_in.conditions.light_wear' | t | json }},
+        visible_wear: {{ 'trade_in.conditions.visible_wear' | t | json }},
+        damaged: {{ 'trade_in.conditions.damaged' | t | json }}
+      }
+    },
+    inventoryErrors: {
+      generic: {{ 'inventory_notify.errors.generic' | t | json }},
+      invalid_email: {{ 'inventory_notify.errors.invalid_email' | t | json }},
+      invalid_product: {{ 'inventory_notify.errors.invalid_product' | t | json }},
+      unrecognized_product: {{ 'inventory_notify.errors.unrecognized_product' | t | json }}
+    }
+  };
+</script>
 <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </body>
 </html>

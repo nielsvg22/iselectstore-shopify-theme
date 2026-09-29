@@ -1,13 +1,15 @@
 <section><div class="wrap reveal">
   <div class="trade">
     <div class="tradecopy">
-      <div class="eye">Inruilservice</div>
-      <h2>{{ section.settings.heading | default: "Je oude iPhone inruilen?" }}</h2>
-      <p class="lead" style="font-size:16px">{{ section.settings.subtext | default: "Ontvang een eerlijke inruilwaarde en gebruik het bedrag direct voor je volgende toestel." }}</p>
-      <a class="btn primary js-tradein-trigger" href="#" style="margin-top:20px">Start inruilwaarde →</a>
+      {% assign trade_heading_default = 'trade_in.banner_heading_default' | t %}
+      {% assign trade_subtext_default = 'trade_in.banner_subtext_default' | t %}
+      <div class="eye">{{ 'trade_in.banner_eyebrow' | t }}</div>
+      <h2>{{ section.settings.heading | default: trade_heading_default }}</h2>
+      <p class="lead" style="font-size:16px">{{ section.settings.subtext | default: trade_subtext_default }}</p>
+      <a class="btn primary js-tradein-trigger" href="#" style="margin-top:20px">{{ 'trade_in.banner_cta' | t }}</a>
     </div>
     {% if section.settings.image %}
-      <img src="{{ section.settings.image | image_url: width: 800 }}" width="800" height="400" alt="Apple producten inruilen">
+      <img src="{{ section.settings.image | image_url: width: 800 }}" width="800" height="400" alt="{{ 'trade_in.banner_image_alt' | t }}">
     {% endif %}
   </div>
 </div></section>

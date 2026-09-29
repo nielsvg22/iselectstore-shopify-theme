@@ -1,8 +1,11 @@
 <section class="hero"><div class="heroIn">
   <div>
     <div class="eye">{{ section.settings.eyebrow | default: "selected by us, ready for you" }}</div>
-    <h1>{{ section.settings.heading | default: "Originele Apple." }}<br><span>{{ section.settings.heading_accent | default: "Voor een betere prijs." }}</span></h1>
-    <p class="lead">{{ section.settings.subtext | default: "Koop scherp geprijsde premium pre-owned originele Apple-producten met volledige transparantie over de conditie en batterijstatus." }}</p>
+    {% assign heading_default = 'hero.heading_default' | t %}
+    {% assign heading_accent_default = 'hero.heading_accent_default' | t %}
+    {% assign subtext_default = 'hero.subtext_default' | t %}
+    <h1>{{ section.settings.heading | default: heading_default }}<br><span>{{ section.settings.heading_accent | default: heading_accent_default }}</span></h1>
+    <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
     <div class="ctas">
       <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'hero.cta_primary' | t }}</a>
       <a class="btn" href="#categorie">{{ 'hero.cta_secondary' | t }}</a>

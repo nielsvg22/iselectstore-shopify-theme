@@ -32,7 +32,6 @@
     "name": "Contact & reviews",
     "settings": [
       { "type": "text", "id": "whatsapp_number", "label": "WhatsApp nummer", "default": "31643295022", "info": "Internationaal formaat, zonder +" },
-      { "type": "text", "id": "whatsapp_default_message", "label": "WhatsApp standaardbericht", "default": "Hoi%20iSelectStore%2C%20ik%20heb%20een%20vraag." },
       { "type": "text", "id": "webwinkelkeur_shop_id", "label": "WebwinkelKeur shop ID", "info": "Alleen cijfers. Leeg = widget wordt niet geladen." },
       { "type": "text", "id": "stock_notify_backend_url", "label": "Backend app URL (voorraadmeldingen)", "default": "https://iselectstore-marktplaats-app.vercel.app" }
     ]

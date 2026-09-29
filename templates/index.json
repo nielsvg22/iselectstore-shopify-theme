@@ -145,7 +145,8 @@
       "settings": {
         "eyebrow": "Waarom iSelectStore",
         "heading": "Wat maakt ons uniek?",
-        "text": "<p>Wij bieden een onderscheidend vermogen dat reguliere refurbished concurrenten niet kunnen leveren. We leveren premium pre-owned originele Apple-producten tegen de allerbeste prijs-kwaliteitverhouding, zonder compromissen te sluiten over de staat van het product. Bij ons vindt u geen ongecertificeerde gerepareerde onderdelen. Selected by us, ready for you.</p>"
+        "text": "<p>Wij bieden een onderscheidend vermogen dat reguliere refurbished concurrenten niet kunnen leveren. We leveren premium pre-owned originele Apple-producten tegen de allerbeste prijs-kwaliteitverhouding, zonder compromissen te sluiten over de staat van het product. Bij ons vindt u geen ongecertificeerde gerepareerde onderdelen.</p>",
+        "show_tagline": true
       }
     }
   },

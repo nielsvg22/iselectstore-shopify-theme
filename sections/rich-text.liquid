@@ -1,6 +1,19 @@
 <section><div class="wrap reveal">
   <div class="head"><div><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2>{{ section.settings.heading }}</h2></div></div>
-  <div class="sub" style="max-width:760px;font-size:16px;line-height:1.7">{{ section.settings.text }}</div>
+  {% comment %}
+    De slogan "selected by us, ready for you" staat bewust NIET in de vertaalbare
+    tekst: hij wordt hier hardgecodeerd toegevoegd en blijft dus overal Engels.
+  {% endcomment %}
+  {% assign rich_text = section.settings.text %}
+  {% if section.settings.show_tagline %}
+    {% assign slogan_span = ' <span class="slogan">selected by us, ready for you</span>' %}
+    {% if rich_text contains '</p>' %}
+      {% assign rich_text = rich_text | replace_first: '</p>', slogan_span | append: '</p>' %}
+    {% else %}
+      {% assign rich_text = rich_text | append: slogan_span %}
+    {% endif %}
+  {% endif %}
+  <div class="sub" style="max-width:760px;font-size:16px;line-height:1.7">{{ rich_text }}</div>
 </div></section>
 
 {% schema %}
@@ -9,7 +22,8 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Kicker" },
     { "type": "text", "id": "heading", "label": "Titel" },
-    { "type": "richtext", "id": "text", "label": "Tekst" }
+    { "type": "richtext", "id": "text", "label": "Tekst" },
+    { "type": "checkbox", "id": "show_tagline", "label": "Toon slogan", "default": false }
   ],
   "presets": [{ "name": "Tekstblok" }]
 }

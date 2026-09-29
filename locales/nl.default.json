@@ -7,7 +7,8 @@
       "cta": "Zoeken →",
       "aria": "Zoeken",
       "close_aria": "Sluiten"
-    }
+    },
+    "breadcrumb_home": "Home"
   },
   "products": {
     "product": {
@@ -32,7 +33,13 @@
     "account_aria": "Account",
     "cart_aria": "Winkelwagen",
     "menu_aria": "Menu",
-    "mobile_cta": "Bekijk voorraad →"
+    "mobile_cta": "Bekijk voorraad →",
+    "top": {
+      "original_products": "Originele Apple producten",
+      "battery_condition": "Exacte batterijconditie",
+      "warranty": "6–12 maanden garantie",
+      "trade_in": "Inruil mogelijk"
+    }
   },
   "footer": {
     "headings": {
@@ -60,21 +67,29 @@
       "reviews_count_suffix": "reviews",
       "kvk": "KVK",
       "btw": "BTW"
-    }
+    },
+    "brand_text": "Premium pre-owned originele Apple-producten met volledige transparantie over conditie en batterijstatus."
   },
   "featured_products": {
     "view_shop_cta": "Bekijk de volledige webshop →",
-    "tab_all": "Alle"
+    "tab_all": "Alle",
+    "eyebrow": "Voorraad",
+    "heading_default": "Onze producten"
   },
   "hero": {
     "cta_primary": "Alle iPhones →",
     "cta_secondary": "Bekijk categorieën",
-    "review_suffix": "WebwinkelKeur-reviews"
+    "review_suffix": "WebwinkelKeur-reviews",
+    "heading_default": "Originele Apple.",
+    "heading_accent_default": "Voor een betere prijs.",
+    "subtext_default": "Koop scherp geprijsde premium pre-owned originele Apple-producten met volledige transparantie over de conditie en batterijstatus."
   },
   "reviews_slider": {
     "prev_aria": "Vorige review",
     "next_aria": "Volgende review",
-    "dot_aria": "Ga naar review {{ index }}"
+    "dot_aria": "Ga naar review {{ index }}",
+    "eyebrow": "Reviews",
+    "heading_default": "Wat vinden onze klanten?"
   },
   "product_card": {
     "cta": "Bekijk toestel",
@@ -101,7 +116,9 @@
       "one": "{{ count }} product",
       "other": "{{ count }} producten"
     },
-    "no_results": "Geen toestellen gevonden met deze filters."
+    "no_results": "Geen toestellen gevonden met deze filters.",
+    "price_min": "Van €",
+    "price_max": "Tot €"
   },
   "product_page": {
     "breadcrumb_home": "Home",
@@ -169,5 +186,149 @@
       "stock_link": "voorraad",
       "lead_after": "."
     }
+  },
+  "featured_categories": {
+    "eyebrow": "Assortiment",
+    "heading_default": "Categorieën",
+    "cta": "Winkel nu →"
+  },
+  "trade_in": {
+    "banner_eyebrow": "Inruilservice",
+    "banner_heading_default": "Je oude iPhone inruilen?",
+    "banner_subtext_default": "Ontvang een eerlijke inruilwaarde en gebruik het bedrag direct voor je volgende toestel.",
+    "banner_cta": "Start inruilwaarde →",
+    "banner_image_alt": "Apple producten inruilen",
+    "modal": {
+      "step_of": "Stap {{ current }} van {{ total }}",
+      "choose_model": "Welk toestel wil je inruilen?",
+      "condition_question": "In welke conditie is je {{ model }}?",
+      "back": "Terug",
+      "restart": "Opnieuw beginnen",
+      "estimated": "Geschatte inruilwaarde",
+      "note": "Voor je {{ model }} in staat \"{{ condition }}\". Dit is een indicatie — de definitieve waarde bepalen we na persoonlijke beoordeling.",
+      "whatsapp_cta": "Vraag deze inruilwaarde aan via WhatsApp",
+      "close_aria": "Sluiten"
+    },
+    "models": {
+      "ipad": "iPad (2020 of nieuwer)",
+      "macbook": "MacBook Air/Pro (M1 of nieuwer)",
+      "watch": "Apple Watch (Series 6 of nieuwer)"
+    },
+    "conditions": {
+      "like_new": "Zoals nieuw",
+      "light_wear": "Lichte gebruikssporen",
+      "visible_wear": "Zichtbare slijtage",
+      "damaged": "Beschadigd, werkt nog"
+    }
+  },
+  "webwinkelkeur": {
+    "heading_default": "Wat klanten van ons vinden"
+  },
+  "contact": {
+    "eyebrow": "Persoonlijk contact",
+    "heading": "Neem contact op",
+    "intro": "Heb je een vraag over een toestel, je bestelling of een inruil? We reageren snel en persoonlijk.",
+    "success_title": "Bericht verstuurd!",
+    "success_text": "Bedankt voor je bericht. We reageren binnen 24 uur persoonlijk terug.",
+    "your_details": "Jouw gegevens",
+    "name_placeholder": "Naam",
+    "email_placeholder": "E-mailadres",
+    "subject": "Onderwerp",
+    "subject_placeholder": "Bijv. vraag over iPhone 15 Pro",
+    "message": "Bericht",
+    "message_placeholder": "Waar kunnen we je mee helpen?",
+    "submit": "Bericht versturen →",
+    "direct_contact": "Direct contact",
+    "whatsapp": "WhatsApp ons →",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "address": "Adres",
+    "visit_note": "Bezoek op afspraak. We reageren doorgaans binnen 24 uur."
+  },
+  "faq": {
+    "eyebrow": "Hulp nodig?",
+    "heading": "Veelgestelde vragen",
+    "help_before": "Staat je vraag er niet bij? Neem gerust",
+    "help_link": "persoonlijk contact",
+    "help_after": "met ons op.",
+    "items": {
+      "1": {
+        "question": "Zijn jullie iPhones origineel of refurbished?",
+        "answer": "<p>Al onze toestellen zijn originele premium pre-owned Apple-producten: niet refurbished en zonder vervangen onderdelen.</p>"
+      },
+      "2": {
+        "question": "Hoe wordt de batterijconditie bepaald?",
+        "answer": "<p>We meten de batterijcapaciteit met de originele Apple-diagnosetools en vermelden dit percentage duidelijk bij elk product.</p>"
+      },
+      "3": {
+        "question": "Wat houdt de garantie in?",
+        "answer": "<p>Elk toestel wordt geleverd met 6 tot 12 maanden garantie, afhankelijk van het product.</p>"
+      },
+      "4": {
+        "question": "Kan ik mijn oude toestel inruilen?",
+        "answer": "<p>Zeker! Gebruik onze inruil-waardeschatter voor een indicatie van de waarde.</p>"
+      }
+    }
+  },
+  "authenticity": {
+    "hero_eyebrow": "Betrouwbaarheid voorop",
+    "hero_heading_default": "Gegarandeerd origineel",
+    "eyebrow": "Waarom ons vertrouwen",
+    "heading": "Wat maakt onze iPhones origineel?",
+    "steps": {
+      "1": {
+        "title": "IMEI- en Apple-serienummercontrole",
+        "text": "Elk toestel wordt gecontroleerd op een geldig, niet-geblokkeerd IMEI- en serienummer, rechtstreeks bij Apple."
+      },
+      "2": {
+        "title": "Officiële Apple-diagnose",
+        "text": "We draaien de originele Apple-diagnosetools om batterijconditie, schermwerking en onderdelen te verifiëren."
+      },
+      "3": {
+        "title": "Geen ongecertificeerde onderdelen",
+        "text": "Is er ooit iets vervangen, dan gebeurt dat met originele Apple-onderdelen — nooit met goedkope kopieën."
+      },
+      "4": {
+        "title": "Unieke fotoreportage per toestel",
+        "text": "Je ziet het daadwerkelijke toestel dat je koopt: geen stockfoto's, maar duidelijke foto's van de werkelijke staat."
+      },
+      "5": {
+        "title": "6–12 maanden garantie",
+        "text": "Mocht er toch iets zijn, dan staan we persoonlijk voor je klaar — met garantie op elk toestel."
+      }
+    }
+  },
+  "password_page": {
+    "title_line_1": "Only the",
+    "title_line_2": "good ones.",
+    "message_default": "Onze webshop is bijna klaar. Heb je een toegangscode ontvangen? Vul 'm hieronder in.",
+    "password_placeholder": "Wachtwoord",
+    "submit": "Winkel openen →"
+  },
+  "inventory_notify": {
+    "title": "Ontvang een melding wanneer dit product weer beschikbaar is",
+    "description": "Vul je e-mailadres in. We sturen je één bericht zodra dit model en opslag weer op voorraad is.",
+    "email_placeholder": "email",
+    "email_aria": "E-mailadres",
+    "submit": "Houd mij op de hoogte",
+    "success": "Je ontvangt een melding zodra dit product weer beschikbaar is.",
+    "errors": {
+      "generic": "Er ging iets mis. Probeer het later opnieuw.",
+      "invalid_email": "Voer een geldig e-mailadres in.",
+      "invalid_product": "Ongeldig product.",
+      "unrecognized_product": "Dit product kon niet worden herkend. Probeer het later opnieuw."
+    }
+  },
+  "whatsapp_float": {
+    "subtitle": "iSelectStore · meestal direct antwoord",
+    "body": "Heb je een vraag over een toestel? Stuur ons een bericht, we reageren meestal binnen enkele minuten.",
+    "start_cta": "Start gesprek →",
+    "open_aria": "Open WhatsApp",
+    "close_aria": "Sluiten",
+    "default_message": "Hoi iSelectStore, ik heb een vraag."
+  },
+  "language_selector": {
+    "label": "Taal",
+    "button": "Wijzig"
   }
 }

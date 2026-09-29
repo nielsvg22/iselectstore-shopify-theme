@@ -1,8 +1,9 @@
 <section id="producten" style="padding-top:6px"><div class="wrap reveal">
   <div class="head">
     <div>
-      <p class="eyebrow">Voorraad</p>
-      <h2>{{ section.settings.heading | default: "Onze producten" }}</h2>
+      <p class="eyebrow">{{ 'featured_products.eyebrow' | t }}</p>
+      {% assign products_heading_default = 'featured_products.heading_default' | t %}
+      <h2>{{ section.settings.heading | default: products_heading_default }}</h2>
       <p class="sub">{{ section.settings.subtext }}</p>
     </div>
     <a class="link" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">{{ 'featured_products.view_shop_cta' | t }}</a>
