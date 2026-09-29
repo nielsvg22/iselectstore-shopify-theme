@@ -457,3 +457,57 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 
  .shopProductsGrid .card .badge{font-size:10px;padding:6px 10px;top:20px;right:20px}
 }
+
+/* ===== Productpagina: Dit toestel / Algemene specificaties / links ===== */
+.specsHead{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.specs .specsHead b{font-size:13.5px;color:var(--navy);text-transform:none;letter-spacing:0}
+.specs .specsHead span{font-size:11.5px;color:var(--muted);text-transform:none;letter-spacing:0;text-align:right}
+.specs .specRow--wide{grid-column:1/-1}
+.specs .specRow--wide b{font-weight:500}
+.specs--flush{margin:0;padding:0;background:none;border:none;border-radius:0}
+.galleryTrust{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:11px 16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;font-size:12.5px;font-weight:600;color:var(--navy);text-align:center}
+.galleryTrust svg{width:15px;height:15px;color:var(--coral-ink);flex:none}
+.pdpLinks{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.pdpLink{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--soft);border:1px solid var(--line);border-radius:14px;font-size:13.5px;font-weight:600;color:var(--navy);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+.pdpLink svg{width:16px;height:16px;color:var(--coral-ink);flex:none}
+.pdpLink:hover{border-color:var(--coral);background:#fff;transform:translateY(-1px)}
+.accNote{margin:0 2px 14px;padding:0;font-size:13px;color:var(--muted);line-height:1.6}
+.accStrong{margin:0 2px 6px;padding:0;font-size:14.5px;font-weight:700;color:var(--navy)}
+.accLink{display:inline-block;margin:0 2px 18px;padding:0;font-size:13.5px;font-weight:600;color:var(--coral-ink);text-decoration:none}
+.accLink:hover{text-decoration:underline}
+
+/* ===== Garantiepagina ===== */
+.giList{display:flex;flex-direction:column;gap:14px}
+.giItem{display:flex;gap:16px;align-items:flex-start;padding:22px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.giNum{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+.giBody{min-width:0}
+.giBody h2{font-size:17px;margin:2px 0 8px;color:var(--navy)}
+.giText{font-size:14.5px;line-height:1.7;color:var(--muted)}
+.giText p{margin:0 0 10px}
+.giText p:last-child{margin-bottom:0}
+.giContact{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:26px;padding:26px;background:var(--navy);border-radius:22px}
+.giContact h2{font-size:19px;margin:0 0 6px;color:#fff}
+.giContact p{margin:0;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.78);max-width:520px}
+
+/* ===== Conditiepagina ===== */
+.cdGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.cdCard{padding:24px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.cdBadge{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 10px;border-radius:12px;background:var(--coral);color:#fff;font-size:13px;font-weight:800;margin-bottom:14px}
+.cdCard h2{font-size:17.5px;margin:0 0 8px;color:var(--navy)}
+.cdSummary{margin:0 0 10px;font-size:14px;font-weight:600;color:var(--coral-ink);line-height:1.5}
+.cdDetail{font-size:14.5px;line-height:1.7;color:var(--muted)}
+.cdDetail p{margin:0 0 10px}
+.cdDetail p:last-child{margin-bottom:0}
+.cdExample{margin:14px 0 0;padding-top:14px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--muted);line-height:1.6}
+
+@media (max-width:640px){
+  .giItem{padding:18px;gap:13px}
+  .giBody h2{font-size:16px}
+  .giContact{flex-direction:column;align-items:flex-start;padding:22px}
+  .giContact .btn{width:100%}
+  .cdGrid{grid-template-columns:1fr}
+  .cdCard{padding:20px}
+  .specsHead{flex-direction:column;gap:2px;align-items:flex-start}
+  .specs .specsHead span{text-align:left}
+  .galleryTrust{font-size:12px;padding:10px 12px}
+}

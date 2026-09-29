@@ -10,7 +10,7 @@ Shopify Markets / het localization-formulier en Translate & Adapt.
 
 | Wat | Bestand |
 | --- | --- |
-| Alle vaste theme-teksten (NL = standaardtaal) | `locales/nl.default.json` (230 sleutels, 24 groepen) |
+| Alle vaste theme-teksten (NL = standaardtaal) | `locales/nl.default.json` (287 sleutels, 26 groepen) |
 | Engelse vertaling (referentie + Markets) | `locales/en.json` (identieke sleutelparentiteit) |
 | Teksten die JS nodig heeft (trade-in, voorraadfouten) | `layout/theme.liquid` → `window.themeStrings` (gevuld via `\| t`) |
 | Merchant content (teksten die je in de theme editor invult) | `templates/*.json` → via **Translate & Adapt** |
@@ -21,7 +21,8 @@ Groepen: `general`, `products`, `cart`, `header`, `footer`, `featured_products`,
 `hero`, `reviews_slider`, `product_card`, `collection`, `product_page`,
 `cart_page`, `search_page`, `errors`, `featured_categories`, `trade_in`,
 `webwinkelkeur`, `contact`, `faq`, `authenticity`, `password_page`,
-`inventory_notify`, `whatsapp_float`, `language_selector`.
+`inventory_notify`, `whatsapp_float`, `language_selector`, `guarantee_page`,
+`condition_page`.
 
 ## 2. Drie soorten tekst — drie aanpakken
 
@@ -79,7 +80,17 @@ Secties: `header` (USP-balk), `contact`, `faq`, `authenticity`,
 (prijsplaceholders), `main-password-header`, `rich-text` (slogan),
 `language-selector`, `footer` (brand-tekst).
 
-Snippets: `inventory-notification-form`, `whatsapp-float`.
+Snippets: `inventory-notification-form`, `whatsapp-float`, `spec-row`,
+`spec-value` (productkenmerken met custom → `app--428689915905--mkt`-fallback),
+`accessory-option`.
+
+Info-pagina's: `guarantee-info` (`templates/page.garantie.json`) en
+`condition-guide` (`templates/page.condities.json`) — blocks vallen terug op
+`guarantee_page.items.N.*` / `condition_page.items.N.*`.
+
+Productpagina: `main-product` (blok "Dit toestel", accordeon "Algemene
+specificaties", links naar beide pagina's via sectie-instellingen, label
+"Echte foto's van dit toestel").
 
 Layout: `theme.liquid` (`window.themeStrings` + taalsectie).
 Assets: `theme.js` (trade-in-modal, geldnotatie via

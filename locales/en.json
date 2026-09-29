@@ -143,15 +143,50 @@
     "feature_condition": "{{ condition }} — see the photo report for the exact condition",
     "feature_warranty": "Incl. {{ months }} months warranty",
     "accordion_description": "Product description",
-    "accordion_specs": "Specifications",
-    "accordion_shipping": "Shipping & warranty",
-    "spec_list_storage": "Storage: {{ value }}GB",
-    "spec_list_battery": "Battery condition: {{ value }}%",
-    "spec_list_condition": "Condition: {{ value }}",
+    "accordion_specs": "General specifications",
+    "accordion_shipping": "Shipping & service",
     "shipping_text_default": "Free shipping within the Netherlands, or pick up in person by appointment. Every device comes with a warranty and personal support via WhatsApp or phone.",
     "related_eyebrow": "You might also like",
     "related_heading": "Similar devices",
-    "related_cta": "View full inventory →"
+    "related_cta": "View full inventory →",
+    "accordion_condition": "Condition",
+    "accordion_guarantee": "Warranty",
+    "device_heading": "This device",
+    "device_sub": "This exact unit",
+    "general_specs_sub": "Fixed specifications of this model.",
+    "real_photos": "Real photos of this device",
+    "link_guarantee": "What does the warranty cover?",
+    "link_condition": "What does this condition mean?",
+    "guarantee_link_cta": "See warranty terms →",
+    "condition_link_cta": "See all conditions →",
+    "condition_text_default": "Every device is tested and assessed before it goes on sale. The condition you see above belongs to this unit — the photos on this page show its actual state.",
+    "guarantee_text_default": "The warranty period for this device is listed in the features above. On our warranty page you can read exactly what it covers and how to report an issue.",
+    "yes": "Yes",
+    "no": "No",
+    "field_color": "Color",
+    "field_sim": "SIM / eSIM",
+    "field_wifi_cellular": "Wi-Fi / Cellular",
+    "field_cycles": "Charge cycles",
+    "field_keyboard_layout": "Keyboard layout",
+    "field_box": "Box included",
+    "field_accessories": "Accessories",
+    "field_cosmetic_notes": "Cosmetic notes",
+    "field_band": "Band",
+    "field_model": "Model",
+    "field_generation": "Generation",
+    "field_screen": "Screen size",
+    "field_year": "Model year",
+    "field_chip": "Chip",
+    "field_cpu": "CPU",
+    "field_gpu": "GPU",
+    "field_ram": "RAM",
+    "field_pencil": "Apple Pencil",
+    "field_series": "Series",
+    "field_case_size": "Case size",
+    "field_material": "Material",
+    "field_connectivity": "Connectivity",
+    "field_keyboard_included": "Keyboard included",
+    "field_mouse_included": "Mouse included"
   },
   "cart_page": {
     "breadcrumb": "Cart",
@@ -330,5 +365,55 @@
   "language_selector": {
     "label": "Language",
     "button": "Change"
+  },
+  "guarantee_page": {
+    "eyebrow": "Warranty",
+    "heading": "What does the warranty cover?",
+    "items": {
+      "1": {
+        "title": "What does the warranty cover?",
+        "answer": "Every device comes with the warranty period listed on its product page. This page explains exactly what that covers."
+      },
+      "2": {
+        "title": "How long does the warranty last?",
+        "answer": "The warranty period depends on the device and is always listed next to the device you buy."
+      },
+      "3": {
+        "title": "What is covered by the warranty?"
+      },
+      "4": {
+        "title": "What is not covered by the warranty?"
+      },
+      "5": {
+        "title": "How do I report an issue?",
+        "answer": "Get in touch via WhatsApp, phone or the contact form. Have your order number and a short description of the problem ready."
+      },
+      "6": {
+        "title": "What happens after a warranty claim?",
+        "answer": "We'll contact you personally, inspect the device and let you know what the next step is."
+      }
+    },
+    "contact_title": "Need help with your warranty?",
+    "contact_text": "Questions about what is or isn't covered? We're happy to help.",
+    "contact_cta": "Get in touch →"
+  },
+  "condition_page": {
+    "eyebrow": "Conditions",
+    "heading": "What do our conditions mean?",
+    "example_label": "Example",
+    "items": {
+      "1": {
+        "name": "Like new"
+      },
+      "2": {
+        "name": "Very good condition"
+      },
+      "3": {
+        "name": "Good condition"
+      },
+      "4": {
+        "name": "Visible signs of use"
+      }
+    }
   }
 }

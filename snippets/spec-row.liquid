@@ -1,0 +1,26 @@
+{% comment %}
+  Rij (label + waarde) voor de spec-blokken op de productpagina.
+  Leest de waarde centraal uit via snippets/spec-value.liquid
+  (custom → app--428689915905--mkt) en toont de rij alleen als er een waarde is.
+
+  Params:
+    product  verplicht
+    key      metafield-key
+    label    locale-sleutel voor het label
+    format   optioneel: storage | percent | warranty | boolean | wide
+    types    optioneel: pipe-lijst met toegestane producttypen
+{% endcomment %}
+{%- capture row_value -%}
+  {%- if format == 'wide' -%}
+    {%- render 'spec-value', product: product, key: key, types: types -%}
+  {%- else -%}
+    {%- render 'spec-value', product: product, key: key, format: format, types: types -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign row_value = row_value | strip -%}
+{%- if row_value != blank -%}
+  <div class="specRow{% if format == 'wide' %} specRow--wide{% endif %}">
+    <small>{{ label | t }}</small>
+    <b>{{ row_value }}</b>
+  </div>
+{%- endif -%}

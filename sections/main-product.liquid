@@ -1,4 +1,6 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
+{% assign guarantee_page = section.settings.guarantee_page %}
+{% assign condition_page = section.settings.condition_page %}
 
 <section style="padding-top:32px;padding-bottom:0"><div class="wrap">
   <div class="breadcrumb">
@@ -9,12 +11,57 @@
   </div>
 </div></section>
 
+{% comment %}
+  "Dit toestel" = kenmerken van dit exacte exemplaar (opslag, batterij,
+  kleur, SIM/eSIM, conditie, garantie, laadcycli …).
+  "Algemene specificaties" = vaste eigenschappen van het model.
+  Beide lezen via snippets/spec-row → spec-value (custom → app…-mkt fallback).
+{% endcomment %}
+{% capture device_rows %}
+  {% render 'spec-row', product: product, key: 'storage_gb', label: 'product_page.spec_storage', format: 'storage', types: 'iPhone|iPad|MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'battery_percentage', label: 'product_page.spec_battery', format: 'percent', types: 'iPhone|iPad|MacBook|Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'color', label: 'product_page.field_color' %}
+  {% render 'spec-row', product: product, key: 'sim_type', label: 'product_page.field_sim', types: 'iPhone|iPad' %}
+  {% render 'spec-row', product: product, key: 'wifi_cellular', label: 'product_page.field_wifi_cellular', types: 'iPad' %}
+  {% render 'spec-row', product: product, key: 'condition', label: 'product_page.spec_condition' %}
+  {% render 'spec-row', product: product, key: 'warranty_months', label: 'product_page.spec_warranty', format: 'warranty' %}
+  {% render 'spec-row', product: product, key: 'cycle_count', label: 'product_page.field_cycles', types: 'MacBook' %}
+  {% render 'spec-row', product: product, key: 'keyboard_layout', label: 'product_page.field_keyboard_layout', types: 'MacBook' %}
+  {% render 'spec-row', product: product, key: 'box_included', label: 'product_page.field_box', format: 'boolean', types: 'iPhone|iPad|MacBook' %}
+  {% render 'spec-row', product: product, key: 'accessories', label: 'product_page.field_accessories', format: 'wide', types: 'iPhone|iPad|MacBook|Mac mini|Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'cosmetic_notes', label: 'product_page.field_cosmetic_notes', format: 'wide' %}
+  {% render 'spec-row', product: product, key: 'watch_band', label: 'product_page.field_band', types: 'Apple Watch' %}
+{% endcapture %}
+{% assign device_rows = device_rows | strip %}
+
+{% capture general_rows %}
+  {% render 'spec-row', product: product, key: 'model', label: 'product_page.field_model' %}
+  {% render 'spec-row', product: product, key: 'generation', label: 'product_page.field_generation', types: 'iPhone|iPad' %}
+  {% render 'spec-row', product: product, key: 'screen_size', label: 'product_page.field_screen', types: 'iPad|MacBook|iMac' %}
+  {% render 'spec-row', product: product, key: 'model_year', label: 'product_page.field_year', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'chip', label: 'product_page.field_chip', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'cpu_variant', label: 'product_page.field_cpu', types: 'MacBook|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'gpu_variant', label: 'product_page.field_gpu', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'ram_gb', label: 'product_page.field_ram', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'apple_pencil_support', label: 'product_page.field_pencil', format: 'boolean', types: 'iPad' %}
+  {% render 'spec-row', product: product, key: 'watch_series', label: 'product_page.field_series', types: 'Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'watch_case_size', label: 'product_page.field_case_size', types: 'Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'watch_material', label: 'product_page.field_material', types: 'Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'watch_connectivity', label: 'product_page.field_connectivity', types: 'Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'keyboard_included', label: 'product_page.field_keyboard_included', format: 'boolean', types: 'iMac' %}
+  {% render 'spec-row', product: product, key: 'mouse_included', label: 'product_page.field_mouse_included', format: 'boolean', types: 'iMac' %}
+{% endcapture %}
+{% assign general_rows = general_rows | strip %}
+
+{% capture condition_display %}{% render 'spec-value', product: product, key: 'condition' %}{% endcapture %}
+{% assign condition_display = condition_display | strip %}
+
 <section style="padding-top:0"><div class="wrap">
   <div class="pdp">
     <div class="gallery">
       <div class="galleryMain">
-        {% comment %} Per-product badge_text metafield wint van de algemene sectie-tekst, zodat
-        de productpagina hetzelfde label toont als de productkaart op de shop/homepage. {% endcomment %}
+        {% comment %} Per-product badge_text metafield wint van de algemene sectie-tekst, zodat de
+        productpagina hetzelfde label toont als de productkaart op de shop/homepage. {% endcomment %}
         {% assign ribbon_text_default = 'product_page.ribbon_default' | t %}
         {% assign ribbon_text = product.metafields.custom.badge_text | default: section.settings.ribbon_text | default: ribbon_text_default %}
         {% if section.settings.show_ribbon and ribbon_text != blank and product.available %}<span class="ribbon">{{ ribbon_text }}</span>{% endif %}
@@ -24,9 +71,15 @@
         <div class="thumbs">
           {% for media in product.media %}
             <div class="thumb{% if forloop.first %} active{% endif %}" data-img="{{ media | image_url: width: 900 }}">
-              <img src="{{ media | image_url: width: 200 }}" width="200" height="200" alt="{{ product.title | escape }} foto {{ forloop.index }}">
+              <img src="{{ media | image_url: width: 200 }}" width="200" height="200" alt="{{ product.title | escape }} ({{ forloop.index }})">
             </div>
           {% endfor %}
+        </div>
+      {% endif %}
+      {% if section.settings.show_real_photos %}
+        <div class="galleryTrust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>{{ 'product_page.real_photos' | t }}</span>
         </div>
       {% endif %}
     </div>
@@ -53,12 +106,15 @@
         <p class="stockNote">{{ 'product_page.low_stock' | t }}</p>
       {% endif %}
 
-      <div class="specs">
-        {% if product.metafields.custom.storage_gb %}<div><small>{{ 'product_page.spec_storage' | t }}</small><b>{{ product.metafields.custom.storage_gb }}GB</b></div>{% endif %}
-        {% if product.metafields.custom.battery_percentage %}<div><small>{{ 'product_page.spec_battery' | t }}</small><b>{{ product.metafields.custom.battery_percentage }}%</b></div>{% endif %}
-        {% if product.metafields.custom.condition %}<div><small>{{ 'product_page.spec_condition' | t }}</small><b>{{ product.metafields.custom.condition }}</b></div>{% endif %}
-        {% if product.metafields.custom.warranty_months %}<div><small>{{ 'product_page.spec_warranty' | t }}</small><b>{{ product.metafields.custom.warranty_months }} {{ 'product_page.spec_warranty_unit' | t }}</b></div>{% endif %}
-      </div>
+      {% if device_rows != blank %}
+        <div class="specs">
+          <div class="specsHead">
+            <b>{{ 'product_page.device_heading' | t }}</b>
+            <span>{{ 'product_page.device_sub' | t }}</span>
+          </div>
+          {{ device_rows }}
+        </div>
+      {% endif %}
 
       {% if section.settings.accessory_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
         <div class="optionGroup">
@@ -91,28 +147,76 @@
       <div class="pdpFeatures">
         {% if product.type != blank %}{% assign feature_product_type = product.type %}{% else %}{% assign feature_product_type = 'product_page.apple_product_default' | t %}{% endif %}
         <div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>{{ 'product_page.feature_original' | t: type: feature_product_type }}</div>
-        {% if product.metafields.custom.battery_percentage %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ 'product_page.feature_battery' | t: percentage: product.metafields.custom.battery_percentage }}</div>{% endif %}
-        {% if product.metafields.custom.condition %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="16" height="8" rx="2"/><path d="M19 10.5h2v3h-2"/></svg>{{ 'product_page.feature_condition' | t: condition: product.metafields.custom.condition }}</div>{% endif %}
-        {% if product.metafields.custom.warranty_months %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>{{ 'product_page.feature_warranty' | t: months: product.metafields.custom.warranty_months }}</div>{% endif %}
+        {% capture feature_battery %}{% render 'spec-value', product: product, key: 'battery_percentage' %}{% endcapture %}
+        {% assign feature_battery = feature_battery | strip %}
+        {% if feature_battery != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ 'product_page.feature_battery' | t: percentage: feature_battery }}</div>{% endif %}
+        {% capture feature_condition %}{% render 'spec-value', product: product, key: 'condition' %}{% endcapture %}
+        {% assign feature_condition = feature_condition | strip %}
+        {% if feature_condition != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="16" height="8" rx="2"/><path d="M19 10.5h2v3h-2"/></svg>{{ 'product_page.feature_condition' | t: condition: feature_condition }}</div>{% endif %}
+        {% capture feature_warranty %}{% render 'spec-value', product: product, key: 'warranty_months' %}{% endcapture %}
+        {% assign feature_warranty = feature_warranty | strip %}
+        {% if feature_warranty != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>{{ 'product_page.feature_warranty' | t: months: feature_warranty }}</div>{% endif %}
       </div>
+
+      {% assign show_guarantee_link = false %}
+      {% if section.settings.show_guarantee_link and guarantee_page != blank %}{% assign show_guarantee_link = true %}{% endif %}
+      {% assign show_condition_link = false %}
+      {% if section.settings.show_condition_link and condition_page != blank %}{% assign show_condition_link = true %}{% endif %}
+      {% if show_guarantee_link or show_condition_link %}
+        <div class="pdpLinks">
+          {% if show_guarantee_link %}
+            <a class="pdpLink" href="{{ guarantee_page.url }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>
+              <span>{{ 'product_page.link_guarantee' | t }}</span>
+            </a>
+          {% endif %}
+          {% if show_condition_link %}
+            <a class="pdpLink" href="{{ condition_page.url }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 5-5"/></svg>
+              <span>{{ 'product_page.link_condition' | t }}</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% assign condition_text_default = 'product_page.condition_text_default' | t %}
+      {% assign guarantee_text_default = 'product_page.guarantee_text_default' | t %}
+      {% capture condition_body %}
+        {% if condition_display != blank %}<p class="accStrong">{{ condition_display }}</p>{% endif %}
+        <p>{{ section.settings.condition_text | default: condition_text_default }}</p>
+        {% if section.settings.show_condition_link and condition_page != blank %}
+          <a class="accLink" href="{{ condition_page.url }}">{{ 'product_page.condition_link_cta' | t }}</a>
+        {% endif %}
+      {% endcapture %}
+      {% capture guarantee_body %}
+        <p>{{ section.settings.guarantee_text | default: guarantee_text_default }}</p>
+        {% if section.settings.show_guarantee_link and guarantee_page != blank %}
+          <a class="accLink" href="{{ guarantee_page.url }}">{{ 'product_page.guarantee_link_cta' | t }}</a>
+        {% endif %}
+      {% endcapture %}
 
       <div class="accordion">
         <div class="accItem open">
           <div class="accHead">{{ 'product_page.accordion_description' | t }}</div>
           <div class="accBody" style="max-height:400px">{{ product.description }}</div>
         </div>
-        {% if product.metafields.custom.storage_gb or product.metafields.custom.battery_percentage %}
+        {% if section.settings.show_general_specs and general_rows != blank %}
         <div class="accItem">
           <div class="accHead">{{ 'product_page.accordion_specs' | t }}</div>
           <div class="accBody">
-            <ul>
-              {% if product.metafields.custom.storage_gb %}<li>{{ 'product_page.spec_list_storage' | t: value: product.metafields.custom.storage_gb }}</li>{% endif %}
-              {% if product.metafields.custom.battery_percentage %}<li>{{ 'product_page.spec_list_battery' | t: value: product.metafields.custom.battery_percentage }}</li>{% endif %}
-              {% if product.metafields.custom.condition %}<li>{{ 'product_page.spec_list_condition' | t: value: product.metafields.custom.condition }}</li>{% endif %}
-            </ul>
+            <p class="accNote">{{ 'product_page.general_specs_sub' | t }}</p>
+            <div class="specs specs--flush">{{ general_rows }}</div>
           </div>
         </div>
         {% endif %}
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_condition' | t }}</div>
+          <div class="accBody">{{ condition_body }}</div>
+        </div>
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_guarantee' | t }}</div>
+          <div class="accBody">{{ guarantee_body }}</div>
+        </div>
         <div class="accItem">
           <div class="accHead">{{ 'product_page.accordion_shipping' | t }}</div>
           <div class="accBody"><p>{% if section.settings.shipping_text != blank %}{{ section.settings.shipping_text }}{% else %}{{ 'product_page.shipping_text_default' | t }}{% endif %}</p></div>
@@ -150,7 +254,18 @@
     { "type": "checkbox", "id": "show_ribbon", "label": "Toon 'Nieuw binnen!'-ribbon", "default": true },
     { "type": "text", "id": "ribbon_text", "label": "Ribbon-tekst" },
     { "type": "text", "id": "rating", "label": "Reviewtekst onder titel" },
-    { "type": "textarea", "id": "shipping_text", "label": "Verzending & garantie-tekst" },
+    { "type": "textarea", "id": "shipping_text", "label": "Verzending & service-tekst" },
+    { "type": "header", "content": "Informatiepagina's" },
+    { "type": "page", "id": "guarantee_page", "label": "Garantiepagina" },
+    { "type": "checkbox", "id": "show_guarantee_link", "label": "Link naar garantiepagina tonen", "default": true },
+    { "type": "textarea", "id": "guarantee_text", "label": "Garantie-uitleg (accordeon)" },
+    { "type": "page", "id": "condition_page", "label": "Conditiepagina" },
+    { "type": "checkbox", "id": "show_condition_link", "label": "Link naar conditiepagina tonen", "default": true },
+    { "type": "textarea", "id": "condition_text", "label": "Conditie-uitleg (accordeon)" },
+    { "type": "header", "content": "Weergave" },
+    { "type": "checkbox", "id": "show_general_specs", "label": "Accordeon 'Algemene specificaties' tonen", "default": true },
+    { "type": "checkbox", "id": "show_real_photos", "label": "Label 'Echte foto's van dit toestel' tonen", "default": true },
+    { "type": "header", "content": "Accessoires" },
     { "type": "product", "id": "accessory_1", "label": "Accessoire 1 (bv. screenprotector)" },
     { "type": "product", "id": "accessory_2", "label": "Accessoire 2 (bv. oplaadkabel)" },
     { "type": "product", "id": "accessory_3", "label": "Accessoire 3 (bv. USB-C adapter)" }

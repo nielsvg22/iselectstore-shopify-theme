@@ -1,0 +1,68 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb">
+    <a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span>
+    <span style="color:#fff">{{ page.title }}</span>
+  </div>
+  <p class="eyebrow">{{ 'condition_page.eyebrow' | t }}</p>
+  {% assign heading_default = 'condition_page.heading' | t %}
+  <h1>{{ section.settings.heading | default: heading_default }}</h1>
+</div></section>
+
+<section><div class="wrap reveal">
+  {% if page.content != blank %}
+    <div class="sub" style="font-size:16px;line-height:1.7;max-width:760px;margin-bottom:32px">{{ page.content }}</div>
+  {% endif %}
+
+  <div class="cdGrid">
+    {% for block in section.blocks %}
+      {% comment %}
+        Conditienaam: valt terug op de locale (index-gebaseerd) zodat de
+        standaardnamen uit het backend-register zichtbaar zijn. Samenvatting,
+        uitleg en voorbeeld komen uit de theme editor (merchant content,
+        vertaalbaar via Translate & Adapt) — die blijven leeg zolang de
+        opdrachtgever ze nog niet heeft aangeleverd.
+      {% endcomment %}
+      {% assign name_key = 'condition_page.items.' | append: forloop.index | append: '.name' %}
+      {% assign name_default = name_key | t %}
+      {% if name_default contains 'translation missing' %}{% assign name_default = '' %}{% endif %}
+      {% assign condition_name = block.settings.name | default: name_default %}
+      {% assign condition_summary = block.settings.summary %}
+      {% assign condition_detail = block.settings.detail %}
+      {% assign condition_example = block.settings.example %}
+      {% if condition_name != blank or condition_summary != blank or condition_detail != blank %}
+        <article class="cdCard" {{ block.shopify_attributes }}>
+          <div class="cdBadge">{{ block.settings.badge | default: forloop.index }}</div>
+          {% if condition_name != blank %}<h2>{{ condition_name }}</h2>{% endif %}
+          {% if condition_summary != blank %}<p class="cdSummary">{{ condition_summary }}</p>{% endif %}
+          {% if condition_detail != blank %}<div class="cdDetail">{{ condition_detail }}</div>{% endif %}
+          {% if condition_example != blank %}
+            <p class="cdExample"><b>{{ 'condition_page.example_label' | t }}:</b> {{ condition_example }}</p>
+          {% endif %}
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Conditiegids",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" }
+  ],
+  "blocks": [
+    {
+      "type": "condition",
+      "name": "Conditie",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Conditienaam" },
+        { "type": "text", "id": "badge", "label": "Badge (kort label, leeg = volgnummer)" },
+        { "type": "text", "id": "summary", "label": "Korte samenvatting" },
+        { "type": "richtext", "id": "detail", "label": "Uitgebreide uitleg" },
+        { "type": "text", "id": "example", "label": "Voorbeeldtekst" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Conditiegids" }]
+}
+{% endschema %}

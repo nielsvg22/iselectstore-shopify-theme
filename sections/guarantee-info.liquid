@@ -1,0 +1,79 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb">
+    <a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span>
+    <span style="color:#fff">{{ page.title }}</span>
+  </div>
+  <p class="eyebrow">{{ 'guarantee_page.eyebrow' | t }}</p>
+  {% assign heading_default = 'guarantee_page.heading' | t %}
+  <h1>{{ section.settings.heading | default: heading_default }}</h1>
+</div></section>
+
+<section><div class="wrap reveal" style="max-width:900px">
+  {% if page.content != blank %}
+    <div class="sub" style="font-size:16px;line-height:1.7;margin-bottom:32px">{{ page.content }}</div>
+  {% endif %}
+
+  <div class="giList">
+    {% for block in section.blocks %}
+      {% comment %}
+        Antwoord: als de merchant het niet heeft ingevuld komt de tekst uit de
+        locale (index-gebaseerde keys). Ontbreekt de key (bijv. items.3.answer)
+        dan wordt de kaart niet getoond — er staat dan geen verzonnen
+        garantiebelofte op de site.
+      {% endcomment %}
+      {% assign title_key = 'guarantee_page.items.' | append: forloop.index | append: '.title' %}
+      {% assign answer_key = 'guarantee_page.items.' | append: forloop.index | append: '.answer' %}
+      {% assign title_default = title_key | t %}
+      {% assign answer_default = answer_key | t %}
+      {% if title_default contains 'translation missing' %}{% assign title_default = '' %}{% endif %}
+      {% if answer_default contains 'translation missing' %}{% assign answer_default = '' %}{% endif %}
+      {% assign item_title = block.settings.title | default: title_default %}
+      {% assign item_answer = block.settings.answer | default: answer_default %}
+      {% if item_answer != blank %}
+        <article class="giItem" {{ block.shopify_attributes }}>
+          <div class="giNum">{{ forloop.index }}</div>
+          <div class="giBody">
+            <h2>{{ item_title }}</h2>
+            <div class="giText">{{ item_answer }}</div>
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% assign contact_page = section.settings.contact_page %}
+  {% assign contact_title_default = 'guarantee_page.contact_title' | t %}
+  {% assign contact_text_default = 'guarantee_page.contact_text' | t %}
+  <div class="giContact">
+    <div>
+      <h2>{{ section.settings.contact_title | default: contact_title_default }}</h2>
+      <p>{{ section.settings.contact_text | default: contact_text_default }}</p>
+    </div>
+    {% if contact_page != blank %}
+      <a class="btn primary" href="{{ contact_page.url }}">{{ 'guarantee_page.contact_cta' | t }}</a>
+    {% endif %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Garantie-informatie",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "page", "id": "contact_page", "label": "Contactpagina (knop)" },
+    { "type": "text", "id": "contact_title", "label": "Titel contactblok" },
+    { "type": "textarea", "id": "contact_text", "label": "Tekst contactblok" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Garantie-onderwerp",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Vraag / kop" },
+        { "type": "richtext", "id": "answer", "label": "Antwoord" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Garantie-informatie" }]
+}
+{% endschema %}

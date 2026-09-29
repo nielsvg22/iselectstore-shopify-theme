@@ -1,0 +1,64 @@
+{% comment %}
+  Centrale metafield-reader voor de storefront.
+
+  Volgorde:
+    1. custom            (storefront-spiegel die de backend meeschrijft)
+    2. app--428689915905--mkt  (brondata vanuit quick-create / AI)
+
+  Params:
+    product  verplicht
+    key      metafield-key (zelfde key bestaat in beide namespaces)
+    format   optioneel: storage | percent | warranty | boolean
+    types    optioneel: pipe-lijst met toegestane producttypen ('' of leeg = alle)
+
+  Geeft alleen tekst terug als er echt een waarde is (geen lege rijen).
+{% endcomment %}
+{%- assign cf = product.metafields.custom -%}
+{%- assign mk = product.metafields['app--428689915905--mkt'] -%}
+{%- assign found = false -%}
+{%- if cf -%}
+  {%- assign candidate = cf[key] -%}
+  {%- if candidate != nil -%}
+    {%- assign value = candidate -%}
+    {%- assign found = true -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if found == false and mk -%}
+  {%- assign candidate = mk[key] -%}
+  {%- if candidate != nil -%}
+    {%- assign value = candidate -%}
+    {%- assign found = true -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%}
+  Producttype-filter: geen MacBook-velden bij een Apple Watch.
+  Alleen actief als product.type exact een bekend producttype is (namen uit de
+  backend-template-registry). Onbekende typen tonen gewoon wat er aan data is.
+{%- endcomment -%}
+{%- if found and types != blank and product.type != blank -%}
+  {%- assign known_types = 'iPhone|iPad|MacBook|iMac|Mac mini|Apple Watch' | split: '|' -%}
+  {%- if known_types contains product.type -%}
+    {%- assign allowed = types | split: '|' -%}
+    {%- unless allowed contains product.type -%}
+      {%- assign found = false -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if found -%}
+  {%- if format == 'boolean' or value != blank -%}
+    {%- if format == 'storage' -%}
+      {{ value | append: 'GB' }}
+    {%- elsif format == 'percent' -%}
+      {{ value | append: '%' }}
+    {%- elsif format == 'warranty' -%}
+      {%- assign warranty_unit = 'product_page.spec_warranty_unit' | t -%}
+      {{ value }} {{ warranty_unit }}
+    {%- elsif format == 'boolean' -%}
+      {%- if value -%}{{ 'product_page.yes' | t }}{%- else -%}{{ 'product_page.no' | t }}{%- endif -%}
+    {%- else -%}
+      {{ value }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
