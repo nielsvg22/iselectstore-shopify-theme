@@ -26,6 +26,7 @@
       "home": "Home",
       "stock": "Voorraad",
       "original_iphone": "Originele iPhone?",
+      "our_story": "Ons verhaal",
       "faq": "Veel gestelde vragen",
       "trade_in": "iPhone verkopen/inruilen",
       "contact": "Contact"
@@ -53,6 +54,7 @@
       "trade_in": "iPhone verkopen/inruilen",
       "value_estimate": "Waardeschatting aanvragen",
       "homepage": "Homepage",
+      "our_story": "Ons verhaal",
       "faq": "Veel gestelde vragen"
     },
     "newsletter": {
@@ -346,12 +348,15 @@
     "email_placeholder": "email",
     "email_aria": "E-mailadres",
     "submit": "Houd mij op de hoogte",
+    "loading": "Even geduld…",
     "success": "Je ontvangt een melding zodra dit product weer beschikbaar is.",
     "errors": {
       "generic": "Er ging iets mis. Probeer het later opnieuw.",
       "invalid_email": "Voer een geldig e-mailadres in.",
       "invalid_product": "Ongeldig product.",
-      "unrecognized_product": "Dit product kon niet worden herkend. Probeer het later opnieuw."
+      "unrecognized_product": "Dit product kon niet worden herkend. Probeer het later opnieuw.",
+      "already_subscribed": "Je staat al op de lijst voor dit model.",
+      "rate_limited": "Te veel aanmeldingen. Probeer het over enkele minuten opnieuw."
     }
   },
   "whatsapp_float": {
@@ -415,5 +420,135 @@
         "name": "Zichtbare gebruikssporen"
       }
     }
+  },
+  "story_page": {
+    "hero": {
+      "eyebrow": "Ons verhaal",
+      "heading_default": "Waarom iSelectStore anders selecteert.",
+      "subtext_default": "Niet zomaar pre-owned: bewust geselecteerd. We nemen alleen Apple-producten in die we zelf zouden gebruiken, fotograferen het exemplaar dat je ontvangt en zijn eerlijk over conditie en batterij.",
+      "cta_video": "Bekijk hoe wij selecteren",
+      "cta_down": "Verder lezen"
+    },
+    "story": {
+      "eyebrow": "Waarom wij bestaan",
+      "heading_default": "Geen massale refurbished. Zorgvuldig gekozen.",
+      "intro_default": "iSelectStore begon met een simpel frustratiepunt: wie een tweedehands iPhone zoekt, komt stapels generieke toestellen tegen, vage foto's en conditiebeschrijvingen die niets zeggen.",
+      "body_default": "<p>Wij doen het anders. We nemen alleen in wat we zelf zouden willen gebruiken, controleren elk toestel persoonlijk en fotograferen het exemplaar dat je daadwerkelijk ontvangt. Batterijconditie en staat vermelden we per toestel — geen gemiddelden en geen verrassingen achteraf.</p><p>Zo blijft het aanbod klein en kloppend, met een eerlijke prijs-kwaliteitverhouding en altijd iemand die je gewoon te spreken krijgt.</p>"
+    },
+    "values": {
+      "eyebrow": "Waarom wij selecteren",
+      "heading_default": "Vier redenen om voor ons te kiezen",
+      "sub_default": "Dit is waarop we elk toestel toetsen voordat het in de webshop komt.",
+      "items": {
+        "1": {
+          "title": "Alleen de goede exemplaren",
+          "text": "We selecteren op staat, batterij en originele onderdelen. Wat de controle niet haalt, komt niet online."
+        },
+        "2": {
+          "title": "Echte foto's",
+          "text": "Je ziet het toestel dat je koopt: foto's van dit exacte exemplaar, geen stockbeeld."
+        },
+        "3": {
+          "title": "Transparantie over batterij en conditie",
+          "text": "Batterijpercentage en conditie staan per toestel vermeld, zodat je vooraf weet wat je koopt."
+        },
+        "4": {
+          "title": "Persoonlijke service",
+          "text": "Een vraag? Je krijgt antwoord van iemand die het toestel zelf heeft gecontroleerd."
+        }
+      }
+    },
+    "concept": {
+      "eyebrow": "Het beeldmerk",
+      "heading_default": "Eén centraal punt, één selectie",
+      "text_default": "<p>Ons beeldmerk is opgebouwd rondom een centraal punt. Dat staat voor onze manier van werken: vanuit één overzicht kiezen we de exemplaren die aan onze eisen voldoen, en de rest laten we liggen.</p>",
+      "points": {
+        "1": {
+          "title": "Uit een groter aanbod",
+          "text": "We kopen gericht in en selecteren, in plaats van alles door te schuiven."
+        },
+        "2": {
+          "title": "Afgeronde vormen",
+          "text": "Ronde, toegankelijke vormen die uitnodigen om rustig rond te kijken."
+        },
+        "3": {
+          "title": "Koraal als accent",
+          "text": "Het accent kleurt het exemplaar dat we kozen; de rest blijft neutraal."
+        }
+      }
+    },
+    "video": {
+      "eyebrow": "Marketingvideo",
+      "heading_default": "Binnenkort: het verhaal achter iSelectStore",
+      "placeholder_text_default": "Hier komt binnenkort onze nieuwe video waarin we laten zien hoe wij selecteren en waarom we dit anders doen.",
+      "badge": "Binnenkort"
+    },
+    "person": {
+      "eyebrow": "Achter iSelectStore",
+      "heading_default": "Persoonlijk geselecteerd, persoonlijk geholpen.",
+      "quote_default": "Geen tussenlaag en geen callcenter: je praat met degene die de toestellen uitkiest en controleert."
+    },
+    "timeline": {
+      "eyebrow": "Onze werkwijze",
+      "heading_default": "Van aanbod tot aan je voordeur",
+      "sub_default": "Vijf stappen die elk toestel doorloopt voordat het te koop staat.",
+      "steps": {
+        "1": {
+          "title": "Selecteren",
+          "text": "We nemen alleen toestellen in die aan onze eisen voldoen: origineel, complete staat en een batterij die nog presteert."
+        },
+        "2": {
+          "title": "Controleren",
+          "text": "Elk toestel wordt nagekeken en getest met de originele Apple-diagnosetools."
+        },
+        "3": {
+          "title": "Fotograferen",
+          "text": "We fotograferen het exacte exemplaar dat je koopt, inclusief eventuele gebruikssporen."
+        },
+        "4": {
+          "title": "Transparant presenteren",
+          "text": "Batterijconditie, staat en garantie staan duidelijk vermeld bij ieder product."
+        },
+        "5": {
+          "title": "Persoonlijk leveren",
+          "text": "Gratis verzending binnen Nederland of afhalen op afspraak, met persoonlijke service daarna."
+        }
+      }
+    },
+    "trust": {
+      "eyebrow": "Bewijs",
+      "heading_default": "Waarop je ons kunt vertrouwen",
+      "sub_default": "Geen loze beloftes — dit is wat je van ons mag verwachten.",
+      "items": {
+        "1": {
+          "title": "Echte reviews",
+          "text": "Onafhankelijke beoordelingen via WebwinkelKeur."
+        },
+        "2": {
+          "title": "Echte productfoto's",
+          "text": "Foto's van het daadwerkelijke toestel dat je koopt."
+        },
+        "3": {
+          "title": "6–12 maanden garantie",
+          "text": "Per toestel vermeld, met persoonlijke afhandeling."
+        },
+        "4": {
+          "title": "Transparante conditie",
+          "text": "Staat en batterijconditie altijd vooraf bekend."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Verder kijken",
+      "heading_default": "Ontdek wat we voor je geselecteerd hebben",
+      "text_default": "Bekijk het actuele aanbod: elk toestel uniek, met echte foto's en vermelde conditie.",
+      "button_default": "Bekijk de voorraad"
+    }
+  },
+  "home_story_cta": {
+    "eyebrow": "Meer dan een webshop",
+    "heading": "Lees waarom wij anders selecteren",
+    "text": "Een kijkje achter de schermen: hoe wij Apple-producten selecteren, controleren en transparant presenteren.",
+    "button": "Lees ons verhaal →"
   }
 }

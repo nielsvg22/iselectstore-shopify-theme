@@ -88,6 +88,9 @@
     .invNotify__msg.is-error {
       color: #dc2626;
     }
+    .invNotify__msg.is-info {
+      color: var(--coral-ink);
+    }
     @media (max-width: 640px) {
       .invNotify__form { flex-direction: column; }
       .invNotify__form .btn { width: 100%; }
@@ -96,14 +99,12 @@
 
   <script>
     (function () {
-      var root = document.querySelector('[data-invnotify]');
-      if (!root) return;
-      var form = root.querySelector('[data-invnotify-form]');
-      var message = root.querySelector('[data-invnotify-msg]');
-      var button = root.querySelector('[data-invnotify-submit]');
+      var roots = document.querySelectorAll('[data-invnotify]');
+      if (!roots.length) return;
+
       var appUrl = {{ wa_backend | json }};
       var successText = {{ 'inventory_notify.success' | t | json }};
-      var genericError = {{ 'inventory_notify.errors.generic' | t | json }};
+      var loadingText = {{ 'inventory_notify.loading' | t | json }};
 
       // themeStrings staat pas onderaan de pagina; daarom pas bij het uitlezen.
       function codeMessage(code) {
@@ -111,43 +112,59 @@
         return (code && strings[code]) || null;
       }
 
-      if (!form || !message || !button) return;
+      Array.prototype.forEach.call(roots, function (root) {
+        var form = root.querySelector('[data-invnotify-form]');
+        var message = root.querySelector('[data-invnotify-msg]');
+        var button = root.querySelector('[data-invnotify-submit]');
+        if (!form || !message || !button) return;
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        button.disabled = true;
-        message.hidden = true;
-        message.classList.remove('is-error');
+        var defaultLabel = button.textContent;
 
-        fetch(appUrl.replace(/\/$/, '') + '/api/inventory/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: form.email.value,
-            productId: form.productId.value
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          button.disabled = true;
+          button.textContent = loadingText;
+          message.hidden = true;
+          message.classList.remove('is-error', 'is-info');
+
+          fetch(appUrl.replace(/\/$/, '') + '/api/inventory/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: form.email.value,
+              productId: form.productId.value
+            })
           })
-        })
-          .then(function (r) {
-            return r.json().catch(function () { return {}; }).then(function (data) {
-              if (!r.ok || data.ok !== true) {
-                throw new Error(codeMessage(data.code) || data.error || data.message || genericError);
+            .then(function (r) {
+              return r.json().catch(function () { return {}; }).then(function (data) {
+                if (!r.ok || data.ok !== true) {
+                  throw new Error(codeMessage(data.code) || data.error || data.message || '');
+                }
+                return data;
+              });
+            })
+            .then(function (data) {
+              var code = data.code;
+              var isInfo = code && code !== 'ok';
+              message.hidden = false;
+              if (isInfo) {
+                message.classList.add('is-info');
+                message.textContent = codeMessage(code) || successText;
+              } else {
+                message.textContent = successText;
               }
-              return data;
+              form.reset();
+            })
+            .catch(function (err) {
+              message.hidden = false;
+              message.classList.add('is-error');
+              message.textContent = (err && err.message) || {{ 'inventory_notify.errors.generic' | t | json }};
+            })
+            .then(function () {
+              button.disabled = false;
+              button.textContent = defaultLabel;
             });
-          })
-          .then(function (data) {
-            message.hidden = false;
-            message.textContent = successText;
-            form.reset();
-          })
-          .catch(function (err) {
-            message.hidden = false;
-            message.classList.add('is-error');
-            message.textContent = (err && err.message) || genericError;
-          })
-          .then(function () {
-            button.disabled = false;
-          });
+        });
       });
     })();
   </script>

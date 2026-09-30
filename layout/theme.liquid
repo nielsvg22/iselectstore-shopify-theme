@@ -66,7 +66,9 @@
       generic: {{ 'inventory_notify.errors.generic' | t | json }},
       invalid_email: {{ 'inventory_notify.errors.invalid_email' | t | json }},
       invalid_product: {{ 'inventory_notify.errors.invalid_product' | t | json }},
-      unrecognized_product: {{ 'inventory_notify.errors.unrecognized_product' | t | json }}
+      unrecognized_product: {{ 'inventory_notify.errors.unrecognized_product' | t | json }},
+      already_subscribed: {{ 'inventory_notify.errors.already_subscribed' | t | json }},
+      rate_limited: {{ 'inventory_notify.errors.rate_limited' | t | json }}
     }
   };
 </script>

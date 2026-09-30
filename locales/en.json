@@ -26,6 +26,7 @@
       "home": "Home",
       "stock": "Shop",
       "original_iphone": "Original iPhone?",
+      "our_story": "Our story",
       "faq": "FAQ",
       "trade_in": "Sell/trade in your iPhone",
       "contact": "Contact"
@@ -53,6 +54,7 @@
       "trade_in": "Sell/trade in your iPhone",
       "value_estimate": "Request a valuation",
       "homepage": "Homepage",
+      "our_story": "Our story",
       "faq": "FAQ"
     },
     "newsletter": {
@@ -346,12 +348,15 @@
     "email_placeholder": "email",
     "email_aria": "Email address",
     "submit": "Notify me when available",
+    "loading": "Please wait…",
     "success": "You'll get a notification as soon as this product is available again.",
     "errors": {
       "generic": "Something went wrong. Please try again later.",
       "invalid_email": "Enter a valid email address.",
       "invalid_product": "Invalid product.",
-      "unrecognized_product": "This product could not be recognized. Please try again later."
+      "unrecognized_product": "This product could not be recognized. Please try again later.",
+      "already_subscribed": "You're already on the list for this model.",
+      "rate_limited": "Too many sign-ups. Please try again in a few minutes."
     }
   },
   "whatsapp_float": {
@@ -415,5 +420,135 @@
         "name": "Visible signs of use"
       }
     }
+  },
+  "story_page": {
+    "hero": {
+      "eyebrow": "Our story",
+      "heading_default": "Why iSelectStore selects differently.",
+      "subtext_default": "Not just pre-owned: deliberately selected. We only take in Apple products we would use ourselves, photograph the exact unit you receive and are upfront about condition and battery.",
+      "cta_video": "See how we select",
+      "cta_down": "Read on"
+    },
+    "story": {
+      "eyebrow": "Why we exist",
+      "heading_default": "Not mass refurbished. Carefully chosen.",
+      "intro_default": "iSelectStore started with a simple frustration: anyone looking for a second-hand iPhone runs into stacks of generic devices, vague photos and condition descriptions that tell you nothing.",
+      "body_default": "<p>We do it differently. We only take in what we would want to use ourselves, personally inspect every device and photograph the exact unit you actually receive. We list battery health and condition per device — no averages and no surprises afterwards.</p><p>That keeps the range small and accurate, with a fair price-quality ratio and always someone you can actually reach.</p>"
+    },
+    "values": {
+      "eyebrow": "Why we select",
+      "heading_default": "Four reasons to choose us",
+      "sub_default": "This is what every device has to pass before it goes into the shop.",
+      "items": {
+        "1": {
+          "title": "Only the good ones",
+          "text": "We select on condition, battery and original parts. Anything that doesn't pass doesn't go online."
+        },
+        "2": {
+          "title": "Real photos",
+          "text": "You see the device you buy: photos of this exact unit, no stock imagery."
+        },
+        "3": {
+          "title": "Transparency on battery and condition",
+          "text": "Battery percentage and condition are listed per device, so you know what you're buying."
+        },
+        "4": {
+          "title": "Personal service",
+          "text": "A question? You get an answer from someone who inspected the device themselves."
+        }
+      }
+    },
+    "concept": {
+      "eyebrow": "The brand mark",
+      "heading_default": "One central point, one selection",
+      "text_default": "<p>Our brand mark is built around a central point. It stands for how we work: from a single overview we pick the units that meet our standards, and we leave the rest alone.</p>",
+      "points": {
+        "1": {
+          "title": "Out of a larger supply",
+          "text": "We buy with intent and select, instead of pushing everything through."
+        },
+        "2": {
+          "title": "Rounded shapes",
+          "text": "Rounded, accessible shapes that invite you to look around at your own pace."
+        },
+        "3": {
+          "title": "Coral as an accent",
+          "text": "The accent colours the unit we chose; everything else stays neutral."
+        }
+      }
+    },
+    "video": {
+      "eyebrow": "Marketing video",
+      "heading_default": "Coming soon: the story behind iSelectStore",
+      "placeholder_text_default": "Our new video will be coming soon, showing how we select and why we do it differently.",
+      "badge": "Coming soon"
+    },
+    "person": {
+      "eyebrow": "Behind iSelectStore",
+      "heading_default": "Personally selected, personally helped.",
+      "quote_default": "No middle layer and no call centre: you're talking to the person who picks and inspects the devices."
+    },
+    "timeline": {
+      "eyebrow": "How we work",
+      "heading_default": "From supply to your front door",
+      "sub_default": "Five steps every device goes through before it goes on sale.",
+      "steps": {
+        "1": {
+          "title": "Selecting",
+          "text": "We only take in devices that meet our standards: original, complete condition and a battery that still performs."
+        },
+        "2": {
+          "title": "Inspecting",
+          "text": "Every device is checked and tested with the original Apple diagnostic tools."
+        },
+        "3": {
+          "title": "Photographing",
+          "text": "We photograph the exact unit you buy, including any signs of use."
+        },
+        "4": {
+          "title": "Presenting transparently",
+          "text": "Battery health, condition and warranty are clearly listed on every product."
+        },
+        "5": {
+          "title": "Delivering personally",
+          "text": "Free shipping within the Netherlands or pick up by appointment, with personal support afterwards."
+        }
+      }
+    },
+    "trust": {
+      "eyebrow": "Proof",
+      "heading_default": "What you can rely on",
+      "sub_default": "No empty promises — this is what you can expect from us.",
+      "items": {
+        "1": {
+          "title": "Real reviews",
+          "text": "Independent ratings through WebwinkelKeur."
+        },
+        "2": {
+          "title": "Real product photos",
+          "text": "Photos of the actual device you are buying."
+        },
+        "3": {
+          "title": "6–12 months warranty",
+          "text": "Listed per device, handled personally."
+        },
+        "4": {
+          "title": "Transparent condition",
+          "text": "Condition and battery health are always known upfront."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Keep looking",
+      "heading_default": "Discover what we selected for you",
+      "text_default": "Browse the current range: every device unique, with real photos and a listed condition.",
+      "button_default": "View the shop"
+    }
+  },
+  "home_story_cta": {
+    "eyebrow": "More than a webshop",
+    "heading": "Read why we select differently",
+    "text": "A look behind the scenes: how we select, inspect and transparently present Apple products.",
+    "button": "Read our story →"
   }
 }
