@@ -1,0 +1,96 @@
+{% assign eyebrow_default = 'story_page.video.eyebrow' | t %}
+{% assign heading_default = 'story_page.video.heading_default' | t %}
+{% assign placeholder_default = 'story_page.video.placeholder_text_default' | t %}
+{% assign badge_default = 'story_page.video.badge' | t %}
+
+{% assign hosted_video = section.settings.video %}
+{% assign external_url = section.settings.video_url %}
+{% assign video_title = section.settings.heading | default: heading_default %}
+{% assign embed_url = '' %}
+
+{% if external_url != blank %}
+  {% if external_url contains 'youtu' %}
+    {% if external_url contains 'watch?v=' %}
+      {% assign video_id = external_url | split: 'watch?v=' | last | split: '&' | first %}
+    {% elsif external_url contains 'youtu.be/' %}
+      {% assign video_id = external_url | split: 'youtu.be/' | last | split: '?' | first | split: '/' | first %}
+    {% elsif external_url contains '/embed/' %}
+      {% assign video_id = external_url | split: '/embed/' | last | split: '?' | first | split: '/' | first %}
+    {% endif %}
+    {% if video_id != blank %}
+      {% assign embed_url = 'https://www.youtube-nocookie.com/embed/' | append: video_id %}
+    {% endif %}
+  {% elsif external_url contains 'vimeo' %}
+    {% assign video_id = external_url | split: '/' | last | split: '?' | first %}
+    {% if video_id != blank %}
+      {% assign embed_url = 'https://player.vimeo.com/video/' | append: video_id %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<section class="stSection stVideoSection" id="story-video"><div class="wrap">
+  <div class="head reveal">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h2>{{ video_title }}</h2>
+    </div>
+  </div>
+
+  <div class="stVideoCard reveal">
+    {% if hosted_video != blank %}
+      <div class="stVideoFrame">
+        {{ hosted_video | video_tag: image_size: '1100x', controls: true, preload: 'none', playsinline: true }}
+      </div>
+    {% elsif embed_url != blank %}
+      <div class="stVideoFrame">
+        <iframe
+          src="{{ embed_url }}"
+          title="{{ video_title | escape }}"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    {% else %}
+      <div class="stVideoPlaceholder">
+        {% if section.settings.poster != blank %}
+          <img
+            class="stVideoPoster"
+            src="{{ section.settings.poster | image_url: width: 1200 }}"
+            srcset="{{ section.settings.poster | image_url: width: 700 }} 700w, {{ section.settings.poster | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 899px) 92vw, 900px"
+            width="1200" height="675"
+            alt="{{ section.settings.poster.alt | default: shop.name | escape }}"
+            loading="lazy">
+        {% endif %}
+        <div class="stVideoPlaceholderInner">
+          <span class="stVideoBadge">{{ section.settings.badge | default: badge_default }}</span>
+          <span class="stPlay" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg>
+          </span>
+          <p class="stVideoPlaceholderText">{{ section.settings.placeholder_text | default: placeholder_default }}</p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Verhaal-video",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "video", "id": "video", "label": "Video (Shopify-hosted)" },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Of externe video-URL (YouTube / Vimeo)",
+      "accept": ["youtube", "vimeo"],
+      "info": "Alleen gebruikt als er geen Shopify-video is ingevuld."
+    },
+    { "type": "image_picker", "id": "poster", "label": "Afbeelding placeholder / poster" },
+    { "type": "text", "id": "badge", "label": "Badge placeholder" },
+    { "type": "textarea", "id": "placeholder_text", "label": "Placeholder-tekst (geen video ingesteld)" }
+  ]
+}
+{% endschema %}

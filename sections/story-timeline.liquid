@@ -1,0 +1,53 @@
+{% assign eyebrow_default = 'story_page.timeline.eyebrow' | t %}
+{% assign heading_default = 'story_page.timeline.heading_default' | t %}
+{% assign sub_default = 'story_page.timeline.sub_default' | t %}
+
+<section class="stSection" id="story-timeline"><div class="wrap">
+  <div class="head reveal">
+    <div>
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h2>{{ section.settings.heading | default: heading_default }}</h2>
+      <p class="sub" style="max-width:640px">{{ section.settings.subtext | default: sub_default }}</p>
+    </div>
+  </div>
+
+  <ol class="stTimeline" style="--st-cols:{{ section.blocks.size }}">
+    {% for block in section.blocks %}
+      {% assign step_title_key = 'story_page.timeline.steps.' | append: forloop.index | append: '.title' %}
+      {% assign step_text_key = 'story_page.timeline.steps.' | append: forloop.index | append: '.text' %}
+      {% assign step_title_default = step_title_key | t %}
+      {% assign step_text_default = step_text_key | t %}
+      {% if step_title_default contains 'translation missing' %}{% assign step_title_default = '' %}{% endif %}
+      {% if step_text_default contains 'translation missing' %}{% assign step_text_default = '' %}{% endif %}
+      <li class="stStep reveal" style="transition-delay:{{ forloop.index0 | times: 0.08 | round: 2 }}s" {{ block.shopify_attributes }}>
+        <span class="stStepNum" aria-hidden="true">{{ forloop.index }}</span>
+        <div class="stStepBody">
+          <h3>{{ block.settings.title | default: step_title_default }}</h3>
+          <p>{{ block.settings.text | default: step_text_default }}</p>
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+</div></section>
+
+{% schema %}
+{
+  "name": "Verhaal-timeline",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "subtext", "label": "Introregel" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Stap",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Tekst" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Verhaal-timeline" }]
+}
+{% endschema %}

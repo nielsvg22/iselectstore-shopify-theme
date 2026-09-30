@@ -80,6 +80,13 @@ Secties: `header` (USP-balk), `contact`, `faq`, `authenticity`,
 (prijsplaceholders), `main-password-header`, `rich-text` (slogan),
 `language-selector`, `footer` (brand-tekst).
 
+Pagina "Ons verhaal" (`templates/page.ons-verhaal.json`):
+`story-hero`, `story-intro`, `story-values`, `story-concept`,
+`story-video`, `story-person`, `story-timeline`, `story-trust`,
+`story-cta` — alle sleutels onder `story_page.*`, blokken vallen terug op
+`story_page.<sectie>.…N.*`. Homepage-CTA: `home-story-cta`
+(`home_story_cta.*`).
+
 Snippets: `inventory-notification-form`, `whatsapp-float`, `spec-row`,
 `spec-value` (productkenmerken met custom → `app--428689915905--mkt`-fallback),
 `accessory-option`.

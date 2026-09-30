@@ -25,6 +25,7 @@
     <div>
       <h4>{{ 'footer.headings.information' | t }}</h4>
       <a href="{{ routes.root_url }}">{{ 'footer.links.homepage' | t }}</a>
+      {% if pages['ons-verhaal'] %}<a href="{{ pages['ons-verhaal'].url }}">{{ 'footer.links.our_story' | t }}</a>{% endif %}
       {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
       {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'footer.links.faq' | t }}</a>{% endif %}
       {% for policy in shop.policies %}<a href="{{ policy.url }}">{{ policy.title }}</a>{% endfor %}

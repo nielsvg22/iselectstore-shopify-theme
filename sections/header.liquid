@@ -11,6 +11,7 @@
     <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
     <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
     {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
+    {% if pages['ons-verhaal'] %}<a href="{{ pages['ons-verhaal'].url }}">{{ 'header.nav.our_story' | t }}</a>{% endif %}
     {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
     <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
     {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
@@ -28,6 +29,7 @@
   <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
   <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
   {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
+  {% if pages['ons-verhaal'] %}<a href="{{ pages['ons-verhaal'].url }}">{{ 'header.nav.our_story' | t }}</a>{% endif %}
   {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
   <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
   {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}

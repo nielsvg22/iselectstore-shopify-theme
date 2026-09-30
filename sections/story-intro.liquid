@@ -1,0 +1,61 @@
+{% assign eyebrow_default = 'story_page.story.eyebrow' | t %}
+{% assign heading_default = 'story_page.story.heading_default' | t %}
+{% assign intro_default = 'story_page.story.intro_default' | t %}
+{% assign body_default = 'story_page.story.body_default' | t %}
+{% assign align = section.settings.alignment | default: 'image_right' %}
+
+<section class="stSection" id="story-intro"><div class="wrap">
+  <div class="stStory stStory--{{ align }}">
+    <div class="stStoryCopy reveal">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h2>{{ section.settings.heading | default: heading_default }}</h2>
+      <div class="stRich stRich--lead">{{ section.settings.intro | default: intro_default }}</div>
+      <div class="stRich">{{ section.settings.body | default: body_default }}</div>
+      {% if page.content != blank %}
+        <div class="stRich stRich--page">{{ page.content }}</div>
+      {% endif %}
+    </div>
+
+    <div class="stStoryMedia reveal" style="transition-delay:.12s">
+      {% if section.settings.image != blank %}
+        <img
+          src="{{ section.settings.image | image_url: width: 900 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w"
+          sizes="(max-width: 899px) 92vw, 460px"
+          width="900" height="1100"
+          alt="{{ section.settings.image.alt | default: shop.name | escape }}"
+          loading="lazy">
+      {% else %}
+        <div class="stStoryGraphic" aria-hidden="true">
+          <span class="stG g1"></span>
+          <span class="stG g2"></span>
+          <span class="stG g3"></span>
+          <svg class="stGMark" viewBox="0 0 24 24"><path d="M12 0c.9 3.2 2 5.6 3.4 7.1C16.9 8.6 19.2 9.7 22.4 10.6c-3.2.9-5.5 2-7 3.5C13.9 15.6 12.8 18 12 21.1c-.8-3.1-1.9-5.5-3.4-7C7.1 12.6 4.8 11.5 1.6 10.6c3.2-.9 5.5-2 7-3.5C10.1 5.6 11.2 3.2 12 0z"/></svg>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Verhaal-intro",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "richtext", "id": "intro", "label": "Introtekst" },
+    { "type": "richtext", "id": "body", "label": "Bodytekst" },
+    { "type": "image_picker", "id": "image", "label": "Afbeelding" },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Opmaak",
+      "options": [
+        { "value": "image_right", "label": "Tekst links, beeld rechts" },
+        { "value": "image_left", "label": "Beeld links, tekst rechts" }
+      ],
+      "default": "image_right"
+    }
+  ]
+}
+{% endschema %}

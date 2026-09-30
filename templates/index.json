@@ -115,6 +115,10 @@
         "count": 4
       }
     },
+    "storycta": {
+      "type": "home-story-cta",
+      "settings": {}
+    },
     "tradein": {
       "type": "trade-in-banner",
       "settings": {}
@@ -155,6 +159,7 @@
     "trust",
     "categories",
     "products",
+    "storycta",
     "tradein",
     "reviews",
     "webwinkelkeur",

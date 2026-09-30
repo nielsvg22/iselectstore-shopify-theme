@@ -1,0 +1,70 @@
+{% assign eyebrow_default = 'story_page.concept.eyebrow' | t %}
+{% assign heading_default = 'story_page.concept.heading_default' | t %}
+{% assign text_default = 'story_page.concept.text_default' | t %}
+
+<section class="stSection" id="story-concept"><div class="wrap">
+  <div class="stConcept">
+    <div class="stConceptArt reveal">
+      <div class="stRings stRings--light" aria-hidden="true">
+        <span class="stRing r1"></span>
+        <span class="stRing r2"></span>
+        <span class="stRing r3"></span>
+        <span class="stOrbitDot d1"></span>
+        <span class="stOrbitDot d2"></span>
+        <span class="stOrbitDot d3 sel"></span>
+        <span class="stOrbitDot d4"></span>
+        <span class="stOrbitDot d5"></span>
+        <span class="stOrbitDot d6"></span>
+        <span class="stHeroCore">
+          <svg class="stMark" viewBox="0 0 24 24"><path d="M12 0c.9 3.2 2 5.6 3.4 7.1C16.9 8.6 19.2 9.7 22.4 10.6c-3.2.9-5.5 2-7 3.5C13.9 15.6 12.8 18 12 21.1c-.8-3.1-1.9-5.5-3.4-7C7.1 12.6 4.8 11.5 1.6 10.6c3.2-.9 5.5-2 7-3.5C10.1 5.6 11.2 3.2 12 0z"/></svg>
+        </span>
+      </div>
+      <span class="stConceptCaption">SELECTED BY US, READY FOR YOU</span>
+    </div>
+
+    <div class="stConceptCopy reveal" style="transition-delay:.12s">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h2>{{ section.settings.heading | default: heading_default }}</h2>
+      <div class="stRich">{{ section.settings.text | default: text_default }}</div>
+      <ul class="stPoints">
+        {% for block in section.blocks %}
+          {% assign pt_title_key = 'story_page.concept.points.' | append: forloop.index | append: '.title' %}
+          {% assign pt_text_key = 'story_page.concept.points.' | append: forloop.index | append: '.text' %}
+          {% assign pt_title_default = pt_title_key | t %}
+          {% assign pt_text_default = pt_text_key | t %}
+          {% if pt_title_default contains 'translation missing' %}{% assign pt_title_default = '' %}{% endif %}
+          {% if pt_text_default contains 'translation missing' %}{% assign pt_text_default = '' %}{% endif %}
+          <li {{ block.shopify_attributes }}>
+            <span class="stPointDot" aria-hidden="true"></span>
+            <div>
+              <b>{{ block.settings.title | default: pt_title_default }}</b>
+              <span>{{ block.settings.text | default: pt_text_default }}</span>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Verhaal-beeldmerk",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "richtext", "id": "text", "label": "Toelichting" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Kenmerk",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Tekst" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Verhaal-beeldmerk" }]
+}
+{% endschema %}

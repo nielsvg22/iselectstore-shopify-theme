@@ -61,6 +61,17 @@ var io = new IntersectionObserver(function (entries) {
   entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: .12 });
 document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+if (window.MutationObserver) {
+  new MutationObserver(function (muts) {
+    muts.forEach(function (m) {
+      Array.prototype.forEach.call(m.addedNodes, function (n) {
+        if (n.nodeType !== 1) return;
+        if (n.classList && n.classList.contains('reveal')) io.observe(n);
+        if (n.querySelectorAll) n.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+}
 
 // Reviews slider (one review at a time, with arrows + dots)
 document.querySelectorAll('.reviewsSlider').forEach(function (slider) {

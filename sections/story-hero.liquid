@@ -1,0 +1,69 @@
+{% comment %}
+  Ons verhaal — hero.
+  De merk-slogan "SELECTED BY US, READY FOR YOU" staat bewust als literal in
+  de markup en komt NIET in de locale-bestanden voor: hij blijft in elke taal
+  exact Engels.
+{% endcomment %}
+{% assign eyebrow_default = 'story_page.hero.eyebrow' | t %}
+{% assign heading_default = 'story_page.hero.heading_default' | t %}
+{% assign subtext_default = 'story_page.hero.subtext_default' | t %}
+{% assign cta_video_default = 'story_page.hero.cta_video' | t %}
+{% assign cta_down_default = 'story_page.hero.cta_down' | t %}
+
+<section class="stHero" id="story-top"><div class="wrap stHeroIn">
+  <div class="stHeroCopy">
+    <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+    <h1>{{ section.settings.heading | default: heading_default }}</h1>
+    <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
+
+    <p class="stSlogan">SELECTED BY US, READY FOR YOU</p>
+
+    <div class="ctas">
+      <a class="btn primary" href="#story-video">{{ section.settings.cta_video | default: cta_video_default }}</a>
+      <a class="btn" href="#story-intro">{{ section.settings.cta_down | default: cta_down_default }}</a>
+    </div>
+  </div>
+
+  {% if section.settings.image != blank %}
+    <div class="stHeroArt stHeroArt--img">
+      <img
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w"
+        sizes="(max-width: 899px) 78vw, 440px"
+        width="900" height="900"
+        alt="{{ section.settings.image.alt | default: shop.name | escape }}"
+        loading="eager">
+    </div>
+  {% else %}
+    <div class="stHeroArt" aria-hidden="true">
+      <div class="stRings">
+        <span class="stRing r1"></span>
+        <span class="stRing r2"></span>
+        <span class="stRing r3"></span>
+        <span class="stOrbitDot d1"></span>
+        <span class="stOrbitDot d2"></span>
+        <span class="stOrbitDot d3 sel"></span>
+        <span class="stOrbitDot d4"></span>
+        <span class="stOrbitDot d5"></span>
+        <span class="stOrbitDot d6"></span>
+        <span class="stHeroCore">
+          <svg class="stMark" viewBox="0 0 24 24"><path d="M12 0c.9 3.2 2 5.6 3.4 7.1C16.9 8.6 19.2 9.7 22.4 10.6c-3.2.9-5.5 2-7 3.5C13.9 15.6 12.8 18 12 21.1c-.8-3.1-1.9-5.5-3.4-7C7.1 12.6 4.8 11.5 1.6 10.6c3.2-.9 5.5-2 7-3.5C10.1 5.6 11.2 3.2 12 0z"/></svg>
+        </span>
+      </div>
+    </div>
+  {% endif %}
+</div></section>
+
+{% schema %}
+{
+  "name": "Verhaal-hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel (H1)" },
+    { "type": "textarea", "id": "subtext", "label": "Subtekst" },
+    { "type": "text", "id": "cta_video", "label": "Knop: naar video" },
+    { "type": "text", "id": "cta_down", "label": "Knop: verder naar beneden" },
+    { "type": "image_picker", "id": "image", "label": "Afbeelding (optioneel — anders grafisch beeldmerk)" }
+  ]
+}
+{% endschema %}
