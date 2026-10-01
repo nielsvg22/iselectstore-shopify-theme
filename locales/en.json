@@ -202,7 +202,8 @@
     "shipping_free": "Free",
     "total": "Total",
     "checkout": "Checkout →",
-    "continue_shopping": "← Continue shopping"
+    "continue_shopping": "← Continue shopping",
+    "upsell_title": "Have you also thought of..."
   },
   "search_page": {
     "breadcrumb": "Search",

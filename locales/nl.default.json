@@ -202,7 +202,8 @@
     "shipping_free": "Gratis",
     "total": "Totaal",
     "checkout": "Afrekenen →",
-    "continue_shopping": "← Verder winkelen"
+    "continue_shopping": "← Verder winkelen",
+    "upsell_title": "Heb je ook gedacht aan..."
   },
   "search_page": {
     "breadcrumb": "Zoeken",

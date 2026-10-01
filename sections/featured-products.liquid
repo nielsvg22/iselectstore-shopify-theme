@@ -19,9 +19,11 @@
 
   <div class="products">
     {% assign limit = section.settings.count | default: 4 %}
+    {% comment %} Accessoires zijn alleen een upsell in de winkelwagen, niet hier. {% endcomment %}
+    {% assign featured_pool = section.settings.collection.products | where_exp: "product", "product.type != 'Accessoire'" %}
     {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan. {% endcomment %}
-    {% assign available_products = section.settings.collection.products | where: "available", true %}
-    {% assign sold_out_products = section.settings.collection.products | where: "available", false %}
+    {% assign available_products = featured_pool | where: "available", true %}
+    {% assign sold_out_products = featured_pool | where: "available", false %}
     {% assign sorted_products = available_products | concat: sold_out_products %}
     {% for product in sorted_products limit: limit %}
       {% render 'product-card', product: product, index: forloop.index0 %}

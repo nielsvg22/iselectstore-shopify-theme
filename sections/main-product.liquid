@@ -233,7 +233,7 @@
     <div class="products">
       {% assign shown = 0 %}
       {% for related in related_collection.products %}
-        {% if related.id != product.id and shown < 4 %}
+        {% if related.id != product.id and related.type != 'Accessoire' and shown < 4 %}
           {% render 'product-card', product: related %}
           {% assign shown = shown | plus: 1 %}
         {% endif %}

@@ -57,16 +57,18 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="11" y1="18" x2="13" y2="18"></line></svg>
             {{ 'collection.filters_toggle' | t }}
           </button>
-          <span class="resultCount">{{ 'collection.results_count' | t: count: collection.products.size }}</span>
+        {% comment %} Accessoires (product type "Accessoire") zijn alleen nog een upsell in de winkelwagen, niet los vindbaar in de shop. {% endcomment %}
+        {% assign shop_products = collection.products | where_exp: "product", "product.type != 'Accessoire'" %}
+          <span class="resultCount">{{ 'collection.results_count' | t: count: shop_products.size }}</span>
         </div>
       </div>
 
-      {% if collection.products.size == 0 %}
+      {% if shop_products.size == 0 %}
         <p class="noResults">{{ 'collection.no_results' | t }}</p>
       {% else %}
         {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan, ongeacht de gekozen sortering. {% endcomment %}
-        {% assign available_products = collection.products | where: "available", true %}
-        {% assign sold_out_products = collection.products | where: "available", false %}
+        {% assign available_products = shop_products | where: "available", true %}
+        {% assign sold_out_products = shop_products | where: "available", false %}
         {% assign sorted_products = available_products | concat: sold_out_products %}
         <div class="products shopProductsGrid">
           {% for product in sorted_products %}

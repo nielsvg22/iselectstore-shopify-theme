@@ -35,8 +35,48 @@
         </aside>
       </div>
     {% endform %}
+
+    {% comment %}
+      "Heb je ook gedacht aan..." upsell: accessoires (product type "Accessoire")
+      worden nergens los in de shop getoond, alleen hier als cross-sell zodra er
+      een toestel in de winkelwagen zit.
+    {% endcomment %}
+    {% assign cart_has_device = false %}
+    {% assign cart_product_ids = "," %}
+    {% for item in cart.items %}
+      {% assign cart_product_ids = cart_product_ids | append: item.product_id | append: ',' %}
+      {% unless item.product.type == 'Accessoire' %}{% assign cart_has_device = true %}{% endunless %}
+    {% endfor %}
+
+    {% if cart_has_device %}
+      {% assign upsell_products = collections.all.products | where_exp: "product", "product.type == 'Accessoire' and product.available" %}
+      {% assign upsell_shown = 0 %}
+      <div class="cartUpsell">
+        {% assign has_any_upsell = false %}
+        {% for product in upsell_products %}
+          {% assign id_token = ',' | append: product.id | append: ',' %}
+          {% if cart_product_ids contains id_token %}{% continue %}{% endif %}
+          {% if upsell_shown == 0 %}
+            <h3 class="cartUpsell__title">{{ 'cart_page.upsell_title' | t }}</h3>
+            <div class="products cartUpsell__grid">
+          {% endif %}
+          {% assign has_any_upsell = true %}
+          {% render 'product-card', product: product, index: upsell_shown %}
+          {% assign upsell_shown = upsell_shown | plus: 1 %}
+          {% if upsell_shown >= 4 %}{% break %}{% endif %}
+        {% endfor %}
+        {% if has_any_upsell %}</div>{% endif %}
+      </div>
+    {% endif %}
   {% endif %}
 </div></section>
+
+<style>
+  .cartUpsell { margin-top: 48px; }
+  .cartUpsell__title { margin: 0 0 18px; }
+  .cartUpsell__grid { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .cartUpsell__grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
 
 {% schema %}
 { "name": "Winkelwagen" }
