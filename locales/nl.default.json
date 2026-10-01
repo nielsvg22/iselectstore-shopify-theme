@@ -203,7 +203,11 @@
     "total": "Totaal",
     "checkout": "Afrekenen →",
     "continue_shopping": "← Verder winkelen",
-    "upsell_title": "Heb je ook gedacht aan..."
+    "upsell_title": "Heb je ook gedacht aan...",
+    "upsell_subtitle": "Populaire accessoires die perfect passen bij je keuze.",
+    "upsell_sold_out": "Verkocht",
+    "upsell_add_aria": "Toevoegen aan winkelwagen",
+    "upsell_view_all": "Bekijk alle accessoires →"
   },
   "search_page": {
     "breadcrumb": "Zoeken",

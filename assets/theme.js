@@ -1,3 +1,20 @@
+// Cart upsell: quick-add accessory to cart, then reload so totals/summary update
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('[data-upsell-add]');
+  if (!btn || btn.disabled) return;
+  var variantId = parseInt(btn.dataset.variantId, 10);
+  if (!variantId) return;
+  btn.disabled = true;
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ items: [{ id: variantId, quantity: 1 }] })
+  })
+    .then(function (r) { if (!r.ok) throw new Error('add failed'); return r.json(); })
+    .then(function () { window.location.reload(); })
+    .catch(function () { btn.disabled = false; });
+});
+
 // Header scroll shadow
 document.addEventListener('scroll', function () {
   var h = document.getElementById('siteHeader');

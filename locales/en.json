@@ -203,7 +203,11 @@
     "total": "Total",
     "checkout": "Checkout →",
     "continue_shopping": "← Continue shopping",
-    "upsell_title": "Have you also thought of..."
+    "upsell_title": "Have you also thought of...",
+    "upsell_subtitle": "Popular accessories that go perfectly with your choice.",
+    "upsell_sold_out": "Sold out",
+    "upsell_add_aria": "Add to cart",
+    "upsell_view_all": "Browse all accessories →"
   },
   "search_page": {
     "breadcrumb": "Search",
