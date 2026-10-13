@@ -7,8 +7,9 @@
       <img src="{{ product.featured_image | image_url: width: 600 }}" width="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
     {% endif %}
   </a>
-  {% if product.metafields.custom.badge_text and product.available %}
-    <span class="badge">{{ product.metafields.custom.badge_text }}</span>
+  {% if product.available %}
+    {% assign badge_label = product.metafields.custom.badge_text | default: product.metafields.custom.condition %}
+    {% if badge_label %}<span class="badge">{{ badge_label }}</span>{% endif %}
   {% endif %}
   <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
   <div class="meta">
@@ -20,28 +21,6 @@
     <b>{{ product.price | money }}</b>
     {% if product.compare_at_price > product.price %}<span class="old">{{ product.compare_at_price | money }}</span>{% endif %}
   </div>
-  {% if product.metafields.custom.battery_percentage or product.metafields.custom.warranty_months or product.metafields.custom.condition %}
-    <div class="featureChips">
-      {% if product.metafields.custom.battery_percentage %}
-        <span class="chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="18" height="10" rx="2"></rect><line x1="22" y1="10" x2="22" y2="14"></line></svg>
-          {{ product.metafields.custom.battery_percentage }}{{ 'product_card.battery_suffix' | t }}
-        </span>
-      {% endif %}
-      {% if product.metafields.custom.warranty_months %}
-        <span class="chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
-          {{ product.metafields.custom.warranty_months }} {{ 'product_card.warranty_suffix' | t }}
-        </span>
-      {% endif %}
-      {% if product.metafields.custom.condition %}
-        <span class="chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"></path><path d="M3 8l9 5 9-5"></path><path d="M12 13v8"></path></svg>
-          {{ product.metafields.custom.condition }}
-        </span>
-      {% endif %}
-    </div>
-  {% endif %}
   <a class="add" href="{{ product.url }}" style="text-align:center">
     {{ 'product_card.cta' | t }}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
