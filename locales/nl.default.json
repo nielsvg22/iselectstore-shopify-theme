@@ -558,11 +558,13 @@
     "button": "Lees ons verhaal →"
   },
   "fresh_stock": {
-    "eyebrow": "Net binnengekomen",
+    "eyebrow": "Net binnen",
     "heading": "Vers in voorraad",
-    "live": "Live voorraad",
+    "subtext": "Populaire modellen, scherp geprijsd.",
+    "view_all": "Bekijk alles →",
     "unique": "Uniek exemplaar",
-    "button": "Bekijk hele voorraad →"
+    "button": "Bekijk hele voorraad →",
+    "like_aria": "Toevoegen aan favorieten"
   },
   "home_proof": {
     "eyebrow": "Transparantie voorop",

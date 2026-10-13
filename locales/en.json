@@ -560,9 +560,11 @@
   "fresh_stock": {
     "eyebrow": "Just arrived",
     "heading": "Fresh in stock",
-    "live": "Live stock",
+    "subtext": "Popular models, priced right.",
+    "view_all": "View all →",
     "unique": "Unique item",
-    "button": "View all stock →"
+    "button": "View all stock →",
+    "like_aria": "Add to favorites"
   },
   "home_proof": {
     "eyebrow": "Transparency first",

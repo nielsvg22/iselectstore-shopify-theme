@@ -1,3 +1,26 @@
+// "Vers in voorraad": hartje-knop (puur visueel, lokaal onthouden, geen account/backend)
+(function () {
+  var likeBtns = document.querySelectorAll('[data-fresh-like]');
+  if (!likeBtns.length) return;
+  var stored;
+  try { stored = JSON.parse(localStorage.getItem('freshStockLikes') || '[]'); } catch (e) { stored = []; }
+  function likeKey(btn) {
+    var link = btn.nextElementSibling;
+    return (link && link.getAttribute('href')) || '';
+  }
+  likeBtns.forEach(function (btn) {
+    if (stored.indexOf(likeKey(btn)) !== -1) btn.classList.add('is-liked');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var k = likeKey(btn);
+      var idx = stored.indexOf(k);
+      if (idx === -1) { stored.push(k); btn.classList.add('is-liked'); }
+      else { stored.splice(idx, 1); btn.classList.remove('is-liked'); }
+      try { localStorage.setItem('freshStockLikes', JSON.stringify(stored)); } catch (e) {}
+    });
+  });
+})();
+
 // Cart upsell: quick-add accessory to cart, then reload so totals/summary update
 document.addEventListener('click', function (e) {
   var btn = e.target.closest('[data-upsell-add]');
