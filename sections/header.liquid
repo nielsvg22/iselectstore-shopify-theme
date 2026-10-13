@@ -5,7 +5,7 @@
 <header id="siteHeader"><div class="nav">
   <a class="logo" href="{{ routes.root_url }}">
     {% render 'icon-mark', size: 20 %}
-    {% if shop.name == 'iSelectStore' or shop.name == blank %}<span class="logo-strong">iSelect</span><span class="logo-light">Store</span>{% else %}{{ shop.name }}{% endif %}
+    <span class="logo-strong">iSelect</span><span class="logo-light">Store</span>
   </a>
   <nav class="links">
     <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>

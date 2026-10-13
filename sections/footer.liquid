@@ -3,7 +3,7 @@
     <div class="footerBrand">
       <a class="logo" href="{{ routes.root_url }}">
         {% render 'icon-mark', size: 20 %}
-        {% if shop.name == 'iSelectStore' or shop.name == blank %}<span class="logo-strong">iSelect</span><span class="logo-light">Store</span>{% else %}{{ shop.name }}{% endif %}
+        <span class="logo-strong">iSelect</span><span class="logo-light">Store</span>
       </a>
       {% assign brand_text_default = 'footer.brand_text' | t %}
       <p style="margin-top:14px">{{ section.settings.brand_text | default: brand_text_default }}</p>
