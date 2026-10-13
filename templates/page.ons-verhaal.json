@@ -11,12 +11,15 @@
   "sections": {
     "hero": {
       "type": "story-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/iselectstore-unboxing-coral.jpg"
+      }
     },
     "intro": {
       "type": "story-intro",
       "settings": {
-        "alignment": "image_right"
+        "alignment": "image_right",
+        "image": "shopify://shop_images/iselectstore-unboxing-navy.jpg"
       }
     },
     "values": {
