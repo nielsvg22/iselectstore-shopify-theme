@@ -143,9 +143,69 @@ document.querySelectorAll('.thumb').forEach(function (t) {
     document.querySelectorAll('.thumb').forEach(function (x) { x.classList.remove('active'); });
     t.classList.add('active');
     var main = document.getElementById('mainImg');
-    if (main) main.src = t.dataset.img;
+    if (main) { main.src = t.dataset.img; main.dataset.full = t.dataset.full; }
   });
 });
+
+// Product photo lightbox (zoom)
+(function () {
+  var lightbox = document.getElementById('lightbox');
+  var mainImg = document.getElementById('mainImg');
+  if (!lightbox || !mainImg) return;
+
+  var lbImg = document.getElementById('lightboxImg');
+  var counter = document.getElementById('lightboxCounter');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+  var zoomBtn = document.getElementById('galleryZoom');
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb'));
+  var images = thumbs.length ? thumbs.map(function (t) { return t.dataset.full; }) : [mainImg.dataset.full];
+  var index = 0;
+
+  function activeIndex() {
+    var i = -1;
+    thumbs.forEach(function (t, idx) { if (t.classList.contains('active')) i = idx; });
+    return i >= 0 ? i : 0;
+  }
+
+  function render() {
+    lbImg.src = images[index];
+    var multi = images.length > 1;
+    counter.style.display = multi ? '' : 'none';
+    prevBtn.style.display = multi ? '' : 'none';
+    nextBtn.style.display = multi ? '' : 'none';
+    if (multi) counter.textContent = (index + 1) + ' / ' + images.length;
+  }
+
+  function openLightbox() {
+    index = activeIndex();
+    render();
+    lightbox.classList.add('open');
+    document.body.classList.add('locked');
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.classList.remove('locked');
+  }
+  function go(dir) {
+    index = (index + dir + images.length) % images.length;
+    render();
+  }
+
+  if (zoomBtn) zoomBtn.addEventListener('click', openLightbox);
+  mainImg.addEventListener('click', openLightbox);
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  prevBtn.addEventListener('click', function () { go(-1); });
+  nextBtn.addEventListener('click', function () { go(1); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+})();
 
 // Product page: accessories + add to cart (AJAX, multi-item)
 (function () {
