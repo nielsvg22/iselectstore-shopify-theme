@@ -20,7 +20,7 @@
       {% if answer_default contains 'translation missing' %}{% assign answer_default = '' %}{% endif %}
       <div class="accItem{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
         <div class="accHead">{{ block.settings.question | default: question_default }}</div>
-        <div class="accBody"{% if forloop.first %} style="max-height:400px"{% endif %}><p>{{ block.settings.answer | default: answer_default }}</p></div>
+        <div class="accBody"><p>{{ block.settings.answer | default: answer_default }}</p></div>
       </div>
     {% endfor %}
   </div>
