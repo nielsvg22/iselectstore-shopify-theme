@@ -4,6 +4,12 @@
   <div class="sub" style="font-size:16px;line-height:1.7;max-width:760px">{{ page.content }}</div>
 </div></section>
 
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: page.title, url_2: page.url
+%}
+
 {% schema %}
 { "name": "Pagina" }
 {% endschema %}

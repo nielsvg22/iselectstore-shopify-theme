@@ -6,6 +6,13 @@
   <p>{{ section.settings.subtext }}</p>
 </div></section>
 
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% assign bc_self = 'header.nav.original_iphone' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: bc_self, url_2: request.path
+%}
+
 <section><div class="wrap reveal">
   <p class="eyebrow">{{ 'authenticity.eyebrow' | t }}</p>
   <h2 style="margin-bottom:18px">{{ 'authenticity.heading' | t }}</h2>

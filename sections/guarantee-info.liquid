@@ -8,6 +8,12 @@
   <h1>{{ section.settings.heading | default: heading_default }}</h1>
 </div></section>
 
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: page.title, url_2: page.url
+%}
+
 <section><div class="wrap reveal" style="max-width:900px">
   {% if page.content != blank %}
     <div class="sub" style="font-size:16px;line-height:1.7;margin-bottom:32px">{{ page.content }}</div>
