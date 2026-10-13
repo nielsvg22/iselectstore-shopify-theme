@@ -22,6 +22,25 @@
 </style>
 {% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% else %}<link rel="icon" href="{{ 'icon-mark.png' | asset_url }}" type="image/png">{% endif %}
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+{% comment %}
+  GEO/SEO: Organization structured data op elke pagina, zodat
+  zoekmachines en AI-antwoordmachines iSelectStore als entiteit herkennen
+  (naam, logo, contactkanaal, social profielen).
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "iSelectStore",
+  "url": {{ shop.url | json }},
+  "logo": {{ 'icon-mark.png' | asset_url | prepend: "https:" | json }}
+  {%- assign same_as = "" | split: "," -%}
+  {%- if settings.social_instagram_link != blank -%}{%- assign same_as = same_as | push: settings.social_instagram_link -%}{%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}{%- assign same_as = same_as | push: settings.social_facebook_link -%}{%- endif -%}
+  {%- if same_as.size > 0 -%}, "sameAs": {{ same_as | json }}{%- endif -%}
+  {%- if settings.whatsapp_number != blank -%}, "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+{{ settings.whatsapp_number }}" }{%- endif -%}
+}
+</script>
 {{ content_for_header }}
 </head>
 <body>
