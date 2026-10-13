@@ -556,5 +556,17 @@
     "heading": "Lees waarom wij anders selecteren",
     "text": "Een kijkje achter de schermen: hoe wij Apple-producten selecteren, controleren en transparant presenteren.",
     "button": "Lees ons verhaal →"
+  },
+  "home_proof": {
+    "eyebrow": "Transparantie voorop",
+    "heading": "Altijd 100% originele Apple-onderdelen",
+    "text": "<p>Elk toestel fotograferen we apart — inclusief een screenshot van de werkelijke batterijconditie — zodat je precies ziet wat je koopt. Geen stockbeeld, geen verrassingen.</p>",
+    "device_alt": "Echte productfoto",
+    "battery_alt": "Screenshot van de batterijconditie",
+    "checks": {
+      "1": "Alleen originele Apple-onderdelen",
+      "2": "Unieke foto's per individueel toestel",
+      "3": "Batterijconditie altijd zichtbaar vóór aankoop"
+    }
   }
 }

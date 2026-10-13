@@ -556,5 +556,17 @@
     "heading": "Read why we select differently",
     "text": "A look behind the scenes: how we select, inspect and transparently present Apple products.",
     "button": "Read our story →"
+  },
+  "home_proof": {
+    "eyebrow": "Transparency first",
+    "heading": "Always 100% original Apple parts",
+    "text": "<p>We photograph every device individually — including a screenshot of the actual battery health — so you know exactly what you're buying. No stock photos, no surprises.</p>",
+    "device_alt": "Real product photo",
+    "battery_alt": "Battery health screenshot",
+    "checks": {
+      "1": "Only original Apple parts",
+      "2": "Unique photos per individual device",
+      "3": "Battery health always visible before you buy"
+    }
   }
 }

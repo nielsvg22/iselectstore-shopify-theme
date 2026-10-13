@@ -1,0 +1,74 @@
+{% comment %}
+  Homepage-sectie die het "echte foto's, geen stockbeeld"-verhaal bewijst:
+  een echte apparaatfoto naast een screenshot van het batterijscherm, plus
+  een korte checklist met vertrouwens-claims. Op klantverzoek zichtbaar op
+  de homepage zelf (niet weggestopt op de "Originele iPhone?"-pagina).
+{% endcomment %}
+{% assign eyebrow_default = 'home_proof.eyebrow' | t %}
+{% assign heading_default = 'home_proof.heading' | t %}
+{% assign text_default = 'home_proof.text' | t %}
+
+<section class="proofSection"><div class="wrap">
+  <div class="proof reveal">
+    <div class="proofMedia">
+      {% if section.settings.device_image %}
+        <img class="proofImg proofImg--device" src="{{ section.settings.device_image | image_url: width: 700 }}" width="700" alt="{{ section.settings.device_image.alt | default: 'home_proof.device_alt' | t }}" loading="lazy">
+      {% else %}
+        <div class="proofImg proofImg--device proofImg--placeholder"></div>
+      {% endif %}
+      {% if section.settings.battery_image %}
+        <img class="proofImg proofImg--battery" src="{{ section.settings.battery_image | image_url: width: 500 }}" width="500" alt="{{ section.settings.battery_image.alt | default: 'home_proof.battery_alt' | t }}" loading="lazy">
+      {% else %}
+        <div class="proofImg proofImg--battery proofImg--placeholder"></div>
+      {% endif %}
+    </div>
+
+    <div class="proofBody">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h2>{{ section.settings.heading | default: heading_default }}</h2>
+      <div class="sub" style="margin-bottom:22px">{{ section.settings.text | default: text_default }}</div>
+
+      <div class="proofChecks">
+        {% for block in section.blocks %}
+          {% assign check_default_key = 'home_proof.checks.' | append: forloop.index %}
+          {% assign check_default = check_default_key | t %}
+          {% if check_default contains 'translation missing' %}{% assign check_default = '' %}{% endif %}
+          <div class="proofCheck" {{ block.shopify_attributes }}>
+            <span class="proofCheckMark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+            <span>{{ block.settings.text | default: check_default }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Bewijsfoto's",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker-tekst" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "richtext", "id": "text", "label": "Tekst" },
+    { "type": "image_picker", "id": "device_image", "label": "Apparaatfoto" },
+    { "type": "image_picker", "id": "battery_image", "label": "Batterijscherm-screenshot" }
+  ],
+  "blocks": [
+    {
+      "type": "check",
+      "name": "Checklist-regel",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Tekst" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "check" },
+      { "type": "check" },
+      { "type": "check" }
+    ]
+  },
+  "presets": [{ "name": "Bewijsfoto's" }]
+}
+{% endschema %}

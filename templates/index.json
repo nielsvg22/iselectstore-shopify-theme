@@ -115,6 +115,15 @@
         "count": 4
       }
     },
+    "proof": {
+      "type": "home-proof",
+      "blocks": {
+        "check-1": { "type": "check", "settings": {} },
+        "check-2": { "type": "check", "settings": {} },
+        "check-3": { "type": "check", "settings": {} }
+      },
+      "settings": {}
+    },
     "storycta": {
       "type": "home-story-cta",
       "settings": {}
@@ -159,6 +168,7 @@
     "trust",
     "categories",
     "products",
+    "proof",
     "storycta",
     "tradein",
     "reviews",

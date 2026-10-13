@@ -689,6 +689,17 @@ a.stProofTitle:hover{color:var(--coral)}
 .stHomeCta .sub{max-width:600px;margin:0 auto;font-size:16.5px;line-height:1.7}
 .stHomeCtaBtn{margin-top:28px;background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 12px 26px -14px rgba(31,48,73,.55)}
 .stHomeCtaBtn:hover{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 16px 32px -14px rgba(249,133,139,.6)}
+
+/* Homepage: bewijsfoto's (echte foto + batterij-screenshot) */
+.proof{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:center}
+.proofMedia{position:relative;aspect-ratio:4/5;max-width:440px}
+.proofImg--device{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:28px;box-shadow:0 34px 64px -34px rgba(31,48,73,.5);background:var(--soft)}
+.proofImg--battery{position:absolute;right:-22px;bottom:-22px;width:44%;aspect-ratio:9/16;object-fit:cover;border-radius:18px;border:4px solid #fff;box-shadow:0 24px 48px -24px rgba(31,48,73,.5);background:var(--soft)}
+.proofImg--placeholder{background:linear-gradient(150deg,var(--navy),#2c4262 70%)}
+.proofChecks{display:flex;flex-direction:column;gap:13px}
+.proofCheck{display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:600;color:var(--navy)}
+.proofCheckMark{width:26px;height:26px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;flex:none}
+.proofCheckMark svg{width:14px;height:14px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
 
 @media(max-width:900px){
@@ -699,6 +710,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offs
   .stPerson{grid-template-columns:1fr;gap:24px;text-align:left}
   .stPersonMedia{justify-self:center}
   .stTrustCard{grid-template-columns:1fr}
+  .proof{grid-template-columns:1fr;gap:48px}
+  .proofMedia{max-width:360px;margin:0 auto}
 }
 @media(min-width:901px){
   .stTimeline{grid-template-columns:repeat(var(--st-cols,5),minmax(0,1fr));gap:18px}
