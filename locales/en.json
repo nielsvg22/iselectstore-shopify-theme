@@ -557,6 +557,13 @@
     "text": "A look behind the scenes: how we select, inspect and transparently present Apple products.",
     "button": "Read our story →"
   },
+  "fresh_stock": {
+    "eyebrow": "Just arrived",
+    "heading": "Fresh in stock",
+    "live": "Live stock",
+    "unique": "Unique item",
+    "button": "View all stock →"
+  },
   "home_proof": {
     "eyebrow": "Transparency first",
     "heading": "Always 100% original Apple parts",

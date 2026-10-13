@@ -68,6 +68,12 @@
       "block_order": ["usp-1", "usp-2", "usp-3", "usp-4", "usp-5", "usp-6"],
       "settings": {}
     },
+    "freshstock": {
+      "type": "fresh-stock",
+      "settings": {
+        "collection": "alle-voorraad"
+      }
+    },
     "categories": {
       "type": "featured-categories",
       "blocks": {
@@ -166,6 +172,7 @@
   "order": [
     "hero",
     "trust",
+    "freshstock",
     "categories",
     "products",
     "proof",

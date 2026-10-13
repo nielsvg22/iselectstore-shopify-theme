@@ -1,0 +1,64 @@
+{% comment %}
+  "Vers in voorraad": compacte lijst van de laatst toegevoegde toestellen op
+  een donkere achtergrond, met een live-indicator — geeft meteen het gevoel
+  dat er voortdurend nieuwe, unieke exemplaren bijkomen.
+{% endcomment %}
+{% assign eyebrow_default = 'fresh_stock.eyebrow' | t %}
+{% assign heading_default = 'fresh_stock.heading' | t %}
+{% assign live_default = 'fresh_stock.live' | t %}
+{% assign unique_default = 'fresh_stock.unique' | t %}
+{% assign button_default = 'fresh_stock.button' | t %}
+
+{% assign stock_collection = section.settings.collection %}
+{% assign stock_count = section.settings.count | default: 3 %}
+
+{% if stock_collection %}
+  {% assign products = stock_collection.products | sort: 'created_at' | reverse %}
+
+  <section class="freshStock reveal"><div class="wrap">
+    <div class="freshStockHead">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <span class="freshStockLive"><span class="freshStockDot"></span>{{ section.settings.live_label | default: live_default }}</span>
+    </div>
+    <h2>{{ section.settings.heading | default: heading_default }}</h2>
+
+    <div class="freshStockList">
+      {% assign shown = 0 %}
+      {% for product in products %}
+        {% if shown >= stock_count %}{% break %}{% endif %}
+        <a class="freshStockRow" href="{{ product.url }}">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 140 }}" width="70" height="70" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
+          {% endif %}
+          <div class="freshStockInfo">
+            <h3>{{ product.title }}</h3>
+            <div class="freshStockMeta">
+              <b>{{ product.price | money }}</b>
+              <span class="freshStockTag">{{ section.settings.unique_label | default: unique_default }}</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        {% assign shown = shown | plus: 1 %}
+      {% endfor %}
+    </div>
+
+    <a class="btn primary freshStockBtn" href="{{ stock_collection.url }}">{{ section.settings.button_text | default: button_default }}</a>
+  </div></section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Vers in voorraad",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collectie" },
+    { "type": "range", "id": "count", "label": "Aantal toestellen", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "eyebrow", "label": "Kicker-tekst" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "text", "id": "live_label", "label": "Live-label" },
+    { "type": "text", "id": "unique_label", "label": "Label per toestel" },
+    { "type": "text", "id": "button_text", "label": "Knoptekst" }
+  ],
+  "presets": [{ "name": "Vers in voorraad" }]
+}
+{% endschema %}

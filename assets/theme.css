@@ -143,6 +143,28 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .trade .lead{color:rgba(255,255,255,.72)}
 .trade img{width:100%;height:400px;object-fit:cover}
 
+/* Homepage: "Vers in voorraad" */
+.freshStock{background:linear-gradient(145deg,var(--navy) 0%,#13213a 60%,#0d1826 100%);border-radius:32px;padding:clamp(32px,5vw,52px);position:relative;overflow:hidden}
+.freshStock::before{content:'';position:absolute;inset:0;background:radial-gradient(480px 260px at 85% -10%,rgba(249,133,139,.18),transparent 70%)}
+.freshStock .wrap{max-width:none;padding:0;position:relative}
+.freshStockHead{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.freshStock .eyebrow{color:var(--coral);margin:0}
+.freshStock h2{color:#fff;margin:4px 0 26px;font-size:clamp(26px,3.6vw,38px)}
+.freshStockLive{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.75);font-size:13px;font-weight:600}
+.freshStockDot{width:9px;height:9px;border-radius:50%;background:#34d16e;flex:none;animation:pulse 1.6s infinite;box-shadow:0 0 0 4px rgba(52,209,110,.18)}
+.freshStockList{display:flex;flex-direction:column;gap:12px}
+.freshStockRow{display:flex;align-items:center;gap:16px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(255,255,255,.05);transition:background .2s,border-color .2s,transform .2s}
+.freshStockRow:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22);transform:translateY(-1px)}
+.freshStockRow img{width:70px;height:70px;border-radius:14px;object-fit:cover;flex:none;background:rgba(255,255,255,.08)}
+.freshStockInfo{flex:1;min-width:0}
+.freshStockInfo h3{margin:0 0 6px;font-size:16px;font-weight:600;color:#fff;letter-spacing:-.01em}
+.freshStockMeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.freshStockMeta b{color:#fff;font-size:16px;font-weight:700}
+.freshStockTag{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.7);background:rgba(255,255,255,.1);padding:5px 11px;border-radius:999px}
+.freshStockRow svg{width:18px;height:18px;color:rgba(255,255,255,.6);flex:none;transition:transform .2s}
+.freshStockRow:hover svg{transform:translateX(3px);color:#fff}
+.freshStockBtn{display:flex;width:100%;justify-content:center;margin-top:24px}
+
 .reviewsSlider{position:relative;max-width:640px;margin:0 auto;padding:0 64px}
 .reviewsViewport{overflow:hidden;border-radius:20px}
 .reviewsTrack{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}

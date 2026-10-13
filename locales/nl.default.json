@@ -557,6 +557,13 @@
     "text": "Een kijkje achter de schermen: hoe wij Apple-producten selecteren, controleren en transparant presenteren.",
     "button": "Lees ons verhaal →"
   },
+  "fresh_stock": {
+    "eyebrow": "Net binnengekomen",
+    "heading": "Vers in voorraad",
+    "live": "Live voorraad",
+    "unique": "Uniek exemplaar",
+    "button": "Bekijk hele voorraad →"
+  },
   "home_proof": {
     "eyebrow": "Transparantie voorop",
     "heading": "Altijd 100% originele Apple-onderdelen",
