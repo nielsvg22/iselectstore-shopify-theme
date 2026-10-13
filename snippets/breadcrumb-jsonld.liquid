@@ -1,0 +1,32 @@
+{% comment %}
+  GEO/SEO: BreadcrumbList structured data, zodat zoekmachines en AI-
+  antwoordmachines de plek van een pagina in de sitestructuur begrijpen.
+  Params: name_1/url_1 .. name_4/url_4 (ongebruikte niveaus leeg laten).
+{% endcomment %}
+{%- assign bc_count = 0 -%}
+{%- capture bc_items -%}
+  {%- if name_1 != blank and url_1 != blank -%}
+    {%- assign bc_count = bc_count | plus: 1 -%}
+    {"@type":"ListItem","position":{{ bc_count }},"name":{{ name_1 | strip_html | json }},"item":{{ shop.url | append: url_1 | json }}}
+  {%- endif -%}
+  {%- if name_2 != blank and url_2 != blank -%}
+    {%- unless bc_count == 0 -%},{%- endunless -%}
+    {%- assign bc_count = bc_count | plus: 1 -%}
+    {"@type":"ListItem","position":{{ bc_count }},"name":{{ name_2 | strip_html | json }},"item":{{ shop.url | append: url_2 | json }}}
+  {%- endif -%}
+  {%- if name_3 != blank and url_3 != blank -%}
+    {%- unless bc_count == 0 -%},{%- endunless -%}
+    {%- assign bc_count = bc_count | plus: 1 -%}
+    {"@type":"ListItem","position":{{ bc_count }},"name":{{ name_3 | strip_html | json }},"item":{{ shop.url | append: url_3 | json }}}
+  {%- endif -%}
+  {%- if name_4 != blank and url_4 != blank -%}
+    {%- unless bc_count == 0 -%},{%- endunless -%}
+    {%- assign bc_count = bc_count | plus: 1 -%}
+    {"@type":"ListItem","position":{{ bc_count }},"name":{{ name_4 | strip_html | json }},"item":{{ shop.url | append: url_4 | json }}}
+  {%- endif -%}
+{%- endcapture -%}
+{%- if bc_count > 0 -%}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{{ bc_items }}] }
+</script>
+{%- endif -%}
