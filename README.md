@@ -57,14 +57,14 @@ Maak deze pagina's aan onder **Online winkel → Pagina's**, met exact deze **ha
 - `faq` → gebruik template **"page.faq"**
 - `contact` → gebruik template **"page.contact"**
 - `originele-iphone` → gebruik template **"page.originele-iphone"**
-- `ons-verhaal` → gebruik template **"page.ons-verhaal"**
+- `over-ons` → gebruik template **"page.ons-verhaal"**
 
 (Template kiezen kan rechts in de pagina-editor onder "Thema-template".)
 
 ### Pagina "Ons verhaal"
 
-1. **Online winkel → Pagina's → Toevoegen**: titel `Ons verhaal`, handle
-   `ons-verhaal`, template **page.ons-verhaal**. Publiceren.
+1. **Online winkel → Pagina's → Toevoegen**: titel `Over ons`, handle
+   `over-ons`, template **page.ons-verhaal**. Publiceren.
 2. De secties (`story-hero` … `story-cta`) staan allemaal al in het template
    met Nederlandse standaardteksten. Teksten zijn aan te passen in de
    thema-editor; laat je een veld leeg, dan valt het terug op de

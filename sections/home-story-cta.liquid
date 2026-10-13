@@ -4,7 +4,7 @@
 {% assign button_default = 'home_story_cta.button' | t %}
 
 {% assign story_url = '' %}
-{% if pages['ons-verhaal'] %}{% assign story_url = pages['ons-verhaal'].url %}{% endif %}
+{% if pages['over-ons'] %}{% assign story_url = pages['over-ons'].url %}{% endif %}
 {% assign button_url = section.settings.button_link | default: story_url %}
 
 <section class="stSection stHomeCtaSection"><div class="wrap">
