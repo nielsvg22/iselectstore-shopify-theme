@@ -15,8 +15,7 @@ button{font:inherit}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
-.mark{flex:none;display:block}
-.mark path{fill:var(--coral)}
+.mark{flex:none;display:block;object-fit:contain}
 
 .top{background:var(--navy);color:#fdf5f4;font-size:12px;overflow:hidden;letter-spacing:.01em;position:relative}
 .topin{max-width:var(--max);margin:auto;padding:10px 18px;display:flex;gap:34px;justify-content:center;font-weight:500;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
@@ -29,6 +28,8 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .nav{max-width:var(--max);margin:auto;height:var(--header-h);padding:0 22px;display:flex;align-items:center;gap:30px}
 .logo{display:flex;align-items:center;gap:9px;color:var(--navy);flex:none;font-weight:800;font-size:19px;letter-spacing:-.01em}
 .logo .mark{width:20px;height:20px}
+.logo-strong{font-weight:800}
+.logo-light{font-weight:500}
 .links{display:flex;gap:34px;justify-content:center;flex:1;font-size:13px;font-weight:500;color:var(--navy)}
 .links a{opacity:.85;transition:opacity .2s}.links a:hover{opacity:1}
 .icons{display:flex;gap:20px;align-items:center;color:var(--navy)}
@@ -548,7 +549,6 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .stOrbitDot.sel{width:18px;height:18px;background:var(--coral);box-shadow:0 0 0 7px rgba(249,133,139,.22)}
 .stHeroCore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:27%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 28%,#fff,#eef0f3);display:grid;place-items:center;box-shadow:0 26px 54px -20px rgba(0,0,0,.55)}
 .stHeroCore .stMark{width:50%;height:50%}
-.stMark path{fill:var(--navy)}
 
 .stSoft{background:var(--ivory);border-block:1px solid var(--line)}
 .stRich{font-size:16px;line-height:1.75;color:var(--muted)}
@@ -569,7 +569,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .stG.g1{width:76%;height:76%}
 .stG.g2{width:54%;height:54%;border-style:dashed;border-color:rgba(31,48,73,.22)}
 .stG.g3{width:31%;height:31%;border-color:rgba(249,133,139,.6)}
-.stGMark{position:relative;width:15%;height:15%;fill:var(--coral)}
+.stGMark{position:relative;width:15%;height:15%}
 
 .stValues{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
 .stValueCard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 24px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
@@ -615,8 +615,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .stPersonMedia img{width:clamp(170px,24vw,250px);aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:0 30px 60px -30px rgba(31,48,73,.55)}
 .stPersonPlaceholder{display:grid;place-items:center;width:clamp(170px,24vw,250px);aspect-ratio:1;border-radius:50%;background:linear-gradient(150deg,var(--navy),#2c4262 70%);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(31,48,73,.55)}
 .stPersonPlaceholder::before{content:'';position:absolute;inset:0;background:radial-gradient(180px 140px at 78% 18%,rgba(249,133,139,.4),transparent 70%)}
-.stPersonPlaceholder .stMark{width:34%;height:34%;position:relative;fill:var(--coral)}
-.stPersonPlaceholder .stMark path{fill:var(--coral)}
+.stPersonPlaceholder .stMark{width:34%;height:34%;position:relative}
 .stPersonCopy h2{margin-bottom:6px}
 .stQuote{position:relative;margin:16px 0 0;padding:0;border:0;font-size:clamp(17px,2.2vw,22px);line-height:1.6;font-weight:500;letter-spacing:-.015em;color:var(--navy)}
 .stQuoteMark{display:block;font-size:54px;line-height:.55;font-weight:700;color:var(--coral);margin-bottom:10px}

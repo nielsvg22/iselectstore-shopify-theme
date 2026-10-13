@@ -1,0 +1,13 @@
+{% comment %}
+  Renders the iSelectStore brand mark (coral asterisk). Usage:
+  {% render 'icon-mark', size: 20 %}
+  {% render 'icon-mark', class: 'stMark' %} (size controlled by that CSS class instead)
+{% endcomment %}
+{% assign mark_class = class | default: 'mark' %}
+<img
+  class="{{ mark_class }}"
+  src="{{ 'icon-mark.png' | asset_url }}"
+  {% if size %}width="{{ size }}" height="{{ size }}" style="width:{{ size }}px;height:{{ size }}px"{% endif %}
+  alt=""
+  loading="lazy"
+>

@@ -6,7 +6,7 @@
 <section class="stSection stCtaSection"><div class="wrap">
   <div class="stCtaCard reveal">
     <span class="stCtaMark" aria-hidden="true">
-      <svg class="mark" viewBox="0 0 24 24"><path d="M12 0c.9 3.2 2 5.6 3.4 7.1C16.9 8.6 19.2 9.7 22.4 10.6c-3.2.9-5.5 2-7 3.5C13.9 15.6 12.8 18 12 21.1c-.8-3.1-1.9-5.5-3.4-7C7.1 12.6 4.8 11.5 1.6 10.6c3.2-.9 5.5-2 7-3.5C10.1 5.6 11.2 3.2 12 0z"/></svg>
+      {% render 'icon-mark', size: 24 %}
     </span>
     <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
     <h2>{{ section.settings.heading | default: heading_default }}</h2>

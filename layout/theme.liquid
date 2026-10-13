@@ -20,7 +20,7 @@
     --soft: {{ settings.color_ivory | default: "#f7f7f7" }};
   }
 </style>
-{% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% endif %}
+{% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% else %}<link rel="icon" href="{{ 'icon-mark.png' | asset_url }}" type="image/png">{% endif %}
 {{ content_for_header }}
 </head>
 <body>
