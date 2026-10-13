@@ -39,6 +39,14 @@
   </div>
 </div></section>
 
+{% assign bc_home = 'product_page.breadcrumb_home' | t %}
+{% assign bc_stock = 'product_page.breadcrumb_stock' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: bc_stock, url_2: routes.all_products_collection_url,
+  name_3: product.title, url_3: product.url
+%}
+
 {% comment %}
   "Dit toestel" = kenmerken van dit exacte exemplaar (opslag, batterij,
   kleur, SIM/eSIM, conditie, garantie, laadcycli …).
@@ -283,7 +291,7 @@
   <button type="button" class="lightboxArrow prev" id="lightboxPrev" aria-label="{{ 'reviews_slider.prev_aria' | t }}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
   </button>
-  <img id="lightboxImg" alt="">
+  <img id="lightboxImg" alt="{{ product.title | escape }}">
   <button type="button" class="lightboxArrow next" id="lightboxNext" aria-label="{{ 'reviews_slider.next_aria' | t }}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
   </button>

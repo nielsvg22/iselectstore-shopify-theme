@@ -5,6 +5,12 @@
   <p>{% if collection.description != blank %}{{ collection.description }}{% else %}{{ 'collection.default_description' | t }}{% endif %}</p>
 </div></section>
 
+{% assign bc_home = 'collection.breadcrumb_home' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: collection.title, url_2: collection.url
+%}
+
 {% paginate collection.products by 24 %}
 <section style="padding-top:36px"><div class="wrap">
   <div class="shopLayout">
@@ -84,6 +90,24 @@
             {% render 'product-card', product: product, index: forloop.index0 %}
           {% endfor %}
         </div>
+
+        {% comment %}
+          GEO/SEO: ItemList-schema voor deze productlijst, zodat AI-
+          antwoordmachines de hele collectie in één keer kunnen oppikken
+          i.p.v. alleen losse productpagina's.
+        {% endcomment %}
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            {% for product in sorted_products limit: 24 %}
+              {% unless forloop.first %},{% endunless %}
+              { "@type": "ListItem", "position": {{ forloop.index }}, "url": {{ shop.url | append: product.url | json }} }
+            {% endfor %}
+          ]
+        }
+        </script>
       {% endif %}
 
       {% if paginate.pages > 1 %}

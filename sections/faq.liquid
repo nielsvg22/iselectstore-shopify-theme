@@ -5,6 +5,13 @@
   {% if pages.contact %}<p>{{ 'faq.help_before' | t }} <a href="{{ pages.contact.url }}" style="color:#fff;text-decoration:underline">{{ 'faq.help_link' | t }}</a> {{ 'faq.help_after' | t }}</p>{% endif %}
 </div></section>
 
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% assign bc_self = 'faq.heading' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: bc_self, url_2: request.path
+%}
+
 <section><div class="wrap reveal" style="max-width:820px">
   <div class="accordion" style="border-top:1px solid var(--line)">
     {% for block in section.blocks %}
