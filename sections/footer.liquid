@@ -61,6 +61,19 @@
     {% if section.settings.btw %}<span>{{ 'footer.badges.btw' | t }} {{ section.settings.btw }}</span>{% endif %}
   </div>
 
+  {% if shop.enabled_payment_types.size > 0 %}
+    {% comment %}
+      Gebruikt Shopify's eigen payment_type_svg_tag i.p.v. losse logo-afbeeldingen,
+      zodat deze rij altijd exact overeenkomt met wat er daadwerkelijk aanstaat bij
+      Instellingen → Betalingen — nooit een methode tonen die niet geaccepteerd wordt.
+    {% endcomment %}
+    <div class="paymentIcons">
+      {% for type in shop.enabled_payment_types %}
+        {{ type | payment_type_svg_tag: class: 'paymentIcon' }}
+      {% endfor %}
+    </div>
+  {% endif %}
+
   <div class="finePrint">Copyright © {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
 </div></footer>
 
