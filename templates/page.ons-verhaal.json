@@ -65,7 +65,9 @@
     },
     "video": {
       "type": "story-video",
-      "settings": {}
+      "settings": {
+        "poster": "shopify://shop_images/iselectstore-story-video-poster.jpg"
+      }
     },
     "person": {
       "type": "story-person",
