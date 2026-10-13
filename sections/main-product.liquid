@@ -2,6 +2,34 @@
 {% assign guarantee_page = section.settings.guarantee_page %}
 {% assign condition_page = section.settings.condition_page %}
 
+{% comment %}
+  GEO/SEO: Product + Offer structured data, zodat zoekmachines en AI-
+  antwoordmachines (ChatGPT, Perplexity, Google AI Overviews) prijs,
+  beschikbaarheid en staat van dit toestel betrouwbaar kunnen overnemen.
+  itemCondition staat vast op UsedCondition — dit zijn refurbished
+  toestellen, nooit fabrieksnieuw, ook niet in de beste conditieklasse.
+{% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | json }},
+  "image": {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }},
+  "brand": { "@type": "Brand", "name": "Apple" },
+  {% if current_variant.sku != blank %}"sku": {{ current_variant.sku | json }},{% endif %}
+  "offers": {
+    "@type": "Offer",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ current_variant.price | json }},
+    "itemCondition": "https://schema.org/UsedCondition",
+    "availability": "https://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": { "@type": "Organization", "name": "iSelectStore" }
+  }
+}
+</script>
+
 <section style="padding-top:32px;padding-bottom:0"><div class="wrap">
   <div class="breadcrumb">
     <a href="{{ routes.root_url }}">{{ 'product_page.breadcrumb_home' | t }}</a><span>/</span>

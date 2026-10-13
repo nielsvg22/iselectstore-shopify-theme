@@ -26,6 +26,36 @@
   </div>
 </div></section>
 
+{% assign faq_count = 0 %}
+{% capture faq_jsonld_items %}
+{% for block in section.blocks %}
+  {% assign question_key = 'faq.items.' | append: forloop.index | append: '.question' %}
+  {% assign answer_key = 'faq.items.' | append: forloop.index | append: '.answer' %}
+  {% assign question_default = question_key | t %}
+  {% assign answer_default = answer_key | t %}
+  {% if question_default contains 'translation missing' %}{% assign question_default = '' %}{% endif %}
+  {% if answer_default contains 'translation missing' %}{% assign answer_default = '' %}{% endif %}
+  {% assign faq_q = block.settings.question | default: question_default | strip_html %}
+  {% assign faq_a = block.settings.answer | default: answer_default | strip_html %}
+  {% if faq_q != blank and faq_a != blank %}
+    {% unless faq_count == 0 %},{% endunless %}
+    {"@type":"Question","name":{{ faq_q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ faq_a | json }}}}
+    {% assign faq_count = faq_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+{% endcapture %}
+
+{% comment %}
+  GEO/SEO: FAQPage structured data — zodat AI-antwoordmachines (ChatGPT,
+  Perplexity, Google AI Overviews) deze vragen/antwoorden direct kunnen
+  citeren als antwoord op klantvragen over iSelectStore.
+{% endcomment %}
+{% if faq_count > 0 %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{{ faq_jsonld_items }}] }
+</script>
+{% endif %}
+
 {% schema %}
 {
   "name": "FAQ",
