@@ -16,10 +16,6 @@
 {% assign heading_text = section.settings.heading | default: heading_default %}
 {% assign heading_html = heading_text | replace: 'iSelectStore', '<span class="stHeroBrand">iSelectStore</span>' %}
 
-{% assign usp_original = 'authenticity.usp_original' | t %}
-{% assign usp_battery = 'authenticity.usp_battery' | t %}
-{% assign usp_warranty = 'authenticity.usp_warranty' | t %}
-
 <section class="stHero{% if has_bg_video %} stHero--video{% endif %}" id="story-top">
   {% if has_bg_video %}
     <video
@@ -43,23 +39,6 @@
         <a class="btn primary" href="#story-video">{{ section.settings.cta_video | default: cta_video_default }}</a>
         <a class="btn" href="#story-intro">{{ section.settings.cta_down | default: cta_down_default }}</a>
       </div>
-
-      {% if has_bg_video %}
-        <div class="stHeroUsps">
-          <div class="stHeroUsp">
-            <span class="stHeroUspIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg></span>
-            <span>{{ usp_original }}</span>
-          </div>
-          <div class="stHeroUsp">
-            <span class="stHeroUspIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="18" height="10" rx="2"></rect><line x1="22" y1="10" x2="22" y2="14"></line></svg></span>
-            <span>{{ usp_battery }}</span>
-          </div>
-          <div class="stHeroUsp">
-            <span class="stHeroUspIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V7l-3-4H6L3 7v1"></path><path d="M3 8l9 5 9-5"></path><path d="M3 8v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8"></path><path d="M12 13v9"></path></svg></span>
-            <span>{{ usp_warranty }}</span>
-          </div>
-        </div>
-      {% endif %}
     </div>
 
     {% unless has_bg_video %}
