@@ -14,13 +14,11 @@
       "settings": {
         "show_ribbon": true,
         "ribbon_text": "Nieuw binnen!",
-        "accessory_1": "gid://shopify/product/16597589852551",
-        "accessory_2": "gid://shopify/product/16597589721479",
-        "accessory_3": "gid://shopify/product/16597589754247"
+        "accessory_1": "16597589852551",
+        "accessory_2": "16597589721479",
+        "accessory_3": "16597589754247"
       }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }
