@@ -10,59 +10,66 @@
 {% assign cta_video_default = 'story_page.hero.cta_video' | t %}
 {% assign cta_down_default = 'story_page.hero.cta_down' | t %}
 
-<section class="stHero" id="story-top"><div class="wrap stHeroIn">
-  <div class="stHeroCopy">
-    <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
-    <h1>{{ section.settings.heading | default: heading_default }}</h1>
-    <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
+{% assign has_bg_video = false %}
+{% if section.settings.video_file_url != blank %}{% assign has_bg_video = true %}{% endif %}
 
-    <p class="stSlogan">SELECTED BY US, READY FOR YOU</p>
+<section class="stHero{% if has_bg_video %} stHero--video{% endif %}" id="story-top">
+  {% if has_bg_video %}
+    <video
+      class="stHeroBgVideo"
+      src="{{ section.settings.video_file_url }}"
+      {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1600 }}"{% endif %}
+      autoplay muted loop playsinline
+      aria-hidden="true">
+    </video>
+    <div class="stHeroVideoOverlay" aria-hidden="true"></div>
+  {% endif %}
+  <div class="wrap stHeroIn">
+    <div class="stHeroCopy">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+      <h1>{{ section.settings.heading | default: heading_default }}</h1>
+      <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
 
-    <div class="ctas">
-      <a class="btn primary" href="#story-video">{{ section.settings.cta_video | default: cta_video_default }}</a>
-      <a class="btn" href="#story-intro">{{ section.settings.cta_down | default: cta_down_default }}</a>
-    </div>
-  </div>
+      <p class="stSlogan">SELECTED BY US, READY FOR YOU</p>
 
-  {% if section.settings.video_file_url != blank %}
-    <div class="stHeroArt stHeroArt--img">
-      <video
-        class="stHeroVideo"
-        src="{{ section.settings.video_file_url }}"
-        {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 900 }}"{% endif %}
-        autoplay muted loop playsinline
-        aria-label="{{ section.settings.heading | default: heading_default | escape }}">
-      </video>
-    </div>
-  {% elsif section.settings.image != blank %}
-    <div class="stHeroArt stHeroArt--img">
-      <img
-        src="{{ section.settings.image | image_url: width: 900 }}"
-        srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w"
-        sizes="(max-width: 899px) 78vw, 440px"
-        width="900" height="900"
-        alt="{{ section.settings.image.alt | default: shop.name | escape }}"
-        loading="eager">
-    </div>
-  {% else %}
-    <div class="stHeroArt" aria-hidden="true">
-      <div class="stRings">
-        <span class="stRing r1"></span>
-        <span class="stRing r2"></span>
-        <span class="stRing r3"></span>
-        <span class="stOrbitDot d1"></span>
-        <span class="stOrbitDot d2"></span>
-        <span class="stOrbitDot d3 sel"></span>
-        <span class="stOrbitDot d4"></span>
-        <span class="stOrbitDot d5"></span>
-        <span class="stOrbitDot d6"></span>
-        <span class="stHeroCore">
-          {% render 'icon-mark', class: 'stMark' %}
-        </span>
+      <div class="ctas">
+        <a class="btn primary" href="#story-video">{{ section.settings.cta_video | default: cta_video_default }}</a>
+        <a class="btn" href="#story-intro">{{ section.settings.cta_down | default: cta_down_default }}</a>
       </div>
     </div>
-  {% endif %}
-</div></section>
+
+    {% unless has_bg_video %}
+      {% if section.settings.image != blank %}
+        <div class="stHeroArt stHeroArt--img">
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w"
+            sizes="(max-width: 899px) 78vw, 440px"
+            width="900" height="900"
+            alt="{{ section.settings.image.alt | default: shop.name | escape }}"
+            loading="eager">
+        </div>
+      {% else %}
+        <div class="stHeroArt" aria-hidden="true">
+          <div class="stRings">
+            <span class="stRing r1"></span>
+            <span class="stRing r2"></span>
+            <span class="stRing r3"></span>
+            <span class="stOrbitDot d1"></span>
+            <span class="stOrbitDot d2"></span>
+            <span class="stOrbitDot d3 sel"></span>
+            <span class="stOrbitDot d4"></span>
+            <span class="stOrbitDot d5"></span>
+            <span class="stOrbitDot d6"></span>
+            <span class="stHeroCore">
+              {% render 'icon-mark', class: 'stMark' %}
+            </span>
+          </div>
+        </div>
+      {% endif %}
+    {% endunless %}
+  </div>
+</section>
 
 {% schema %}
 {
