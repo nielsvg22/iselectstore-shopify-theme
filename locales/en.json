@@ -354,18 +354,20 @@
     }
   },
   "authenticity_compare": {
-    "eyebrow": "Fair comparison",
-    "heading_default": "Original vs Aftermarket",
-    "sub_default": "The difference shows, you'll feel it, and it affects resale value.",
-    "original_label": "Original parts",
-    "aftermarket_label": "Aftermarket parts",
+    "heading_default": "Choose your parts",
+    "sub_default": "Original Apple parts or aftermarket parts.",
+    "info_label": "What's the difference?",
+    "legend_good_title": "Original parts",
+    "legend_good_sub": "The same quality as Apple itself.",
+    "legend_bad_title": "Aftermarket parts",
+    "legend_bad_sub": "Alternative, lower quality.",
     "rows": {
-      "1": { "label": "Quality", "good": "Apple quality and certification", "bad": "Inconsistent quality" },
-      "2": { "label": "Display", "good": "Original Retina display", "bad": "Lower image quality" },
-      "3": { "label": "Battery", "good": "Original battery with exact condition", "bad": "Faster capacity loss" },
-      "4": { "label": "iOS warnings", "good": "No warnings", "bad": "Frequent system warnings" },
-      "5": { "label": "Reliability", "good": "Maximum reliability", "bad": "Higher risk of issues" },
-      "6": { "label": "Resale value", "good": "Higher resale value", "bad": "Lower resale value" }
+      "1": { "label": "Quality", "description": "The same quality as Apple itself.", "good": "Apple quality and certification", "bad": "Inconsistent quality" },
+      "2": { "label": "Display", "description": "Image quality and brightness.", "good": "Original Retina display", "bad": "Lower image quality" },
+      "3": { "label": "Battery", "description": "Capacity and lifespan.", "good": "Original battery with exact condition", "bad": "Faster capacity loss" },
+      "4": { "label": "iOS warnings", "description": "No error messages in iOS.", "good": "No warnings", "bad": "Frequent system warnings" },
+      "5": { "label": "Reliability", "description": "Durable and stable in use.", "good": "Maximum reliability", "bad": "Higher risk of issues" },
+      "6": { "label": "Resale value", "description": "Higher value on trade-in or resale.", "good": "Higher resale value", "bad": "Lower resale value" }
     }
   },
   "password_page": {

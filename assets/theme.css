@@ -722,21 +722,42 @@ a.stProofTitle:hover{color:var(--coral)}
 .stCtaBtn{margin-top:26px;background:var(--coral);border-color:var(--coral);color:#fff}
 .stCtaBtn:hover{background:var(--coral-ink);border-color:var(--coral-ink)}
 
-.authCompare{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -44px rgba(31,48,73,.4)}
-.authCompareTable{width:100%;border-collapse:collapse;font-size:14.5px}
-.authCompareTable thead th{padding:18px 20px;text-align:left;font-size:13px;font-weight:700;color:var(--navy);background:var(--ivory)}
-.authCompareTable thead th.authCompareCol--good{background:var(--coral);color:#fff}
-.authCompareRowLabel{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--navy);white-space:nowrap}
-.authCompareTable td.authCompareRowLabel{padding:14px 20px;border-top:1px solid var(--line)}
-.authCompareIcon{display:grid;place-items:center;width:26px;height:26px;color:var(--muted);flex:none}
-.authCompareIcon svg{width:16px;height:16px}
-.authCompareCol{padding:14px 20px;border-top:1px solid var(--line);border-left:1px solid var(--line);display:flex;align-items:center;gap:9px;color:var(--muted)}
-.authCompareCol--good{background:rgba(249,133,139,.07);color:var(--navy);font-weight:500}
-.authCheckIcon{width:17px;height:17px;color:var(--coral-ink);flex:none}
-.authCrossIcon{width:15px;height:15px;color:#b7bec8;flex:none}
-@media (max-width:720px){
-  .authCompareTable{font-size:13px}
-  .authCompareTable thead th,.authCompareTable td.authCompareRowLabel,.authCompareCol{padding:11px 12px}
+.authCompareHead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.authCompareHead h2{margin:0}
+.authInfoPill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:980px;background:var(--lightblue);color:var(--navy);font-size:13.5px;font-weight:600;white-space:nowrap}
+.authInfoPill svg{width:16px;height:16px;flex:none}
+.authInfoPill svg:first-child{color:var(--navy)}
+.authCompareSub{margin:10px 0 28px}
+
+.authLegend{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.authLegendTile{display:flex;align-items:center;gap:14px;padding:18px;border-radius:20px}
+.authLegendTile--good{background:var(--coral);color:#fff}
+.authLegendTile--bad{background:var(--ivory);color:var(--navy)}
+.authLegendIcon{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;flex:none;background:rgba(255,255,255,.22)}
+.authLegendTile--bad .authLegendIcon{background:#fff;color:var(--muted)}
+.authLegendIcon svg{width:20px;height:20px}
+.authLegendTile b{display:block;font-size:14.5px;font-weight:700}
+.authLegendTile span{display:block;font-size:12.5px;opacity:.85;margin-top:1px}
+.authLegendTile--bad span{color:var(--muted);opacity:1}
+
+.authRows{display:flex;flex-direction:column;gap:14px}
+.authRowCard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 40px -32px rgba(31,48,73,.3)}
+.authRowHead{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.authRowIcon{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--ivory);color:var(--navy);flex:none}
+.authRowIcon svg{width:20px;height:20px}
+.authRowHead b{display:block;font-size:15.5px;font-weight:700;color:var(--navy)}
+.authRowHead span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+.authRowOption{display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:14px;font-size:13.5px;color:var(--muted);margin-top:8px}
+.authRowOption--good{background:rgba(249,133,139,.1);color:var(--navy);font-weight:600}
+.authRowRadio{width:18px;height:18px;border-radius:50%;border:2px solid #d7dbe1;flex:none;position:relative}
+.authRowOption--good .authRowRadio{border-color:var(--coral);background:var(--coral)}
+.authRowOption--good .authRowRadio::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#fff}
+.authCheckIcon{width:15px;height:15px;color:var(--coral-ink);flex:none}
+.authRowOption--good .authCheckIcon{color:var(--coral-ink)}
+.authCrossIcon{width:13px;height:13px;color:#aab1bb;flex:none}
+@media (max-width:600px){
+  .authLegend{grid-template-columns:1fr}
+  .authCompareHead{flex-direction:column;align-items:flex-start}
 }
 
 .stHomeCta{position:relative;text-align:center;padding:clamp(40px,7vw,76px) clamp(22px,5vw,56px);border-radius:32px;border:1px solid var(--line);background:linear-gradient(155deg,#fff 0%,var(--ivory) 52%,#fbf1f1 100%);overflow:hidden}

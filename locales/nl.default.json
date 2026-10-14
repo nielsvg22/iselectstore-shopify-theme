@@ -354,18 +354,20 @@
     }
   },
   "authenticity_compare": {
-    "eyebrow": "Eerlijke vergelijking",
-    "heading_default": "Origineel vs Aftermarket",
-    "sub_default": "Het verschil zie je, merk je en het heeft invloed op de waarde.",
-    "original_label": "Originele onderdelen",
-    "aftermarket_label": "Aftermarket onderdelen",
+    "heading_default": "Onderdelen kiezen",
+    "sub_default": "Originele Apple onderdelen of aftermarket onderdelen.",
+    "info_label": "Wat is het verschil?",
+    "legend_good_title": "Originele onderdelen",
+    "legend_good_sub": "Dezelfde kwaliteit als Apple zelf.",
+    "legend_bad_title": "Aftermarket onderdelen",
+    "legend_bad_sub": "Alternatief, lagere kwaliteit.",
     "rows": {
-      "1": { "label": "Kwaliteit", "good": "Apple kwaliteit en certificering", "bad": "Wisselende kwaliteit" },
-      "2": { "label": "Scherm", "good": "Origineel Retina-display", "bad": "Lagere beeldkwaliteit" },
-      "3": { "label": "Batterij", "good": "Originele batterij met exacte conditie", "bad": "Sneller capaciteitsverlies" },
-      "4": { "label": "iOS meldingen", "good": "Geen waarschuwingen", "bad": "Vaak systeemmeldingen" },
-      "5": { "label": "Betrouwbaarheid", "good": "Maximale betrouwbaarheid", "bad": "Groter risico op storingen" },
-      "6": { "label": "Restwaarde", "good": "Hogere restwaarde", "bad": "Lagere restwaarde" }
+      "1": { "label": "Kwaliteit", "description": "Dezelfde kwaliteit als Apple zelf.", "good": "Apple kwaliteit en certificering", "bad": "Wisselende kwaliteit" },
+      "2": { "label": "Scherm", "description": "Beeldkwaliteit en helderheid.", "good": "Origineel Retina-display", "bad": "Lagere beeldkwaliteit" },
+      "3": { "label": "Batterij", "description": "Capaciteit en levensduur.", "good": "Originele batterij met exacte conditie", "bad": "Sneller capaciteitsverlies" },
+      "4": { "label": "iOS meldingen", "description": "Geen foutmeldingen in iOS.", "good": "Geen waarschuwingen", "bad": "Vaak systeemmeldingen" },
+      "5": { "label": "Betrouwbaarheid", "description": "Duurzaam en stabiel in gebruik.", "good": "Maximale betrouwbaarheid", "bad": "Groter risico op storingen" },
+      "6": { "label": "Restwaarde", "description": "Hogere waarde bij inruil of verkoop.", "good": "Hogere restwaarde", "bad": "Lagere restwaarde" }
     }
   },
   "password_page": {
