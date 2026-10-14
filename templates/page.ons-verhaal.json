@@ -53,25 +53,11 @@
       "block_order": ["value-1", "value-2", "value-3", "value-4"],
       "settings": {}
     },
-    "concept": {
-      "type": "story-concept",
-      "blocks": {
-        "point-1": { "type": "point", "settings": {} },
-        "point-2": { "type": "point", "settings": {} },
-        "point-3": { "type": "point", "settings": {} }
-      },
-      "block_order": ["point-1", "point-2", "point-3"],
-      "settings": {}
-    },
     "video": {
       "type": "story-video",
       "settings": {
         "poster": "shopify://shop_images/iselectstore-story-video-poster.jpg"
       }
-    },
-    "person": {
-      "type": "story-person",
-      "settings": {}
     },
     "timeline": {
       "type": "story-timeline",
@@ -123,13 +109,11 @@
   },
   "order": [
     "hero",
-    "intro",
     "values",
-    "concept",
-    "video",
-    "person",
-    "timeline",
+    "intro",
     "trust",
+    "video",
+    "timeline",
     "cta"
   ]
 }
