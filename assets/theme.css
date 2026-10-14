@@ -578,12 +578,13 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .stSlogan{position:relative;display:inline-block;margin:30px 0 0;padding:13px 24px 13px 46px;border-radius:980px;border:1px solid rgba(31,48,73,.14);background:rgba(255,255,255,.65);color:var(--navy);font-size:clamp(11px,2.3vw,13.5px);font-weight:700;letter-spacing:.18em;line-height:1.5}
 .stSlogan--top{margin:0 0 24px}
 @media (max-width:640px){
-  .stHero--video{min-height:94vh}
-  .stHero--video .stHeroIn{min-height:84vh;padding-top:28px;padding-bottom:40px}
+  .stHero--video{min-height:72vh}
+  .stHero--video .stHeroIn{min-height:62vh;padding-top:28px;padding-bottom:40px}
   .stHero--video .stHeroCopy{display:flex;flex-direction:column;height:100%}
   .stHero--video .stSlogan--top{margin-bottom:0}
   .stHero--video .stHeroMid{margin-top:auto;margin-bottom:auto;padding:32px 0}
   .stHero--video .ctas{margin-top:auto}
+  .stHeroBgVideo{object-position:center}
 }
 .stSlogan::before{content:'';position:absolute;left:22px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(249,133,139,.24)}
 .stHero .ctas{margin-top:30px}
