@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,11 +14,13 @@
       "settings": {
         "show_ribbon": true,
         "ribbon_text": "Nieuw binnen!",
-        "accessory_1": "gid://shopify/Product/16597589852551",
-        "accessory_2": "gid://shopify/Product/16597589721479",
-        "accessory_3": "gid://shopify/Product/16597589754247"
+        "accessory_1": "gid://shopify/product/16597589852551",
+        "accessory_2": "gid://shopify/product/16597589721479",
+        "accessory_3": "gid://shopify/product/16597589754247"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
