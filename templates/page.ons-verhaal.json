@@ -56,7 +56,8 @@
     "video": {
       "type": "story-video",
       "settings": {
-        "poster": "shopify://shop_images/iselectstore-story-video-poster.jpg"
+        "poster": "shopify://shop_images/iselectstore-story-video-poster.jpg",
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.HD-720p-1.6Mbps-97455412.mp4"
       }
     },
     "timeline": {
@@ -104,7 +105,9 @@
     },
     "cta": {
       "type": "story-cta",
-      "settings": {}
+      "settings": {
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.SD-480p-0.9Mbps-97455412.mp4"
+      }
     }
   },
   "order": [
