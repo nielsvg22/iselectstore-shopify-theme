@@ -12,7 +12,8 @@
     "hero": {
       "type": "story-hero",
       "settings": {
-        "image": "shopify://shop_images/iselectstore-unboxing-coral.jpg"
+        "image": "shopify://shop_images/iselectstore-unboxing-coral.jpg",
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.HD-720p-1.6Mbps-97455412.mp4"
       }
     },
     "intro": {

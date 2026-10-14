@@ -24,7 +24,17 @@
     </div>
   </div>
 
-  {% if section.settings.image != blank %}
+  {% if section.settings.video_file_url != blank %}
+    <div class="stHeroArt stHeroArt--img">
+      <video
+        class="stHeroVideo"
+        src="{{ section.settings.video_file_url }}"
+        {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 900 }}"{% endif %}
+        autoplay muted loop playsinline
+        aria-label="{{ section.settings.heading | default: heading_default | escape }}">
+      </video>
+    </div>
+  {% elsif section.settings.image != blank %}
     <div class="stHeroArt stHeroArt--img">
       <img
         src="{{ section.settings.image | image_url: width: 900 }}"
@@ -63,7 +73,8 @@
     { "type": "textarea", "id": "subtext", "label": "Subtekst" },
     { "type": "text", "id": "cta_video", "label": "Knop: naar video" },
     { "type": "text", "id": "cta_down", "label": "Knop: verder naar beneden" },
-    { "type": "image_picker", "id": "image", "label": "Afbeelding (optioneel — anders grafisch beeldmerk)" }
+    { "type": "image_picker", "id": "image", "label": "Afbeelding (optioneel — anders grafisch beeldmerk)" },
+    { "type": "url", "id": "video_file_url", "label": "Video-bestand URL (optioneel)", "info": "Vervangt de afbeelding, speelt gedempt/herhalend af." }
   ]
 }
 {% endschema %}
