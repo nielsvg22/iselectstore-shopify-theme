@@ -31,9 +31,11 @@
     <div class="stHeroCopy">
       <p class="stSlogan stSlogan--top">SELECTED BY US, READY FOR YOU</p>
 
-      <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
-      <h1>{{ heading_html }}</h1>
-      <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
+      <div class="stHeroMid">
+        <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
+        <h1>{{ heading_html }}</h1>
+        <p class="lead">{{ section.settings.subtext | default: subtext_default }}</p>
+      </div>
 
       <div class="ctas">
         <a class="btn primary" href="#story-video">{{ section.settings.cta_video | default: cta_video_default }}</a>
