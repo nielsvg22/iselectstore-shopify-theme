@@ -325,6 +325,9 @@
   "authenticity": {
     "hero_eyebrow": "Betrouwbaarheid voorop",
     "hero_heading_default": "Gegarandeerd origineel",
+    "usp_original": "Originele Apple producten",
+    "usp_battery": "Exacte batterijconditie",
+    "usp_warranty": "6–12 maanden garantie",
     "eyebrow": "Waarom ons vertrouwen",
     "heading": "Wat maakt onze iPhones origineel?",
     "steps": {
@@ -348,6 +351,21 @@
         "title": "6–12 maanden garantie",
         "text": "Mocht er toch iets zijn, dan staan we persoonlijk voor je klaar — met garantie op elk toestel."
       }
+    }
+  },
+  "authenticity_compare": {
+    "eyebrow": "Eerlijke vergelijking",
+    "heading_default": "Origineel vs Aftermarket",
+    "sub_default": "Het verschil zie je, merk je en het heeft invloed op de waarde.",
+    "original_label": "Originele onderdelen",
+    "aftermarket_label": "Aftermarket onderdelen",
+    "rows": {
+      "1": { "label": "Kwaliteit", "good": "Apple kwaliteit en certificering", "bad": "Wisselende kwaliteit" },
+      "2": { "label": "Scherm", "good": "Origineel Retina-display", "bad": "Lagere beeldkwaliteit" },
+      "3": { "label": "Batterij", "good": "Originele batterij met exacte conditie", "bad": "Sneller capaciteitsverlies" },
+      "4": { "label": "iOS meldingen", "good": "Geen waarschuwingen", "bad": "Vaak systeemmeldingen" },
+      "5": { "label": "Betrouwbaarheid", "good": "Maximale betrouwbaarheid", "bad": "Groter risico op storingen" },
+      "6": { "label": "Restwaarde", "good": "Hogere restwaarde", "bad": "Lagere restwaarde" }
     }
   },
   "password_page": {

@@ -583,6 +583,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .stHero .btn.primary{background:var(--coral);border-color:var(--coral);color:#fff}
 .stHero .btn.primary:hover{background:var(--coral-ink);border-color:var(--coral-ink);box-shadow:0 14px 30px -12px rgba(249,133,139,.65)}
 
+.authUsps{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:32px;font-size:13px;font-weight:600;color:var(--navy)}
+.authUsps span:not(.authUspDivider){display:inline-flex;align-items:center;gap:7px}
+.authUsps .mark{width:16px;height:16px;opacity:.85}
+.authUspDivider{width:1px;height:14px;background:rgba(31,48,73,.18)}
+
 .stHeroArt{position:relative;width:min(100%,430px);aspect-ratio:1;margin-inline:auto}
 .stHeroArt--img{aspect-ratio:auto}
 .stHeroArt--img img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:32px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
@@ -715,6 +720,23 @@ a.stProofTitle:hover{color:var(--coral)}
 .stCtaCard .sub{max-width:560px;margin:0 auto;color:rgba(255,255,255,.78)}
 .stCtaBtn{margin-top:26px;background:var(--coral);border-color:var(--coral);color:#fff}
 .stCtaBtn:hover{background:var(--coral-ink);border-color:var(--coral-ink)}
+
+.authCompare{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -44px rgba(31,48,73,.4)}
+.authCompareTable{width:100%;border-collapse:collapse;font-size:14.5px}
+.authCompareTable thead th{padding:18px 20px;text-align:left;font-size:13px;font-weight:700;color:var(--navy);background:var(--ivory)}
+.authCompareTable thead th.authCompareCol--good{background:var(--coral);color:#fff}
+.authCompareRowLabel{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--navy);white-space:nowrap}
+.authCompareTable td.authCompareRowLabel{padding:14px 20px;border-top:1px solid var(--line)}
+.authCompareIcon{display:grid;place-items:center;width:26px;height:26px;color:var(--muted);flex:none}
+.authCompareIcon svg{width:16px;height:16px}
+.authCompareCol{padding:14px 20px;border-top:1px solid var(--line);border-left:1px solid var(--line);display:flex;align-items:center;gap:9px;color:var(--muted)}
+.authCompareCol--good{background:rgba(249,133,139,.07);color:var(--navy);font-weight:500}
+.authCheckIcon{width:17px;height:17px;color:var(--coral-ink);flex:none}
+.authCrossIcon{width:15px;height:15px;color:#b7bec8;flex:none}
+@media (max-width:720px){
+  .authCompareTable{font-size:13px}
+  .authCompareTable thead th,.authCompareTable td.authCompareRowLabel,.authCompareCol{padding:11px 12px}
+}
 
 .stHomeCta{position:relative;text-align:center;padding:clamp(40px,7vw,76px) clamp(22px,5vw,56px);border-radius:32px;border:1px solid var(--line);background:linear-gradient(155deg,#fff 0%,var(--ivory) 52%,#fbf1f1 100%);overflow:hidden}
 .stHomeCta::after{content:'';position:absolute;left:-80px;top:-100px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(249,133,139,.22),transparent 70%)}

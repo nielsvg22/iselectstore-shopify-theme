@@ -1,9 +1,56 @@
 {% assign hero_heading_default = 'authenticity.hero_heading_default' | t %}
-<section class="shopHero"><div class="wrap">
-  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">{{ 'header.nav.original_iphone' | t }}</span></div>
-  <p class="eyebrow">{{ 'authenticity.hero_eyebrow' | t }}</p>
-  <h1>{{ section.settings.heading | default: hero_heading_default }}</h1>
-  <p>{{ section.settings.subtext }}</p>
+<section class="stHero"><div class="wrap stHeroIn">
+  <div class="stHeroCopy">
+    <p class="eyebrow">{{ 'authenticity.hero_eyebrow' | t }}</p>
+    <h1>{{ section.settings.heading | default: hero_heading_default }}</h1>
+    <p class="lead">{{ section.settings.subtext }}</p>
+
+    <div class="ctas">
+      {% if section.settings.cta_primary_label != blank %}
+        <a class="btn primary" href="{{ section.settings.cta_primary_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_primary_label }}</a>
+      {% endif %}
+      {% if section.settings.cta_secondary_label != blank %}
+        <a class="btn" href="{{ section.settings.cta_secondary_link | default: '#story-cta' }}">{{ section.settings.cta_secondary_label }}</a>
+      {% endif %}
+    </div>
+
+    <div class="authUsps">
+      <span>{% render 'icon-mark', size: 16 %}{{ 'authenticity.usp_original' | t }}</span>
+      <span class="authUspDivider" aria-hidden="true"></span>
+      <span>{% render 'icon-mark', size: 16 %}{{ 'authenticity.usp_battery' | t }}</span>
+      <span class="authUspDivider" aria-hidden="true"></span>
+      <span>{% render 'icon-mark', size: 16 %}{{ 'authenticity.usp_warranty' | t }}</span>
+    </div>
+  </div>
+
+  {% if section.settings.image != blank %}
+    <div class="stHeroArt stHeroArt--img">
+      <img
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w"
+        sizes="(max-width: 899px) 78vw, 440px"
+        width="900" height="900"
+        alt="{{ section.settings.image.alt | default: shop.name | escape }}"
+        loading="eager">
+    </div>
+  {% else %}
+    <div class="stHeroArt" aria-hidden="true">
+      <div class="stRings">
+        <span class="stRing r1"></span>
+        <span class="stRing r2"></span>
+        <span class="stRing r3"></span>
+        <span class="stOrbitDot d1"></span>
+        <span class="stOrbitDot d2"></span>
+        <span class="stOrbitDot d3 sel"></span>
+        <span class="stOrbitDot d4"></span>
+        <span class="stOrbitDot d5"></span>
+        <span class="stOrbitDot d6"></span>
+        <span class="stHeroCore">
+          {% render 'icon-mark', class: 'stMark' %}
+        </span>
+      </div>
+    </div>
+  {% endif %}
 </div></section>
 
 {% assign bc_home = 'general.breadcrumb_home' | t %}
@@ -13,6 +60,7 @@
   name_2: bc_self, url_2: request.path
 %}
 
+{% if section.blocks.size > 0 %}
 <section><div class="wrap reveal">
   <p class="eyebrow">{{ 'authenticity.eyebrow' | t }}</p>
   <h2 style="margin-bottom:18px">{{ 'authenticity.heading' | t }}</h2>
@@ -37,6 +85,7 @@
     {% endfor %}
   </div>
 </div></section>
+{% endif %}
 
 {% schema %}
 {
@@ -56,7 +105,12 @@
       "type": "richtext",
       "id": "intro",
       "label": "Introtekst"
-    }
+    },
+    { "type": "image_picker", "id": "image", "label": "Hero-afbeelding (optioneel — anders grafisch beeldmerk)" },
+    { "type": "text", "id": "cta_primary_label", "label": "Primaire knop-tekst" },
+    { "type": "url", "id": "cta_primary_link", "label": "Primaire knop-link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secundaire knop-tekst" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Secundaire knop-link" }
   ],
   "blocks": [
     {

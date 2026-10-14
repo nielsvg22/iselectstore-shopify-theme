@@ -325,6 +325,9 @@
   "authenticity": {
     "hero_eyebrow": "Reliability first",
     "hero_heading_default": "Guaranteed original",
+    "usp_original": "Original Apple products",
+    "usp_battery": "Exact battery condition",
+    "usp_warranty": "6–12 months warranty",
     "eyebrow": "Why trust us",
     "heading": "What makes our iPhones original?",
     "steps": {
@@ -348,6 +351,21 @@
         "title": "6–12 months warranty",
         "text": "If anything does come up, we're there for you personally — with warranty on every device."
       }
+    }
+  },
+  "authenticity_compare": {
+    "eyebrow": "Fair comparison",
+    "heading_default": "Original vs Aftermarket",
+    "sub_default": "The difference shows, you'll feel it, and it affects resale value.",
+    "original_label": "Original parts",
+    "aftermarket_label": "Aftermarket parts",
+    "rows": {
+      "1": { "label": "Quality", "good": "Apple quality and certification", "bad": "Inconsistent quality" },
+      "2": { "label": "Display", "good": "Original Retina display", "bad": "Lower image quality" },
+      "3": { "label": "Battery", "good": "Original battery with exact condition", "bad": "Faster capacity loss" },
+      "4": { "label": "iOS warnings", "good": "No warnings", "bad": "Frequent system warnings" },
+      "5": { "label": "Reliability", "good": "Maximum reliability", "bad": "Higher risk of issues" },
+      "6": { "label": "Resale value", "good": "Higher resale value", "bad": "Lower resale value" }
     }
   },
   "password_page": {
