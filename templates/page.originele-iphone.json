@@ -17,9 +17,7 @@
         "image": "shopify://shop_images/iselectstore-authentic-lineup.png",
         "cta_primary_label": "Bekijk onze voorraad →",
         "cta_secondary_label": "Lees onze belofte"
-      },
-      "blocks": {},
-      "block_order": []
+      }
     },
     "explain": {
       "type": "story-intro",
@@ -28,17 +26,12 @@
         "heading": "Wat is een iPhone in originele staat?",
         "intro": "<p>Een iPhone in originele staat is voorzien van originele onderdelen van Apple en door Apple gecertificeerde componenten.</p>",
         "body": "<p>Dit betekent dat het scherm, de batterij, camera's en andere onderdelen nog origineel zijn en naar behoren functioneren, precies zoals Apple het heeft ontworpen.</p>",
-        "alignment": "image_left",
-        "image": "shopify://shop_images/iselectstore-authentic-hand.png"
+        "image": "shopify://shop_images/iselectstore-authentic-hand.png",
+        "alignment": "image_left"
       }
     },
     "benefits": {
       "type": "story-values",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Waarom jij origineel wilt",
-        "subtext": "Originele Apple-producten bieden meer dan alleen een goed werkende iPhone."
-      },
       "blocks": {
         "value-1": {
           "type": "value",
@@ -73,20 +66,55 @@
           }
         }
       },
-      "block_order": ["value-1", "value-2", "value-3", "value-4"]
+      "block_order": [
+        "value-1",
+        "value-2",
+        "value-3",
+        "value-4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Waarom jij origineel wilt",
+        "subtext": "Originele Apple-producten bieden meer dan alleen een goed werkende iPhone."
+      }
     },
     "compare": {
       "type": "authenticity-compare",
-      "settings": {},
       "blocks": {
-        "row-1": { "type": "row", "settings": {} },
-        "row-2": { "type": "row", "settings": {} },
-        "row-3": { "type": "row", "settings": {} },
-        "row-4": { "type": "row", "settings": {} },
-        "row-5": { "type": "row", "settings": {} },
-        "row-6": { "type": "row", "settings": {} }
+        "row-1": {
+          "type": "row",
+          "settings": {}
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {}
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {}
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {}
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {}
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {}
+        }
       },
-      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5", "row-6"]
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
+      ],
+      "settings": {}
     },
     "restwaarde": {
       "type": "story-intro",
@@ -95,8 +123,8 @@
         "heading": "Hogere restwaarde",
         "intro": "<p>Een iPhone met originele onderdelen behoudt zijn waarde beter.</p>",
         "body": "<p>Bij inruil of verkoop krijg je meer terug, omdat je de zekerheid hebt van originele staat en een betrouwbare werking.</p>",
-        "alignment": "image_left",
-        "image": "shopify://shop_images/iselectstore-authentic-pink.png"
+        "image": "shopify://shop_images/iselectstore-authentic-pink.png",
+        "alignment": "image_left"
       }
     },
     "cta": {
