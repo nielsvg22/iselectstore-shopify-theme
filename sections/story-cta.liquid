@@ -5,9 +5,13 @@
 
 <section class="stSection stCtaSection" id="story-cta"><div class="wrap">
   <div class="stCtaCard reveal">
-    <span class="stCtaMark" aria-hidden="true">
-      {% render 'icon-mark', size: 24 %}
-    </span>
+    {% if section.settings.video_file_url != blank %}
+      <video class="stCtaVideo" src="{{ section.settings.video_file_url }}" autoplay muted loop playsinline aria-hidden="true"></video>
+    {% else %}
+      <span class="stCtaMark" aria-hidden="true">
+        {% render 'icon-mark', size: 24 %}
+      </span>
+    {% endif %}
     <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
     <h2>{{ section.settings.heading | default: heading_default }}</h2>
     <p class="sub">{{ section.settings.text | default: text_default }}</p>
@@ -28,7 +32,8 @@
     { "type": "textarea", "id": "text", "label": "Tekst" },
     { "type": "text", "id": "button_label", "label": "Knop-tekst" },
     { "type": "url", "id": "button_link", "label": "Knop-link" },
-    { "type": "checkbox", "id": "show_button", "label": "Toon knop", "default": true }
+    { "type": "checkbox", "id": "show_button", "label": "Toon knop", "default": true },
+    { "type": "url", "id": "video_file_url", "label": "Video-bestand URL (optioneel, speelt gedempt/herhalend af i.p.v. het beeldmerk)" }
   ]
 }
 {% endschema %}
