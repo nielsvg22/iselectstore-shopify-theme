@@ -4,11 +4,13 @@
 
 De acht accountgerelateerde themabestanden zijn gericht geüpload naar het **gepubliceerde** thema `210646630791`, met `--allow-live --nodelete --only ...`. De bestaande header kwam vlak vóór upload nog overeen met de back-up. Alle acht bestanden zijn na upload teruggelezen: zes zijn bytegelijk, beide JSON-templates zijn inhoudelijk gelijk na normalisatie van Shopify's automatisch toegevoegde lege `settings`-objecten en editorcommentaar. De header gebruikt de officiële Shopify-account-route.
 
-De actuele vrijgegeven appversie is **iselectstore-portaal-live-20261015-v2**, versie-ID `1168792715265`. Deze bevat naast de full-page extension een nieuwe, automatisch weergegeven ingang op zowel het besteloverzicht als profiel (`customer-account.order-index.announcement.render` en `customer-account.profile.announcement.render`). De knop **Open mijn iSelectStore** gebruikt `extension:iselectstore-portal/`; Shopify lost daarmee de juiste full-page URL binnen dezelfde geïnstalleerde app op. Er hoeft hiervoor geen URL door de winkelbeheerder te worden gekopieerd. Een directe storefront-headerlink naar de full-page URL blijft een optionele vervolgstap; de huidige route loopt via het besteloverzicht.
+De actuele vrijgegeven appversie is **iselectstore-account-setup-20261015**, versie-ID `1168802054145`. Deze bevat de full-page extension en ingangen op het besteloverzicht en profiel. **De ingangen zijn niet zichtbaar op de door de eigenaar aangeleverde live screenshot.** Een geslaagde apprelease bewijst geen zichtbare activatie; de eerdere beschrijving dat de knop automatisch verschijnt, is niet door een live test bevestigd.
+
+De installatie is inmiddels onafhankelijk bevestigd via de officiële Admin API: app `435960217601`, installatie `1236378747271`, winkel `110103658887`. De installatie heeft effectief alleen `customer_read_customers`, `customer_read_orders` en `customer_write_customers`. De nieuwste appversie vraagt tijdelijk `read_online_store_pages`, `read_online_store_navigation` en `write_online_store_navigation` om de echte full-page pagina te vinden en het accountmenu zorgvuldig bij te werken. Shopify weigert deze handelingen totdat de eigenaar de scopewijziging bij het openen van de app accepteert. Er is nog geen navigatiemutatie uitgevoerd. Na inrichting worden de extra beheerrechten weer uit de appconfiguratie verwijderd en wordt de minimale versie opnieuw vrijgegeven.
 
 De nieuwe app-ingang heeft UID `9420b04e-5d37-9a42-7912-e3102c1d0f623e6b9eb7`. Webshop- en contactlinks gebruiken nu de echte `shop.url` en `shop.email` uit de Customer Account API als geen editorinstelling is ingevuld. Contact valt dan terug op een e-mailactie, niet op een niet-bestaande servicepagina. De e-mailactie verstuurt niets zonder dat de klant zelf verzendt.
 
-Eigenaar heeft installatie gemeld. De CLI kan de installatie op deze productiestore nog niet onafhankelijk verifiëren. Een volledige ingelogde klanttest, protected-customer-data rechten, adreswijzigingen en een echte retouraanvraag zijn **niet** als geslaagd vastgesteld. De native accountomgeving is vanuit de uitvoeromgeving beperkt door toegang/botbescherming. De openbare storefront blijft wachtwoordbeschermd.
+De officiële Admin API bevestigt de installatie op de juiste productiestore. Een volledige ingelogde klanttest, protected-customer-data rechten, adreswijzigingen en een echte retouraanvraag zijn **niet** als geslaagd vastgesteld. De native accountomgeving is vanuit de uitvoeromgeving beperkt door toegang/botbescherming. De openbare storefront blijft wachtwoordbeschermd.
 
 ## Eerder bevestigd uitgevoerd
 
@@ -45,12 +47,12 @@ De lokale bundle `artifacts/iselectstore-customer-portal.bundle` bevat de opleve
 
 ### Shopify-installatie en acceptatie
 
-De eigenaar meldt de app te hebben geïnstalleerd. De effectieve winkelinstallatie en scopes moeten nog via een ingelogde klanttest worden bevestigd. `shopify app dev` kan deze winkel niet als development/sandboxstore vinden. Ook een read-only `app execute`-controle kon de winkel niet binnen de apporganisatie vinden. Er zijn geen Admin API-mutaties op productie geprobeerd.
+De installatie is via de officiële client-credentials grant en Admin API geverifieerd. Credentials worden alleen tijdelijk in procesgeheugen gebruikt en niet geprint, opgeslagen of gecommit. De extra navigatie-/paginarechten zijn wel vrijgegeven in de appversie, maar nog niet door de winkel toegekend. De eigenaar moet de app openen en de bijgewerkte rechten accepteren. Vervolgens kan de echte accountpagina worden uitgelezen en het accountmenu worden gekoppeld; deze stap staat nog open.
 
 Daarna zijn nog nodig:
 
 1. Protected customer data-toegang controleren en klantaccounts met echte Shopify-testdata openen.
-2. Ingelogd op het besteloverzicht of profiel de automatisch weergegeven knop **Open mijn iSelectStore** controleren. Een accountmenu-item en een directe header-URL zijn aanvullend mogelijk, maar niet nodig voor deze nieuwe ingang.
+2. Accountpagina en accountmenu via Shopify uitlezen en koppelen na toestemming voor de scopewijziging. Daarna ingelogd de portaalnavigatie controleren; de entry-extension alleen heeft de zichtbaarheid niet opgelost.
 3. Garantie- en favorietmetafields met de beschreven lees-/schrijfrechten instellen. Favorieten pas daarna activeren.
 4. De servicepagina aanmaken met template `page.klantenservice`, native retourinstellingen en contactontvangst controleren.
 5. Preview van de nieuwe accountomgeving en bestaande winkelstromen testen; de storefront is momenteel wachtwoordbeschermd.
