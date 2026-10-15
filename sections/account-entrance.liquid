@@ -1,0 +1,39 @@
+{{ 'account-portal.css' | asset_url | stylesheet_tag }}
+{% assign account_url = section.settings.portal_url | default: routes.account_url %}
+<section class="portal"><div class="wrap">
+  <div class="portalHero">
+    <div>
+      <div class="portalEmblem">{% render 'icon-mark', size: 26 %}</div>
+      <p class="portalKicker">Mijn iSelectStore</p>
+      <h1>Jouw aankoop.<br>Alles op één plek.</h1>
+      <p class="portalIntro">Van de eerste bestelling tot hulp bij je toestel. Je persoonlijke omgeving voor alles wat bij jouw iSelectStore-aankoop hoort.</p>
+      <a class="btn portalPrimary" href="{{ account_url | escape }}">Naar mijn account {% render 'portal-icon', icon: 'arrow' %}</a>
+      <p class="portalSecure">{% render 'portal-icon', icon: 'lock' %} Veilig inloggen via Shopify</p>
+    </div>
+    <aside class="portalGuide" aria-label="Zo werkt je account">
+      <h2>Zo ben je binnen.</h2>
+      <ol>
+        <li><div><strong>Gebruik je e-mailadres</strong><small>Hetzelfde adres als bij je bestelling.</small></div></li>
+        <li><div><strong>Log veilig in bij Shopify</strong><small>Volg de inlogstappen voor jouw account.</small></div></li>
+        <li><div><strong>Alles bij de hand</strong><small>Je bestellingen, gegevens en hulp bij je aankoop.</small></div></li>
+      </ol>
+    </aside>
+  </div>
+  <div class="portalServices">
+    <div class="portalService">{% render 'portal-icon', icon: 'box' %}<div><h2>Van bestelling tot bezorging</h2><p>Je aankopen, bestelstatus en beschikbare trackinglinks bij elkaar.</p></div></div>
+    <div class="portalService">{% render 'portal-icon', icon: 'shield' %}<div><h2>Zorg voor jouw toestel</h2><p>Vind hulp en bekijk de garantiegegevens die voor je aankoop zijn vastgelegd.</p></div></div>
+    <div class="portalService">{% render 'portal-icon', icon: 'person' %}<div><h2>Persoonlijk geregeld</h2><p>Beheer je accountgegevens en opgeslagen bezorgadressen via Shopify.</p></div></div>
+    <div class="portalService">{% render 'portal-icon', icon: 'help' %}<div><h2>We staan voor je klaar</h2><p>Een vraag, retour of garantiegeval? Vind de juiste volgende stap.</p></div></div>
+  </div>
+  <div class="portalHelp"><div><h2>Liever even persoonlijk contact?</h2><p>We helpen je graag verder.</p></div>
+    {% if section.settings.service_page != blank %}<a class="portalTextLink" href="{{ section.settings.service_page.url }}">Neem contact op {% render 'portal-icon', icon: 'arrow' %}</a>
+    {% elsif pages.contact %}<a class="portalTextLink" href="{{ pages.contact.url }}">Neem contact op {% render 'portal-icon', icon: 'arrow' %}</a>
+    {% else %}<a class="portalTextLink" href="mailto:{{ shop.email | escape }}">Mail ons {% render 'portal-icon', icon: 'arrow' %}</a>{% endif %}
+  </div>
+</div></section>
+{% schema %}
+{"name":"Mijn iSelectStore ingang","settings":[
+  {"type":"url","id":"portal_url","label":"Full-page extension URL","info":"Na installatie kopiëren uit Shopify account-editor. Leeg = standaard Shopify-account."},
+  {"type":"page","id":"service_page","label":"Servicepagina"}
+]}
+{% endschema %}
