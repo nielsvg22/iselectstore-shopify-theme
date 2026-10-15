@@ -6,7 +6,7 @@
 {% assign legend_bad_title_default = 'authenticity_compare.legend_bad_title' | t %}
 {% assign legend_bad_sub_default = 'authenticity_compare.legend_bad_sub' | t %}
 
-<section class="stSection" id="authenticity-compare"><div class="wrap" style="max-width:720px">
+<section class="stSection" id="authenticity-compare"><div class="wrap" style="max-width:880px">
   <div class="authCompareHead reveal">
     <h2>{{ section.settings.heading | default: heading_default }}</h2>
     <a class="authInfoPill" href="{{ section.settings.info_link | default: '#story-intro' }}">
@@ -56,15 +56,17 @@
             <span>{{ block.settings.description | default: row_desc_default }}</span>
           </div>
         </div>
-        <div class="authRowOption authRowOption--good">
-          <span class="authRowRadio"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="authCheckIcon" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>{{ block.settings.good_text | default: row_good_default }}</span>
-        </div>
-        <div class="authRowOption">
-          <span class="authRowRadio"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="authCrossIcon" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          <span>{{ block.settings.bad_text | default: row_bad_default }}</span>
+        <div class="authRowCols">
+          <div class="authRowOption authRowOption--good">
+            <span class="authRowRadio"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="authCheckIcon" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span class="authRowText">{{ block.settings.good_text | default: row_good_default }}</span>
+          </div>
+          <div class="authRowOption authRowOption--bad">
+            <span class="authRowRadio"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="authCrossIcon" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <span class="authRowText">{{ block.settings.bad_text | default: row_bad_default }}</span>
+          </div>
         </div>
       </div>
     {% endfor %}

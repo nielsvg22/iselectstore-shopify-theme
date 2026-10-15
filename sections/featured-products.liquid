@@ -21,11 +21,29 @@
     {% assign limit = section.settings.count | default: 4 %}
     {% comment %} Accessoires zijn alleen een upsell in de winkelwagen, niet hier. {% endcomment %}
     {% assign featured_pool = section.settings.collection.products | where_exp: "product", "product.type != 'Accessoire'" %}
-    {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan. {% endcomment %}
-    {% assign available_products = featured_pool | where: "available", true %}
-    {% assign sold_out_products = featured_pool | where: "available", false %}
-    {% assign sorted_products = available_products | concat: sold_out_products %}
-    {% for product in sorted_products limit: limit %}
+    {% comment %}
+      Zorg dat élke categorie-tab (iPhone/iPad/MacBook/Apple Watch) producten heeft:
+      eerst1 per categorie, dan de tweede ronde — zodat "Alle" een mooie mengeling toont.
+    {% endcomment %}
+    {% assign cat_names = 'iPhone,iPad,MacBook,Apple Watch' | split: ',' %}
+    {% assign featured_sorted = '' | split: '' %}
+    {% for cat in cat_names %}
+      {% assign cat_products = featured_pool | where: "type", cat %}
+      {% assign cat_available = cat_products | where: "available", true %}
+      {% assign cat_sold = cat_products | where: "available", false %}
+      {% assign cat_sorted = cat_available | concat: cat_sold %}
+      {% assign cat_take = cat_sorted | slice: 0, 1 %}
+      {% assign featured_sorted = featured_sorted | concat: cat_take %}
+    {% endfor %}
+    {% for cat in cat_names %}
+      {% assign cat_products = featured_pool | where: "type", cat %}
+      {% assign cat_available = cat_products | where: "available", true %}
+      {% assign cat_sold = cat_products | where: "available", false %}
+      {% assign cat_sorted = cat_available | concat: cat_sold %}
+      {% assign cat_take = cat_sorted | slice: 1, 1 %}
+      {% assign featured_sorted = featured_sorted | concat: cat_take %}
+    {% endfor %}
+    {% for product in featured_sorted limit: limit %}
       {% render 'product-card', product: product, index: forloop.index0 %}
     {% endfor %}
   </div>

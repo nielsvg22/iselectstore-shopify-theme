@@ -159,11 +159,48 @@
         </div>
       {% endif %}
 
-      {% if section.settings.accessory_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
+      {% comment %}
+        Dynamische accessoires: bij iPhones automatisch de screenprotector die bij
+        het model hoort (bv. iPhone 14 → Screenprotector iPhone 14). Bestaat er geen
+        match, dan valt accessory_1 terug op de ingestelde screenprotector.
+      {% endcomment %}
+      {% assign acc_1 = section.settings.accessory_1 %}
+      {% if product.type == 'iPhone' %}
+        {% assign handle_parts = product.handle | split: '-' %}
+        {% assign iphone_model = '' %}
+        {% for part in handle_parts %}
+          {% assign part_low = part | downcase %}
+          {% if part_low contains 'gb' or part_low == 'tb' or part_low == 'krasvrij' or part_low == 'batt' or part_low == 'garantie' or part_low == 'test' %}
+            {% break %}
+          {% endif %}
+          {% if part_low == 'iphone' %}
+            {% continue %}
+          {% endif %}
+          {% if iphone_model == blank %}
+            {% assign iphone_model = part %}
+          {% else %}
+            {% assign iphone_model = iphone_model | append: ' ' | append: part %}
+          {% endif %}
+        {% endfor %}
+        {% if iphone_model != blank %}
+          {% assign model_query = 'iphone ' | append: iphone_model %}
+          {% for candidate in collections.all.products %}
+            {% if candidate.type == 'Screenprotector' %}
+              {% assign candidate_title = candidate.title | downcase %}
+              {% if candidate_title contains model_query %}
+                {% assign acc_1 = candidate %}
+                {% break %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
+      {% if acc_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
         <div class="optionGroup">
           <label>{{ 'product_page.accessories_label' | t }}</label>
           <div class="accessories" id="accessoryList">
-            {% if section.settings.accessory_1 %}{% render 'accessory-option', accessory: section.settings.accessory_1 %}{% endif %}
+            {% if acc_1 %}{% render 'accessory-option', accessory: acc_1 %}{% endif %}
             {% if section.settings.accessory_2 %}{% render 'accessory-option', accessory: section.settings.accessory_2 %}{% endif %}
             {% if section.settings.accessory_3 %}{% render 'accessory-option', accessory: section.settings.accessory_3 %}{% endif %}
           </div>
