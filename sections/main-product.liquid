@@ -184,10 +184,11 @@
         {% endfor %}
         {% if iphone_model != blank %}
           {% assign model_query = 'iphone ' | append: iphone_model %}
+          {% comment %} Exacte modelmatch: "iphone 14" mag nooit "iphone 14 pro max" raken. {% endcomment %}
           {% for candidate in collections.all.products %}
             {% if candidate.type == 'Screenprotector' %}
-              {% assign candidate_title = candidate.title | downcase %}
-              {% if candidate_title contains model_query %}
+              {% assign cand_model = candidate.title | remove_first: 'Screenprotector ' | split: '(' | first | strip | downcase %}
+              {% if cand_model == model_query %}
                 {% assign acc_1 = candidate %}
                 {% break %}
               {% endif %}
