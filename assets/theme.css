@@ -115,8 +115,8 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .card{border:1px solid var(--line);border-radius:22px;padding:16px;position:relative;background:#fff;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
 .card:hover{transform:translateY(-6px);box-shadow:0 26px 44px -22px rgba(31,48,73,.24);border-color:transparent}
-.card>a{display:block}
-.card img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:18px;background:#f6f6f6}
+.card>a{display:block;position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;background:#f6f6f6}
+.card img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:10px}
 .badge{position:absolute;top:26px;left:26px;z-index:2;display:inline-flex;align-items:center;background:var(--coral);color:#fff;padding:5px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.01em;width:fit-content;box-shadow:0 8px 20px -8px rgba(249,133,139,.6)}
 .card h3{font-size:16.5px;line-height:1.3;margin:14px 0 4px;font-weight:600;letter-spacing:-.01em;color:var(--navy)}
 .meta{color:var(--muted);font-size:12.5px}
@@ -160,7 +160,7 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .freshStockLike.is-liked{color:var(--coral)}
 .freshStockLike.is-liked svg{fill:var(--coral)}
 .freshStockLink{display:flex;align-items:center;gap:16px;text-decoration:none}
-.freshStockLink img{width:70px;height:70px;border-radius:14px;object-fit:cover;flex:none;background:var(--soft)}
+.freshStockLink img{width:70px;height:70px;border-radius:14px;object-fit:contain;object-position:center;padding:6px;flex:none;background:var(--soft)}
 .freshStockInfo{flex:1;min-width:0;padding-right:36px}
 .freshStockInfo h3{margin:0 0 6px;font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.01em}
 .freshStockInfo b{display:block;color:var(--coral-ink);font-size:19px;font-weight:700;margin-bottom:8px}
@@ -230,10 +230,10 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--navy)}
 .breadcrumb span{opacity:.5}
 
-.pdp{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
 .gallery{position:sticky;top:calc(var(--header-h) + 24px)}
 .galleryMain{position:relative;width:100%;border-radius:28px;overflow:hidden;background:var(--soft);border:1px solid var(--line);aspect-ratio:1;max-height:min(70vh,640px)}
-.galleryMain img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .3s;cursor:zoom-in}
+.galleryMain img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:10px;transition:opacity .3s;cursor:zoom-in}
 .galleryMain img.imgBroken{display:none}
 .galleryMain .imgFallback{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);font-size:13px;text-align:center;padding:24px}
 .galleryMain:has(img.imgBroken) .imgFallback{display:flex}
@@ -245,7 +245,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
 .thumbs{display:flex;gap:10px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
 .thumbs::-webkit-scrollbar{display:none}
 .thumb{width:76px;height:76px;border-radius:14px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--soft);flex:none;transition:border-color .2s,transform .2s}
-.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb img{width:100%;height:100%;object-fit:contain;object-position:center;padding:6px}
 .thumb.active{border-color:var(--coral)}
 .thumb:hover{transform:translateY(-2px)}
 
@@ -477,7 +477,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 34px;background:var(--ivo
  .trade{grid-template-columns:1fr}.footer{grid-template-columns:1fr 1fr}
  .reviewsSlider{padding:0 48px}
  .reviewsArrow{width:36px;height:36px}
- .pdp{grid-template-columns:1fr;gap:32px}
+ .pdp{grid-template-columns:minmax(0,1fr);gap:32px}
  .gallery{position:static}
  .cartLayout{grid-template-columns:1fr}
  .cartSummary{position:static}
