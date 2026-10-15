@@ -1,0 +1,60 @@
+{% comment %}Only the server-authenticated Shopify customer is used. No URL/customer ID lookup.{% endcomment %}
+{% if customer %}
+  <noscript><style>.sp-portal .sp-layout{display:block}.sp-portal section[data-native-panel]{margin-bottom:36px}</style></noscript>
+  <div data-native-portal data-customer-portal-private>
+    <div class="sp-top"><div><p class="portalKicker">Mijn iSelectStore</p><h1>Welkom{% if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif %}.</h1><p class="sp-muted">Fijn dat je er bent. Alles voor jouw aankoop, bij elkaar.</p></div><a class="sp-link" data-native-logout href="{{ routes.account_logout_url }}">{% render 'portal-icon', icon: 'person' %} Uitloggen</a></div>
+    <div class="sp-layout">
+      <nav class="sp-nav" aria-label="Mijn account" data-native-navigation hidden>
+        <button type="button" data-native-tab="overzicht" aria-current="page">{% render 'portal-icon', icon: 'person' %}<span>Overzicht</span></button>
+        <button type="button" data-native-tab="bestellingen">{% render 'portal-icon', icon: 'box' %}<span>Bestellingen</span></button>
+        <button type="button" data-native-tab="producten">{% render 'portal-icon', icon: 'shield' %}<span>Producten & garantie</span></button>
+        <button type="button" data-native-tab="gegevens">{% render 'portal-icon', icon: 'person' %}<span>Mijn gegevens</span></button>
+        <button type="button" data-native-tab="service">{% render 'portal-icon', icon: 'help' %}<span>Service</span></button>
+        <span class="sp-nav-note">{% render 'portal-icon', icon: 'lock' %} Veilig verbonden met Shopify</span>
+      </nav>
+      <div class="sp-content" tabindex="-1" data-native-content>
+        <section data-native-panel="overzicht">
+          <div class="sp-heading"><h2>Je laatste bestelling</h2><a class="sp-link" href="#portal-orders" data-native-go="bestellingen">Alles bekijken {% render 'portal-icon', icon: 'arrow' %}</a></div>
+          {% if customer.last_order %}{% render 'storefront-portal-order', portal_order: customer.last_order, shop: shop, compact: true %}
+          {% else %}<div class="sp-empty"><span class="sp-emblem">{% render 'portal-icon', icon: 'box' %}</span><h3>Je eerste aankoop begint hier.</h3><p>Nog geen bestellingen op dit account. Bestel met hetzelfde e-mailadres om je aankopen hier terug te vinden.</p><a class="sp-link" href="{{ routes.all_products_collection_url }}">Ontdek ons assortiment {% render 'portal-icon', icon: 'arrow' %}</a></div>{% endif %}
+          <div class="sp-grid sp-shortcuts">
+            <a class="sp-card" href="#portal-products" data-native-go="producten">{% render 'portal-icon', icon: 'shield' %}<h3>Jouw producten</h3><p>Aankopen en vastgelegde garantiegegevens.</p>{% render 'portal-icon', icon: 'arrow' %}</a>
+            <a class="sp-card" href="#portal-profile" data-native-go="gegevens">{% render 'portal-icon', icon: 'person' %}<h3>Persoonlijk geregeld</h3><p>Je gegevens en bezorgadressen bij elkaar.</p>{% render 'portal-icon', icon: 'arrow' %}</a>
+            <a class="sp-card" href="#portal-service" data-native-go="service">{% render 'portal-icon', icon: 'help' %}<h3>We zijn er voor je</h3><p>Hulp bij een bestelling, retour of garantie.</p>{% render 'portal-icon', icon: 'arrow' %}</a>
+          </div>
+        </section>
+        {% paginate customer.orders by 20 %}
+          <section data-native-panel="bestellingen" id="portal-orders"><h2>Mijn bestellingen</h2><p class="sp-muted">Van aankoop tot bezorging. Bekijk hieronder de informatie van jouw bestellingen.</p>
+            {% for portal_order in customer.orders %}{% render 'storefront-portal-order', portal_order: portal_order, shop: shop %}
+            {% else %}<div class="sp-empty"><h3>Nog geen bestellingen.</h3><p>Bestellingen met het e-mailadres van dit account verschijnen hier.</p></div>{% endfor %}
+            {% if paginate.pages > 1 %}<nav class="sp-actions" aria-label="Bestelpagina’s">{% if paginate.previous %}<a class="sp-link" data-native-pagination="bestellingen" href="{{ paginate.previous.url }}#portal-orders">Vorige bestellingen</a>{% endif %}<span class="sp-muted">Pagina {{ paginate.current_page }} van {{ paginate.pages }}</span>{% if paginate.next %}<a class="sp-link" data-native-pagination="bestellingen" href="{{ paginate.next.url }}#portal-orders">Meer bestellingen</a>{% endif %}</nav>{% endif %}
+          </section>
+          <section data-native-panel="producten" id="portal-products"><h2>Mijn producten & garantie</h2><p class="sp-muted">Je aankopen op deze bestelpagina. We tonen alleen garantiegegevens die voor jouw aankoop zijn vastgelegd.</p><div class="sp-grid">
+            {% assign portal_product_count = 0 %}
+            {% for portal_order in customer.orders %}{% unless portal_order.cancelled %}{% for item in portal_order.line_items %}
+              {% assign portal_product_count = portal_product_count | plus: 1 %}
+              <article class="sp-card"><div class="sp-product"><span class="sp-product-image">{% if item.image %}{{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,180', alt: item.title }}{% else %}{% render 'portal-icon', icon: 'box' %}{% endif %}</span><div><h3>{{ item.product.title | default: item.title | escape }}</h3>{% if item.variant.title != blank and item.variant.title != 'Default Title' %}<p class="sp-muted">{{ item.variant.title | escape }}</p>{% endif %}</div></div>
+                <dl class="sp-pairs"><div><dt>Aankoopdatum</dt><dd>{{ portal_order.created_at | date: '%d-%m-%Y' }}</dd></div><div><dt>Bestelling</dt><dd>{{ portal_order.name | escape }}</dd></div></dl>
+                {% assign portal_warranty = portal_order.metafields.custom.portal_warranty.value %}{% assign portal_warranty_found = false %}{% assign portal_line_gid = item.id | prepend: 'gid://shopify/LineItem/' %}
+                {% if portal_warranty.version == 1 %}{% for record in portal_warranty.items %}{% if record.lineItemId == portal_line_gid and record.description != blank %}{% assign portal_warranty_found = true %}<div class="sp-warranty"><strong>{{ record.description | escape }}</strong>{% if record.expiresOn != blank %}<p>Vastgelegde einddatum: {{ record.expiresOn | escape }}</p>{% endif %}</div>{% endif %}{% endfor %}{% endif %}
+                {% unless portal_warranty_found %}<p class="sp-muted">Er zijn geen garantiegegevens voor dit product vastgelegd. Neem contact op voor informatie over jouw aankoop.</p>{% endunless %}
+                <a class="sp-link" href="mailto:{{ shop.email | escape }}?subject={{ 'Garantie · ' | append: portal_order.name | append: ' · ' | append: item.title | url_encode }}">Ondersteuning aanvragen {% render 'portal-icon', icon: 'arrow' %}</a>
+              </article>
+            {% endfor %}{% endunless %}{% endfor %}
+          </div>{% if portal_product_count == 0 %}<div class="sp-empty"><h3>Je producten komen hier.</h3><p>Na je aankoop vind je hier je producten en beschikbare garantiegegevens.</p></div>{% endif %}
+          {% if paginate.pages > 1 %}<nav class="sp-actions" aria-label="Productpagina’s">{% if paginate.previous %}<a class="sp-link" data-native-pagination="producten" href="{{ paginate.previous.url }}#portal-products">Vorige producten</a>{% endif %}{% if paginate.next %}<a class="sp-link" data-native-pagination="producten" href="{{ paginate.next.url }}#portal-products">Meer producten</a>{% endif %}</nav>{% endif %}
+          </section>
+        {% endpaginate %}
+        <section data-native-panel="gegevens" id="portal-profile"><div class="sp-card"><h2>Mijn gegevens</h2><p class="sp-muted">De gegevens van je Shopify-klantaccount.</p><dl class="sp-pairs"><div><dt>Naam</dt><dd>{{ customer.name | escape }}</dd></div><div><dt>E-mailadres</dt><dd>{{ customer.email | escape }}</dd></div><div><dt>Telefoonnummer</dt><dd>{{ customer.phone | default: 'Niet opgegeven' | escape }}</dd></div></dl><a class="sp-link" href="{{ routes.account_profile_url | default: routes.account_url }}">Gegevens veilig wijzigen via Shopify {% render 'portal-icon', icon: 'arrow' %}</a></div>
+          <div class="sp-card"><h2>Bezorgadressen</h2><div class="sp-addresses">{% for address in customer.addresses %}<article class="sp-address">{% if address.id == customer.default_address.id %}<span class="sp-badge">Standaardbezorgadres</span>{% endif %}{{ address | format_address }}</article>{% else %}<p class="sp-muted">Je hebt nog geen adres opgeslagen.</p>{% endfor %}</div><a class="sp-link" href="{{ routes.account_profile_url | default: routes.account_url }}">Adressen beheren via Shopify {% render 'portal-icon', icon: 'arrow' %}</a></div>
+        </section>
+        <section data-native-panel="service" id="portal-service"><h2>Hoe kunnen we je helpen?</h2><p class="sp-muted">Kies wat je wilt regelen. We helpen je graag verder.</p><div class="sp-grid">
+          <article class="sp-card">{% render 'portal-icon', icon: 'box' %}<h3>Hulp bij je bestelling</h3><p class="sp-muted">Bekijk je bestelstatus en tracking of stel ons een vraag.</p><a class="sp-link" href="#portal-orders" data-native-go="bestellingen">Open mijn bestellingen {% render 'portal-icon', icon: 'arrow' %}</a></article>
+          <article class="sp-card">{% render 'portal-icon', icon: 'arrow' %}<h3>Retourneren</h3><p class="sp-muted">Open je volledige bestelling voor beschikbare Shopify-retouropties. Geen optie zichtbaar? Neem contact op.</p><a class="sp-link" href="#portal-orders" data-native-go="bestellingen">Naar mijn bestellingen {% render 'portal-icon', icon: 'arrow' %}</a></article>
+          <article class="sp-card">{% render 'portal-icon', icon: 'shield' %}<h3>Een garantievraag</h3><p class="sp-muted">Bekijk de informatie bij je product of vraag ons om hulp.</p><a class="sp-link" href="#portal-products" data-native-go="producten">Mijn producten bekijken {% render 'portal-icon', icon: 'arrow' %}</a>{% if pages.garantie %}<a class="sp-link" href="{{ pages.garantie.url }}">Garantievoorwaarden {% render 'portal-icon', icon: 'arrow' %}</a>{% endif %}</article>
+          <article class="sp-card">{% render 'portal-icon', icon: 'help' %}<h3>Persoonlijk contact</h3><p class="sp-muted">We helpen je graag verder met je aankoop.</p>{% if pages.contact %}<a class="sp-link" href="{{ pages.contact.url }}">Contact opnemen {% render 'portal-icon', icon: 'arrow' %}</a>{% else %}<a class="sp-link" href="mailto:{{ shop.email | escape }}">Mail ons {% render 'portal-icon', icon: 'arrow' %}</a>{% endif %}{% if pages.faq %}<a class="sp-link" href="{{ pages.faq.url }}">Veelgestelde vragen {% render 'portal-icon', icon: 'arrow' %}</a>{% endif %}</article>
+        </div></section>
+      </div>
+    </div>
+  </div>
+{% endif %}

@@ -1,4 +1,5 @@
-{% assign portal_default_url = routes.account_url | append: '/pages/01a1407f-6691-7e42-b117-6a16e02749c0' %}
+{% assign portal_default_url = routes.search_url | append: '?view=mijn-account' %}
+{% if pages['mijn-account'] != blank %}{% assign portal_default_url = pages['mijn-account'].url %}{% endif %}
 {% assign portal_url = section.settings.account_portal_url | default: portal_default_url %}
 <div class="top"><div class="topin">
   <span>{{ 'header.top.original_products' | t }}</span><span>{{ 'header.top.battery_condition' | t }}</span><span>{{ 'header.top.warranty' | t }}</span><span>{{ 'header.top.trade_in' | t }}</span>
@@ -57,7 +58,7 @@
   "name": "Header",
   "settings": [
     { "type": "collection", "id": "shop_collection", "label": "Voorraad-collectie (koppeling 'Voorraad' in menu)" },
-    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Plak na activatie de volledige URL van Mijn iSelectStore uit de Shopify account-editor. Leeg = officieel Shopify-account." }
+    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Leeg = pagina mijn-account indien aanwezig, anders het klantenportaal in het thema." }
   ]
 }
 {% endschema %}
