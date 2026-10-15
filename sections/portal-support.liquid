@@ -1,0 +1,44 @@
+{{ 'account-portal.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'portal-support.js' | asset_url }}" defer></script>
+<section class="portal"><div class="wrap">
+  <p class="portalKicker">iSelectStore service</p>
+  <h1>Goed geholpen.<br>Ook na je aankoop.</h1>
+  <p class="portalIntro">Vertel ons waar je hulp bij nodig hebt. Voeg je bestelnummer toe, zodat we je aankoop kunnen terugvinden.</p>
+  <div class="portalSupportLayout">
+    <div class="portalForm">
+      {% form 'contact', id: 'portalSupportForm' %}
+        {% if form.posted_successfully? %}
+          <div class="portalNotice" role="status" tabindex="-1" data-portal-result><h2>Je bericht is verstuurd.</h2><p>Bedankt. We nemen contact met je op via het opgegeven e-mailadres.</p></div>
+        {% else %}
+          {% if form.errors %}<div class="portalNotice" role="alert" tabindex="-1" data-portal-result><h2>Controleer je gegevens</h2>{{ form.errors | default_errors }}</div>{% endif %}
+          <div class="portalFields">
+            <label class="portalField" for="portal-name">Naam<input id="portal-name" type="text" name="contact[name]" autocomplete="name" required maxlength="160" value="{{ form.name | default: customer.name | escape }}"></label>
+            <label class="portalField" for="portal-email">E-mailadres<input id="portal-email" type="email" name="contact[email]" autocomplete="email" required maxlength="254" value="{{ form.email | default: customer.email | escape }}"></label>
+            <label class="portalField" for="portal-topic">Waar gaat je vraag over?<select id="portal-topic" name="contact[Onderwerp]" required>
+              <option value="Bestelling"{% if form.Onderwerp == 'Bestelling' %} selected{% endif %}>Mijn bestelling</option>
+              <option value="Retour"{% if form.Onderwerp == 'Retour' %} selected{% endif %}>Retourneren</option>
+              <option value="Garantie"{% if form.Onderwerp == 'Garantie' %} selected{% endif %}>Garantie</option>
+              <option value="Overig"{% if form.Onderwerp == 'Overig' %} selected{% endif %}>Een andere vraag</option>
+            </select></label>
+            <label class="portalField" for="portal-order">Bestelnummer (optioneel)<input id="portal-order" type="text" name="contact[Bestelnummer]" maxlength="80" value="{{ form.Bestelnummer | escape }}" data-portal-prefill="order"></label>
+            <label class="portalField portalField--wide" for="portal-product">Product (optioneel)<input id="portal-product" type="text" name="contact[Product]" maxlength="180" value="{{ form.Product | escape }}" data-portal-prefill="product"></label>
+            <label class="portalField portalField--wide" for="portal-message">Je bericht<textarea id="portal-message" name="contact[body]" rows="6" required maxlength="5000">{{ form.body | escape }}</textarea><small>Deel geen wachtwoorden, inlogcodes of betaalgegevens.</small></label>
+          </div>
+          <button class="btn portalPrimary" type="submit">Bericht versturen {% render 'portal-icon', icon: 'arrow' %}</button>
+          <p class="portalNote">Met dit formulier stuur je ons een servicebericht. Een retour is pas aangevraagd via de retouroptie in je Shopify-bestelling of na bevestiging door onze klantenservice.</p>
+        {% endif %}
+      {% endform %}
+    </div>
+    <aside class="portalSupportAside">
+      <h2>Zelf iets regelen?</h2>
+      <p>Open je account voor je bestelstatus, tracking en beschikbare retouropties. Je opgeslagen adressen beheer je in je profiel.</p>
+      <a class="btn portalPrimary" href="{{ routes.account_url }}">Open mijn account</a>
+      {% if pages.faq %}<p><a class="portalTextLink" href="{{ pages.faq.url }}">Veelgestelde vragen {% render 'portal-icon', icon: 'arrow' %}</a></p>{% endif %}
+      {% if pages.garantie %}<p><a class="portalTextLink" href="{{ pages.garantie.url }}">Garantievoorwaarden {% render 'portal-icon', icon: 'arrow' %}</a></p>{% endif %}
+      <p>Mail je liever rechtstreeks?<br><a class="portalTextLink" href="mailto:{{ shop.email | escape }}">{{ shop.email | escape }}</a></p>
+    </aside>
+  </div>
+</div></section>
+{% schema %}
+{"name":"Klantenservice portaal","settings":[]}
+{% endschema %}

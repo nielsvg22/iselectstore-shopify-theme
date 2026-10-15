@@ -1,0 +1,9 @@
+node_modules/
+.shopify/
+dist/
+.env
+.env.*
+!.env.example
+artifacts/
+apps/customer-portal/shopify.app.toml
+apps/customer-portal/extensions/*/manifest.json

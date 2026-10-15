@@ -1,0 +1,15 @@
+# Kopieer naar shopify.app.toml en koppel met `shopify app config link`.
+# Gebruik de echte client_id/application_url uit de aangemaakte extension-only app.
+client_id = "REPLACE_WITH_SHOPIFY_CLIENT_ID"
+name = "iSelectStore klantenportaal"
+application_url = "https://shopify.dev/apps/default-app-home"
+embedded = true
+
+[access_scopes]
+scopes = "customer_read_customers,customer_read_orders,customer_write_customers"
+
+[auth]
+redirect_urls = []
+
+[webhooks]
+api_version = "2026-07"

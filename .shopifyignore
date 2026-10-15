@@ -1,0 +1,8 @@
+apps/**
+docs/**
+tests/**
+scripts/**
+artifacts/**
+package*.json
+node_modules/**
+.gitignore

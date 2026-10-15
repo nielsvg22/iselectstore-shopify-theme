@@ -1,0 +1,42 @@
+api_version = "2026-07"
+
+[[extensions]]
+type = "ui_extension"
+name = "Mijn iSelectStore"
+handle = "iselectstore-portal"
+
+[[extensions.targeting]]
+module = "./src/Portal.tsx"
+target = "customer-account.page.render"
+
+[extensions.capabilities]
+api_access = true
+
+[extensions.settings]
+[[extensions.settings.fields]]
+key = "storefront_url"
+type = "single_line_text_field"
+name = "URL van de webshop"
+description = "Volledige https-URL van de iSelectStore-webshop."
+
+[[extensions.settings.fields]]
+key = "support_url"
+type = "single_line_text_field"
+name = "URL van de servicepagina"
+description = "Volledige https-URL van de Shopify-pagina met template page.klantenservice."
+
+[[extensions.settings.fields]]
+key = "faq_url"
+type = "single_line_text_field"
+name = "URL veelgestelde vragen"
+
+[[extensions.settings.fields]]
+key = "warranty_url"
+type = "single_line_text_field"
+name = "URL garantievoorwaarden"
+
+[[extensions.settings.fields]]
+key = "wishlist_enabled"
+type = "boolean"
+name = "Favorieten inschakelen"
+description = "Pas inschakelen na configuratie van custom.portal_wishlist met Customer Account READ_WRITE."

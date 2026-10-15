@@ -1,0 +1,16 @@
+export type Money = {amount: string; currencyCode: string};
+export type Product = {id: string; title: string; onlineStoreUrl: string | null;
+  availableForSale: boolean; featuredImage: {url: string; altText: string | null} | null};
+export type Line = {id: string; name: string; title: string; variantTitle: string | null;
+  quantity: number; productId: string | null; productType: string | null;
+  image: {url: string; altText: string | null} | null};
+export type Order = {id: string; name: string; createdAt: string; cancelledAt: string | null;
+  financialStatus: string | null; fulfillmentStatus: string; statusPageUrl: string;
+  totalPrice: Money; totalRefunded: Money;
+  lineItems: {nodes: Line[]; pageInfo: {hasNextPage: boolean}};
+  fulfillments: {nodes: {status: string | null; trackingInformation: {company: string | null; number: string | null; url: string | null}[]}[];
+    pageInfo: {hasNextPage: boolean}}};
+export type Customer = {id: string; firstName: string | null; lastName: string | null;
+  emailAddress: {emailAddress: string | null} | null;
+  phoneNumber: {phoneNumber: string | null} | null;
+  defaultAddress: {formatted: string[]} | null};

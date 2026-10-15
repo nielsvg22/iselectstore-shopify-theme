@@ -1,5 +1,7 @@
 # iSelectStore — Shopify-thema
 
+Het custom klantenportaal staat in `apps/customer-portal`. Zie [implementatie, Shopify-activatie en testhandleiding](docs/CUSTOMER-PORTAL.md). De app vereist een eigen Shopify-installatie; alleen dit thema uploaden activeert de account-extension niet.
+
 Dit is een werkend Shopify Online Store 2.0-thema, gebouwd op basis van de goedgekeurde HTML-demo. Volg deze stappen om het te installeren en werkend te krijgen.
 
 ## 1. Thema uploaden
