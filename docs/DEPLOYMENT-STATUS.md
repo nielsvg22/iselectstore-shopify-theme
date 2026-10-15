@@ -54,3 +54,9 @@ De remote themebranch bevat inmiddels Shopify's automatische commits van de eerd
 Alle negen geüploade bestanden zijn uit het live thema teruggelezen: zeven bytegelijk; beide JSON-templates semantisch gelijk na Shopify-editorcommentaar en lege settings-normalisatie. De echte `/customer_authentication/login?return_to=%2Fsearch%3Fview%3Dmijn-account&locale=nl` opent Shopify OAuth met HTTP 200. `/search?view=mijn-account`, `/collections/all`, `/cart` en `/checkout` leiden vanuit deze niet-ingelogde omgeving nog naar de bestaande wachtwoordpagina. Dit is geen volledige geauthenticeerde acceptatie.
 
 `appRevokeAccessScopes` heeft de drie tijdelijke rechten `read_online_store_pages`, `read_online_store_navigation` en `write_online_store_navigation` succesvol ingetrokken, zonder userErrors. De onbevestigde extra pagina-write-scope is niet meer aangevraagd.
+
+## Definitieve Git-status
+
+Shopify heeft de negen live themabestanden automatisch naar GitHub gesynchroniseerd in remote commit `8fc16c5` (naast eerdere commits `deffc24` en `d6b2cd5`). De volledige lokale bronimplementatie is commit `8cadc57`; remote wijzigingen zijn zorgvuldig gemerged in `c8f2860`. Vier JSON-add/add-conflicten waren uitsluitend Shopify-editorcommentaar/opmaak/lege settings: de inhoud is gelijk gecontroleerd en de remote editorversies zijn behouden.
+
+Een rechtstreekse `git push origin main` na de merge blijft HTTP 403 geven. De themabestanden staan dus werkelijk op GitHub via de Shopify-koppeling; de aanvullende appbroncode, tests en documentatie zijn lokaal gecommit maar nog niet rechtstreeks gepusht. `artifacts/iselectstore-customer-portal.bundle` bewaart de volledige lokale commits voor overdracht. Geen force-push of overschrijving van ander werk.
