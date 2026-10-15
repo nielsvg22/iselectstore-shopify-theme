@@ -1,4 +1,5 @@
-{% assign portal_url = section.settings.account_portal_url | default: routes.account_url %}
+{% assign portal_default_url = routes.account_url | append: '/pages/01a1407f-6691-7e42-b117-6a16e02749c0' %}
+{% assign portal_url = section.settings.account_portal_url | default: portal_default_url %}
 <div class="top"><div class="topin">
   <span>{{ 'header.top.original_products' | t }}</span><span>{{ 'header.top.battery_condition' | t }}</span><span>{{ 'header.top.warranty' | t }}</span><span>{{ 'header.top.trade_in' | t }}</span>
 </div></div>
