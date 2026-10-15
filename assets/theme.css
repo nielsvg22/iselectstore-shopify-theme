@@ -115,7 +115,7 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .card{border:1px solid var(--line);border-radius:22px;padding:16px;position:relative;background:#fff;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
 .card:hover{transform:translateY(-6px);box-shadow:0 26px 44px -22px rgba(31,48,73,.24);border-color:transparent}
-.card>a{display:block;position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;background:#f6f6f6}
+.card>a:not(.add){display:block;position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;background:#f6f6f6}
 .card img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:10px}
 .badge{position:absolute;top:26px;left:26px;z-index:2;display:inline-flex;align-items:center;background:var(--coral);color:#fff;padding:5px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.01em;width:fit-content;box-shadow:0 8px 20px -8px rgba(249,133,139,.6)}
 .card h3{font-size:16.5px;line-height:1.3;margin:14px 0 4px;font-weight:600;letter-spacing:-.01em;color:var(--navy)}
@@ -123,10 +123,10 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .price{display:flex;gap:9px;align-items:baseline;margin:11px 0 14px}
 .price b{font-size:22px;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
 .old{font-size:12.5px;text-decoration:line-through;color:#9ca2aa}
-.add{margin-top:auto;border:0;border-radius:980px;padding:13px;background:var(--navy);color:#fff;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.add{margin-top:auto;border:0;border-radius:980px;padding:13px;background:var(--coral);color:#fff;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .add svg{width:14px;height:14px;flex:none;transition:transform .2s}
 .add:hover svg{transform:translateX(3px)}
-.add:hover{background:var(--coral);transform:translateY(-1px)}
+.add:hover{background:var(--coral-ink);transform:translateY(-1px)}
 .add:disabled{background:#c7cbd1;color:#6b7280;cursor:not-allowed;transform:none}
 .add:disabled:hover{background:#c7cbd1;transform:none}
 .stockNote--sold{color:#6b7280}
