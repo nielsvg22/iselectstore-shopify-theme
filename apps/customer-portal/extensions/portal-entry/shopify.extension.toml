@@ -1,0 +1,15 @@
+api_version = "2026-07"
+uid = "9420b04e-5d37-9a42-7912-e3102c1d0f623e6b9eb7"
+
+[[extensions]]
+type = "ui_extension"
+name = "iSelectStore portaal openen"
+handle = "iselectstore-portal-entry"
+
+[[extensions.targeting]]
+module = "./src/Entry.tsx"
+target = "customer-account.order-index.announcement.render"
+
+[[extensions.targeting]]
+module = "./src/Entry.tsx"
+target = "customer-account.profile.announcement.render"

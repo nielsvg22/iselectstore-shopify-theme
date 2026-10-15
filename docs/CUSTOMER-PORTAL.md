@@ -4,7 +4,7 @@
 
 GitHub- en live deployment zijn expliciet geautoriseerd. Zie [actuele deploymentstatus](DEPLOYMENT-STATUS.md) voor toegang, back-ups en de vrijgegeven appversie. `main` is vóór de werkzaamheden met `git pull --ff-only origin main` gesynchroniseerd; er waren geen aanvullende remote commits. De implementatie is lokaal gecommit als `69aeffa`; GitHub weigert de push en Contents/Git-tree API-schrijfacties met HTTP 403 **Resource not accessible by integration**, ook na GitHub CLI-login en aanvullende `repo`-autorisatie. De remote branch is niet gewijzigd.
 
-Dit project bevat een moderne Shopify Customer Account full-page extension, een optionele account-ingang in het thema en een Shopify-contactformulier. De app is aangemaakt, gekoppeld en als versie **iselectstore-klantenportaal-2** vrijgegeven op Shopify. **Installatie in de winkel, metafieldconfiguratie, accountnavigatie en live klanttests zijn nog niet afgerond.** De storefront blijft ongewijzigd totdat die controles mogelijk zijn. Er is geen eigen authenticatieserver.
+Dit project bevat een moderne Shopify Customer Account full-page extension, een optionele account-ingang in het thema en een Shopify-contactformulier. De app is aangemaakt, gekoppeld en als versie **iselectstore-portaal-live-20261015-v2** vrijgegeven op Shopify. De acht accountbestanden staan op het gepubliceerde thema. Er is nu een automatische ingang boven bestellingen en profiel, zonder dat de eigenaar een gegenereerde URL hoeft te kopiëren. **Effectieve winkelinstallatie, metafieldconfiguratie en ingelogde live klanttests zijn nog niet onafhankelijk bevestigd.** Er is geen eigen authenticatieserver.
 
 De accountknoppen in de bestaande desktop- en mobiele header verwijzen standaard naar `routes.account_url`, niet meer naar het Marktplaats-portaal. Na installatie kan de beheerder de full-page URL invullen in de headerinstelling **Klantenportaal URL**. Deze wijziging raakt uitsluitend het Shopify-thema.
 
@@ -89,7 +89,7 @@ Vul in de account-editor de extensioninstellingen in:
 - **URL veelgestelde vragen** en **URL garantievoorwaarden**: bestaande pagina's, indien beschikbaar.
 - **Favorieten inschakelen**: pas na onderstaande metafieldconfiguratie en schrijftest.
 
-Ontbrekende optionele URL's worden niet als werkende knoppen getoond. Gebruik alleen eigen servicepagina's; ordernummer/product worden als URL-hints meegestuurd. Tokens, e-mailadressen en interne klant-ID's worden niet naar de servicepagina gestuurd.
+Ontbrekende optionele FAQ-/garantie-URL's worden niet als werkende knoppen getoond. Voor de webshop en contactmogelijkheid gebruikt de app standaard de echte Shopify `shop.url` en `shop.email`; bij ontbrekende servicepagina opent contact een e-mailactie. Gebruik alleen eigen servicepagina's; ordernummer/product worden als URL-hints meegestuurd. Tokens, e-mailadressen en interne klant-ID's worden niet naar de servicepagina gestuurd.
 
 Stel de account-branding in op de **daadwerkelijk ingestelde** themawaarden: navy/coral/ivory uit de thema-editor, Poppins waar Shopify dat ondersteunt, rustig lichte ondergronden, afgeronde kaarten en knoppen. Het thema kan aangepaste kleuren bevatten; de defaults in deze handleiding zijn geen reden om die te overschrijven. Kies voor knoptekst een voldoende contrasterende kleur; navy met wit is gebruikt voor de nieuwe primaire themaknoppen.
 

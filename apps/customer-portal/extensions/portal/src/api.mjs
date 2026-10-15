@@ -16,6 +16,7 @@ const ORDER_FIELDS = `
   }`;
 
 export const ACCOUNT_QUERY = `query PortalAccount($after: String) {
+  shop { email url }
   customer {
     id firstName lastName emailAddress { emailAddress } phoneNumber { phoneNumber }
     defaultAddress { formatted(withName: true) }
@@ -89,6 +90,26 @@ export function httpsUrl(value) {
     const url = new URL(value);
     return url.protocol === 'https:' && !url.username && !url.password ? url.href : undefined;
   } catch { return undefined; }
+}
+
+export function supportDestination(configuredUrl, shopEmail) {
+  const configured = httpsUrl(configuredUrl);
+  if (configured) return configured;
+  // Store contact details come from Shopify, never a URL parameter/customer.
+  return typeof shopEmail === 'string' && /^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/.test(shopEmail)
+    ? `mailto:${encodeURIComponent(shopEmail)}` : undefined;
+}
+
+export function serviceLink(base, order, topic, product = '') {
+  const url = new URL(base);
+  if (url.protocol === 'mailto:') {
+    url.searchParams.set('subject', `iSelectStore · ${topic}${order ? ` · ${order}` : ''}`);
+    url.searchParams.set('body', `${order ? `Bestelling: ${order}\n` : ''}${product ? `Product: ${product}\n` : ''}\nMijn vraag:\n`);
+  } else {
+    url.searchParams.set('order', order); url.searchParams.set('topic', topic);
+    if (product) url.searchParams.set('product', product);
+  }
+  return url.href;
 }
 
 export const financialLabels = {

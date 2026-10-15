@@ -1,11 +1,12 @@
 import '@shopify/ui-extensions/preact';
-import {render, type ComponentChildren} from 'preact';
-import {useCallback, useEffect, useRef, useState} from 'preact/hooks';
+import {createContext, render, type ComponentChildren} from 'preact';
+import {useCallback, useContext, useEffect, useRef, useState} from 'preact/hooks';
 import {useApi, useSettings, useSubscription} from '@shopify/ui-extensions/customer-account/preact';
 import {ACCOUNT_QUERY, WARRANTY_QUERY, WISHLIST_QUERY, WISHLIST_MUTATION,
   PRODUCTS_QUERY, SEARCH_QUERY, accountQuery, httpsUrl, money, date, tracking,
-  financialLabels, fulfillmentLabels, warrantyFor, wishlistIds, wishlistInput, productSearch} from './api.mjs';
-import type {Customer, Order, Line, Product} from './types';
+  financialLabels, fulfillmentLabels, warrantyFor, wishlistIds, wishlistInput, productSearch,
+  supportDestination, serviceLink} from './api.mjs';
+import type {Customer, Order, Line, Product, Shop} from './types';
 
 export default async () => { render(<Portal />, document.body); };
 
@@ -17,6 +18,7 @@ const routes = [
 type Route = typeof routes[number][0] | 'favorites';
 type Settings = {storefront_url: string; support_url: string; faq_url: string; warranty_url: string; wishlist_enabled: boolean};
 type PageInfo = {hasNextPage: boolean; endCursor: string | null};
+const ShopContext = createContext<Shop | null>(null);
 
 function Card({heading, children}: {heading?: string; children: ComponentChildren}) {
   return <s-box padding="large" border="base" borderRadius="large" background="base">
@@ -25,8 +27,10 @@ function Card({heading, children}: {heading?: string; children: ComponentChildre
 }
 function Empty({heading, children}: {heading: string; children: ComponentChildren}) {
   const settings = useSettings<Settings>();
+  const shop = useContext(ShopContext);
+  const storefrontUrl = httpsUrl(settings.storefront_url) || httpsUrl(shop?.url);
   return <Card heading={heading}><s-paragraph color="subdued">{children}</s-paragraph>
-    {httpsUrl(settings.storefront_url) && <s-link href={httpsUrl(settings.storefront_url)}>Ontdek onze voorraad</s-link>}</Card>;
+    {storefrontUrl && <s-link href={storefrontUrl}>Ontdek onze voorraad</s-link>}</Card>;
 }
 function ErrorNotice({retry, access = false}: {retry: () => void; access?: boolean}) {
   return <s-banner tone="critical" heading={access ? 'Je gegevens zijn niet beschikbaar' : 'Ophalen is niet gelukt'}>
@@ -101,6 +105,7 @@ function AccountPortal({customerId}: {customerId: string}) {
   const settings = useSettings<Settings>();
   const [route, setRoute] = useState<Route>('overview');
   const [customer, setCustomer] = useState<Customer | null>(null);
+  const [shop, setShop] = useState<Shop | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [pageInfo, setPageInfo] = useState<PageInfo>({hasNextPage: false, endCursor: null});
   const [loading, setLoading] = useState(true);
@@ -121,6 +126,7 @@ function AccountPortal({customerId}: {customerId: string}) {
       if (!result.customer || result.customer.id !== customerId || (after && owner.current !== result.customer.id)) throw new Error('access');
       owner.current = result.customer.id;
       setCustomer(result.customer);
+      setShop(result.shop || null);
       const next: Order[] = result.customer.orders.nodes;
       setOrders(previous => after ? [...previous, ...next.filter(o => !previous.some(p => p.id === o.id))] : next);
       setPageInfo(result.customer.orders.pageInfo);
@@ -153,12 +159,13 @@ function AccountPortal({customerId}: {customerId: string}) {
   const navigate = (next: string) => navigation.navigate(`extension://${next}`);
   const items: readonly (readonly [string, string])[] = settings.wishlist_enabled
     ? [...routes, ['favorites', 'Favorieten']] : routes;
-  const supportUrl = httpsUrl(settings.support_url);
+  const supportUrl = supportDestination(settings.support_url, shop?.email);
+  const storefrontUrl = httpsUrl(settings.storefront_url) || httpsUrl(shop?.url);
   const heading = items.find(([key]) => key === route)?.[1] || 'Mijn iSelectStore';
 
-  return <s-page heading={route === 'overview' ? `Welkom${customer?.firstName ? `, ${customer.firstName}` : ''}` : heading}
+  return <ShopContext.Provider value={shop}><s-page heading={route === 'overview' ? `Welkom${customer?.firstName ? `, ${customer.firstName}` : ''}` : heading}
     subheading="Mijn iSelectStore · Alles voor jouw aankoop, op één plek.">
-    {httpsUrl(settings.storefront_url) && <s-button slot="secondary-actions" href={httpsUrl(settings.storefront_url)}>Verder winkelen</s-button>}
+    {storefrontUrl && <s-button slot="secondary-actions" href={storefrontUrl}>Verder winkelen</s-button>}
     <s-query-container>
       <s-grid gridTemplateColumns="@container (inline-size > 850px) 220px minmax(0, 1fr), minmax(0, 1fr)" gap="large">
         <s-box padding="base" background="subdued" borderRadius="large">
@@ -214,7 +221,7 @@ function AccountPortal({customerId}: {customerId: string}) {
         </s-stack>
       </s-grid>
     </s-query-container>
-  </s-page>;
+  </s-page></ShopContext.Provider>;
 }
 
 function Profile({customer}: {customer: Customer}) {
@@ -277,17 +284,11 @@ function ProductOrder({order, supportUrl}: {order: Order; supportUrl?: string}) 
   </Card>;
 }
 
-function serviceLink(base: string, order: string, topic: string, product = '') {
-  const url = new URL(base); url.searchParams.set('order', order);
-  url.searchParams.set('topic', topic);
-  if (product) url.searchParams.set('product', product);
-  return url.href;
-}
 function Support({orders, supportUrl, faqUrl, warrantyUrl}: {orders: Order[]; supportUrl?: string; faqUrl?: string; warrantyUrl?: string}) {
   return <s-stack gap="large">
     <Card heading="Hoe kunnen we je helpen?">
       <s-paragraph color="subdued">Een vraag over je toestel, levering of garantie? Stuur ons een bericht met je bestelnummer. Zo kunnen we gericht met je meekijken.</s-paragraph>
-      {supportUrl ? <s-button href={supportUrl} variant="primary">Neem contact op</s-button> :
+      {supportUrl ? <s-button href={supportUrl} variant="primary">{supportUrl.startsWith('mailto:') ? 'Mail onze klantenservice' : 'Neem contact op'}</s-button> :
         <s-paragraph>De servicepagina is nog niet gekoppeld. Gebruik de contactgegevens in de webshop.</s-paragraph>}
       <s-stack direction="inline" gap="base">{faqUrl && <s-link href={faqUrl}>Veelgestelde vragen</s-link>}
         {warrantyUrl && <s-link href={warrantyUrl}>Garantievoorwaarden</s-link>}</s-stack>

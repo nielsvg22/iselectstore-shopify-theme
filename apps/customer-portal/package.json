@@ -9,9 +9,10 @@
     "dev": "shopify app dev",
     "build": "shopify app build",
     "bundle": "esbuild extensions/portal/src/Portal.tsx --bundle --format=esm --jsx=automatic --jsx-import-source=preact --outfile=dist/portal.js --minify",
+    "bundle:entry": "esbuild extensions/portal-entry/src/Entry.tsx --bundle --format=esm --jsx=automatic --jsx-import-source=preact --outfile=dist/entry.js --minify",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "npm run bundle && node scripts/browser-smoke.mjs",
+    "test:browser": "npm run bundle && npm run bundle:entry && node scripts/browser-smoke.mjs",
     "deploy": "shopify app deploy"
   },
   "dependencies": {

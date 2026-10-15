@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {accountQuery, ACCOUNT_ENDPOINT, ACCOUNT_QUERY, httpsUrl, warrantyFor,
-  wishlistIds, wishlistInput, tracking, money, productSearch} from '../extensions/portal/src/api.mjs';
+  wishlistIds, wishlistInput, tracking, money, productSearch, supportDestination, serviceLink} from '../extensions/portal/src/api.mjs';
 
 test('account requests use Shopify automatic authentication, not caller IDs or tokens', async () => {
   let request;
@@ -57,4 +57,12 @@ test('amounts are formatted in order currency and search cannot inject operators
   assert.match(money({amount: '19.95', currencyCode: 'EUR'}), /19,95/);
   assert.equal(money({amount: 'NaN', currencyCode: 'EUR'}), 'Bedrag niet beschikbaar');
   assert.equal(productSearch('iPhone" OR vendor:*'), 'title:"iPhone  OR vendor*"');
+});
+test('support uses the configured page or the actual shop contact, with safe mail hints', () => {
+  assert.equal(supportDestination('https://shop.example/pages/service', 'shop@example.com'), 'https://shop.example/pages/service');
+  assert.equal(supportDestination(undefined, 'shop@example.com'), 'mailto:shop%40example.com');
+  assert.equal(supportDestination(undefined, 'shop@example.com?bcc=evil@example.com'), undefined);
+  const mail = new URL(serviceLink('mailto:shop%40example.com', '#10', 'Garantie', 'Toestel'));
+  assert.equal(mail.searchParams.get('subject'), 'iSelectStore · Garantie · #10');
+  assert.match(mail.searchParams.get('body'), /Product: Toestel/);
 });

@@ -1,4 +1,5 @@
 export type Money = {amount: string; currencyCode: string};
+export type Shop = {email: string; url: string};
 export type Product = {id: string; title: string; onlineStoreUrl: string | null;
   availableForSale: boolean; featuredImage: {url: string; altText: string | null} | null};
 export type Line = {id: string; name: string; title: string; variantTitle: string | null;

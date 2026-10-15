@@ -47,7 +47,7 @@ window.fetch=async (_url, options)=>{
  if(body.query.includes('PortalWishlist'))return {ok:true,json:async()=>({data:{customer:{id:window.testCustomer.id,metafield:null}}})};
  const captured=window.testCustomer;
  if(window.testMode==='delay') await new Promise(resolve=>setTimeout(resolve,500));
- return {ok:true,json:async()=>({data:{customer:captured}})};
+ return {ok:true,json:async()=>({data:{customer:captured,shop:{email:'service@example.invalid',url:'https://example.invalid'}}})};
 };
 </script><script type="module">import start from '/bundle.js';start();</script></body></html>`;
 
@@ -56,8 +56,10 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
     if (pages[url.pathname]) {res.setHeader('Content-Type', 'text/html'); return res.end(pages[url.pathname]);}
     if (url.pathname === '/runtime') {res.setHeader('Content-Type', 'text/html'); return res.end(runtime);}
+    if (url.pathname === '/entry-runtime') {res.setHeader('Content-Type', 'text/html'); return res.end(runtime.replace("'/bundle.js'", "'/entry.js'"));}
     let file;
     if (url.pathname === '/bundle.js') file = path.join(appRoot, 'dist/portal.js');
+    else if (url.pathname === '/entry.js') file = path.join(appRoot, 'dist/entry.js');
     else if (/^\/assets\/[a-z0-9.-]+$/i.test(url.pathname)) file = path.join(root, url.pathname);
     else {res.statusCode = 404; return res.end();}
     res.setHeader('Content-Type', file.endsWith('.css') ? 'text/css' : file.endsWith('.png') ? 'image/png' : 'text/javascript');
@@ -100,6 +102,9 @@ try {
   await page.waitForFunction(() => document.body.textContent.includes('nog geen specifieke garantiegegevens'));
   await page.evaluate(() => navigation.navigate('extension://favorites'));
   await page.waitForFunction(() => document.body.textContent.includes('Ruimte voor jouw volgende favoriet'));
+  await page.evaluate(() => {shopify.settings.change({}); navigation.navigate('extension://support');});
+  await page.waitForFunction(() => document.body.textContent.includes('Mail onze klantenservice'));
+  assert.equal(await page.locator('s-button').filter({hasText:'Mail onze klantenservice'}).getAttribute('href'), 'mailto:service%40example.invalid');
   const b = account('2', false);
   await page.evaluate(b => {window.testCustomer = b; shopify.authenticatedAccount.customer.change({id:b.id}); navigation.navigate('extension://overview');}, b);
   await page.waitForFunction(() => document.querySelector('s-page')?.getAttribute('heading')?.includes('Testklant B'), null, {timeout:5000}).catch(async error => {console.log(await page.locator('body').innerText()); console.log(errors); throw error;});
@@ -117,6 +122,9 @@ try {
   await page.evaluate(() => shopify.authenticatedAccount.customer.change(undefined));
   await page.waitForFunction(() => document.querySelector('s-banner')?.getAttribute('heading') === 'Open je Shopify-account');
   assert.ok(!(await page.locator('body').innerText()).includes('Testklant B'));
+  await page.goto(origin + '/entry-runtime');
+  await page.waitForFunction(() => document.body.textContent.includes('Open mijn iSelectStore'));
+  assert.equal(await page.locator('s-button').getAttribute('href'), 'extension:iselectstore-portal/');
   assert.deepEqual(errors, []);
   console.log('Browser smoke geslaagd: thema 320/390/768/1440px, formulierhints, portaalroutes, lege account, fout, accountwissel, late response en uitgelogde staat.');
   console.log('Let op: Shopify-hostcomponenten, authenticatie en verzending zijn hier gesimuleerd; live acceptatie blijft nodig.');

@@ -1,6 +1,16 @@
 # Deploymentstatus klantenportaal — 15 oktober 2026
 
-## Bevestigd uitgevoerd
+## Actuele publicatie
+
+De acht accountgerelateerde themabestanden zijn gericht geüpload naar het **gepubliceerde** thema `210646630791`, met `--allow-live --nodelete --only ...`. De bestaande header kwam vlak vóór upload nog overeen met de back-up. Alle acht bestanden zijn na upload teruggelezen: zes zijn bytegelijk, beide JSON-templates zijn inhoudelijk gelijk na normalisatie van Shopify's automatisch toegevoegde lege `settings`-objecten en editorcommentaar. De header gebruikt de officiële Shopify-account-route.
+
+De actuele vrijgegeven appversie is **iselectstore-portaal-live-20261015-v2**, versie-ID `1168792715265`. Deze bevat naast de full-page extension een nieuwe, automatisch weergegeven ingang op zowel het besteloverzicht als profiel (`customer-account.order-index.announcement.render` en `customer-account.profile.announcement.render`). De knop **Open mijn iSelectStore** gebruikt `extension:iselectstore-portal/`; Shopify lost daarmee de juiste full-page URL binnen dezelfde geïnstalleerde app op. Er hoeft hiervoor geen URL door de winkelbeheerder te worden gekopieerd. Een directe storefront-headerlink naar de full-page URL blijft een optionele vervolgstap; de huidige route loopt via het besteloverzicht.
+
+De nieuwe app-ingang heeft UID `9420b04e-5d37-9a42-7912-e3102c1d0f623e6b9eb7`. Webshop- en contactlinks gebruiken nu de echte `shop.url` en `shop.email` uit de Customer Account API als geen editorinstelling is ingevuld. Contact valt dan terug op een e-mailactie, niet op een niet-bestaande servicepagina. De e-mailactie verstuurt niets zonder dat de klant zelf verzendt.
+
+Eigenaar heeft installatie gemeld. De CLI kan de installatie op deze productiestore nog niet onafhankelijk verifiëren. Een volledige ingelogde klanttest, protected-customer-data rechten, adreswijzigingen en een echte retouraanvraag zijn **niet** als geslaagd vastgesteld. De native accountomgeving is vanuit de uitvoeromgeving beperkt door toegang/botbescherming. De openbare storefront blijft wachtwoordbeschermd.
+
+## Eerder bevestigd uitgevoerd
 
 - Store: `ggh8q9-v1.myshopify.com`. Shopify CLI-login is geautoriseerd en thematoegang werkt.
 - Gepubliceerd thema: `iselectstore-shopify-theme/main`, ID `210646630791`.
@@ -35,16 +45,27 @@ De lokale bundle `artifacts/iselectstore-customer-portal.bundle` bevat de opleve
 
 ### Shopify-installatie en acceptatie
 
-De app moet via het Dev Dashboard voor custom distribution op de live winkel worden geïnstalleerd. De installatiestap moet de winkel en effectieve scopes bevestigen. `shopify app dev` kan deze winkel niet als development/sandboxstore vinden. Ook een read-only `app execute`-controle kon de winkel niet binnen de apporganisatie vinden. Er zijn geen Admin API-mutaties op productie geprobeerd.
+De eigenaar meldt de app te hebben geïnstalleerd. De effectieve winkelinstallatie en scopes moeten nog via een ingelogde klanttest worden bevestigd. `shopify app dev` kan deze winkel niet als development/sandboxstore vinden. Ook een read-only `app execute`-controle kon de winkel niet binnen de apporganisatie vinden. Er zijn geen Admin API-mutaties op productie geprobeerd.
 
 Daarna zijn nog nodig:
 
 1. Protected customer data-toegang controleren en klantaccounts met echte Shopify-testdata openen.
-2. De full-page extension in de account-editor plaatsen, service-/winkel-URL's instellen en de echte directe URL kopiëren.
+2. Ingelogd op het besteloverzicht of profiel de automatisch weergegeven knop **Open mijn iSelectStore** controleren. Een accountmenu-item en een directe header-URL zijn aanvullend mogelijk, maar niet nodig voor deze nieuwe ingang.
 3. Garantie- en favorietmetafields met de beschreven lees-/schrijfrechten instellen. Favorieten pas daarna activeren.
 4. De servicepagina aanmaken met template `page.klantenservice`, native retourinstellingen en contactontvangst controleren.
 5. Preview van de nieuwe accountomgeving en bestaande winkelstromen testen; de storefront is momenteel wachtwoordbeschermd.
-6. Pas dan de geteste accountbestanden gericht naar thema `210646630791` uploaden, zonder andere live bestanden te verwijderen of te vervangen. De header pas naar de directe extension-URL laten verwijzen nadat deze werkt.
+6. De acht geteste accountbestanden zijn gericht live geüpload. Een eventuele directe header-URL pas na controle van de werkelijke full-page URL activeren.
 7. Na upload live account, productpagina, cart en checkout controleren. Er is nog geen volledige live acceptatie geweest.
 
-De gepubliceerde storefront is tot nu toe niet gewijzigd. Alleen de ongepubliceerde back-up en de Shopify-appregistratie/-versie zijn toegevoegd.
+De gepubliceerde storefront bevat inmiddels de acht hierboven genoemde accountbestanden. Homepage, product-, collectie-, cart- en checkoutbestanden zijn niet aangepast. De wachtwoordbescherming is behouden.
+
+
+## Controles na de laatste update
+
+- Strict TypeScript: geslaagd.
+- Acht gerichte API-/validatietests: geslaagd.
+- Customer Account GraphQL-schema inclusief `shop { email url }`: geldig.
+- Chromium-smoketest: geslaagd, inclusief automatische-inganglink en contact zonder editorinstellingen, accountwissels en late responses.
+- Officiële Shopify-build en releasevalidatie van beide extensions: geslaagd.
+- Live HTTP: `/`, `/collections/all`, `/cart` en `/checkout` leiden naar de bestaande wachtwoordpagina (HTTP 200). `/cart.js` is afgeschermd (401). De account-route verwijst naar Shopify-hosted accounts, maar de uiteindelijke pagina geeft vanuit de uitvoeromgeving 406. Dit is geen volledige functionele regressietest achter de winkelafscherming.
+- GitHub-schrijfrecht blijft geblokkeerd; de commits zijn lokaal en in de bijgewerkte bundle bewaard.
