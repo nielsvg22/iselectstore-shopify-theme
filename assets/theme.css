@@ -51,7 +51,7 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .mnav .primary{margin-top:22px;padding:16px 34px;font-size:16px}
 
 .hero{background:radial-gradient(circle at 18% 20%,#fbfbfd 0%,var(--ivory) 45%,#eef0f3 100%);position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(600px 300px at 85% 15%,rgba(249,133,139,.14),transparent 70%)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(600px 300px at 85% 15%,rgba(249,133,139,.14),transparent 70%);pointer-events:none}
 .heroIn{max-width:var(--max);margin:auto;min-height:620px;padding:clamp(44px,8vw,70px) 22px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;position:relative}
 .eye{font-size:13px;letter-spacing:.14em;font-weight:600;color:var(--coral-ink);margin-bottom:18px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
 .eye::before{content:'';width:22px;height:1px;background:var(--coral-ink)}
@@ -136,7 +136,7 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .snapdots span:first-child{background:var(--coral);width:16px;border-radius:4px}
 
 .trade{background:linear-gradient(120deg,var(--navy),#2c4262 60%);border-radius:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden;align-items:center;position:relative}
-.trade::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 260px at 10% 20%,rgba(249,133,139,.28),transparent 70%)}
+.trade::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 260px at 10% 20%,rgba(249,133,139,.28),transparent 70%);pointer-events:none}
 .tradecopy{padding:clamp(30px,5vw,56px);position:relative;color:#fff}
 .trade .eye{color:var(--coral)}.trade .eye::before{background:var(--coral)}
 .trade h2{font-size:clamp(28px,4vw,44px);color:#fff}
@@ -403,7 +403,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 
 /* Shop page */
 .shopHero{background:linear-gradient(120deg,var(--navy),#2c4262 65%);padding:clamp(40px,7vw,64px) 0;position:relative;overflow:hidden}
-.shopHero::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 260px at 90% 0%,rgba(249,133,139,.3),transparent 70%)}
+.shopHero::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 260px at 90% 0%,rgba(249,133,139,.3),transparent 70%);pointer-events:none}
 .shopHero .wrap{position:relative}
 .shopHero .eyebrow{color:var(--coral)}
 .shopHero h1{color:#fff;font-size:clamp(30px,4.4vw,46px);margin:0 0 10px}
@@ -442,7 +442,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .sortSelect{padding:10px 16px;border:1.5px solid var(--line);border-radius:980px;font-family:inherit;font-size:16px;color:var(--navy);background:#fff;cursor:pointer}
 @media (min-width:901px){
   .shopHero{padding:clamp(56px,8vw,86px) 0}
-  .shopHero::after{content:'';position:absolute;left:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(249,133,139,.18),transparent 70%)}
+  .shopHero::after{content:'';position:absolute;left:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(249,133,139,.18),transparent 70%);pointer-events:none}
   .shopToolbar{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
   .searchRow{flex:1;max-width:420px}
   .shopSearchInput{box-shadow:0 10px 26px -18px rgba(31,48,73,.45)}
@@ -590,7 +590,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 #story-intro,#story-video{scroll-margin-top:calc(var(--header-h) + 18px)}
 
 .stHero{position:relative;overflow:hidden;padding:0;background:linear-gradient(165deg,var(--lightpink) 0%,#fff 58%,var(--ivory) 100%);color:var(--navy)}
-.stHero::before{content:'';position:absolute;inset:0;background:radial-gradient(620px 320px at 88% 6%,rgba(249,133,139,.22),transparent 70%),radial-gradient(520px 300px at 2% 96%,rgba(31,48,73,.06),transparent 70%)}
+.stHero::before{content:'';position:absolute;inset:0;background:radial-gradient(620px 320px at 88% 6%,rgba(249,133,139,.22),transparent 70%),radial-gradient(520px 300px at 2% 96%,rgba(31,48,73,.06),transparent 70%);pointer-events:none}
 .stHeroIn>*{min-width:0}
 .stHeroIn{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(28px,5vw,56px);align-items:center;min-height:clamp(480px,72vh,640px);padding-top:clamp(52px,8vw,84px);padding-bottom:clamp(52px,8vw,84px)}
 .stHero .eyebrow{color:var(--coral-ink)}
@@ -706,7 +706,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .stVideoFrame video{display:block;width:100%;height:100%;object-fit:contain;background:#0d1520}
 .stVideoFrame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .stVideoPlaceholder{position:relative;display:flex;align-items:flex-end;justify-content:flex-start;min-height:clamp(280px,46vw,540px);padding:clamp(26px,4vw,48px);text-align:left;background:var(--navy);overflow:hidden}
-.stVideoPlaceholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,48,73,0) 38%,rgba(31,48,73,.82) 100%)}
+.stVideoPlaceholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,48,73,0) 38%,rgba(31,48,73,.82) 100%);pointer-events:none}
 .stVideoPoster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}
 .stVideoPlaceholderInner{position:relative;z-index:1;display:flex;flex-direction:row;align-items:center;gap:20px;max-width:100%;color:#fff}
 .stVideoBadge{display:none}
@@ -717,7 +717,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .stPerson{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4.5vw,52px);align-items:center}
 .stPersonMedia img{width:clamp(170px,24vw,250px);aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:0 30px 60px -30px rgba(31,48,73,.55)}
 .stPersonPlaceholder{display:grid;place-items:center;width:clamp(170px,24vw,250px);aspect-ratio:1;border-radius:50%;background:linear-gradient(150deg,var(--navy),#2c4262 70%);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(31,48,73,.55)}
-.stPersonPlaceholder::before{content:'';position:absolute;inset:0;background:radial-gradient(180px 140px at 78% 18%,rgba(249,133,139,.4),transparent 70%)}
+.stPersonPlaceholder::before{content:'';position:absolute;inset:0;background:radial-gradient(180px 140px at 78% 18%,rgba(249,133,139,.4),transparent 70%);pointer-events:none}
 .stPersonPlaceholder .stMark{width:34%;height:34%;position:relative}
 .stPersonCopy h2{margin-bottom:6px}
 .stQuote{position:relative;margin:16px 0 0;padding:0;border:0;font-size:clamp(17px,2.2vw,22px);line-height:1.6;font-weight:500;letter-spacing:-.015em;color:var(--navy)}
@@ -738,7 +738,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .stStepBody p{margin:0;font-size:14px;line-height:1.65;color:var(--muted)}
 
 .stTrustCard{position:relative;display:grid;grid-template-columns:minmax(210px,290px) 1fr;gap:16px;padding:clamp(20px,3vw,30px);border-radius:32px;overflow:hidden;background:linear-gradient(140deg,var(--navy) 0%,#2c4262 72%)}
-.stTrustCard::before{content:'';position:absolute;inset:0;background:radial-gradient(440px 240px at 94% 0%,rgba(249,133,139,.3),transparent 70%)}
+.stTrustCard::before{content:'';position:absolute;inset:0;background:radial-gradient(440px 240px at 94% 0%,rgba(249,133,139,.3),transparent 70%);pointer-events:none}
 .stTrustCard>*{position:relative;z-index:1;min-width:0}
 .stScore{display:flex;flex-direction:column;gap:7px;justify-content:center;padding:22px 20px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
 .stStars{color:var(--coral);letter-spacing:3px;font-size:15px}
@@ -755,7 +755,7 @@ a.stProofTitle:hover{color:var(--coral)}
 .stProof>div>span{display:block;font-size:13px;line-height:1.6;color:rgba(255,255,255,.72)}
 
 .stCtaSection{position:relative;background:linear-gradient(155deg,var(--navy) 0%,#2c4262 70%);overflow:hidden}
-.stCtaSection::before{content:'';position:absolute;inset:0;background:radial-gradient(560px 300px at 92% 100%,rgba(249,133,139,.22),transparent 70%)}
+.stCtaSection::before{content:'';position:absolute;inset:0;background:radial-gradient(560px 300px at 92% 100%,rgba(249,133,139,.22),transparent 70%);pointer-events:none}
 .stCtaCard{position:relative;max-width:840px;margin:0 auto;padding:0;text-align:center;border-radius:0;border:0;background:none;box-shadow:none;overflow:visible}
 .stCtaCard>*{position:relative;z-index:1}
 .stCtaMark{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);box-shadow:none;margin-bottom:20px}
