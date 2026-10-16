@@ -60,3 +60,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* Coral actions always use white labels, including contextual links and nested text. */
 :is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay,.stHomeCtaBtn):not(:disabled),:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay,.stHomeCtaBtn):not(:disabled) :is(span,b,strong,em,svg){color:#fff!important;-webkit-text-fill-color:#fff}
+
+/* Live inventory label, separate from the original product photo. */
+.card .productCardVisual{isolation:isolate}
+.card .productSoldRibbon{position:absolute;z-index:3;top:8.5%;left:-17%;width:70%;height:14%;display:grid;place-items:center;transform:rotate(-45deg);background:var(--coral);color:#fff;-webkit-text-fill-color:#fff;font-family:var(--font-body);font-size:clamp(9px,.8vw,12px);font-weight:700;line-height:1;letter-spacing:.06em;text-align:center;pointer-events:none}
+@media(max-width:640px){.card .productSoldRibbon{font-size:9px}}

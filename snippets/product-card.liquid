@@ -1,15 +1,44 @@
 {% comment %} Verwacht: product, optioneel index (positie in de grid, voor staggered reveal) {% endcomment %}
+{% comment %}Sold exports retain their original image ID in the filename. Prefer that exact original, then another clean photo of the same item.{% endcomment %}
+{% liquid
+  assign card_image = product.featured_image
+  assign card_filename = card_image.src | split: '/' | last | split: '?' | first | downcase
+  if card_filename contains 'verkocht-'
+    assign source_image_id = card_filename | remove_first: 'verkocht-' | split: '.' | first | split: '_' | first
+    assign clean_candidate = nil
+    for item_image in product.images
+      assign item_filename = item_image.src | split: '/' | last | split: '?' | first | downcase
+      unless item_filename contains 'verkocht-'
+        if clean_candidate == nil
+          assign clean_candidate = item_image
+        endif
+        assign item_image_id = item_image.id | append: ''
+        if item_image_id == source_image_id
+          assign clean_candidate = item_image
+          break
+        endif
+      endunless
+    endfor
+    if clean_candidate != nil
+      assign card_image = clean_candidate
+    endif
+  endif
+  assign card_filename = card_image.src | split: '/' | last | split: '?' | first | downcase
+%}
 {% assign stagger_index = index | default: 0 | at_most: 8 %}
 {% assign stagger_delay = stagger_index | times: 0.06 %}
 <article class="card reveal{% if collection_card %} collectionCard{% endif %}" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
-  <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-    {% if product.featured_image %}
+  <a class="productCardVisual" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    {% if card_image %}
       {% if collection_card %}
-        <img src="{{ product.featured_image | image_url: width: 600 }}" srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 450 }} 450w, {{ product.featured_image | image_url: width: 600 }} 600w" sizes="(min-width:1600px) 280px, (min-width:1200px) 300px, (min-width:901px) 330px, 50vw" width="600" height="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" {% if index < 4 %}loading="eager"{% else %}loading="lazy"{% endif %} decoding="async">
+        <img src="{{ card_image | image_url: width: 600 }}" srcset="{{ card_image | image_url: width: 300 }} 300w, {{ card_image | image_url: width: 450 }} 450w, {{ card_image | image_url: width: 600 }} 600w" sizes="(min-width:1600px) 280px, (min-width:1200px) 300px, (min-width:901px) 330px, 50vw" width="600" height="600" alt="{{ card_image.alt | default: product.title | escape }}" {% if index < 4 %}loading="eager"{% else %}loading="lazy"{% endif %} decoding="async">
       {% else %}
-        <img src="{{ product.featured_image | image_url: width: 600 }}" width="600" height="600" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy">
+        <img src="{{ card_image | image_url: width: 600 }}" width="600" height="600" alt="{{ card_image.alt | default: product.title | escape }}" loading="lazy">
       {% endif %}
     {% endif %}
+    {% unless product.available %}
+      <span class="productSoldRibbon">VERKOCHT</span>
+    {% endunless %}
   </a>
   {% if product.available %}
     {% assign badge_label = product.metafields.custom.badge_text | default: product.metafields.custom.condition %}

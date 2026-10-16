@@ -19,7 +19,8 @@
     "test:storefront:browser": "npm run build:storefront && node scripts/storefront-browser.mjs",
     "test:native:browser": "node scripts/native-browser.mjs",
     "test:brand:browser": "node scripts/brand-browser.mjs",
-    "test:collection:browser": "node scripts/collection-browser.mjs"
+    "test:collection:browser": "node scripts/collection-browser.mjs",
+    "test:product-card:browser": "node scripts/product-card-browser.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",
