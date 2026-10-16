@@ -286,7 +286,9 @@
     "upsell_subtitle": "Populaire accessoires die perfect passen bij je keuze.",
     "upsell_sold_out": "Verkocht",
     "upsell_add_aria": "Toevoegen aan winkelwagen",
-    "upsell_view_all": "Bekijk alle accessoires →"
+    "upsell_view_all": "Bekijk alle accessoires →",
+    "item_warranty": "Incl. {{ warranty }} garantie",
+    "shipping_note": "Meestal op werkdagen voor 17:00 besteld, morgen in huis."
   },
   "search_page": {
     "breadcrumb": "Zoeken",

@@ -286,7 +286,9 @@
     "upsell_subtitle": "Popular accessories that go perfectly with your choice.",
     "upsell_sold_out": "Sold out",
     "upsell_add_aria": "Add to cart",
-    "upsell_view_all": "Browse all accessories →"
+    "upsell_view_all": "Browse all accessories →",
+    "item_warranty": "Incl. {{ warranty }} warranty",
+    "shipping_note": "Order on weekdays before 5pm, usually delivered the next day."
   },
   "search_page": {
     "breadcrumb": "Search",

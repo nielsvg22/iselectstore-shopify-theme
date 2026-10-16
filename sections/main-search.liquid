@@ -14,7 +14,7 @@
   {% if search.results.size == 0 %}
     <p class="noResults">{{ 'search_page.no_results' | t: terms: search.terms }}</p>
   {% else %}
-    <div class="products">
+    <div class="products shopProductsGrid">
       {% for item in search.results %}
         {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
       {% endfor %}

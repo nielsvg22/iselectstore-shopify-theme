@@ -493,8 +493,10 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 
 @media(max-width:900px){
  .links{display:none}
- .burger{display:block}
- .icons{margin-left:auto}
+ .nav{display:grid;grid-template-columns:auto 1fr auto;gap:8px}
+ .burger{display:block;justify-self:start}
+ .logo{justify-self:center;min-width:0;max-width:100%;overflow:hidden}
+ .icons{justify-self:end;margin-left:0}
  .logoFormerly{height:18px}
  .logoBbp{height:20px}
  .icLang{display:none}

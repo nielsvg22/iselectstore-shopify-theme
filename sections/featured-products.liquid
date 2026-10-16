@@ -30,7 +30,7 @@
     {% endfor %}
   </div>
 
-  <div class="products">
+  <div class="products shopProductsGrid">
     {% for product in featured_sorted limit: limit %}
       {% if product.available %}{% render 'product-card', product: product, index: forloop.index0 %}{% endif %}
     {% endfor %}

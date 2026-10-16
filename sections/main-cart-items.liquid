@@ -18,6 +18,11 @@
               <div class="info">
                 <h4><a href="{{ item.url }}">{{ item.product.title }}</a></h4>
                 <div class="meta">{{ item.variant.title | replace: 'Default Title', '' }}</div>
+                {% capture item_warranty %}{% render 'spec-value', product: item.product, key: 'warranty_months', format: 'warranty' %}{% endcapture %}
+                {% assign item_warranty = item_warranty | strip %}
+                {% if item_warranty != blank %}
+                  <div class="cartItemWarranty">{{ 'cart_page.item_warranty' | t: warranty: item_warranty }}</div>
+                {% endif %}
                 <div class="itemPrice">{{ item.final_line_price | money }}</div>
               </div>
               <a class="remove" href="{{ item.url_to_remove }}">{{ 'cart_page.remove' | t }}</a>
@@ -31,6 +36,8 @@
           <div class="sumRow"><span>{{ 'cart_page.shipping' | t }}</span><b>{{ 'cart_page.shipping_free' | t }}</b></div>
           <div class="sumRow total"><span>{{ 'cart_page.total' | t }}</span><b>{{ cart.total_price | money }}</b></div>
           <button class="btn primary" type="submit" name="checkout" style="width:100%;margin-top:18px;justify-content:center">{{ 'cart_page.checkout' | t }}</button>
+          <p class="cartShippingNote">{{ 'cart_page.shipping_note' | t }}</p>
+          <div class="cartTrustWidget"><valued-widget layout="rating" size="small" align="center" theme="light"></valued-widget></div>
           <a class="link" href="{{ routes.all_products_collection_url }}" style="justify-content:center;margin-top:16px;width:100%">{{ 'cart_page.continue_shopping' | t }}</a>
         </aside>
       </div>
@@ -115,6 +122,9 @@
   .upsellCard__add:hover { background: var(--navy); color: #fff; }
   .upsellCard__add:disabled { opacity: .5; cursor: not-allowed; }
   @media (max-width: 900px) { .cartUpsell__grid { grid-template-columns: repeat(2, 1fr); } }
+  .cartItemWarranty { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .cartShippingNote { font-size: 12.5px; color: var(--muted); text-align: center; margin: 12px 0 0; line-height: 1.5; }
+  .cartTrustWidget { display: flex; justify-content: center; margin-top: 14px; }
 </style>
 
 {% schema %}
