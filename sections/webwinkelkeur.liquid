@@ -32,8 +32,18 @@
   </section>
 
   <style>
-    .webwinkelkeur { background: var(--ivory); }
-    .wwkWidget { display: flex; justify-content: center; }
+    /*
+      De widget die WebwinkelKeur zelf injecteert, rendert zijn eigen
+      merkbalkje (logo + score + "Gebaseerd op … reviews") altijd in wit
+      tekst — dat is bij hen onstyle-baar vanaf onze kant. Daarom staat de
+      hele widget op een donkere kaart: de witte merkbalk wordt leesbaar,
+      en de eigen (lichte) reviewkaartjes van de widget blijven daar
+      prima op afsteken.
+    */
+    .webwinkelkeur { background: var(--navy); }
+    .webwinkelkeur .eyebrow { color: var(--coral); }
+    .webwinkelkeur h2 { color: #fff; }
+    .wwkWidget { display: flex; justify-content: center; padding: 8px 0 4px; }
   </style>
 {% endif %}
 
