@@ -111,6 +111,12 @@
     "meta_warranty_prefix": "incl."
   },
   "collection": {
+    "stock_order": {
+      "newest": "Newest first · available first",
+      "loading": "Loading the newest available products…",
+      "error": "The automatic stock order could not be loaded. The standard order is shown. Please reload the page.",
+      "pagination": "Pagination"
+    },
     "breadcrumb_home": "Home",
     "eyebrow": "Full inventory",
     "default_title": "All products",

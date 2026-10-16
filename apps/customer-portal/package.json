@@ -21,7 +21,8 @@
     "test:brand:browser": "node scripts/brand-browser.mjs",
     "test:collection:browser": "node scripts/collection-browser.mjs",
     "test:product-card:browser": "node scripts/product-card-browser.mjs",
-    "test:homepage:stock": "node scripts/homepage-stock-test.mjs"
+    "test:homepage:stock": "node scripts/homepage-stock-test.mjs",
+    "test:collection:stock": "node scripts/collection-stock-browser.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",

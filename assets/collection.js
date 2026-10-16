@@ -67,5 +67,9 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setup());
   else setup();
   document.addEventListener('shopify:section:load', event => setup(event.target));
+  document.addEventListener('iselect:collection:ordered', event => {
+    event.target.querySelectorAll('[data-collection-grid]').forEach(grid => delete grid.dataset.enhanced);
+    setup(event.target);
+  });
   document.addEventListener('shopify:section:unload', event => event.target.querySelectorAll('[data-collection-grid]').forEach(grid => grid._collectionObserver?.disconnect()));
 })();

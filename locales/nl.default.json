@@ -111,6 +111,12 @@
     "meta_warranty_prefix": "incl."
   },
   "collection": {
+    "stock_order": {
+      "newest": "Nieuwste eerst · beschikbaar vooraan",
+      "loading": "De nieuwste beschikbare producten worden geladen…",
+      "error": "De automatische voorraadvolgorde kon niet worden geladen. Je ziet de standaardvolgorde. Probeer de pagina opnieuw te laden.",
+      "pagination": "Paginering"
+    },
     "breadcrumb_home": "Home",
     "eyebrow": "Volledige voorraad",
     "default_title": "Alle producten",

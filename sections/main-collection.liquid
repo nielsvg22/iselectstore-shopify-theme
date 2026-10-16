@@ -1,5 +1,6 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection.js' | asset_url }}" defer></script>
+<script src="{{ 'collection-stock-order.js' | asset_url }}" defer></script>
 <section class="shopHero collectionHero"><div class="wrap">
   <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span aria-hidden="true">/</span><span>{{ collection.title | escape }}</span></div>
   <p class="eyebrow">{{ 'collection.eyebrow' | t }}</p>
@@ -9,7 +10,7 @@
 {% assign bc_home = 'collection.breadcrumb_home' | t %}
 {% render 'breadcrumb-jsonld', name_1: bc_home, url_1: routes.root_url, name_2: collection.title, url_2: collection.url %}
 {% liquid
-  assign current_sort = collection.sort_by | default: collection.default_sort_by
+  assign current_sort = collection.sort_by | default: 'created-descending'
   assign active_count = 0
   for filter in collection.filters
     assign active_count = active_count | plus: filter.active_values.size
@@ -70,7 +71,7 @@
             {% render 'collection-filter-values', collection: collection %}
             <label for="CollectionSort" class="collectionSrOnly">Sorteer producten</label>
             <select id="CollectionSort" class="sortSelect" name="sort_by">
-              {% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == current_sort %}selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}
+              {% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == current_sort %}selected{% endif %}>{% if option.value == 'created-descending' %}{{ 'collection.stock_order.newest' | t }}{% else %}{{ option.name | escape }}{% endif %}</option>{% endfor %}
             </select>
             <button class="collectionSortSubmit clearAllBtn" type="submit">Sorteren</button>
           </form>
@@ -86,6 +87,8 @@
           <a class="clearFiltersLink" href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>
         </nav>
       {% endif %}
+      <div data-stock-results data-section-id="{{ section.id }}" data-total="{{ collection.products_count }}" data-page="{{ paginate.current_page }}" data-page-size="24" data-sort="{{ current_sort }}">
+      <p class="stockOrderStatus" role="status" hidden data-stock-status data-loading="{{ 'collection.stock_order.loading' | t | escape }}" data-error="{{ 'collection.stock_order.error' | t | escape }}"></p>
       {% if collection.products.size == 0 %}
         <div class="noResults"><h2>Geen producten gevonden</h2><p>{{ 'collection.no_results' | t }}</p>{% if active_count > 0 %}<a class="btn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
       {% else %}
@@ -99,12 +102,13 @@
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{% for product in collection.products %}{% unless forloop.first %},{% endunless %}{"@type":"ListItem","position":{{ paginate.current_offset | plus: forloop.index }},"url":{{ shop.url | append: product.url | json }}}{% endfor %}]}</script>
       {% endif %}
       {% if paginate.pages > 1 %}
-        <nav class="collectionPagination" aria-label="Paginering">
+        <nav class="collectionPagination" aria-label="{{ 'collection.stock_order.pagination' | t }}">
           {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="Vorige pagina">←</a>{% endif %}
           {% for part in paginate.parts %}{% assign part_number = part.title | plus: 0 %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% elsif part_number == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
           {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="Volgende pagina">→</a>{% endif %}
         </nav>
       {% endif %}
+      </div>
     </div>
   </div>
 </div></section>

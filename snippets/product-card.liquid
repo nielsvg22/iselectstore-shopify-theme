@@ -27,7 +27,7 @@
 %}
 {% assign stagger_index = index | default: 0 | at_most: 8 %}
 {% assign stagger_delay = stagger_index | times: 0.06 %}
-<article class="card reveal{% if collection_card %} collectionCard{% endif %}" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
+<article class="card reveal{% if collection_card %} collectionCard{% endif %}" data-product-id="{{ product.id }}" data-available="{{ product.available }}" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
   <a class="productCardVisual" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     {% if card_image %}
       {% if collection_card %}
