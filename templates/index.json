@@ -174,13 +174,6 @@
         "button_link": ""
       }
     },
-    "tradein": {
-      "type": "trade-in-banner",
-      "settings": {
-        "heading": "",
-        "subtext": ""
-      }
-    },
     "reviews": {
       "type": "reviews",
       "blocks": {
@@ -272,6 +265,13 @@
         "subtext": ""
       }
     },
+    "tradein": {
+      "type": "trade-in-banner",
+      "settings": {
+        "heading": "",
+        "subtext": ""
+      }
+    },
     "webwinkelkeur": {
       "type": "webwinkelkeur",
       "settings": {
@@ -297,8 +297,8 @@
     "products",
     "proof",
     "storycta",
-    "tradein",
     "reviews",
+    "tradein",
     "webwinkelkeur",
     "whyus"
   ]
