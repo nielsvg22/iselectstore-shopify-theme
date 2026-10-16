@@ -104,28 +104,32 @@
           "type": "category",
           "settings": {
             "collection": "apple-iphone",
-            "label": "Apple iPhone"
+            "label": "Apple iPhone",
+            "image": "shopify://shop_images/IMG_9279-scaled_2e8f9459-df0a-4675-aa92-2485fb52f9be.jpg"
           }
         },
         "cat-ipad": {
           "type": "category",
           "settings": {
             "collection": "apple-ipad",
-            "label": "Tablets | Apple iPad"
+            "label": "Tablets | Apple iPad",
+            "image": "shopify://shop_images/IMG_9437-scaled_6f98b1bb-ff21-4918-90e3-12604ca6c6b0.jpg"
           }
         },
         "cat-macbook": {
           "type": "category",
           "settings": {
             "collection": "apple-macbooks",
-            "label": "Apple MacBooks"
+            "label": "Apple MacBooks",
+            "image": "shopify://shop_images/IMG_9475-2-scaled_63d48149-f767-4f71-951d-2f751c47d016.jpg"
           }
         },
         "cat-watch": {
           "type": "category",
           "settings": {
             "collection": "apple-watch",
-            "label": "Apple Watch"
+            "label": "Apple Watch",
+            "image": "shopify://shop_images/IMG_9333-scaled_643571a1-3322-4764-8d90-38f2c9d6ba9c.jpg"
           }
         }
       },
@@ -167,13 +171,6 @@
         "text": "",
         "button_label": "",
         "button_link": ""
-      }
-    },
-    "tradein": {
-      "type": "trade-in-banner",
-      "settings": {
-        "heading": "",
-        "subtext": ""
       }
     },
     "reviews": {
@@ -267,6 +264,13 @@
         "subtext": ""
       }
     },
+    "tradein": {
+      "type": "trade-in-banner",
+      "settings": {
+        "heading": "",
+        "subtext": ""
+      }
+    },
     "webwinkelkeur": {
       "type": "webwinkelkeur",
       "settings": {
@@ -292,8 +296,8 @@
     "products",
     "proof",
     "storycta",
-    "tradein",
     "reviews",
+    "tradein",
     "webwinkelkeur",
     "whyus"
   ]
