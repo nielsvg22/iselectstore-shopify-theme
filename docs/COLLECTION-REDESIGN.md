@@ -62,3 +62,9 @@ Controleer als eigenaar de collectie in je bestaande ingelogde browser: filters 
 Officiële documentatie: https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering/support-storefront-filtering
 
 GitHub: de Shopify-koppeling synchroniseert live themabestanden naar `main`. Rechtstreeks pushen van de volledige broncode kan nog HTTP 403 opleveren; lokale commits en een Git-bundle bewaren ook tests/documentatie. De definitieve publicatie-/synchronisatiecontrole wordt in de afronding vermeld.
+
+## Bevestigd na publicatie
+
+Implementatiecommit: `77cf935`. De zes themabestanden zijn live gepubliceerd, via de Theme API teruggelezen en bytegelijk met de geteste bron bevonden. Ze zijn eveneens alle zes in `origin/main` teruggevonden via Shopify-sync (waargenomen commit `1519f79`). De echte live wachtwoordpagina geeft HTTP 200 zonder JavaScript-fouten; de nieuwe collectie-CSS en JavaScript zijn via de Shopify-CDN opgehaald (HTTP 200, nieuwe functionaliteit aanwezig). Shopify minificeert CSS op de CDN; de onveranderde bron is afzonderlijk via de Theme API gecontroleerd. De echte catalogus achter het wachtwoord is niet als browseracceptatietest geclaimd.
+
+Aanvullend is de huidige paginapositie toegankelijk gemarkeerd met `aria-current` en getest op pagina 2. Rechtstreeks pushen van tests/documentatie is opnieuw met HTTP 403 geweigerd; deze bestanden staan in lokale commits en de Git-bundle, niet automatisch in de GitHub-themakoppeling.

@@ -75,6 +75,7 @@ try{
  console.log('Native GET forms: price conversion, list filters, sort preservation and active removal links passed');
  await page.goto('https://collection.test/collections/all');await page.locator('.collectionTrade .js-tradein-trigger').click();assert.ok(await page.locator('#tiOverlay').evaluate(n=>n.classList.contains('open')));await page.locator('#tiClose').click();
  await page.locator('.collectionPagination a[aria-label="Volgende pagina"]').click();await page.waitForURL('**page=2');assert.equal(await page.locator('.collectionCard').count(),4);assert.equal(await page.locator('.collectionCard').first().locator('h3 a').getAttribute('href'),'/products/individual-25');
+ assert.equal(await page.locator('.collectionPagination [aria-current=page]').innerText(),'2');
  const schema=JSON.parse(await page.locator('script[type="application/ld+json"]').last().textContent());assert.equal(schema.itemListElement.length,4);assert.equal(schema.itemListElement[0].position,25);assert.ok(!schema.itemListElement.some(n=>n.url.includes('trade')));
  for(const count of [0,1,2,3,4]){await page.goto('https://collection.test/collections/all?limit='+count);assert.equal(await page.locator('.collectionCard').count(),count);if(count<3)assert.equal(await page.locator('.collectionTrade:visible').count(),0);else assert.equal(await page.locator('.collectionTrade:visible').count(),1);}
  await page.goto('https://collection.test/collections/all?banner=off');assert.equal(await page.locator('.collectionTrade').count(),0);
