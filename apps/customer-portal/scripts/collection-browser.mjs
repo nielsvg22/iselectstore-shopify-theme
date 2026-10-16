@@ -43,7 +43,7 @@ async function fixture(page){page.on('pageerror',e=>errors.push(e.message));awai
 try{
  const page=await b.newPage({viewport:{width:1920,height:1300}});await fixture(page);
  await page.goto('https://collection.test/collections/all');await page.evaluate(()=>document.fonts.ready);
- for(const [width,columns] of [[1920,4],[1536,4],[1440,4],[1280,3],[1024,2],[768,2],[390,2]]){
+ for(const [width,columns] of [[1920,3],[1536,3],[1440,3],[1280,3],[1024,2],[768,2],[390,2]]){
   await page.setViewportSize({width,height:1300});await page.waitForTimeout(150);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Page overflow ${width}`);
   const cards=page.locator('.collectionCard');assert.equal(await cards.count(),24);
@@ -77,7 +77,7 @@ try{
  await page.locator('.collectionPagination a[aria-label="Volgende pagina"]').click();await page.waitForURL('**page=2');assert.equal(await page.locator('.collectionCard').count(),4);assert.equal(await page.locator('.collectionCard').first().locator('h3 a').getAttribute('href'),'/products/individual-25');
  assert.equal(await page.locator('.collectionPagination [aria-current=page]').innerText(),'2');
  const schema=JSON.parse(await page.locator('script[type="application/ld+json"]').last().textContent());assert.equal(schema.itemListElement.length,4);assert.equal(schema.itemListElement[0].position,25);assert.ok(!schema.itemListElement.some(n=>n.url.includes('trade')));
- for(const count of [0,1,2,3,4]){await page.goto('https://collection.test/collections/all?limit='+count);assert.equal(await page.locator('.collectionCard').count(),count);if(count<4)assert.equal(await page.locator('.collectionTrade:visible').count(),0);else assert.equal(await page.locator('.collectionTrade:visible').count(),1);}
+ for(const count of [0,1,2,3,4]){await page.goto('https://collection.test/collections/all?limit='+count);assert.equal(await page.locator('.collectionCard').count(),count);if(count<3)assert.equal(await page.locator('.collectionTrade:visible').count(),0);else assert.equal(await page.locator('.collectionTrade:visible').count(),1);}
  await page.goto('https://collection.test/collections/all?banner=off');assert.equal(await page.locator('.collectionTrade').count(),0);
  await page.goto('https://collection.test/collections/all?destination=1');assert.equal(await page.locator('.collectionTrade .primary').getAttribute('href'),'/pages/existing-trade');
  await page.goto('https://collection.test/collections/all?no_filters=1');assert.ok(await page.locator('.collectionFilterEmpty').isVisible());

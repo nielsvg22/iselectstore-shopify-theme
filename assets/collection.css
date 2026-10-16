@@ -86,12 +86,6 @@
  .collectionGrid:has(>.collectionCard:nth-of-type(2))>.collectionTrade{display:none}
  .collectionGrid:has(>.collectionCard:nth-of-type(3))>.collectionTrade{display:grid}
 }
-@media(min-width:1440px){
- .products.collectionGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
- .collectionGrid:has(>.collectionCard:nth-of-type(3))>.collectionTrade{display:none}
- .collectionGrid:has(>.collectionCard:nth-of-type(4))>.collectionTrade{display:grid}
- .collectionLayout{grid-template-columns:220px minmax(0,1fr);gap:24px}
-}
 @media(max-width:900px){
  .collectionToolbar .toolbarRow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
  .collectionToolbar .resultCount{flex-basis:100%;font-size:12px}

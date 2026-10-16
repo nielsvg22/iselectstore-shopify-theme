@@ -4,7 +4,7 @@
 
 De referentie https://mobico.nl/acties/beste-deals/ is bekeken: filters links, productraster rechts, consistente productfoto's en een commerciële onderbreking na de eerste rij. iSelectStore behoudt eigen Poppins-typografie, navy/ivory/lichtkoraal en koraalkleurige knoppen met witte tekst. Geen gekopieerde Mobico-afbeeldingen of stijlen.
 
-- Alleen de collectiepagina krijgt de nieuwe desktopindeling: zijbalk van 220 px en een productraster met 2 kolommen vanaf 901 px, 3 vanaf 1100 px en 4 vanaf 1440 px. De maximale paginabreedte is 1480 px.
+- Alleen de collectiepagina krijgt de nieuwe desktopindeling: zijbalk van 220 px en een productraster met 2 kolommen vanaf 901 px, 3 vanaf 1100 px (ook op grote desktop). De maximale paginabreedte is 1480 px.
 - Het bestaande mobiele tweekolomsraster en de bestaande productkaartinhoud blijven behouden. Nieuwe voorraadinformatie en specificatiechips zijn alleen op desktop zichtbaar. De nieuwe banner is bewust niet zichtbaar op mobiel/tablet tot en met 900 px.
 - De gedeelde productkaart krijgt extra inhoud uitsluitend met `collection_card: true`: opslag uit `custom.storage_gb` of een opslagoptie, kleuren uit productopties en echte Shopify-beschikbaarheid. Geen technische gegevens, garantie of korting verzonnen. Afbeeldingen gebruiken `contain`, gereserveerde ruimte en Shopify-responsieve URL's. Eerste vier kaartafbeeldingen laden eager, de rest lazy.
 - Iedere Shopify-productvermelding blijft zelfstandig. Geen samenvoeging van modellen. Collectieproducten, telling, paginering en volgorde komen rechtstreeks uit Shopify. De oude, niet-ondersteunde `where_exp`-uitsluiting en hergroepering op beschikbaarheid zijn verwijderd: ze ondermijnden aantallen en de gekozen sortering. Eventuele uitsluiting van accessoires hoort in de collectieregels van Shopify thuis.
@@ -71,6 +71,8 @@ Aanvullend is de huidige paginapositie toegankelijk gemarkeerd met `aria-current
 
 ## Compactere desktopweergave
 
-Na feedback over de grote presentatie is uitsluitend desktop-CSS compacter gemaakt: lager titelblok (28–34 px titel), kleiner boven-/tussenruimte, een 220 px filterkolom, maximaal 1480 px inhoud, fotovlakken van 200 px hoog met contain en producttitels op maximaal twee zichtbare regels. Productnamen blijven volledig in de linktekst voor hulptechnologie. Kaarten, voorraad en acties blijven zichtbaar en uitgelijnd. Vier kolommen vanaf 1440 px; drie vanaf 1100 px. De inruilbanner is eveneens lager. Mobiele regels zijn behouden.
+Na feedback over de grote presentatie is uitsluitend desktop-CSS compacter gemaakt: lager titelblok (28–34 px titel), kleiner boven-/tussenruimte, een 220 px filterkolom, maximaal 1480 px inhoud, fotovlakken van 200 px hoog met contain en producttitels op maximaal twee zichtbare regels. Productnamen blijven volledig in de linktekst voor hulptechnologie. Kaarten, voorraad en acties blijven zichtbaar en uitgelijnd. Op verzoek van de eigenaar maximaal drie kolommen op desktop vanaf 1100 px. De inruilbanner is eveneens lager. Mobiele regels zijn behouden.
 
 De volledige collectie-browsertest slaagt opnieuw op 1920/1536/1440/1280/1024/768/390 px, inclusief maxima voor kaart-/titelblokhoogte, eerste rij en banner, filtering/sortering/paginering, lege collecties, zonder JavaScript en nul JS-fouten. Back-up van de voorgaande live CSS: `artifacts/collection-compact-before/assets/collection.css`.
+
+De eigenaar heeft na de compactere uitvoering expliciet drie producten per rij gekozen, ook op grote desktops. CSS en browserverwachtingen zijn daarop aangepast; de banner volgt na product 3. Native filterconfiguratie en vereiste toegang staan in `docs/NATIVE-FILTER-SETUP.md`.
