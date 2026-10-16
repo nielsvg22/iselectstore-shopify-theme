@@ -1,5 +1,6 @@
-<section class="hero"><div class="heroIn">
-  <div>
+{{ 'hero-desktop.css' | asset_url | stylesheet_tag }}
+<section class="hero hero--showcase"><div class="heroIn">
+  <div class="heroCopy">
     <div class="eye">{{ section.settings.eyebrow | default: "selected by us, ready for you" }}</div>
     {% assign heading_default = 'hero.heading_default' | t %}
     {% assign heading_accent_default = 'hero.heading_accent_default' | t %}
@@ -13,8 +14,18 @@
     <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: "607" }} {{ 'hero.review_suffix' | t }}</span></div>
   </div>
   {% if section.settings.image %}
-    <div class="heroImg"><img src="{{ section.settings.image | image_url: width: 900 }}" width="900" height="900" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>
+    <div class="heroImg heroMobileMedia"><img src="{{ section.settings.image | image_url: width: 900 }}" width="900" height="900" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>
   {% endif %}
+  <div class="heroDesktopMedia" aria-hidden="true">
+    <picture>
+      {% if section.settings.desktop_image != blank %}
+        <source media="(min-width: 981px)" srcset="{{ section.settings.desktop_image | image_url: width: 1200 }}">
+      {% else %}
+        <source media="(min-width: 981px)" srcset="{{ 'hero-iphone-desktop.webp' | asset_url }}">
+      {% endif %}
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1060" height="1484" alt="" loading="eager" fetchpriority="high">
+    </picture>
+  </div>
 </div></section>
 
 {% schema %}
@@ -26,6 +37,7 @@
     { "type": "text", "id": "heading_accent", "label": "Titel regel 2 (coral)" },
     { "type": "textarea", "id": "subtext", "label": "Subtekst" },
     { "type": "image_picker", "id": "image", "label": "Hero-afbeelding" },
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop productvisual", "info": "Optioneel: vrijstaande productafbeelding op een witte of transparante achtergrond. Leeg gebruikt de standaard iPhone-visual. De mobiele hero blijft ongewijzigd." },
     { "type": "collection", "id": "shop_collection", "label": "Collectie voor 'Alle iPhones'-knop" },
     { "type": "text", "id": "rating", "label": "Reviewscore" },
     { "type": "text", "id": "review_count", "label": "Aantal reviews" }

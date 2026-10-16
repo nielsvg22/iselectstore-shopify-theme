@@ -1,0 +1,19 @@
+/* Desktop-only hero composition. The existing mobile layout stays intact. */
+.heroDesktopMedia{display:none}
+@media(min-width:981px){
+  .hero--showcase{background:#fff;isolation:isolate;padding:0}
+  .hero--showcase::before{content:'';position:absolute;width:1100px;aspect-ratio:1;right:-330px;top:-360px;border-radius:50%;background:rgba(249,133,139,.035);box-shadow:-110px 240px 0 30px rgba(249,133,139,.035),-220px 440px 0 -80px rgba(249,133,139,.035);pointer-events:none;z-index:-1}
+  .hero--showcase::after{background:radial-gradient(ellipse at 78% 46%,rgba(249,133,139,.06),transparent 64%);z-index:-1}
+  .hero--showcase .heroIn{max-width:1440px;height:clamp(700px,calc(100svh - 80px),860px);min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr);gap:clamp(24px,3vw,52px);padding:60px 32px 20px}
+  .hero--showcase .heroCopy{position:relative;z-index:1;min-width:0;padding:12px 0}
+  .hero--showcase .eye{font-size:12px;letter-spacing:.13em;margin-bottom:28px}
+  .hero--showcase h1{font-size:clamp(44px,4.15vw,68px);line-height:1.04;letter-spacing:-.045em;font-weight:800;margin-bottom:28px}
+  .hero--showcase .lead{font-size:clamp(17px,1.25vw,20px);line-height:1.55;max-width:580px;margin:0}
+  .hero--showcase .ctas{margin-top:34px;gap:16px}
+  .hero--showcase .btn{min-height:56px;padding:16px 28px;font-size:14px}
+  .hero--showcase .rating{margin-top:34px;gap:14px;font-size:13px}
+  .hero--showcase .heroMobileMedia{display:none}
+  .hero--showcase .heroDesktopMedia{display:grid;place-items:center;position:relative;min-width:0;min-height:0;align-self:stretch;grid-column:2;grid-row:1;mix-blend-mode:multiply}
+  .heroDesktopMedia picture{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:0}
+  .heroDesktopMedia img{display:block;max-height:100%;width:120%;max-width:none;height:100%;object-fit:contain;transform:translateX(18px) rotate(9deg) scale(1.08);mask-image:linear-gradient(to bottom,#000 92%,transparent 100%)}
+}
