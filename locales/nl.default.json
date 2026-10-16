@@ -645,6 +645,7 @@
     }
   },
   "home_story_cta": {
+    "image_alt": "iSelectStore-presentatie met twee iPhones in hun verpakking",
     "eyebrow": "Meer dan een webshop",
     "heading": "Lees waarom wij anders selecteren",
     "text": "Een kijkje achter de schermen: hoe wij Apple-producten selecteren, controleren en transparant presenteren.",
@@ -660,6 +661,7 @@
     "like_aria": "Toevoegen aan favorieten"
   },
   "home_proof": {
+    "work_alt": "Een iPhone in handschoenen, gefotografeerd voor de productpresentatie",
     "eyebrow": "Transparantie voorop",
     "heading": "Altijd 100% originele Apple-onderdelen",
     "text": "<p>Elk toestel fotograferen we apart — inclusief een screenshot van de werkelijke batterijconditie — zodat je precies ziet wat je koopt. Geen stockbeeld, geen verrassingen.</p>",

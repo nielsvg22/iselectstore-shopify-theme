@@ -6,9 +6,19 @@
 {% assign story_url = '' %}
 {% if pages['over-ons'] %}{% assign story_url = pages['over-ons'].url %}{% endif %}
 {% assign button_url = section.settings.button_link | default: story_url %}
+{% assign story_image = section.settings.image | default: images['iselectstore-unboxing-navy.jpg'] %}
 
 <section class="stSection stHomeCtaSection"><div class="wrap">
-  <div class="stHomeCta reveal">
+  <div class="stHomeCta{% if story_image != blank %} stHomeCta--editorial{% endif %} reveal">
+    {% if story_image != blank %}
+      <div class="stHomeStoryMedia">
+        <picture>
+          <source media="(min-width: 981px)" srcset="{{ story_image | image_url: width: 600 }} 600w, {{ story_image | image_url: width: 1000 }} 1000w" sizes="(min-width: 1440px) 580px, 46vw">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1000" height="667" alt="{{ 'home_story_cta.image_alt' | t | escape }}" loading="lazy">
+        </picture>
+      </div>
+    {% endif %}
+    <div class="stHomeStoryCopy">
     <span class="stHomeCtaMark" aria-hidden="true">
       {% render 'icon-mark', size: 26 %}
     </span>
@@ -18,6 +28,7 @@
     {% if button_url != blank %}
       <a class="btn stHomeCtaBtn" href="{{ button_url }}">{{ section.settings.button_label | default: button_default }}</a>
     {% endif %}
+    </div>
   </div>
 </div></section>
 
@@ -25,6 +36,7 @@
 {
   "name": "Homepage — Ons verhaal",
   "settings": [
+    { "type": "image_picker", "id": "image", "label": "Desktop verhaalfoto", "info": "Leeg gebruikt het bestaande iSelectStore-merkbeeld. Alleen zichtbaar op desktop." },
     { "type": "text", "id": "eyebrow", "label": "Kicker" },
     { "type": "text", "id": "heading", "label": "Titel" },
     { "type": "textarea", "id": "text", "label": "Tekst" },

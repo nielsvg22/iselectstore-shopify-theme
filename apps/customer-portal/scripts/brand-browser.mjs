@@ -37,16 +37,16 @@ const pages={
  '/pages/contact':await section('contact'),'/pages/garantie':await section('guarantee-info'),
  '/pages/over-ons':await section('story-intro')+await section('story-trust'),'/search':await section('storefront-portal'),'/password':await section('main-password-header')};
 const header=await section('header'),footer=await section('footer');
-const head='<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"><link rel="stylesheet" href="/assets/brand-fonts.css"><link rel="stylesheet" href="/assets/brand.css"><style>.reveal{opacity:1!important;transform:none!important;transition:none!important}</style>';
+const head='<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"><link rel="stylesheet" href="/assets/brand-fonts.css"><link rel="stylesheet" href="/assets/brand.css"><link rel="stylesheet" href="/assets/desktop-atmosphere.css"><style>.reveal{opacity:1!important;transform:none!important;transition:none!important}</style>';
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
 await fs.mkdir(path.join(root,'artifacts/brand-preview'),{recursive:true});
 try{
  for(const width of [320,390,768,1024,1440]){
   const page=await browser.newPage({viewport:{width,height:960}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://brand.example.invalid/**',async route=>{const u=new URL(route.request().url());
-   if(u.pathname.startsWith('/assets/'))return route.fulfill({body:await fs.readFile(path.join(root,u.pathname.slice(1))),contentType:u.pathname.endsWith('.js')?'application/javascript':u.pathname.endsWith('.svg')?'image/svg+xml':u.pathname.endsWith('.woff2')?'font/woff2':'text/css'});
+   if(u.pathname.startsWith('/assets/'))return route.fulfill({body:await fs.readFile(path.join(root,u.pathname.slice(1))),contentType:u.pathname.endsWith('.js')?'application/javascript':u.pathname.endsWith('.svg')?'image/svg+xml':u.pathname.endsWith('.woff2')?'font/woff2':u.pathname.endsWith('.webp')?'image/webp':'text/css'});
    if(u.pathname==='/fixture.svg')return route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="600" height="600" fill="#f7f7f7"/><rect x="195" y="65" width="210" height="470" rx="32" fill="#1f3049"/><rect x="207" y="78" width="186" height="444" rx="24" fill="#e4ecf4"/></svg>'});
-   return route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="nl"><head>'+head+'</head><body>'+ (u.pathname==='/password'?'':header)+'<main>'+ (pages[u.pathname]||pages['/'])+'</main>'+ (u.pathname==='/password'?'':footer)+'<script src="/assets/theme.js"></script></body></html>'});
+   return route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="nl"><head>'+head+'</head><body data-store-page="'+(u.pathname==='/'?'index':u.pathname.startsWith('/pages/')?'page':'other')+'">'+ (u.pathname==='/password'?'':header)+'<main>'+ (pages[u.pathname]||pages['/'])+'</main>'+ (u.pathname==='/password'?'':footer)+'<script src="/assets/theme.js"></script></body></html>'});
   });
   for(const [routeName] of Object.entries(pages)){
    await page.goto('https://brand.example.invalid'+routeName);await page.evaluate(()=>{document.querySelectorAll('.reveal').forEach(n=>n.classList.add('in'));document.querySelectorAll('img').forEach(i=>i.loading='eager');});

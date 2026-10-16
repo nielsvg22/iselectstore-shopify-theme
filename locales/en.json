@@ -645,6 +645,7 @@
     }
   },
   "home_story_cta": {
+    "image_alt": "iSelectStore presentation with two iPhones in their packaging",
     "eyebrow": "More than a webshop",
     "heading": "Read why we select differently",
     "text": "A look behind the scenes: how we select, inspect and transparently present Apple products.",
@@ -660,6 +661,7 @@
     "like_aria": "Add to favorites"
   },
   "home_proof": {
+    "work_alt": "An iPhone held in gloves, photographed for its product listing",
     "eyebrow": "Transparency first",
     "heading": "Always 100% original Apple parts",
     "text": "<p>We photograph every device individually — including a screenshot of the actual battery health — so you know exactly what you're buying. No stock photos, no surprises.</p>",

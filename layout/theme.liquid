@@ -10,6 +10,7 @@
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ 'animations.css' | asset_url | stylesheet_tag }}
 {% render 'brand-head' %}
+{{ 'desktop-atmosphere.css' | asset_url | stylesheet_tag }}
 <style>
   :root{
     --navy: {{ settings.color_navy | default: "#1f3049" }};
@@ -44,7 +45,7 @@
 </script>
 {{ content_for_header }}
 </head>
-<body>
+<body data-store-page="{{ request.page_type | escape }}">
 {% section 'header' %}
 
 <main>
