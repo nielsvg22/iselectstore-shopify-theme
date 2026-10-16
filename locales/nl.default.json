@@ -349,7 +349,7 @@
       "summary_icloud": "iCloud/Vind mijn uitgezet",
       "note": "Stuur deze gegevens via WhatsApp door en we doen je persoonlijk een bod. Staat iCloud nog aan? Zet die dan vast uit voor je het toestel inlevert — zonder dat kunnen we het niet overnemen.",
       "whatsapp_cta": "Stuur aanvraag via WhatsApp",
-      "whatsapp_message": "Hoi! 👋 Ik wil graag mijn toestel inruilen.\n\n📱 Model: {{ model }}\n💾 Opslag: {{ storage }}\n🔋 Batterijconditie: {{ battery }}\n✨ Conditie: {{ condition }}\n📦 Doosje/toebehoren: {{ accessories }}\n☁️ iCloud uitgezet: {{ icloud }}\n\nKunnen jullie een bod doen?",
+      "whatsapp_message": "👋 *Inruilaanvraag – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Opslag:* {{ storage }}\n🔋 *Batterijconditie:* {{ battery }}\n✨ *Conditie:* {{ condition }}\n📦 *Doosje/toebehoren:* {{ accessories }}\n☁️ *iCloud uitgezet:* {{ icloud }}\n──────────────\nKunnen jullie een bod doen? 🙏",
       "close_aria": "Sluiten"
     },
     "models": {

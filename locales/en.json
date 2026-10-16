@@ -349,7 +349,7 @@
       "summary_icloud": "iCloud/Find My signed out",
       "note": "Send these details via WhatsApp and we'll make you a personal offer. If iCloud is still signed in, please sign out before handing in the device — we can't take it over without that.",
       "whatsapp_cta": "Send request via WhatsApp",
-      "whatsapp_message": "Hi! 👋 I'd like to trade in my device.\n\n📱 Model: {{ model }}\n💾 Storage: {{ storage }}\n🔋 Battery health: {{ battery }}\n✨ Condition: {{ condition }}\n📦 Box/accessories: {{ accessories }}\n☁️ iCloud signed out: {{ icloud }}\n\nCan you make me an offer?",
+      "whatsapp_message": "👋 *Trade-in request – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Storage:* {{ storage }}\n🔋 *Battery health:* {{ battery }}\n✨ *Condition:* {{ condition }}\n📦 *Box/accessories:* {{ accessories }}\n☁️ *iCloud signed out:* {{ icloud }}\n──────────────\nCan you make me an offer? 🙏",
       "close_aria": "Close"
     },
     "models": {
