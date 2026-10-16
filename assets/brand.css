@@ -1,0 +1,59 @@
+/* Studio Lef / iSelectStore stylesheet, October 2026. Original artwork stays untouched. */
+:root{--font-body:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;--font-heading:var(--font-body);--lightblue:#e4ecf4;--lightpink:#ffe6ed;--anthracite:#25292d;--ink:var(--anthracite);--coral-ink:var(--navy);--coral-hover:#ef6570}
+body{font-family:var(--font-body);color:var(--ink)}
+h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-family:var(--font-heading)}
+.hero h1 span{color:var(--coral);text-decoration:none}
+.brandLogo{display:block;object-fit:contain;width:220px;height:auto;max-width:100%;flex:none}
+.nav>.logo{min-width:0;gap:0}
+.nav>.logo .brandLogo{width:205px}
+.nav{gap:22px}
+.links{gap:clamp(14px,1.7vw,26px)}
+.icons{gap:10px;flex:none}
+.icons .ic,.icons .burger{width:44px;height:44px;margin:0;flex:none}
+.icons .ic>svg{width:21px;height:21px}
+.icons .ic .count{top:2px;right:1px;color:var(--navy);box-shadow:0 0 0 2px #fff}
+.icons .burger span{left:11px;right:11px}
+.icons .burger span:nth-child(1){top:14px}
+.icons .burger span:nth-child(2){top:21px}
+.icons .burger span:nth-child(3){top:28px}
+.brandUspIcon{display:block;object-fit:contain;flex:none;width:48px;height:48px}
+.trustitem .bubble{width:62px;height:62px;background:transparent;border-radius:0;box-shadow:none}
+.trustitem .bubble .brandUspIcon{width:62px;height:62px}
+.trustitem b{font-family:var(--font-heading);font-size:13px}
+.stProofIcon .brandUspIcon,.stValueIcon .brandUspIcon{width:48px;height:48px}
+.stValueIcon:has(.brandUspIcon){width:56px;height:56px;background:transparent;box-shadow:none}
+.pdpFeature>.brandUspIcon{width:28px;height:28px;margin-top:-3px}
+.pdpLink>.brandUspIcon{width:28px;height:28px}
+.authUsps .brandUspIcon{width:30px;height:30px}
+.tradecopy>.brandUspIcon{width:60px;height:60px;margin-bottom:18px}
+.primary,.add,.stHero .btn.primary,.pdpInfo .add,.buyRow .add,.filterToggle{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(249,133,139,.55)}
+.primary:hover,.add:hover,.stHero .btn.primary:hover,.pdpInfo .add:hover,.buyRow .add:hover,.filterToggle:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff;box-shadow:0 12px 28px -8px rgba(249,133,139,.6)}
+.primary:disabled,.add:disabled{opacity:.55}
+.stHero--video .btn.primary{background:var(--coral);border-color:var(--coral);color:#fff}
+.stHero--video .btn.primary:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff}
+.eye,.eyebrow,.link,.pdpLink,.filterChip,.clearFiltersLink{color:var(--navy)}
+.hero .eye{color:var(--coral)}
+.eye::before{background:var(--coral)}
+.link{text-decoration:underline;text-decoration-color:var(--coral);text-underline-offset:5px}
+.filterChip{background:var(--lightpink)}
+.filterChip button{color:var(--navy)}
+.badge{color:var(--navy)}
+.siteFooter{background:var(--navy);color:#fff}
+.siteFooter .footerLogo{display:inline-flex;margin-bottom:10px}
+.siteFooter .brandLogo{width:245px;max-width:100%}
+.siteFooter .footerGiantMark{object-fit:contain;z-index:-1;pointer-events:none}
+.siteFooter .socialIc{color:var(--navy);background:#fff}
+.siteFooter .newsletter{background:var(--ivory);border-color:transparent}
+.siteFooter .newsletter .primary{background:var(--coral);border-color:var(--coral);color:#fff}
+.siteFooter .newsletter .primary:hover{background:var(--coral-hover);border-color:var(--coral-hover)}
+.siteFooter .footerBadges{color:#fff}
+.siteFooter .finePrint{color:rgba(255,255,255,.76)}
+.siteFooter .footer p,.siteFooter .footer a{color:rgba(255,255,255,.88)}
+.siteFooter .footer a:hover{color:#fff}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--navy);outline-offset:4px}
+.siteFooter a:focus-visible,.siteFooter button:focus-visible{outline-color:var(--coral)}
+.passwordPage .logo .brandLogo{width:280px;margin-inline:auto}
+@media(max-width:1100px){.nav .links{display:none}.nav .icons{margin-left:auto}.nav .burger{display:block}.nav{gap:12px}}
+@media(max-width:640px){:root{--header-h:64px}.nav{padding-inline:16px;gap:8px;height:64px}.nav>.logo .brandLogo{width:clamp(132px,calc(100vw - 216px),174px)}.nav .icons{gap:0}.siteFooter .brandLogo{width:235px}.trustitem .bubble,.trustitem .bubble .brandUspIcon{width:56px;height:56px}}
+@media(max-width:359px){.nav{padding-inline:10px}.nav>.logo .brandLogo{width:132px}.icons .ic,.icons .burger{width:40px}.icons .burger span{left:9px;right:9px}}
+@media(prefers-reduced-motion:reduce){.brandLogo,.brandUspIcon{animation:none;transition:none}}
