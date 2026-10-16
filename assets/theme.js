@@ -350,6 +350,12 @@ if (filterClose && filterSidebar) {
     { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)') }
   ];
   var STORAGE = ['64 GB', '128 GB', '256 GB', '512 GB', '1 TB', pick(ti, 'storage_other', 'Anders / weet ik niet')];
+  var BATTERY = [
+    pick(ti, 'battery_90_100', '90–100%'),
+    pick(ti, 'battery_80_89', '80–89%'),
+    pick(ti, 'battery_below_80', 'Minder dan 80%'),
+    pick(ti, 'battery_unknown', 'Weet ik niet')
+  ];
   var CONDITIONS = [
     { name: pick(conditionStrings, 'like_new', 'Zoals nieuw') },
     { name: pick(conditionStrings, 'light_wear', 'Lichte gebruikssporen') },
@@ -361,7 +367,12 @@ if (filterClose && filterSidebar) {
     pick(ti, 'accessories_partial', 'Gedeeltelijk (alleen toestel of alleen doosje)'),
     pick(ti, 'accessories_no', 'Nee, alleen het toestel')
   ];
-  var TOTAL_STEPS = 5;
+  var ICLOUD = [
+    pick(ti, 'icloud_yes', 'Ja, uitgezet'),
+    pick(ti, 'icloud_no', 'Nee, nog niet'),
+    pick(ti, 'icloud_unsure', 'Weet ik niet')
+  ];
+  var TOTAL_STEPS = 7;
   var state = { step: 1 };
 
   function build() {
@@ -419,27 +430,48 @@ if (filterClose && filterSidebar) {
       }));
       body.appendChild(backButton(1));
     } else if (state.step === 3) {
-      body.insertAdjacentHTML('beforeend', stepHeader(3, 'condition_question', { model: state.model.name }));
-      body.appendChild(optionGrid(CONDITIONS.map(function (c) { return c.name; }), function (i) {
-        state.condition = CONDITIONS[i]; state.step = 4; render();
+      body.insertAdjacentHTML('beforeend', stepHeader(3, 'battery_question', { model: state.model.name }));
+      body.appendChild(optionGrid(BATTERY, function (i) {
+        state.battery = BATTERY[i]; state.step = 4; render();
       }));
       body.appendChild(backButton(2));
     } else if (state.step === 4) {
-      body.insertAdjacentHTML('beforeend', stepHeader(4, 'accessories_question'));
-      body.appendChild(optionGrid(ACCESSORIES, function (i) {
-        state.accessories = ACCESSORIES[i]; state.step = 5; render();
+      body.insertAdjacentHTML('beforeend', stepHeader(4, 'condition_question', { model: state.model.name }));
+      body.appendChild(optionGrid(CONDITIONS.map(function (c) { return c.name; }), function (i) {
+        state.condition = CONDITIONS[i]; state.step = 5; render();
       }));
       body.appendChild(backButton(3));
+    } else if (state.step === 5) {
+      body.insertAdjacentHTML('beforeend', stepHeader(5, 'accessories_question'));
+      body.appendChild(optionGrid(ACCESSORIES, function (i) {
+        state.accessories = ACCESSORIES[i]; state.step = 6; render();
+      }));
+      body.appendChild(backButton(4));
+    } else if (state.step === 6) {
+      body.insertAdjacentHTML('beforeend', stepHeader(6, 'icloud_question'));
+      body.appendChild(optionGrid(ICLOUD, function (i) {
+        state.icloud = ICLOUD[i]; state.step = 7; render();
+      }));
+      body.appendChild(backButton(5));
     } else {
-      var vars = { model: state.model.name, storage: state.storage, condition: state.condition.name, accessories: state.accessories };
+      var vars = {
+        model: state.model.name,
+        storage: state.storage,
+        battery: state.battery,
+        condition: state.condition.name,
+        accessories: state.accessories,
+        icloud: state.icloud
+      };
       var waNumber = pick(ti, 'whatsapp_number', '31643295022');
       var waMessage = tpl(pick(ti, 'whatsapp_message', ''), vars);
       var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage);
       var rows = [
         [pick(ti, 'summary_model', 'Toestel'), state.model.name],
         [pick(ti, 'summary_storage', 'Opslag'), state.storage],
+        [pick(ti, 'summary_battery', 'Batterijconditie'), state.battery],
         [pick(ti, 'summary_condition', 'Conditie'), state.condition.name],
-        [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories]
+        [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories],
+        [pick(ti, 'summary_icloud', 'iCloud/Vind mijn uitgezet'), state.icloud]
       ];
       body.insertAdjacentHTML('beforeend',
         '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p>' +
