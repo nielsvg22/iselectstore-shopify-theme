@@ -10,10 +10,26 @@
   <div class="cats">
     {% for block in section.blocks %}
       <a class="cat" href="{{ block.settings.collection.url }}" {{ block.shopify_attributes }}>
-        {% if block.settings.collection.featured_image %}
-          <img src="{{ block.settings.collection.featured_image | image_url: width: 600 }}" width="600" height="600" alt="{{ block.settings.collection.title }}">
-        {% elsif block.settings.image %}
-          <img src="{{ block.settings.image | image_url: width: 600 }}" width="600" height="600" alt="{{ block.settings.label }}">
+        {% liquid
+          assign category_photo = blank
+          case block.settings.collection.handle
+            when 'apple-iphone'
+              assign category_photo = 'category-iphone.webp'
+            when 'apple-ipad'
+              assign category_photo = 'category-ipad.webp'
+            when 'apple-macbooks'
+              assign category_photo = 'category-macbook.webp'
+            when 'apple-watch'
+              assign category_photo = 'category-watch.webp'
+          endcase
+          assign category_alt = block.settings.label | default: block.settings.collection.title
+        %}
+        {% if block.settings.image %}
+          <img src="{{ block.settings.image | image_url: width: 900 }}" width="900" height="900" loading="lazy" decoding="async" alt="{{ category_alt | escape }}">
+        {% elsif category_photo != blank %}
+          <img src="{{ category_photo | asset_url }}" width="744" height="790" loading="lazy" decoding="async" alt="{{ category_alt | escape }}">
+        {% elsif block.settings.collection.featured_image %}
+          <img src="{{ block.settings.collection.featured_image | image_url: width: 900 }}" width="900" height="900" loading="lazy" decoding="async" alt="{{ category_alt | escape }}">
         {% endif %}
         <div class="catcopy"><b>{{ block.settings.label | default: block.settings.collection.title }}</b><span>{{ 'featured_categories.cta' | t }}</span></div>
       </a>
