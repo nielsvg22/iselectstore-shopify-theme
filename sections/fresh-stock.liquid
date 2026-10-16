@@ -14,8 +14,9 @@
 {% assign stock_count = section.settings.count | default: 3 %}
 
 {% if stock_collection %}
-  {% assign products = stock_collection.products | sort: 'created_at' | reverse %}
+  {% assign products = stock_collection.products | where: 'available', true | reject: 'type', 'Accessoire' | sort: 'created_at' | reverse %}
 
+  {% if products.size > 0 %}
   <section class="freshStock reveal"><div class="wrap">
     <div class="freshStockHead">
       <div>
@@ -29,6 +30,7 @@
     <div class="freshStockList">
       {% assign shown = 0 %}
       {% for product in products %}
+        {% unless product.available %}{% continue %}{% endunless %}
         {% if shown >= stock_count %}{% break %}{% endif %}
         <div class="freshStockRow">
           <a class="freshStockLike" href="#" aria-label="{{ 'fresh_stock.like_aria' | t }}" data-fresh-like>
@@ -57,6 +59,7 @@
 
     <a class="btn primary freshStockBtn" href="{{ stock_collection.url }}">{{ section.settings.button_text | default: button_default }}</a>
   </div></section>
+  {% endif %}
 {% endif %}
 
 {% schema %}

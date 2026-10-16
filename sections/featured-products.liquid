@@ -1,3 +1,16 @@
+{% assign limit = section.settings.count | default: 4 %}
+{% assign featured_pool = section.settings.collection.products | where: 'available', true | reject: 'type', 'Accessoire' %}
+{% assign cat_names = 'iPhone,iPad,MacBook,Apple Watch' | split: ',' %}
+{% assign featured_sorted = '' | split: '' %}
+{% for round in (0..7) %}
+  {% if featured_sorted.size >= limit %}{% break %}{% endif %}
+  {% for cat in cat_names %}
+    {% if featured_sorted.size >= limit %}{% break %}{% endif %}
+    {% assign cat_take = featured_pool | where: 'type', cat | slice: round, 1 %}
+    {% assign featured_sorted = featured_sorted | concat: cat_take %}
+  {% endfor %}
+{% endfor %}
+{% if featured_sorted.size > 0 %}
 <section id="producten" style="padding-top:6px"><div class="wrap reveal">
   <div class="head">
     <div>
@@ -11,43 +24,20 @@
 
   <div class="tabs" id="catTabs">
     <span class="tab active" data-cat="Alle">{{ 'featured_products.tab_all' | t }}</span>
-    <span class="tab" data-cat="iPhone">iPhone</span>
-    <span class="tab" data-cat="iPad">iPad</span>
-    <span class="tab" data-cat="MacBook">MacBook</span>
-    <span class="tab" data-cat="Apple Watch">Apple Watch</span>
+    {% for cat in cat_names %}
+      {% assign visible_category_products = featured_sorted | where: 'type', cat %}
+      {% if visible_category_products.size > 0 %}<span class="tab" data-cat="{{ cat | escape }}">{{ cat | escape }}</span>{% endif %}
+    {% endfor %}
   </div>
 
   <div class="products">
-    {% assign limit = section.settings.count | default: 4 %}
-    {% comment %} Accessoires zijn alleen een upsell in de winkelwagen, niet hier. {% endcomment %}
-    {% assign featured_pool = section.settings.collection.products | where_exp: "product", "product.type != 'Accessoire'" %}
-    {% comment %}
-      Zorg dat élke categorie-tab (iPhone/iPad/MacBook/Apple Watch) producten heeft:
-      eerst1 per categorie, dan de tweede ronde — zodat "Alle" een mooie mengeling toont.
-    {% endcomment %}
-    {% assign cat_names = 'iPhone,iPad,MacBook,Apple Watch' | split: ',' %}
-    {% assign featured_sorted = '' | split: '' %}
-    {% for cat in cat_names %}
-      {% assign cat_products = featured_pool | where: "type", cat %}
-      {% assign cat_available = cat_products | where: "available", true %}
-      {% assign cat_sold = cat_products | where: "available", false %}
-      {% assign cat_sorted = cat_available | concat: cat_sold %}
-      {% assign cat_take = cat_sorted | slice: 0, 1 %}
-      {% assign featured_sorted = featured_sorted | concat: cat_take %}
-    {% endfor %}
-    {% for cat in cat_names %}
-      {% assign cat_products = featured_pool | where: "type", cat %}
-      {% assign cat_available = cat_products | where: "available", true %}
-      {% assign cat_sold = cat_products | where: "available", false %}
-      {% assign cat_sorted = cat_available | concat: cat_sold %}
-      {% assign cat_take = cat_sorted | slice: 1, 1 %}
-      {% assign featured_sorted = featured_sorted | concat: cat_take %}
-    {% endfor %}
     {% for product in featured_sorted limit: limit %}
-      {% render 'product-card', product: product, index: forloop.index0 %}
+      {% if product.available %}{% render 'product-card', product: product, index: forloop.index0 %}{% endif %}
     {% endfor %}
   </div>
 </div></section>
+
+{% endif %}
 
 {% schema %}
 {

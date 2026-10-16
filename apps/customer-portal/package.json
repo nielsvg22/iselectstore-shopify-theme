@@ -20,7 +20,8 @@
     "test:native:browser": "node scripts/native-browser.mjs",
     "test:brand:browser": "node scripts/brand-browser.mjs",
     "test:collection:browser": "node scripts/collection-browser.mjs",
-    "test:product-card:browser": "node scripts/product-card-browser.mjs"
+    "test:product-card:browser": "node scripts/product-card-browser.mjs",
+    "test:homepage:stock": "node scripts/homepage-stock-test.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",
