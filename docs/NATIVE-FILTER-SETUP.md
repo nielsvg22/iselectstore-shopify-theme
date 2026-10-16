@@ -42,3 +42,13 @@ Deze definities voorbereiden is **niet hetzelfde als filters activeren**. De bes
 De resterende handeling door de winkelbeheerder: **Apps → Search & Discovery → Filters → Filter toevoegen → Bron**, selecteer Producttype en de aangemaakte productmetavelden, sla op. Controleer vóór Conditie de onjuiste waarde. De storefront toont de bronnen automatisch zodra Shopify ze activeert. Model/kleur worden pas zinvol na correcte aparte brongegevens; daarvoor zijn geen waarden verzonnen.
 
 Officiële Shopify-instructies: https://help.shopify.com/nl/manual/online-store/search-and-discovery/filters
+
+## Officiële ChatGPT-koppeling bevestigd
+
+De officiële Shopify-koppeling is nu verbonden met de juiste winkel. Een gevalideerde Admin GraphQL-query kan hiermee de geïnstalleerde apps en metafielddefinities lezen; de eerdere `ACCESS_DENIED` op de CLI-appinventaris is dus geen blokkade voor deze nieuwe koppeling. De volledige appinventaris (geen vervolgpagina) bevat **geen Shopify Search & Discovery**. Dat is een concreet ontbrekend onderdeel in de winkel, afzonderlijk van de werkende ChatGPT-koppeling.
+
+De drie voorbereide definities zijn via de nieuwe koppeling opnieuw bevestigd. Het openbare mutationschema biedt geen installatie-operatie voor Search & Discovery en geen operatie voor het toevoegen van storefrontfilterbronnen. De activering is daarom niet uitgevoerd. Er zijn geen aanvullende productwaarden, tags, apps of filterinstellingen gewijzigd.
+
+Benodigde beheerhandeling: installeer de gratis officiële app https://apps.shopify.com/search-and-discovery en voeg binnen Filters de bronnen Producttype, Opslagcapaciteit (GB) en Batterijconditie (%) toe. Controleer de onjuiste conditiewaarde vóór die bron geactiveerd wordt. Dit vereist geen nieuw thema of nieuwe koppelpoging van de ChatGPT-app.
+
+Documentatie: https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering (filters moeten eerst in Shopify Admin worden aangemaakt).
