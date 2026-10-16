@@ -1,0 +1,11 @@
+{% comment %}Preserve Shopify's active filters when submitting the separate sort form.{% endcomment %}
+{% for filter in collection.filters %}
+  {% for value in filter.active_values %}
+    <input type="hidden" name="{{ value.param_name | escape }}" value="{{ value.value | escape }}">
+  {% endfor %}
+  {% if filter.type == 'price_range' %}
+    {% if filter.min_value.value != blank %}<input type="hidden" name="{{ filter.min_value.param_name | escape }}" value="{{ filter.min_value.value | divided_by: 100.0 }}">{% endif %}
+    {% if filter.max_value.value != blank %}<input type="hidden" name="{{ filter.max_value.param_name | escape }}" value="{{ filter.max_value.value | divided_by: 100.0 }}">{% endif %}
+  {% endif %}
+{% endfor %}
+{% if collection.current_type %}<input type="hidden" name="q" value="{{ collection.current_type | escape }}">{% elsif collection.current_vendor %}<input type="hidden" name="q" value="{{ collection.current_vendor | escape }}">{% endif %}

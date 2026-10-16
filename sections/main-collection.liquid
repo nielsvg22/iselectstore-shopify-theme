@@ -1,127 +1,126 @@
-<section class="shopHero"><div class="wrap">
-  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">{{ collection.title }}</span></div>
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection.js' | asset_url }}" defer></script>
+<section class="shopHero collectionHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span aria-hidden="true">/</span><span>{{ collection.title | escape }}</span></div>
   <p class="eyebrow">{{ 'collection.eyebrow' | t }}</p>
-  <h1>{% if collection.title != blank %}{{ collection.title }}{% else %}{{ 'collection.default_title' | t }}{% endif %}</h1>
-  <p>{% if collection.description != blank %}{{ collection.description }}{% else %}{{ 'collection.default_description' | t }}{% endif %}</p>
+  <h1>{% if collection.title != blank %}{{ collection.title | escape }}{% else %}{{ 'collection.default_title' | t }}{% endif %}</h1>
+  {% if collection.description != blank %}<div class="collectionDescription">{{ collection.description }}</div>{% else %}<p>{{ 'collection.default_description' | t }}</p>{% endif %}
 </div></section>
-
 {% assign bc_home = 'collection.breadcrumb_home' | t %}
-{% render 'breadcrumb-jsonld',
-  name_1: bc_home, url_1: routes.root_url,
-  name_2: collection.title, url_2: collection.url
+{% render 'breadcrumb-jsonld', name_1: bc_home, url_1: routes.root_url, name_2: collection.title, url_2: collection.url %}
+{% liquid
+  assign current_sort = collection.sort_by | default: collection.default_sort_by
+  assign active_count = 0
+  for filter in collection.filters
+    assign active_count = active_count | plus: filter.active_values.size
+    if filter.type == 'price_range'
+      if filter.min_value.value != blank or filter.max_value.value != blank
+        assign active_count = active_count | plus: 1
+      endif
+    endif
+  endfor
 %}
-
 {% paginate collection.products by 24 %}
-<section style="padding-top:36px"><div class="wrap">
-  <div class="shopLayout">
-    <aside class="filterSidebar" id="filterSidebar">
+<section class="collectionListing"><div class="wrap">
+  <div class="shopLayout collectionLayout">
+    <aside class="filterSidebar collectionFilters" id="filterSidebar" aria-label="Productfilters">
       <button class="filterCloseBtn" id="filterClose" type="button">{{ 'collection.filters_close' | t }}</button>
-      {% for filter in collection.filters %}
-        <div class="filterGroup">
-          <h4>{{ filter.label }}</h4>
-          {% if filter.type == 'list' %}
-            {% for value in filter.values %}
-              <label class="checkRow">
-                <input type="checkbox" onchange="window.location.href='{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}'" {% if value.active %}checked{% endif %}>
-                {{ value.label }}<span class="cnt">{{ value.count }}</span>
-              </label>
-            {% endfor %}
-          {% elsif filter.type == 'price_range' %}
-            <div class="rangeRow">
-              <form>
-                <input type="number" name="{{ filter.min_value.param_name }}" placeholder="{{ 'collection.price_min' | t }}" value="{{ filter.min_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
-                <input type="number" name="{{ filter.max_value.param_name }}" placeholder="{{ 'collection.price_max' | t }}" value="{{ filter.max_value.value }}" style="width:47%;display:inline-block;padding:8px;border-radius:8px;border:1px solid var(--line)">
-                <button class="clearAllBtn" type="submit" style="margin-top:8px">{{ 'collection.filters_apply' | t }}</button>
-              </form>
+      <div class="collectionFilterHeading"><h2>Verfijn je keuze</h2>{% if active_count > 0 %}<a href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
+      <form action="{{ collection.url }}" method="get" data-collection-filters>
+        <input type="hidden" name="sort_by" value="{{ current_sort | escape }}">
+        {% if collection.current_type %}<input type="hidden" name="q" value="{{ collection.current_type | escape }}">{% elsif collection.current_vendor %}<input type="hidden" name="q" value="{{ collection.current_vendor | escape }}">{% endif %}
+        {% for filter in collection.filters %}
+          <details class="filterGroup collectionFilterGroup" open>
+            <summary>{{ filter.label | escape }}<span aria-hidden="true">+</span></summary>
+            <div class="collectionFilterOptions">
+              {% case filter.type %}
+                {% when 'list', 'boolean' %}
+                  {% for value in filter.values %}
+                    <label class="checkRow">
+                      <input type="checkbox" name="{{ value.param_name | escape }}" value="{{ value.value | escape }}" {% if value.active %}checked{% elsif value.count == 0 %}disabled{% endif %}>
+                      <span>{{ value.label | escape }}</span><span class="cnt">{{ value.count }}</span>
+                    </label>
+                  {% endfor %}
+                {% when 'price_range' %}
+                  <div class="collectionPriceRange">
+                    <label>Vanaf ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.min_value.param_name | escape }}" placeholder="0" {% if filter.min_value.value != blank %}value="{{ filter.min_value.value | divided_by: 100.0 }}"{% endif %}></label>
+                    <label>Tot ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.max_value.param_name | escape }}" placeholder="{{ filter.range_max | divided_by: 100.0 }}" {% if filter.max_value.value != blank %}value="{{ filter.max_value.value | divided_by: 100.0 }}"{% endif %}></label>
+                  </div>
+              {% endcase %}
             </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-      {% if collection.current_vendor or collection.current_type %}
-        <a class="clearAllBtn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>
-      {% endif %}
+          </details>
+        {% else %}
+          <p class="collectionFilterEmpty">Voor deze collectie zijn nog geen filters beschikbaar.</p>
+        {% endfor %}
+        {% if collection.filters.size > 0 %}<button class="btn primary collectionApply" type="submit">{{ 'collection.filters_apply' | t }}</button>{% endif %}
+      </form>
     </aside>
-
-    <div class="shopMain">
-      <div class="shopToolbar">
-        <form action="{{ collection.url }}" method="get" class="searchRow">
-          <span class="searchIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </span>
-          <input type="search" name="q" class="shopSearchInput" placeholder="{{ 'collection.search_placeholder' | t }}" value="{{ search.terms }}">
-          <button type="submit" class="searchSubmit" aria-label="{{ 'collection.search_aria' | t }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </button>
+    <div class="shopMain collectionMain">
+      <div class="shopToolbar collectionToolbar">
+        <form action="{{ routes.search_url }}" method="get" class="searchRow" role="search">
+          <input type="hidden" name="type" value="product">
+          <label class="collectionSrOnly" for="CollectionSearch">{{ 'collection.search_placeholder' | t }}</label>
+          <span class="searchIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"/></svg></span>
+          <input id="CollectionSearch" type="search" name="q" class="shopSearchInput" placeholder="{{ 'collection.search_placeholder' | t }}">
+          <button type="submit" class="searchSubmit" aria-label="{{ 'collection.search_aria' | t }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"/></svg></button>
         </form>
         <div class="toolbarRow">
-          <select class="sortSelect" onchange="window.location.href=this.value">
-            <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>{{ 'collection.sort_newest' | t }}</option>
-            <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>{{ 'collection.sort_price_asc' | t }}</option>
-            <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>{{ 'collection.sort_price_desc' | t }}</option>
-          </select>
-          <button class="filterToggle" id="filterToggle" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="11" y1="18" x2="13" y2="18"></line></svg>
-            {{ 'collection.filters_toggle' | t }}
-          </button>
-        {% comment %}
-          Accessoires (product type "Accessoire") zijn standaard alleen een upsell
-          in de winkelwagen, niet los vindbaar in de shop — behalve als iemand hier
-          bewust op binnenkomt via de "Bekijk alle accessoires"-link (filtert expliciet
-          op dat type), dan tonen we ze juist wel.
-        {% endcomment %}
-        {% if collection.current_type == 'Accessoire' %}
-          {% assign shop_products = collection.products %}
-        {% else %}
-          {% assign shop_products = collection.products | where_exp: "product", "product.type != 'Accessoire'" %}
-        {% endif %}
-          <span class="resultCount">{{ 'collection.results_count' | t: count: shop_products.size }}</span>
+          <p class="resultCount">{{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}producten{% endif %}</p>
+          <form action="{{ collection.url }}" method="get" class="collectionSort" data-collection-sort>
+            {% render 'collection-filter-values', collection: collection %}
+            <label for="CollectionSort" class="collectionSrOnly">Sorteer producten</label>
+            <select id="CollectionSort" class="sortSelect" name="sort_by">
+              {% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == current_sort %}selected{% endif %}>{{ option.name | escape }}</option>{% endfor %}
+            </select>
+            <button class="collectionSortSubmit clearAllBtn" type="submit">Sorteren</button>
+          </form>
+          <button class="filterToggle" id="filterToggle" type="button" aria-controls="filterSidebar" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M8 12h8M11 18h2"/></svg>{{ 'collection.filters_toggle' | t }}{% if active_count > 0 %} ({{ active_count }}){% endif %}</button>
         </div>
       </div>
-
-      {% if shop_products.size == 0 %}
-        <p class="noResults">{{ 'collection.no_results' | t }}</p>
-      {% else %}
-        {% comment %} Verkocht/uitverkocht (voorraad 0) altijd onderaan, ongeacht de gekozen sortering. {% endcomment %}
-        {% assign available_products = shop_products | where: "available", true %}
-        {% assign sold_out_products = shop_products | where: "available", false %}
-        {% assign sorted_products = available_products | concat: sold_out_products %}
-        <div class="products shopProductsGrid">
-          {% for product in sorted_products %}
-            {% render 'product-card', product: product, index: forloop.index0 %}
+      {% if active_count > 0 %}
+        <nav class="activeFilters" aria-label="Actieve filters">
+          {% for filter in collection.filters %}
+            {% for value in filter.active_values %}<a class="filterChip" href="{{ value.url_to_remove }}" aria-label="Verwijder {{ filter.label | escape }}: {{ value.label | escape }}">{{ filter.label | escape }}: {{ value.label | escape }} <span aria-hidden="true">×</span></a>{% endfor %}
+            {% if filter.type == 'price_range' %}{% if filter.min_value.value != blank or filter.max_value.value != blank %}<a class="filterChip" href="{{ filter.url_to_remove }}">{{ filter.label | escape }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }} <span aria-hidden="true">×</span></a>{% endif %}{% endif %}
           {% endfor %}
-        </div>
-
-        {% comment %}
-          GEO/SEO: ItemList-schema voor deze productlijst, zodat AI-
-          antwoordmachines de hele collectie in één keer kunnen oppikken
-          i.p.v. alleen losse productpagina's.
-        {% endcomment %}
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          "itemListElement": [
-            {% for product in sorted_products limit: 24 %}
-              {% unless forloop.first %},{% endunless %}
-              { "@type": "ListItem", "position": {{ forloop.index }}, "url": {{ shop.url | append: product.url | json }} }
-            {% endfor %}
-          ]
-        }
-        </script>
+          <a class="clearFiltersLink" href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>
+        </nav>
       {% endif %}
-
-      {% if paginate.pages > 1 %}
-        <div class="snapdots" style="display:flex;margin-top:32px">
-          {% for part in paginate.parts %}
-            {% if part.is_link %}<a class="link" href="{{ part.url }}">{{ part.title }}</a>{% else %}<b style="color:var(--navy)">{{ part.title }}</b>{% endif %}
+      {% if collection.products.size == 0 %}
+        <div class="noResults"><h2>Geen producten gevonden</h2><p>{{ 'collection.no_results' | t }}</p>{% if active_count > 0 %}<a class="btn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
+      {% else %}
+        <div class="products shopProductsGrid collectionGrid" data-collection-grid>
+          {% for product in collection.products %}
+            {% render 'product-card', product: product, index: forloop.index0, collection_card: true %}
+            {% if forloop.index == 3 and section.settings.trade_enabled != false %}{% render 'collection-trade-in', settings: section.settings, section_id: section.id %}{% endif %}
           {% endfor %}
+          {% if collection.products.size == 2 and section.settings.trade_enabled != false %}{% render 'collection-trade-in', settings: section.settings, section_id: section.id %}{% endif %}
         </div>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{% for product in collection.products %}{% unless forloop.first %},{% endunless %}{"@type":"ListItem","position":{{ paginate.current_offset | plus: forloop.index }},"url":{{ shop.url | append: product.url | json }}}{% endfor %}]}</script>
+      {% endif %}
+      {% if paginate.pages > 1 %}
+        <nav class="collectionPagination" aria-label="Paginering">
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="Vorige pagina">←</a>{% endif %}
+          {% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% elsif part.title == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
+          {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="Volgende pagina">→</a>{% endif %}
+        </nav>
       {% endif %}
     </div>
   </div>
 </div></section>
 {% endpaginate %}
-
+<noscript><style>@media(max-width:900px){.collectionFilters{position:static;transform:none}.collectionFilters .filterCloseBtn,.collectionMain .filterToggle{display:none}}.collectionTrade .js-tradein-trigger{display:none}</style></noscript>
 {% schema %}
-{ "name": "Collectie" }
+{
+  "name": "Collectie",
+  "settings": [
+    {"type":"header","content":"Inruilbanner na eerste productrij"},
+    {"type":"checkbox","id":"trade_enabled","label":"Inruilbanner op desktop tonen","default":true},
+    {"type":"text","id":"trade_title","label":"Titel","default":"Ruil je oude iPhone in. Bespaar op je volgende."},
+    {"type":"textarea","id":"trade_description","label":"Beschrijving","default":"Geef je huidige iPhone een tweede leven en ontdek de mogelijkheden om voordeliger te upgraden."},
+    {"type":"image_picker","id":"trade_image","label":"Afbeelding"},
+    {"type":"text","id":"trade_cta","label":"Knoptekst","default":"Ontdek de inruilmogelijkheden"},
+    {"type":"url","id":"trade_url","label":"Bestemming","info":"Leeg: bestaande inruilpagina indien aanwezig, anders de bestaande inruilmodule."}
+  ]
+}
 {% endschema %}

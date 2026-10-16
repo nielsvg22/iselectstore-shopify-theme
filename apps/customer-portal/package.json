@@ -18,7 +18,8 @@
     "typecheck:storefront": "tsc --noEmit -p storefront/tsconfig.json",
     "test:storefront:browser": "npm run build:storefront && node scripts/storefront-browser.mjs",
     "test:native:browser": "node scripts/native-browser.mjs",
-    "test:brand:browser": "node scripts/brand-browser.mjs"
+    "test:brand:browser": "node scripts/brand-browser.mjs",
+    "test:collection:browser": "node scripts/collection-browser.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",
