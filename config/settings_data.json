@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "shop_collection": "",
+          "account_portal_url": "",
+          "show_bestbuyphone_logo": true
+        }
+      },
+      "language-selector": {
+        "type": "language-selector",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "shop_collection": "",
+          "brand_text": "",
+          "whatsapp": "",
+          "phone": "",
+          "address": "",
+          "rating": "",
+          "review_count": "",
+          "kvk": "",
+          "btw": ""
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "8194965531299925038": {
+        "type": "shopify://apps/webwinkelkeur/blocks/sidebar/c3ac2bcb-63f1-40d3-9622-f307cd559ad3",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}
