@@ -65,3 +65,7 @@ Het resultaat van de live readback en GitHub-synchronisatie staat in de afrondin
 Alle 40 bestanden zijn teruggelezen uit het gepubliceerde thema en komen overeen met de lokale bron, inclusief de binaire WOFF2-fonts en vectorlogo's. De echte live wachtwoordpagina is in Chromium op mobiel geopend: HTTP 200, drie logo-instanties correct geladen, lokale Poppins daadwerkelijk geladen, één intact wachtwoordformulier en geen JavaScript-fouten. Screenshot: `artifacts/brand-preview/live-password-390.png`.
 
 De winkel blijft wachtwoordbeschermd. De paginatests achter die afscherming zijn lokale componenttests met testfixtures; er is geen volledige live aankoop, betaaltest of privéklantacceptatie geclaimd.
+
+## Git-overdracht
+
+Implementatiecommit: `593349e`. Shopify synchroniseert gepubliceerde themabestanden naar de gekoppelde GitHub-branch; de eerste waargenomen brandingcommit is `0b8b5dd`. Die remote wijzigingen zijn zonder conflicten in de lokale branch gemerged. Een rechtstreekse push van de volledige broncode, tests en documentatie wordt nog steeds geweigerd met HTTP 403. Alle lokale commits blijven bewaard in de bijgewerkte `artifacts/iselectstore-customer-portal.bundle`. Dit blokkeert de reeds geverifieerde live themapublicatie niet.
