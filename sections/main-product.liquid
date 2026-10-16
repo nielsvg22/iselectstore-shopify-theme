@@ -61,7 +61,7 @@
   {% render 'spec-row', product: product, key: 'wifi_cellular', label: 'product_page.field_wifi_cellular', types: 'iPad' %}
   {% render 'spec-row', product: product, key: 'condition', label: 'product_page.spec_condition' %}
   {% render 'spec-row', product: product, key: 'warranty_months', label: 'product_page.spec_warranty', format: 'warranty' %}
-  {% render 'spec-row', product: product, key: 'cycle_count', label: 'product_page.field_cycles', types: 'MacBook' %}
+  {% render 'spec-row', product: product, key: 'cycle_count', label: 'product_page.field_cycles', types: 'iPhone|iPad|MacBook|Apple Watch' %}
   {% render 'spec-row', product: product, key: 'keyboard_layout', label: 'product_page.field_keyboard_layout', types: 'MacBook' %}
   {% render 'spec-row', product: product, key: 'box_included', label: 'product_page.field_box', format: 'boolean', types: 'iPhone|iPad|MacBook' %}
   {% render 'spec-row', product: product, key: 'accessories', label: 'product_page.field_accessories', format: 'wide', types: 'iPhone|iPad|MacBook|Mac mini|Apple Watch' %}
@@ -75,10 +75,10 @@
   {% render 'spec-row', product: product, key: 'generation', label: 'product_page.field_generation', types: 'iPhone|iPad' %}
   {% render 'spec-row', product: product, key: 'screen_size', label: 'product_page.field_screen', types: 'iPad|MacBook|iMac' %}
   {% render 'spec-row', product: product, key: 'model_year', label: 'product_page.field_year', types: 'MacBook|iMac|Mac mini' %}
-  {% render 'spec-row', product: product, key: 'chip', label: 'product_page.field_chip', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'chip', label: 'product_page.field_chip', types: 'iPhone|iPad|MacBook|iMac|Mac mini' %}
   {% render 'spec-row', product: product, key: 'cpu_variant', label: 'product_page.field_cpu', types: 'MacBook|Mac mini' %}
   {% render 'spec-row', product: product, key: 'gpu_variant', label: 'product_page.field_gpu', types: 'MacBook|iMac|Mac mini' %}
-  {% render 'spec-row', product: product, key: 'ram_gb', label: 'product_page.field_ram', types: 'MacBook|iMac|Mac mini' %}
+  {% render 'spec-row', product: product, key: 'ram_gb', label: 'product_page.field_ram', format: 'storage', types: 'MacBook|iMac|Mac mini' %}
   {% render 'spec-row', product: product, key: 'apple_pencil_support', label: 'product_page.field_pencil', format: 'boolean', types: 'iPad' %}
   {% render 'spec-row', product: product, key: 'watch_series', label: 'product_page.field_series', types: 'Apple Watch' %}
   {% render 'spec-row', product: product, key: 'watch_case_size', label: 'product_page.field_case_size', types: 'Apple Watch' %}

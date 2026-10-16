@@ -1,0 +1,15 @@
+{% doc %}
+  @param {string} value - Existing product value, or its Shopify metafield.
+{% enddoc %}
+{%- assign label = value.value | default: value -%}
+{%- assign normalized = label | handleize | replace: '-', '_' -%}
+{%- if normalized == 'krasvrij_scherm_minimale_gebruikssporen_op_de_behuizing' -%}
+  {%- assign normalized = 'screen_minor_wear' -%}
+{%- endif -%}
+{%- assign known = 'krasvrij|krasvrij_scherm|screen_minor_wear|zeer_nette_staat|nette_staat|licht_gebruikt|als_nieuw|premium_pre_owned|hoge_batterijconditie|scherp_geprijsd|origineel_apple|12_maanden_garantie|zwart|wit|blauw|rood|roze|zilver|middernacht|sterrenlicht|space_grey|titanium|zwart_titanium|wit_titanium' | split: '|' -%}
+{%- if known contains normalized -%}
+  {%- assign translation_key = 'product_values.' | append: normalized -%}
+  {{- translation_key | t -}}
+{%- else -%}
+  {{- label | escape -}}
+{%- endif -%}

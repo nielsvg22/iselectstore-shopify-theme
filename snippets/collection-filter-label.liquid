@@ -1,0 +1,17 @@
+{% doc %}
+  @param {filter} filter - Shopify's native collection filter.
+{% enddoc %}
+{%- assign parameter = filter.param_name | default: filter.values.first.param_name -%}
+{%- if filter.type == 'price_range' -%}
+  {{- 'collection.filter_price' | t -}}
+{%- else -%}
+  {%- case parameter -%}
+    {%- when 'filter.v.availability' -%}{{- 'collection.filter_availability' | t -}}
+    {%- when 'filter.p.product_type' -%}{{- 'collection.filter_type' | t -}}
+    {%- when 'filter.p.m.custom.storage_gb' -%}{{- 'collection.filter_storage' | t -}}
+    {%- when 'filter.p.m.custom.battery_percentage' -%}{{- 'collection.filter_battery' | t -}}
+    {%- when 'filter.p.m.custom.condition' -%}{{- 'collection.filter_condition' | t -}}
+    {%- when 'filter.p.m.custom.color', 'filter.v.option.kleur', 'filter.v.option.color' -%}{{- 'collection.filter_color' | t -}}
+    {%- else -%}{{- filter.label | escape -}}
+  {%- endcase -%}
+{%- endif -%}

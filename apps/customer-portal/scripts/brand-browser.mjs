@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 // Synthetic commerce fixtures are test-only. Render the actual theme components.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -12,7 +13,7 @@ function prepare(s){return s.replace(/{% schema %}[\s\S]*?{% endschema %}/g,'')
  .replace(/{% form '([^']+)'[^%]*%}/g,(tag,type)=>`<form method="post" action="${type==='product'?'/cart/add':type==='cart'?'/cart':'/contact'}" id="${tag.match(/id: '([^']+)'/)?.[1]||'test-form'}">`)
  .replace(/{% endform %}/g,'</form>');}
 for(const name of await fs.readdir(path.join(root,'snippets')))if(name.endsWith('.liquid'))await fs.writeFile(path.join(tmp,name),prepare(await fs.readFile(path.join(root,'snippets',name),'utf8')));
-const engine=new Liquid({root:tmp,extname:'.liquid'});
+const engine=new Liquid({root:tmp,extname:'.liquid'});configureThemeLiquid(engine);
 const translations=JSON.parse((await fs.readFile(path.join(root,'locales/nl.default.json'),'utf8')).replace(/\/\*[\s\S]*?\*\//g,''));
 engine.registerFilter('t',(key,...args)=>{let text=key.split('.').reduce((v,k)=>v?.[k],translations)||key;if(typeof text==='object')text=text.other||text.one||key;for(const pair of args)if(Array.isArray(pair))text=text.replaceAll('{{ '+pair[0]+' }}',pair[1]);return text;});
 engine.registerFilter('asset_url',n=>'/assets/'+n);engine.registerFilter('stylesheet_tag',s=>`<link rel="stylesheet" href="${s}">`);

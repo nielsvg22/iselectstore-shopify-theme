@@ -31,6 +31,10 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- if found and value.value != nil -%}
+  {%- assign value = value.value -%}
+{%- endif -%}
+
 {%- comment -%}
   Producttype-filter: geen MacBook-velden bij een Apple Watch.
   Alleen actief als product.type exact een bekend producttype is (namen uit de
@@ -58,7 +62,7 @@
     {%- elsif format == 'boolean' -%}
       {%- if value -%}{{ 'product_page.yes' | t }}{%- else -%}{{ 'product_page.no' | t }}{%- endif -%}
     {%- else -%}
-      {{ value }}
+      {% render 'product-spec-text', value: value %}
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}

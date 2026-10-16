@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
@@ -11,7 +12,7 @@ const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const root = path.resolve(appRoot, '../..');
 const output = path.join(root, 'artifacts');
 await fs.mkdir(output, {recursive: true});
-const engine = new Liquid({root: path.join(root, 'snippets'), extname: '.liquid'});
+const engine = new Liquid({root: path.join(root, 'snippets'), extname: '.liquid'});configureThemeLiquid(engine);
 const translations = JSON.parse((await fs.readFile(path.join(root, 'locales/nl.default.json'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, ''));
 engine.registerFilter('t', key => key.split('.').reduce((v, k) => v?.[k], translations) || key);
 engine.registerFilter('asset_url', name => `/assets/${name}`);

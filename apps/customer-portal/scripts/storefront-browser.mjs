@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 // Browser verification uses synthetic customers and a signed test OAuth issuer.
 // No test credentials, customers or orders enter the production bundle.
 import fs from 'node:fs/promises';
@@ -17,7 +18,7 @@ function jwt(nonce){const now=Math.floor(Date.now()/1000);const body=[{alg:'RS25
   {iss:issuer,aud:'test-public-client',sub:'customer-test',nonce,iat:now,exp:now+300}]
   .map(v=>Buffer.from(JSON.stringify(v)).toString('base64url')).join('.');
   return body+'.'+sign('RSA-SHA256',Buffer.from(body),privateKey).toString('base64url');}
-const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});
+const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});configureThemeLiquid(engine);
 engine.registerFilter('asset_url',n=>'/assets/'+n);
 engine.registerFilter('stylesheet_tag',s=>`<link rel="stylesheet" href="${s}">`);
 const translations=JSON.parse((await fs.readFile(path.join(root,'locales/nl.default.json'),'utf8')).replace(/\/\*[\s\S]*?\*\//g,''));

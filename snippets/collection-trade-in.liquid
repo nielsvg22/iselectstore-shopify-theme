@@ -1,5 +1,18 @@
 {% comment %}Reusable grid promotion. Uses the existing trade-in estimator if no real page/URL is configured.{% endcomment %}
 {% liquid
+  assign trade_title = settings.trade_title
+  if trade_title == blank or trade_title == 'Ruil je oude iPhone in. Bespaar op je volgende.'
+    assign trade_title = 'collection.trade_title' | t
+  endif
+  assign trade_description = settings.trade_description
+  if trade_description == blank or trade_description == 'Geef je huidige iPhone een tweede leven en ontdek de mogelijkheden om voordeliger te upgraden.'
+    assign trade_description = 'collection.trade_description' | t
+  endif
+  assign trade_cta = settings.trade_cta
+  if trade_cta == blank or trade_cta == 'Ontdek de inruilmogelijkheden'
+    assign trade_cta = 'collection.trade_cta' | t
+  endif
+  assign trade_image_alt = 'collection.trade_image_alt' | t
   assign trade_destination = settings.trade_url
   if trade_destination == blank
     if pages.inruilen != blank
@@ -11,19 +24,19 @@
 %}
 <aside class="collectionTrade" aria-labelledby="CollectionTradeTitle-{{ section_id }}" data-collection-trade>
   <div class="collectionTradeCopy">
-    <p class="eyebrow">Een volgende stap voor jouw iPhone</p>
-    <h2 id="CollectionTradeTitle-{{ section_id }}">{{ settings.trade_title | default: 'Ruil je oude iPhone in. Bespaar op je volgende.' | escape }}</h2>
-    <p>{{ settings.trade_description | default: 'Geef je huidige iPhone een tweede leven en ontdek de mogelijkheden om voordeliger te upgraden.' | escape }}</p>
+    <p class="eyebrow">{{ 'collection.trade_eyebrow' | t }}</p>
+    <h2 id="CollectionTradeTitle-{{ section_id }}">{{ trade_title | escape }}</h2>
+    <p>{{ trade_description | escape }}</p>
     {% if trade_destination != blank %}
-      <a class="btn primary" href="{{ trade_destination | escape }}">{{ settings.trade_cta | default: 'Ontdek de inruilmogelijkheden' | escape }} <span aria-hidden="true">→</span></a>
+      <a class="btn primary" href="{{ trade_destination | escape }}">{{ trade_cta | escape }} <span aria-hidden="true">→</span></a>
     {% else %}
-      <button type="button" class="btn primary js-tradein-trigger">{{ settings.trade_cta | default: 'Ontdek de inruilmogelijkheden' | escape }} <span aria-hidden="true">→</span></button>
-      <noscript>{% if pages.contact != blank %}<a class="link" href="{{ pages.contact.url }}">Neem contact op over inruilen</a>{% else %}<p>Schakel JavaScript in om de bestaande inruilmodule te openen.</p>{% endif %}</noscript>
+      <button type="button" class="btn primary js-tradein-trigger">{{ trade_cta | escape }} <span aria-hidden="true">→</span></button>
+      <noscript>{% if pages.contact != blank %}<a class="link" href="{{ pages.contact.url }}">{{ 'collection.trade_contact' | t }}</a>{% else %}<p>{{ 'collection.trade_enable_js' | t }}</p>{% endif %}</noscript>
     {% endif %}
   </div>
   <div class="collectionTradeVisual">
     {% if settings.trade_image != blank %}
-      <img src="{{ settings.trade_image | image_url: width: 600 }}" width="600" height="600" loading="lazy" decoding="async" alt="{{ settings.trade_image.alt | default: 'iPhone inruilen bij iSelectStore' | escape }}">
+      <img src="{{ settings.trade_image | image_url: width: 600 }}" width="600" height="600" loading="lazy" decoding="async" alt="{{ settings.trade_image.alt | default: trade_image_alt | escape }}">
     {% else %}
       <img src="{{ 'category-iphone.webp' | asset_url }}" width="744" height="790" loading="lazy" decoding="async" alt="iPhone">
     {% endif %}

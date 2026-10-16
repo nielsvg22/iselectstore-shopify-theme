@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -12,7 +13,7 @@ for(const name of ['storefront-portal-native','storefront-portal-order','portal-
   text=text.replace('{% paginate customer.orders by 20 %}','{% if true %}').replace('{% endpaginate %}','{% endif %}');
   await fs.writeFile(path.join(tmp,name+'.liquid'),text);
 }
-const engine=new Liquid({root:tmp,extname:'.liquid'});
+const engine=new Liquid({root:tmp,extname:'.liquid'});configureThemeLiquid(engine);
 engine.registerFilter('asset_url',n=>'/assets/'+n);engine.registerFilter('stylesheet_tag',s=>`<link rel="stylesheet" href="${s}">`);
 engine.registerFilter('money_with_currency',n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n/100));
 engine.registerFilter('format_address',a=>`<address>${a.first_name}<br>${a.address1}<br>${a.city}</address>`);

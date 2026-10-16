@@ -24,34 +24,35 @@
 {% paginate collection.products by 24 %}
 <section class="collectionListing"><div class="wrap">
   <div class="shopLayout collectionLayout">
-    <aside class="filterSidebar collectionFilters" id="filterSidebar" aria-label="Productfilters">
+    <aside class="filterSidebar collectionFilters" id="filterSidebar" aria-label="{{ 'collection.filters_aria' | t }}">
       <button class="filterCloseBtn" id="filterClose" type="button">{{ 'collection.filters_close' | t }}</button>
-      <div class="collectionFilterHeading"><h2>Verfijn je keuze</h2>{% if active_count > 0 %}<a href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
+      <div class="collectionFilterHeading"><h2>{{ 'collection.filters_heading' | t }}</h2>{% if active_count > 0 %}<a href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
       <form action="{{ collection.url }}" method="get" data-collection-filters>
         <input type="hidden" name="sort_by" value="{{ current_sort | escape }}">
         {% if collection.current_type %}<input type="hidden" name="q" value="{{ collection.current_type | escape }}">{% elsif collection.current_vendor %}<input type="hidden" name="q" value="{{ collection.current_vendor | escape }}">{% endif %}
         {% for filter in collection.filters %}
+          {% capture localized_filter_label %}{% render 'collection-filter-label', filter: filter %}{% endcapture %}{% assign localized_filter_label = localized_filter_label | strip %}
           <details class="filterGroup collectionFilterGroup" open>
-            <summary>{{ filter.label | escape }}<span aria-hidden="true">+</span></summary>
+            <summary>{{ localized_filter_label }}<span aria-hidden="true">+</span></summary>
             <div class="collectionFilterOptions">
               {% case filter.type %}
                 {% when 'list', 'boolean' %}
                   {% for value in filter.values %}
                     <label class="checkRow">
                       <input type="checkbox" name="{{ value.param_name | escape }}" value="{{ value.value | escape }}" {% if value.active %}checked{% elsif value.count == 0 %}disabled{% endif %}>
-                      <span>{{ value.label | escape }}</span><span class="cnt">{{ value.count }}</span>
+                      <span>{% if value.param_name == 'filter.v.availability' %}{% if value.value == '1' %}{{ 'product_card.in_stock' | t }}{% else %}{{ 'collection.filter_unavailable' | t }}{% endif %}{% else %}{% render 'product-spec-text', value: value.label %}{% endif %}</span><span class="cnt">{{ value.count }}</span>
                     </label>
                   {% endfor %}
                 {% when 'price_range' %}
                   <div class="collectionPriceRange">
-                    <label>Vanaf ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.min_value.param_name | escape }}" placeholder="0" {% if filter.min_value.value != blank %}value="{{ filter.min_value.value | divided_by: 100.0 }}"{% endif %}></label>
-                    <label>Tot ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.max_value.param_name | escape }}" placeholder="{{ filter.range_max | divided_by: 100.0 }}" {% if filter.max_value.value != blank %}value="{{ filter.max_value.value | divided_by: 100.0 }}"{% endif %}></label>
+                    <label>{{ 'collection.price_from' | t }} ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.min_value.param_name | escape }}" placeholder="0" {% if filter.min_value.value != blank %}value="{{ filter.min_value.value | divided_by: 100.0 }}"{% endif %}></label>
+                    <label>{{ 'collection.price_to' | t }} ({{ cart.currency.iso_code | default: shop.currency }})<input type="number" inputmode="decimal" step="0.01" min="0" name="{{ filter.max_value.param_name | escape }}" placeholder="{{ filter.range_max | divided_by: 100.0 }}" {% if filter.max_value.value != blank %}value="{{ filter.max_value.value | divided_by: 100.0 }}"{% endif %}></label>
                   </div>
               {% endcase %}
             </div>
           </details>
         {% else %}
-          <p class="collectionFilterEmpty">Voor deze collectie zijn nog geen filters beschikbaar.</p>
+          <p class="collectionFilterEmpty">{{ 'collection.filters_empty' | t }}</p>
         {% endfor %}
         {% if collection.filters.size > 0 %}<button class="btn primary collectionApply" type="submit">{{ 'collection.filters_apply' | t }}</button>{% endif %}
       </form>
@@ -66,23 +67,27 @@
           <button type="submit" class="searchSubmit" aria-label="{{ 'collection.search_aria' | t }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"/></svg></button>
         </form>
         <div class="toolbarRow">
-          <p class="resultCount">{{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}producten{% endif %}</p>
+          <p class="resultCount">{{ 'collection.results_count' | t: count: collection.products_count }}</p>
           <form action="{{ collection.url }}" method="get" class="collectionSort" data-collection-sort>
             {% render 'collection-filter-values', collection: collection %}
-            <label for="CollectionSort" class="collectionSrOnly">Sorteer producten</label>
+            <label for="CollectionSort" class="collectionSrOnly">{{ 'collection.sort_label' | t }}</label>
             <select id="CollectionSort" class="sortSelect" name="sort_by">
               {% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == current_sort %}selected{% endif %}>{% if option.value == 'created-descending' %}{{ 'collection.stock_order.newest' | t }}{% else %}{{ option.name | escape }}{% endif %}</option>{% endfor %}
             </select>
-            <button class="collectionSortSubmit clearAllBtn" type="submit">Sorteren</button>
+            <button class="collectionSortSubmit clearAllBtn" type="submit">{{ 'collection.sort_submit' | t }}</button>
           </form>
           <button class="filterToggle" id="filterToggle" type="button" aria-controls="filterSidebar" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M8 12h8M11 18h2"/></svg>{{ 'collection.filters_toggle' | t }}{% if active_count > 0 %} ({{ active_count }}){% endif %}</button>
         </div>
       </div>
       {% if active_count > 0 %}
-        <nav class="activeFilters" aria-label="Actieve filters">
+        <nav class="activeFilters" aria-label="{{ 'collection.active_filters' | t }}">
           {% for filter in collection.filters %}
-            {% for value in filter.active_values %}<a class="filterChip" href="{{ value.url_to_remove }}" aria-label="Verwijder {{ filter.label | escape }}: {{ value.label | escape }}">{{ filter.label | escape }}: {{ value.label | escape }} <span aria-hidden="true">×</span></a>{% endfor %}
-            {% if filter.type == 'price_range' %}{% if filter.min_value.value != blank or filter.max_value.value != blank %}<a class="filterChip" href="{{ filter.url_to_remove }}">{{ filter.label | escape }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }} <span aria-hidden="true">×</span></a>{% endif %}{% endif %}
+          {% capture localized_filter_label %}{% render 'collection-filter-label', filter: filter %}{% endcapture %}{% assign localized_filter_label = localized_filter_label | strip %}
+            {% for value in filter.active_values %}
+              {% capture localized_filter_value %}{% if value.param_name == 'filter.v.availability' %}{% if value.value == '1' %}{{ 'product_card.in_stock' | t }}{% else %}{{ 'collection.filter_unavailable' | t }}{% endif %}{% else %}{% render 'product-spec-text', value: value.label %}{% endif %}{% endcapture %}{% assign localized_filter_value = localized_filter_value | strip %}
+              <a class="filterChip" href="{{ value.url_to_remove }}" aria-label="{{ 'collection.remove_filter' | t: label: localized_filter_label, value: localized_filter_value | escape }}">{{ localized_filter_label }}: {{ localized_filter_value }} <span aria-hidden="true">×</span></a>
+            {% endfor %}
+            {% if filter.type == 'price_range' %}{% if filter.min_value.value != blank or filter.max_value.value != blank %}<a class="filterChip" href="{{ filter.url_to_remove }}">{{ localized_filter_label }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }} <span aria-hidden="true">×</span></a>{% endif %}{% endif %}
           {% endfor %}
           <a class="clearFiltersLink" href="{{ collection.url }}?sort_by={{ current_sort | url_encode }}{% if collection.current_type %}&amp;q={{ collection.current_type | url_encode }}{% elsif collection.current_vendor %}&amp;q={{ collection.current_vendor | url_encode }}{% endif %}">{{ 'collection.filters_clear_all' | t }}</a>
         </nav>
@@ -90,7 +95,7 @@
       <div data-stock-results data-section-id="{{ section.id }}" data-total="{{ collection.products_count }}" data-page="{{ paginate.current_page }}" data-page-size="24" data-sort="{{ current_sort }}">
       <p class="stockOrderStatus" role="status" hidden data-stock-status data-loading="{{ 'collection.stock_order.loading' | t | escape }}" data-error="{{ 'collection.stock_order.error' | t | escape }}"></p>
       {% if collection.products.size == 0 %}
-        <div class="noResults"><h2>Geen producten gevonden</h2><p>{{ 'collection.no_results' | t }}</p>{% if active_count > 0 %}<a class="btn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
+        <div class="noResults"><h2>{{ 'collection.no_results_title' | t }}</h2><p>{{ 'collection.no_results' | t }}</p>{% if active_count > 0 %}<a class="btn" href="{{ collection.url }}">{{ 'collection.filters_clear_all' | t }}</a>{% endif %}</div>
       {% else %}
         <div class="products shopProductsGrid collectionGrid" data-collection-grid>
           {% for product in collection.products %}
@@ -103,9 +108,9 @@
       {% endif %}
       {% if paginate.pages > 1 %}
         <nav class="collectionPagination" aria-label="{{ 'collection.stock_order.pagination' | t }}">
-          {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="Vorige pagina">←</a>{% endif %}
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="{{ 'collection.previous_page' | t }}">←</a>{% endif %}
           {% for part in paginate.parts %}{% assign part_number = part.title | plus: 0 %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% elsif part_number == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
-          {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="Volgende pagina">→</a>{% endif %}
+          {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="{{ 'collection.next_page' | t }}">→</a>{% endif %}
         </nav>
       {% endif %}
       </div>

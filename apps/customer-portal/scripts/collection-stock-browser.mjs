@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 // Local fixtures only: exercise the actual Liquid, Shopify GET forms, CSS and JS.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -10,7 +11,7 @@ const temp=await fs.mkdtemp('/tmp/iselect-collection-test-');
 const prepare=s=>s.replace(/{% schema %}[\s\S]*?{% endschema %}/g,'').replace(/{% paginate [^%]+%}/g,'{% if true %}').replace(/{% endpaginate %}/g,'{% endif %}')
  .replace(/{% form [^%]+%}/g,'<form action="/contact" method="post">').replace(/{% endform %}/g,'</form>');
 for(const name of await fs.readdir(path.join(root,'snippets')))if(name.endsWith('.liquid'))await fs.writeFile(path.join(temp,name),prepare(await fs.readFile(path.join(root,'snippets',name),'utf8')));
-const engine=new Liquid({root:temp,extname:'.liquid'});
+const engine=new Liquid({root:temp,extname:'.liquid'});configureThemeLiquid(engine);
 const translations=JSON.parse((await fs.readFile(path.join(root,'locales/nl.default.json'),'utf8')).replace(/\/\*[\s\S]*?\*\//g,''));
 engine.registerFilter('t',key=>key.split('.').reduce((a,k)=>a?.[k],translations)||key);
 engine.registerFilter('asset_url',name=>'/assets/'+name);engine.registerFilter('stylesheet_tag',url=>`<link rel="stylesheet" href="${url}">`);

@@ -37,16 +37,16 @@
       {% endif %}
     {% endif %}
     {% unless product.available %}
-      <span class="productSoldRibbon">VERKOCHT</span>
+      <span class="productSoldRibbon">{{ 'product_card.sold_ribbon' | t }}</span>
     {% endunless %}
   </a>
   {% if product.available %}
     {% assign badge_label = product.metafields.custom.badge_text | default: product.metafields.custom.condition %}
-    {% if badge_label %}<span class="badge">{{ badge_label }}</span>{% endif %}
+    {% if badge_label %}<span class="badge">{% render 'product-spec-text', value: badge_label %}</span>{% endif %}
   {% endif %}
   <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
   <div class="meta">
-    {%- if product.metafields.custom.condition -%}{{ product.metafields.custom.condition }}{%- endif -%}
+    {%- if product.metafields.custom.condition -%}{% render 'product-spec-text', value: product.metafields.custom.condition %}{%- endif -%}
     {%- if product.metafields.custom.battery_percentage %} · {{ product.metafields.custom.battery_percentage }}{{ 'product_card.meta_battery_suffix' | t }}{% endif -%}
     {%- if product.metafields.custom.warranty_months %} · {{ 'product_card.meta_warranty_prefix' | t }} {{ product.metafields.custom.warranty_months }} {{ 'product_card.warranty_suffix' | t }}{% endif -%}
   </div>
@@ -60,7 +60,7 @@
         {% if card_storage == blank %}{% if option_name == 'opslag' or option_name == 'opslagcapaciteit' or option_name == 'storage' %}<span>{{ option.values | join: ' / ' | escape }}</span>{% endif %}{% endif %}
       {% endfor %}
     </div>
-    <p class="collectionStock{% unless product.available %} collectionStock--sold{% endunless %}"><span aria-hidden="true"></span>{% if product.available %}Op voorraad{% else %}Uitverkocht{% endif %}</p>
+    <p class="collectionStock{% unless product.available %} collectionStock--sold{% endunless %}"><span aria-hidden="true"></span>{% if product.available %}{{ 'product_card.in_stock' | t }}{% else %}{{ 'product_card.out_of_stock' | t }}{% endif %}</p>
   {% endif %}
   <div class="price">
     <b>{{ product.price | money }}</b>

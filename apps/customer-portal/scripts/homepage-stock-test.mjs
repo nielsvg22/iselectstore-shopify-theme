@@ -1,10 +1,11 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {Liquid} from 'liquidjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
-const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});
+const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});configureThemeLiquid(engine);
 engine.registerFilter('t',k=>k);engine.registerFilter('money',n=>String(n/100));
 const sources=Object.fromEntries(await Promise.all(['featured-products','fresh-stock'].map(async n=>[n,(await fs.readFile(path.join(root,'sections',n+'.liquid'),'utf8')).replace(/{% schema %}[\s\S]*?{% endschema %}/g,'')])));
 function product(id,type,available,created_at='2026-10-01'){return {id,title:'Test '+id,type,available,created_at,url:'/products/'+id,price:10000,metafields:{custom:{}}};}

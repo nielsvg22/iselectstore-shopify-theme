@@ -1,0 +1,134 @@
+[
+  {
+    "namespace": "custom",
+    "key": "model",
+    "name": "Model",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "color",
+    "name": "Kleur",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "chip",
+    "name": "Chip / processor",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "ram_gb",
+    "name": "Werkgeheugen (GB)",
+    "type": "number_integer",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "sim_type",
+    "name": "SIM / eSIM-uitvoering",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "warranty_months",
+    "name": "Garantie (maanden)",
+    "type": "number_integer",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "screen_size",
+    "name": "Schermformaat",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "watch_series",
+    "name": "Apple Watch-serie",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "watch_case_size",
+    "name": "Apple Watch-kastformaat",
+    "type": "single_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "cycle_count",
+    "name": "Laadcycli",
+    "type": "number_integer",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "box_included",
+    "name": "Originele doos inbegrepen",
+    "type": "boolean",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  },
+  {
+    "namespace": "custom",
+    "key": "cosmetic_notes",
+    "name": "Cosmetische opmerkingen",
+    "type": "multi_line_text_field",
+    "ownerType": "PRODUCT",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "description": "iSelectStore: vul alleen in op basis van gecontroleerde toestelgegevens. Geen automatische standaardwaarde."
+  }
+]

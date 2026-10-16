@@ -1,3 +1,4 @@
+import {configureThemeLiquid} from './theme-liquid-fixture.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -7,7 +8,7 @@ import {chromium} from 'playwright';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
 await fs.mkdir(path.join(root,'artifacts/sold-ribbon-review'),{recursive:true});
 const translations=JSON.parse((await fs.readFile(path.join(root,'locales/nl.default.json'),'utf8')).replace(/\/\*[\s\S]*?\*\//g,''));
-const engine=new Liquid();engine.registerFilter('image_url',image=>image.src);engine.registerFilter('money',n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n/100));engine.registerFilter('t',key=>key.split('.').reduce((a,k)=>a?.[k],translations)||key);
+const engine=new Liquid({root:path.join(root,'snippets'),extname:'.liquid'});configureThemeLiquid(engine);engine.registerFilter('image_url',image=>image.src);engine.registerFilter('money',n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n/100));engine.registerFilter('t',key=>key.split('.').reduce((a,k)=>a?.[k],translations)||key);
 const source=await fs.readFile(path.join(root,'snippets/product-card.liquid'),'utf8');
 const stamped={id:999,src:'/photos/verkocht-123_uuid.jpg',alt:'Hetzelfde toestel'};
 const clean={id:123,src:'/photos/clean.jpg',alt:'Hetzelfde toestel'};

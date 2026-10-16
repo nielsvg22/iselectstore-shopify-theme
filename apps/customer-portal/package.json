@@ -23,7 +23,8 @@
     "test:product-card:browser": "node scripts/product-card-browser.mjs",
     "test:homepage:stock": "node scripts/homepage-stock-test.mjs",
     "test:collection:stock": "node scripts/collection-stock-browser.mjs",
-    "test:notification:browser": "node scripts/notification-brand-browser.mjs"
+    "test:notification:browser": "node scripts/notification-brand-browser.mjs",
+    "test:specifications": "node scripts/specification-localization-test.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",
