@@ -1,6 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": { "type": "main-collection" }
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "trade_enabled": true,
+        "trade_title": "Ruil je oude iPhone in. Bespaar op je volgende.",
+        "trade_description": "Geef je huidige iPhone een tweede leven en ontdek de mogelijkheden om voordeliger te upgraden.",
+        "trade_image": "shopify://shop_images/IMG_9468-scaled_c973c2bc-8ea4-4c9d-9337-0df17a5016df.jpg",
+        "trade_cta": "Ontdek de inruilmogelijkheden",
+        "trade_url": ""
+      }
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
