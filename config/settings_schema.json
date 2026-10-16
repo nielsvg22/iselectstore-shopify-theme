@@ -10,40 +10,137 @@
   {
     "name": "Kleuren",
     "settings": [
-      { "type": "color", "id": "color_navy", "label": "Navy", "default": "#1f3049" },
-      { "type": "color", "id": "color_coral", "label": "Coral", "default": "#f9858b" },
-      { "type": "color", "id": "color_ivory", "label": "Ivory (achtergrond)", "default": "#f7f7f7" }
+      {
+        "type": "color",
+        "id": "color_navy",
+        "label": "Navy",
+        "default": "#1f3049"
+      },
+      {
+        "type": "color",
+        "id": "color_coral",
+        "label": "Coral",
+        "default": "#f9858b"
+      },
+      {
+        "type": "color",
+        "id": "color_ivory",
+        "label": "Ivory (achtergrond)",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "color",
+        "id": "color_lightblue",
+        "label": "Lichtblauw",
+        "default": "#e4ecf4"
+      },
+      {
+        "type": "color",
+        "id": "color_lightcoral",
+        "label": "Lichtkoraal",
+        "default": "#ffe6ed"
+      },
+      {
+        "type": "color",
+        "id": "color_anthracite",
+        "label": "Antraciet",
+        "default": "#25292d"
+      }
+    ]
+  },
+  {
+    "name": "Typografie",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Huisstijl: Aeonic voor koppen, Poppins voor tekst. Zonder aangeleverd Aeonic-webfont gebruiken koppen Poppins als fallback."
+      },
+      {
+        "type": "url",
+        "id": "brand_heading_font_url",
+        "label": "Aeonic webfont URL",
+        "info": "Optioneel: https-URL naar het aangeleverde .woff2- of .woff-bestand in Shopify Bestanden."
+      }
     ]
   },
   {
     "name": "Logo & favicon",
     "settings": [
-      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
     ]
   },
   {
     "name": "Social media",
     "settings": [
-      { "type": "text", "id": "social_instagram_link", "label": "Instagram URL" },
-      { "type": "text", "id": "social_facebook_link", "label": "Facebook URL" }
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      }
     ]
   },
   {
     "name": "Contact & reviews",
     "settings": [
-      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp nummer", "default": "31643295022", "info": "Internationaal formaat, zonder +" },
-      { "type": "text", "id": "webwinkelkeur_shop_id", "label": "WebwinkelKeur shop ID", "info": "Alleen cijfers. Leeg = widget wordt niet geladen." },
-      { "type": "text", "id": "stock_notify_backend_url", "label": "Backend app URL (voorraadmeldingen)", "default": "https://iselectstore-marktplaats-app.vercel.app" }
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp nummer",
+        "default": "31643295022",
+        "info": "Internationaal formaat, zonder +"
+      },
+      {
+        "type": "text",
+        "id": "webwinkelkeur_shop_id",
+        "label": "WebwinkelKeur shop ID",
+        "info": "Alleen cijfers. Leeg = widget wordt niet geladen."
+      },
+      {
+        "type": "text",
+        "id": "stock_notify_backend_url",
+        "label": "Backend app URL (voorraadmeldingen)",
+        "default": "https://iselectstore-marktplaats-app.vercel.app"
+      }
     ]
   },
   {
     "name": "Marketing & tracking",
     "settings": [
-      { "type": "header", "content": "Tracking IDs" },
-      { "type": "paragraph", "content": "Deze IDs worden gebruikt in Shopify Customer Events custom pixels. Geen scripts worden direct in het thema geïnjecteerd." },
-      { "type": "text", "id": "meta_pixel_id", "label": "Meta Pixel ID", "info": "Alleen cijfers, bv. 1234567890" },
-      { "type": "text", "id": "google_analytics_id", "label": "Google Analytics 4 ID", "info": "bv. G-XXXXXXXXXX" },
-      { "type": "text", "id": "google_ads_id", "label": "Google Ads conversion ID", "info": "bv. AW-XXXXXXXXXX" }
+      {
+        "type": "header",
+        "content": "Tracking IDs"
+      },
+      {
+        "type": "paragraph",
+        "content": "Deze IDs worden gebruikt in Shopify Customer Events custom pixels. Geen scripts worden direct in het thema geïnjecteerd."
+      },
+      {
+        "type": "text",
+        "id": "meta_pixel_id",
+        "label": "Meta Pixel ID",
+        "info": "Alleen cijfers, bv. 1234567890"
+      },
+      {
+        "type": "text",
+        "id": "google_analytics_id",
+        "label": "Google Analytics 4 ID",
+        "info": "bv. G-XXXXXXXXXX"
+      },
+      {
+        "type": "text",
+        "id": "google_ads_id",
+        "label": "Google Ads conversion ID",
+        "info": "bv. AW-XXXXXXXXXX"
+      }
     ]
   }
 ]

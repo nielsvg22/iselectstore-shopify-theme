@@ -227,16 +227,16 @@
 
       <div class="pdpFeatures">
         {% if product.type != blank %}{% assign feature_product_type = product.type %}{% else %}{% assign feature_product_type = 'product_page.apple_product_default' | t %}{% endif %}
-        <div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>{{ 'product_page.feature_original' | t: type: feature_product_type }}</div>
+        <div class="pdpFeature">{% render 'brand-usp', icon: 'original' %}{{ 'product_page.feature_original' | t: type: feature_product_type }}</div>
         {% capture feature_battery %}{% render 'spec-value', product: product, key: 'battery_percentage' %}{% endcapture %}
         {% assign feature_battery = feature_battery | strip %}
-        {% if feature_battery != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>{{ 'product_page.feature_battery' | t: percentage: feature_battery }}</div>{% endif %}
+        {% if feature_battery != blank %}<div class="pdpFeature">{% render 'brand-usp', icon: 'battery' %}{{ 'product_page.feature_battery' | t: percentage: feature_battery }}</div>{% endif %}
         {% capture feature_condition %}{% render 'spec-value', product: product, key: 'condition' %}{% endcapture %}
         {% assign feature_condition = feature_condition | strip %}
-        {% if feature_condition != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="16" height="8" rx="2"/><path d="M19 10.5h2v3h-2"/></svg>{{ 'product_page.feature_condition' | t: condition: feature_condition }}</div>{% endif %}
+        {% if feature_condition != blank %}<div class="pdpFeature">{% render 'brand-usp', icon: 'photos' %}{{ 'product_page.feature_condition' | t: condition: feature_condition }}</div>{% endif %}
         {% capture feature_warranty %}{% render 'spec-value', product: product, key: 'warranty_months' %}{% endcapture %}
         {% assign feature_warranty = feature_warranty | strip %}
-        {% if feature_warranty != blank %}<div class="pdpFeature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>{{ 'product_page.feature_warranty' | t: months: feature_warranty }}</div>{% endif %}
+        {% if feature_warranty != blank %}<div class="pdpFeature">{% render 'brand-usp', icon: 'warranty' %}{{ 'product_page.feature_warranty' | t: months: feature_warranty }}</div>{% endif %}
       </div>
 
       {% assign show_guarantee_link = false %}

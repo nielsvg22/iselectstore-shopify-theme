@@ -1,0 +1,15 @@
+{% comment %}Shared by storefront and password layout. Poppins is the approved fallback until Aeonic is supplied.{% endcomment %}
+{{ 'brand-fonts.css' | asset_url | stylesheet_tag }}
+{{ 'brand.css' | asset_url | stylesheet_tag }}
+{% if settings.brand_heading_font_url != blank %}
+  <style>
+    @font-face {
+      font-family: 'iSelect Aeonic';
+      src: url({{ settings.brand_heading_font_url | json }});
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    :root { --font-heading: 'iSelect Aeonic', 'Poppins', sans-serif; }
+  </style>
+{% endif %}

@@ -1,0 +1,9 @@
+{%- comment -%}Map existing Dutch/English USP labels while preserving editor content.{%- endcomment -%}
+{%- assign brand_label = title | downcase -%}
+{%- if brand_label contains 'batter' -%}battery
+{%- elsif brand_label contains 'foto' or brand_label contains 'photo' -%}photos
+{%- elsif brand_label contains 'inruil' or brand_label contains 'trade' -%}trade-in
+{%- elsif brand_label contains 'garant' or brand_label contains 'warrant' -%}warranty
+{%- elsif brand_label contains 'prijs' or brand_label contains 'price' or brand_label contains 'value' -%}value
+{%- elsif brand_label contains 'origin' or brand_label contains 'apple' -%}original
+{%- endif -%}

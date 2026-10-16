@@ -2,7 +2,9 @@
   {% for block in section.blocks %}
     {% assign stagger_delay = forloop.index0 | times: 0.06 %}
     <div class="trustitem reveal" style="transition-delay:{{ stagger_delay }}s" {{ block.shopify_attributes }}>
-      <div class="bubble">{{ block.settings.icon }}</div>
+      {% capture brand_key %}{% render 'brand-usp-key', title: block.settings.title %}{% endcapture %}
+      {% assign brand_key = brand_key | strip %}
+      <div class="bubble">{% if brand_key != blank %}{% render 'brand-usp', icon: brand_key %}{% else %}{{ block.settings.icon }}{% endif %}</div>
       <div><b>{{ block.settings.title }}</b><small>{{ block.settings.subtitle }}</small></div>
     </div>
   {% endfor %}

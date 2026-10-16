@@ -6,7 +6,7 @@ import {Liquid} from 'liquidjs';
 import assert from 'node:assert/strict';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
 const tmp=await fs.mkdtemp('/tmp/iselect-native-test-');
-for(const name of ['storefront-portal-native','storefront-portal-order','portal-icon','icon-mark']){
+for(const name of ['storefront-portal-native','storefront-portal-order','portal-icon','icon-mark','brand-logo','brand-usp','brand-usp-key']){
   let text=await fs.readFile(path.join(root,'snippets',name+'.liquid'),'utf8');
   // Shopify's paginator is server-provided. The test supplies a one-page context.
   text=text.replace('{% paginate customer.orders by 20 %}','{% if true %}').replace('{% endpaginate %}','{% endif %}');
@@ -26,7 +26,7 @@ const base={shop:{id:110103658887,url:host,email:'service@example.invalid'},rout
   account_profile_url:'https://shopify.com/110103658887/account/profile',account_logout_url:'/account/logout',storefront_login_url:'/customer_authentication/login?locale=nl',all_products_collection_url:'/collections/all'},
   request:{host:'native.example.invalid',path:'/search'},section:{settings:{customer_account_client_id:''}},settings:{},cart:{item_count:0},paginate:{pages:1,current_page:1},pages:{contact:{url:'/pages/contact'},garantie:{url:'/pages/garantie'},faq:{url:'/pages/faq'}}};
 async function section(name,context){return engine.parseAndRender((await fs.readFile(path.join(root,'sections',name+'.liquid'),'utf8')).replace(/{% schema %}[\s\S]*?{% endschema %}/g,'').replace(/{% form [^%]+%}/g,'<form>').replace(/{% endform %}/g,'</form>'),context);}
-async function html(current){const ctx={...base,customer:current};return '<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"></head><body>'+await section('header',ctx)+'<main>'+await section('storefront-portal',ctx)+'</main>'+await section('footer',ctx)+'</body></html>';}
+async function html(current){const ctx={...base,customer:current};return '<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"><link rel="stylesheet" href="/assets/brand-fonts.css"><link rel="stylesheet" href="/assets/brand.css"></head><body>'+await section('header',ctx)+'<main>'+await section('storefront-portal',ctx)+'</main>'+await section('footer',ctx)+'</body></html>';}
 // A request-controlled ID must never substitute for the authenticated customer.
 const loggedOut=await html(null);assert.ok(!loggedOut.includes('test-a@example.invalid'));assert.ok(!loggedOut.includes('#TEST-10'));
 const malicious=await html({...customer,first_name:'<script>alert(1)</script>'});assert.ok(!malicious.includes('<script>alert(1)</script>'));assert.ok(malicious.includes('&lt;script&gt;'));
@@ -35,7 +35,7 @@ try{
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));let current=null;
   await page.route(host+'/**',async route=>{const request=new URL(route.request().url());
-    if(request.pathname.startsWith('/assets/'))return route.fulfill({body:await fs.readFile(path.join(root,request.pathname.slice(1))),contentType:request.pathname.endsWith('.js')?'application/javascript':'text/css'});
+    if(request.pathname.startsWith('/assets/'))return route.fulfill({body:await fs.readFile(path.join(root,request.pathname.slice(1))),contentType:request.pathname.endsWith('.js')?'application/javascript':request.pathname.endsWith('.svg')?'image/svg+xml':request.pathname.endsWith('.woff2')?'font/woff2':'text/css'});
     if(request.pathname==='/customer_authentication/login'){assert.equal(request.searchParams.get('return_to'),'/search?view=mijn-account');current=customer;return route.fulfill({status:302,headers:{location:url}});}
     if(request.pathname==='/account/logout'){current=null;return route.fulfill({status:302,headers:{location:url}});}
     return route.fulfill({contentType:'text/html',body:await html(current)});

@@ -7,20 +7,21 @@
 <title>{{ page_title }}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
 {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 <link rel="canonical" href="{{ canonical_url }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ 'animations.css' | asset_url | stylesheet_tag }}
+{% render 'brand-head' %}
 <style>
   :root{
     --navy: {{ settings.color_navy | default: "#1f3049" }};
     --coral: {{ settings.color_coral | default: "#f9858b" }};
     --ivory: {{ settings.color_ivory | default: "#f7f7f7" }};
+    --lightblue: {{ settings.color_lightblue | default: "#e4ecf4" }};
+    --lightpink: {{ settings.color_lightcoral | default: "#ffe6ed" }};
+    --anthracite: {{ settings.color_anthracite | default: "#25292d" }};
     --soft: {{ settings.color_ivory | default: "#f7f7f7" }};
   }
 </style>
-{% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% else %}<link rel="icon" href="{{ 'icon-mark.png' | asset_url }}" type="image/png">{% endif %}
+{% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">{% else %}<link rel="icon" href="{{ 'brand-mark-coral.svg' | asset_url }}" type="image/svg+xml">{% endif %}
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 {% comment %}
   GEO/SEO: Organization structured data op elke pagina, zodat
@@ -33,7 +34,7 @@
   "@type": "Organization",
   "name": "iSelectStore",
   "url": {{ shop.url | json }},
-  "logo": {{ 'icon-mark.png' | asset_url | prepend: "https:" | json }}
+  "logo": {{ 'brand-logo-primary.svg' | asset_url | prepend: "https:" | json }}
   {%- assign same_as = "" | split: "," -%}
   {%- if settings.social_instagram_link != blank -%}{%- assign same_as = same_as | push: settings.social_instagram_link -%}{%- endif -%}
   {%- if settings.social_facebook_link != blank -%}{%- assign same_as = same_as | push: settings.social_facebook_link -%}{%- endif -%}

@@ -32,7 +32,11 @@
         {% if proof_title != blank %}
           <div class="stProof" {{ block.shopify_attributes }}>
             <span class="stProofIcon" aria-hidden="true">
-              {% if block.settings.icon != blank %}
+              {% capture brand_key %}{% render 'brand-usp-key', title: proof_title %}{% endcapture %}
+              {% assign brand_key = brand_key | strip %}
+              {% if brand_key != blank %}
+                {% render 'brand-usp', icon: brand_key %}
+              {% elsif block.settings.icon != blank %}
                 {{ block.settings.icon }}
               {% else %}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-4"></path></svg>

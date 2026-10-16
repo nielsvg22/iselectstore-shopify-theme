@@ -27,7 +27,7 @@ const context={shop:{id:110103658887,url:origin,email:'service@example.invalid'}
   request:{host:'portal.example.invalid',path:'/pages/mijn-account'},section:{settings:{customer_account_client_id:'test-public-client'}},cart:{item_count:0}};
 async function section(name,settings=context.section.settings){const s=(await fs.readFile(path.join(root,'sections',name+'.liquid'),'utf8')).replace(/{% schema %}[\s\S]*?{% endschema %}/g,'').replace(/{% form [^%]+%}/g,'<form>').replace(/{% endform %}/g,'</form>');return engine.parseAndRender(s,{...context,section:{settings}});}
 const header=await section('header',{}),footer=await section('footer',{}),portal=await section('storefront-portal');
-const html=`<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"></head><body>${header}<main>${portal}</main>${footer}</body></html>`;
+const html=`<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/theme.css"><link rel="stylesheet" href="/assets/brand-fonts.css"><link rel="stylesheet" href="/assets/brand.css"></head><body>${header}<main>${portal}</main>${footer}</body></html>`;
 await fs.mkdir(path.join(root,'artifacts'),{recursive:true});
 const browser=await (process.env.BROWSER==='webkit'?webkit:chromium).launch({headless:true,...(process.env.BROWSER==='webkit'?{}:{executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium'}),args:['--no-sandbox']});
 try {
@@ -37,7 +37,7 @@ try {
   customer.orders.nodes[0].lineItems.nodes[0].title='iPhone 16 Pro';
   await page.route(origin+'/**',async route=>{
     const u=new URL(route.request().url());
-    if(u.pathname.startsWith('/assets/')){try{return route.fulfill({body:await fs.readFile(path.join(root,u.pathname.slice(1))),contentType:u.pathname.endsWith('.js')?'application/javascript':'text/css'});}catch{return route.fulfill({status:404,body:''});}}
+    if(u.pathname.startsWith('/assets/')){try{return route.fulfill({body:await fs.readFile(path.join(root,u.pathname.slice(1))),contentType:u.pathname.endsWith('.js')?'application/javascript':u.pathname.endsWith('.svg')?'image/svg+xml':u.pathname.endsWith('.woff2')?'font/woff2':'text/css'});}catch{return route.fulfill({status:404,body:''});}}
     return route.fulfill({body:html,contentType:'text/html'});
   });
   await page.route('https://shopify.com/**',async route=>{

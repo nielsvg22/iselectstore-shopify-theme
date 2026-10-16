@@ -17,7 +17,8 @@
     "build:storefront": "esbuild storefront/Portal.tsx --bundle --format=iife --jsx=automatic --jsx-import-source=preact --outfile=../../assets/storefront-portal.js --minify",
     "typecheck:storefront": "tsc --noEmit -p storefront/tsconfig.json",
     "test:storefront:browser": "npm run build:storefront && node scripts/storefront-browser.mjs",
-    "test:native:browser": "node scripts/native-browser.mjs"
+    "test:native:browser": "node scripts/native-browser.mjs",
+    "test:brand:browser": "node scripts/brand-browser.mjs"
   },
   "dependencies": {
     "@preact/signals": "^2.11.3",
