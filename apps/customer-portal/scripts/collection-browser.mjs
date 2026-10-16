@@ -13,7 +13,7 @@ const prepare=s=>s.replace(/{% schema %}[\s\S]*?{% endschema %}/g,'').replace(/{
 for(const name of await fs.readdir(path.join(root,'snippets')))if(name.endsWith('.liquid'))await fs.writeFile(path.join(temp,name),prepare(await fs.readFile(path.join(root,'snippets',name),'utf8')));
 const engine=new Liquid({root:temp,extname:'.liquid'});configureThemeLiquid(engine);
 const translations=JSON.parse((await fs.readFile(path.join(root,'locales/nl.default.json'),'utf8')).replace(/\/\*[\s\S]*?\*\//g,''));
-engine.registerFilter('t',key=>key.split('.').reduce((a,k)=>a?.[k],translations)||key);
+engine.registerFilter('t',(key,...args)=>{let value=key.split('.').reduce((a,k)=>a?.[k],translations)||key;const count=args.find(a=>Array.isArray(a)&&a[0]==='count')?.[1];if(typeof value==='object')value=value[count===1?'one':'other'];return String(value).replace(/{{\s*count\s*}}/g,String(count??''));});
 engine.registerFilter('asset_url',name=>'/assets/'+name);engine.registerFilter('stylesheet_tag',url=>`<link rel="stylesheet" href="${url}">`);
 engine.registerFilter('image_url',()=>'/test-product.svg');
 const money=n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(Number(n)/100);
@@ -44,7 +44,7 @@ async function fixture(page){page.on('pageerror',e=>errors.push(e.message));awai
 try{
  const page=await b.newPage({viewport:{width:1920,height:1300}});await fixture(page);
  await page.goto('https://collection.test/collections/all');await page.evaluate(()=>document.fonts.ready);
- for(const [width,columns] of [[1920,3],[1536,3],[1440,3],[1280,3],[1024,2],[768,2],[390,2]]){
+ for(const [width,columns] of [[1920,3],[1536,3],[1440,3],[1280,3],[1024,2],[768,2],[430,2],[320,2],[390,2]]){
   await page.setViewportSize({width,height:1300});await page.waitForTimeout(150);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Page overflow ${width}`);
   const cards=page.locator('.collectionCard');assert.equal(await cards.count(),24);
@@ -60,15 +60,35 @@ try{
    assert.ok((await cards.nth(3).locator('.collectionStock').innerText()).includes('Uitverkocht'));
    assert.ok((await cards.nth(3).locator('.price').innerText()).includes('445'));
    assert.equal(await cards.nth(3).locator('.old').count(),0);
-  }else{assert.equal(await banner.isVisible(),false);assert.equal(await page.locator('.collectionStock').first().isVisible(),false);}
+  }else{
+   assert.equal(await banner.isVisible(),false);assert.equal(await page.locator('.collectionStock').first().isVisible(),false);
+   const first=cards.first();
+   assert.ok((await first.locator('.cardFacts').innerText()).includes('256GB'));
+   assert.ok((await first.locator('.cardFacts').innerText()).includes('95%'));
+   assert.equal(await first.locator('.meta').isVisible(),false);
+   const visual=await first.locator('.productCardVisual').boundingBox();
+   assert.ok(Math.abs(visual.width-visual.height)<1,'Square mobile image');
+   await page.evaluate(()=>scrollTo(0,document.querySelector('[data-collection-grid]').getBoundingClientRect().top+scrollY+400));
+   await page.waitForTimeout(100);
+   const bar=await page.locator('[data-mobile-collection-controls]').boundingBox();
+   const header=await page.locator('#siteHeader').boundingBox();
+   assert.ok(bar.y>=-1&&bar.y<=Math.max(0,header.y+header.height)+2,'Mobile controls stay below the visible header');
+   assert.ok((await page.locator('#filterToggle').boundingBox()).height>=44);
+   assert.ok((await page.locator('#CollectionSort').boundingBox()).height>=44);
+   if(width===390)await page.screenshot({path:path.join(root,'artifacts/collection-preview/mobile-controls-scrolled.png')});
+   await page.evaluate(()=>scrollTo(0,0));
+  }
   await page.screenshot({path:path.join(root,`artifacts/collection-preview/collection-${width}.png`)});
   console.log(`${width}px: ${columns} columns, banner placement/DOM order, no overflow, product data intact`);
  }
  await page.locator('#filterToggle').click();assert.equal(await page.locator('#filterToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.evaluate(()=>document.activeElement.id),'filterClose');await page.keyboard.press('Escape');assert.equal(await page.locator('#filterToggle').getAttribute('aria-expanded'),'false');assert.equal(await page.evaluate(()=>document.activeElement.id),'filterToggle');
  await page.setViewportSize({width:1440,height:1300});
+ await page.waitForTimeout(100);
+ assert.equal(await page.locator('.collectionControlsFloating').count(),0,'Desktop restores controls to document flow');
  await page.goto('https://collection.test/collections/all?filter.p.m.custom.condition=Zo+goed+als+nieuw&filter.v.price.gte=425&filter.v.price.lte=700&sort_by=price-ascending');
  assert.equal(await page.locator('input[name="filter.v.price.gte"]').first().inputValue(),'425');
  assert.equal(await page.locator('.activeFilters .filterChip').count(),2);
+ assert.equal((await page.locator('.collectionFilterCount').textContent()).trim(),'2');
  await page.locator('#CollectionSort').selectOption('price-descending');await page.waitForURL('**sort_by=price-descending');
  assert.equal(new URL(page.url()).searchParams.get('filter.v.price.gte'),'425');assert.equal(new URL(page.url()).searchParams.get('filter.p.m.custom.condition'),'Zo goed als nieuw');
  assert.equal(await page.locator('.collectionCard').first().locator('h3 a').getAttribute('href'),'/products/individual-21');

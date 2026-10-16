@@ -66,17 +66,18 @@
           <input id="CollectionSearch" type="search" name="q" class="shopSearchInput" placeholder="{{ 'collection.search_placeholder' | t }}">
           <button type="submit" class="searchSubmit" aria-label="{{ 'collection.search_aria' | t }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"/></svg></button>
         </form>
-        <div class="toolbarRow">
+        <p class="collectionMobileCount">{{ 'collection.results_count' | t: count: collection.products_count }}</p>
+        <div class="toolbarRow" data-mobile-collection-controls>
           <p class="resultCount">{{ 'collection.results_count' | t: count: collection.products_count }}</p>
           <form action="{{ collection.url }}" method="get" class="collectionSort" data-collection-sort>
             {% render 'collection-filter-values', collection: collection %}
-            <label for="CollectionSort" class="collectionSrOnly">{{ 'collection.sort_label' | t }}</label>
+            <label for="CollectionSort" class="collectionSrOnly collectionSortLabel">{{ 'collection.sort_label' | t }}</label>
             <select id="CollectionSort" class="sortSelect" name="sort_by">
               {% for option in collection.sort_options %}<option value="{{ option.value | escape }}" {% if option.value == current_sort %}selected{% endif %}>{% if option.value == 'created-descending' %}{{ 'collection.stock_order.newest' | t }}{% else %}{{ option.name | escape }}{% endif %}</option>{% endfor %}
             </select>
             <button class="collectionSortSubmit clearAllBtn" type="submit">{{ 'collection.sort_submit' | t }}</button>
           </form>
-          <button class="filterToggle" id="filterToggle" type="button" aria-controls="filterSidebar" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M8 12h8M11 18h2"/></svg>{{ 'collection.filters_toggle' | t }}{% if active_count > 0 %} ({{ active_count }}){% endif %}</button>
+          <button class="filterToggle" id="filterToggle" type="button" aria-controls="filterSidebar" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M8 12h8M11 18h2"/></svg>{{ 'collection.filters_toggle' | t }}{% if active_count > 0 %} <span class="collectionFilterCount">{{ active_count }}</span>{% endif %}</button>
         </div>
       </div>
       {% if active_count > 0 %}
@@ -118,7 +119,7 @@
   </div>
 </div></section>
 {% endpaginate %}
-<noscript><style>@media(max-width:900px){.collectionFilters{position:static;transform:none}.collectionFilters .filterCloseBtn,.collectionMain .filterToggle{display:none}}.collectionTrade .js-tradein-trigger{display:none}</style></noscript>
+<noscript><style>@media(max-width:900px){.collectionFilters{position:static;transform:none}.collectionFilters .filterCloseBtn,.collectionMain .filterToggle{display:none}.collectionToolbar>.toolbarRow{position:static;display:block}.collectionSort{flex-wrap:wrap}.collectionSortLabel{display:none}}.collectionTrade .js-tradein-trigger{display:none}</style></noscript>
 {% schema %}
 {
   "name": "Collectie",

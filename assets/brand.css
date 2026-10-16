@@ -1,4 +1,5 @@
 /* Studio Lef / iSelectStore stylesheet, October 2026. Original artwork stays untouched. */
+.cardFacts{display:none}
 :root{--font-body:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;--font-heading:var(--font-body);--lightblue:#e4ecf4;--lightpink:#ffe6ed;--anthracite:#25292d;--ink:var(--anthracite);--coral-ink:var(--navy);--coral-hover:#ef6570}
 body{font-family:var(--font-body);color:var(--ink)}
 h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-family:var(--font-heading)}
@@ -65,3 +66,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .card .productCardVisual{isolation:isolate}
 .card .productSoldRibbon{position:absolute;z-index:3;top:8.5%;left:-17%;width:70%;height:14%;display:grid;place-items:center;transform:rotate(-45deg);background:var(--coral);color:#fff;-webkit-text-fill-color:#fff;font-family:var(--font-body);font-size:clamp(9px,.8vw,12px);font-weight:700;line-height:1;letter-spacing:.06em;text-align:center;pointer-events:none}
 @media(max-width:640px){.card .productSoldRibbon{font-size:9px}}
+
+/* Shared mobile product cards: real specifications, consistent image frames. */
+@media(max-width:900px){
+ .card--quick-facts .meta,.card--quick-facts .collectionSpecs{display:none}
+ .card--quick-facts .cardFacts{display:flex;flex-direction:column;gap:5px;min-height:76px;margin:8px 0 0;font-size:11px;line-height:1.4;color:var(--navy)}
+ .cardFacts>div{display:flex;flex-wrap:wrap;column-gap:5px;align-items:baseline}
+ .cardFacts dt{color:var(--muted);font-weight:400}
+ .cardFacts dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+ .cardFacts .cardFactCondition{display:block}
+ .cardFactCondition dt{display:inline;margin-right:5px}
+ .cardFactCondition dd{display:inline}
+ .card--quick-facts .productCardVisual{aspect-ratio:1;width:100%;height:auto;flex:none}
+ .card--quick-facts .productCardVisual img{object-fit:contain;padding:0}
+ .card--quick-facts h3{font-size:14px;line-height:1.4;min-height:2.8em;margin:10px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+ .card--quick-facts .price{margin-top:auto;padding-top:12px;margin-bottom:10px;flex-wrap:wrap;column-gap:6px;row-gap:2px}
+ .card--quick-facts .price b{font-size:20px;line-height:1.25}
+ .card--quick-facts .add{min-height:44px;padding:10px 6px;font-size:12px;margin-top:0}
+ .card--quick-facts .badge{max-width:calc(100% - 30px);font-size:9px;line-height:1.3;padding:4px 7px;top:15px;left:15px}
+}

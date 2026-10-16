@@ -27,7 +27,7 @@
 %}
 {% assign stagger_index = index | default: 0 | at_most: 8 %}
 {% assign stagger_delay = stagger_index | times: 0.06 %}
-<article class="card reveal{% if collection_card %} collectionCard{% endif %}" data-product-id="{{ product.id }}" data-available="{{ product.available }}" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
+<article class="card card--quick-facts reveal{% if collection_card %} collectionCard{% endif %}" data-product-id="{{ product.id }}" data-available="{{ product.available }}" data-category="{{ product.type | escape }}" style="transition-delay:{{ stagger_delay }}s">
   <a class="productCardVisual" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     {% if card_image %}
       {% if collection_card %}
@@ -50,6 +50,15 @@
     {%- if product.metafields.custom.battery_percentage %} · {{ product.metafields.custom.battery_percentage }}{{ 'product_card.meta_battery_suffix' | t }}{% endif -%}
     {%- if product.metafields.custom.warranty_months %} · {{ 'product_card.meta_warranty_prefix' | t }} {{ product.metafields.custom.warranty_months }} {{ 'product_card.warranty_suffix' | t }}{% endif -%}
   </div>
+  {% capture mobile_storage %}{% render 'spec-value', product: product, key: 'storage_gb', format: 'storage' %}{% endcapture %}
+  {% capture mobile_battery %}{% render 'spec-value', product: product, key: 'battery_percentage', format: 'percent' %}{% endcapture %}
+  {% capture mobile_condition %}{% render 'spec-value', product: product, key: 'condition' %}{% endcapture %}
+  {% assign mobile_storage = mobile_storage | strip %}{% assign mobile_battery = mobile_battery | strip %}{% assign mobile_condition = mobile_condition | strip %}
+  <dl class="cardFacts">
+    {% if mobile_storage != blank %}<div><dt>{{ 'product_page.spec_storage' | t }}</dt><dd>{{ mobile_storage }}</dd></div>{% endif %}
+    {% if mobile_battery != blank %}<div><dt>{{ 'product_page.spec_battery' | t }}</dt><dd>{{ mobile_battery }}</dd></div>{% endif %}
+    {% if mobile_condition != blank %}<div class="cardFactCondition"><dt>{{ 'product_page.spec_condition' | t }}</dt><dd>{{ mobile_condition }}</dd></div>{% endif %}
+  </dl>
   {% if collection_card %}
     {% assign card_storage = product.metafields.custom.storage_gb.value | default: product.metafields.custom.storage_gb %}
     <div class="collectionSpecs">

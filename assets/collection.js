@@ -1,5 +1,47 @@
 (() => {
   function setup(root = document) {
+    root.querySelectorAll('[data-mobile-collection-controls]').forEach(bar => {
+      if (bar._stickyCleanup) return;
+      let frame = 0;
+      const placeholder = document.createElement('div');
+      placeholder.className = 'collectionControlsPlaceholder';
+      placeholder.hidden = true;
+      placeholder.setAttribute('aria-hidden', 'true');
+      bar.before(placeholder);
+      const mobileControls = matchMedia('(max-width:900px)');
+      function update() {
+        frame = 0;
+        const header = document.getElementById('siteHeader');
+        const headerBox = header?.getBoundingClientRect();
+        const top = headerBox ? Math.max(0, Math.min(headerBox.bottom, headerBox.height)) : 0;
+        const floating = bar.classList.contains('collectionControlsFloating');
+        const anchor = (floating ? placeholder : bar).getBoundingClientRect();
+        const bottom = bar.closest('.collectionMain').getBoundingClientRect().bottom;
+        if (mobileControls.matches && anchor.top < top && bottom > 0) {
+          placeholder.style.height = `${bar.getBoundingClientRect().height}px`;
+          placeholder.hidden = false;
+          bar.classList.add('collectionControlsFloating');
+          const bounds = placeholder.getBoundingClientRect();
+          bar.style.left = `${bounds.left}px`;
+          bar.style.width = `${bounds.width}px`;
+          bar.style.top = `${Math.min(Math.ceil(top), bottom - bar.getBoundingClientRect().height - 16)}px`;
+        } else {
+          bar.classList.remove('collectionControlsFloating');
+          placeholder.hidden = true;
+          bar.style.removeProperty('left');
+          bar.style.removeProperty('width');
+          bar.style.removeProperty('top');
+        }
+      }
+      function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+      window.addEventListener('scroll', schedule, {passive: true});
+      window.addEventListener('resize', schedule, {passive: true});
+      const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(schedule) : null;
+      const header = document.getElementById('siteHeader');
+      if (header) observer?.observe(header);
+      bar._stickyCleanup = () => { window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); observer?.disconnect(); cancelAnimationFrame(frame); placeholder.remove(); };
+      update();
+    });
     root.querySelectorAll('[data-collection-sort]:not([data-enhanced])').forEach(form => {
       form.dataset.enhanced = 'true';
       form.querySelector('select').addEventListener('change', () => form.requestSubmit());
@@ -71,5 +113,8 @@
     event.target.querySelectorAll('[data-collection-grid]').forEach(grid => delete grid.dataset.enhanced);
     setup(event.target);
   });
-  document.addEventListener('shopify:section:unload', event => event.target.querySelectorAll('[data-collection-grid]').forEach(grid => grid._collectionObserver?.disconnect()));
+  document.addEventListener('shopify:section:unload', event => {
+    event.target.querySelectorAll('[data-collection-grid]').forEach(grid => grid._collectionObserver?.disconnect());
+    event.target.querySelectorAll('[data-mobile-collection-controls]').forEach(bar => bar._stickyCleanup?.());
+  });
 })();
