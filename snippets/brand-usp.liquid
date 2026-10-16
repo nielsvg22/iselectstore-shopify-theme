@@ -1,0 +1,18 @@
+{% liquid
+  assign brand_usp_asset = ''
+  case icon
+    when 'original'
+      assign brand_usp_asset = 'brand-usp-original.svg'
+    when 'battery'
+      assign brand_usp_asset = 'brand-usp-battery.svg'
+    when 'photos'
+      assign brand_usp_asset = 'brand-usp-photos.svg'
+    when 'trade-in'
+      assign brand_usp_asset = 'brand-usp-trade-in.svg'
+    when 'value'
+      assign brand_usp_asset = 'brand-usp-value.svg'
+    when 'warranty'
+      assign brand_usp_asset = 'brand-usp-warranty.svg'
+  endcase
+%}
+{% if brand_usp_asset != blank %}<img class="brandUspIcon" src="{{ brand_usp_asset | asset_url }}" width="48" height="48" alt="" aria-hidden="true" loading="lazy" decoding="async">{% endif %}

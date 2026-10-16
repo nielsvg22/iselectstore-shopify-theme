@@ -1,0 +1,8 @@
+{% liquid
+  assign logo_asset = 'brand-logo-primary.svg'
+  if variant == 'white'
+    assign logo_asset = 'brand-logo-white.svg'
+  endif
+  assign logo_loading = loading | default: 'lazy'
+%}
+<img class="brandLogo" src="{{ logo_asset | asset_url }}" width="240" height="45" alt="iSelectStore — selected by us. ready for you." loading="{{ logo_loading }}" decoding="async">
