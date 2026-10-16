@@ -57,3 +57,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:640px){:root{--header-h:64px}.nav{padding-inline:16px;gap:8px;height:64px}.nav>.logo .brandLogo{width:clamp(132px,calc(100vw - 216px),174px)}.nav .icons{gap:0}.siteFooter .brandLogo{width:235px}.trustitem .bubble,.trustitem .bubble .brandUspIcon{width:56px;height:56px}}
 @media(max-width:359px){.nav{padding-inline:10px}.nav>.logo .brandLogo{width:132px}.icons .ic,.icons .burger{width:40px}.icons .burger span{left:9px;right:9px}}
 @media(prefers-reduced-motion:reduce){.brandLogo,.brandUspIcon{animation:none;transition:none}}
+
+/* Coral actions always use white labels, including contextual links and nested text. */
+:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay):not(:disabled),:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay):not(:disabled) :is(span,b,strong,em,svg){color:#fff!important;-webkit-text-fill-color:#fff}
