@@ -52,7 +52,8 @@
       "best_price": "Best price, always quality",
       "battery_condition": "Exact battery health",
       "trade_in": "Trade-in available",
-      "warranty": "6–12 months warranty"
+      "warranty": "6–12 months warranty",
+      "shipping": "Order before 5pm, delivered tomorrow"
     }
   },
   "footer": {
