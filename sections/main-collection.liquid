@@ -101,7 +101,7 @@
       {% if paginate.pages > 1 %}
         <nav class="collectionPagination" aria-label="Paginering">
           {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="Vorige pagina">←</a>{% endif %}
-          {% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% elsif part.title == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
+          {% for part in paginate.parts %}{% assign part_number = part.title | plus: 0 %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% elsif part_number == paginate.current_page %}<span aria-current="page">{{ part.title }}</span>{% else %}<span>{{ part.title }}</span>{% endif %}{% endfor %}
           {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="Volgende pagina">→</a>{% endif %}
         </nav>
       {% endif %}
