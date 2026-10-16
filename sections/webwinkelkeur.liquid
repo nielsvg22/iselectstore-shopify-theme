@@ -11,7 +11,8 @@
     Webwinkel-ID bij installatie van de app: zie thema-instellingen.
 {% endcomment %}
 
-{% assign embed = section.settings.widget_embed %}
+{% assign default_embed = '<valued-widget layout="reviews" size="medium" align="center" theme="light"></valued-widget>' %}
+{% assign embed = section.settings.widget_embed | default: default_embed %}
 
 {% if embed != blank %}
   <section class="webwinkelkeur" data-section-id="{{ section.id }}">
@@ -48,13 +49,13 @@
       "info": "De <valued-widget>-code uit het WebwinkelKeur-dashboard (Widgets → Ontvang de code). Rendert pas zodra de gratis WebwinkelKeur Shopify-app is geïnstalleerd."
     }
   ],
-  "default": {
-    "settings": {
-      "widget_embed": "<valued-widget layout=\"reviews\" size=\"medium\" align=\"center\" theme=\"light\"></valued-widget>"
-    }
-  },
   "presets": [
-    { "name": "WebwinkelKeur" }
+    {
+      "name": "WebwinkelKeur",
+      "settings": {
+        "widget_embed": "<valued-widget layout=\"reviews\" size=\"medium\" align=\"center\" theme=\"light\"></valued-widget>"
+      }
+    }
   ]
 }
 {% endschema %}
