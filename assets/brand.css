@@ -1,8 +1,8 @@
 /* Studio Lef / iSelectStore stylesheet, October 2026. Original artwork stays untouched. */
-:root{--font-body:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;--font-heading:var(--font-body);--lightblue:#e4ecf4;--lightpink:#ffe6ed;--anthracite:#25292d;--ink:var(--anthracite);--coral-ink:var(--navy)}
+:root{--font-body:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;--font-heading:var(--font-body);--lightblue:#e4ecf4;--lightpink:#ffe6ed;--anthracite:#25292d;--ink:var(--anthracite);--coral-ink:var(--navy);--coral-hover:#ef6570}
 body{font-family:var(--font-body);color:var(--ink)}
 h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-family:var(--font-heading)}
-.hero h1 span{color:var(--navy);text-decoration:underline;text-decoration-color:var(--coral);text-decoration-thickness:.09em;text-underline-offset:.13em;text-decoration-skip-ink:none}
+.hero h1 span{color:var(--coral);text-decoration:none}
 .brandLogo{display:block;object-fit:contain;width:220px;height:auto;max-width:100%;flex:none}
 .nav>.logo{min-width:0;gap:0}
 .nav>.logo .brandLogo{width:205px}
@@ -26,11 +26,13 @@ h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-
 .pdpLink>.brandUspIcon{width:28px;height:28px}
 .authUsps .brandUspIcon{width:30px;height:30px}
 .tradecopy>.brandUspIcon{width:60px;height:60px;margin-bottom:18px}
-.primary,.add,.stHero .btn.primary,.pdpInfo .add,.buyRow .add,.filterToggle{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 8px 20px -12px rgba(31,48,73,.35)}
-.primary:hover,.add:hover,.stHero .btn.primary:hover,.pdpInfo .add:hover,.buyRow .add:hover,.filterToggle:hover{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 12px 28px -12px rgba(31,48,73,.45)}
+.primary,.add,.stHero .btn.primary,.pdpInfo .add,.buyRow .add,.filterToggle{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(249,133,139,.55)}
+.primary:hover,.add:hover,.stHero .btn.primary:hover,.pdpInfo .add:hover,.buyRow .add:hover,.filterToggle:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff;box-shadow:0 12px 28px -8px rgba(249,133,139,.6)}
 .primary:disabled,.add:disabled{opacity:.55}
-.stHero--video .btn.primary,.stHero--video .btn.primary:hover{background:var(--coral);border-color:var(--coral);color:var(--navy)}
+.stHero--video .btn.primary{background:var(--coral);border-color:var(--coral);color:#fff}
+.stHero--video .btn.primary:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff}
 .eye,.eyebrow,.link,.pdpLink,.filterChip,.clearFiltersLink{color:var(--navy)}
+.hero .eye{color:var(--coral)}
 .eye::before{background:var(--coral)}
 .link{text-decoration:underline;text-decoration-color:var(--coral);text-underline-offset:5px}
 .filterChip{background:var(--lightpink)}
@@ -42,7 +44,8 @@ h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-
 .siteFooter .footerGiantMark{object-fit:contain;z-index:-1;pointer-events:none}
 .siteFooter .socialIc{color:var(--navy);background:#fff}
 .siteFooter .newsletter{background:var(--ivory);border-color:transparent}
-.siteFooter .newsletter .primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.siteFooter .newsletter .primary{background:var(--coral);border-color:var(--coral);color:#fff}
+.siteFooter .newsletter .primary:hover{background:var(--coral-hover);border-color:var(--coral-hover)}
 .siteFooter .footerBadges{color:#fff}
 .siteFooter .finePrint{color:rgba(255,255,255,.76)}
 .siteFooter .footer p,.siteFooter .footer a{color:rgba(255,255,255,.88)}
