@@ -55,8 +55,8 @@
  .products.collectionGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch}
  .collectionGrid>.collectionCard{min-width:0;padding:12px;border-radius:18px;transition-delay:0s!important;box-shadow:0 3px 12px -8px rgba(31,48,73,.14)}
  .collectionGrid>.collectionCard:hover{transform:translateY(-3px);border-color:#d8dee5;box-shadow:0 14px 28px -20px rgba(31,48,73,.3)}
- .collectionGrid .collectionCard>a:not(.add){border-radius:14px;background:var(--ivory);aspect-ratio:auto;height:200px}
- .collectionGrid .collectionCard img{object-fit:contain;padding:12px}
+ .collectionGrid .collectionCard>a:not(.add){border-radius:14px;background:var(--ivory);aspect-ratio:1;height:auto;width:min(100%,260px);margin-inline:auto;flex-shrink:0}
+ .collectionGrid .collectionCard img{object-fit:contain;padding:0}
  .collectionGrid .collectionCard .badge{top:22px;left:22px;max-width:calc(100% - 44px);font-size:10px;overflow-wrap:anywhere;pointer-events:none}
  .collectionGrid .collectionCard h3{font-size:14px;line-height:1.4;margin:10px 0 6px;min-height:2.8em;overflow-wrap:anywhere;font-family:var(--font-heading);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
  .collectionGrid .collectionCard .meta{font-size:11px;line-height:1.65;min-height:3.3em;overflow-wrap:anywhere}
