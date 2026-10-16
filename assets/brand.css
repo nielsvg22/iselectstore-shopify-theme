@@ -26,8 +26,8 @@ h1,h2,h3,h4,h5,h6,.catcopy b,.cardTitle,.pdpTitle,.stProofTitle,.sp-top h1{font-
 .pdpLink>.brandUspIcon{width:28px;height:28px}
 .authUsps .brandUspIcon{width:30px;height:30px}
 .tradecopy>.brandUspIcon{width:60px;height:60px;margin-bottom:18px}
-.primary,.add,.stHero .btn.primary,.pdpInfo .add,.buyRow .add,.filterToggle{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(249,133,139,.55)}
-.primary:hover,.add:hover,.stHero .btn.primary:hover,.pdpInfo .add:hover,.buyRow .add:hover,.filterToggle:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff;box-shadow:0 12px 28px -8px rgba(249,133,139,.6)}
+.primary,.add,.stHero .btn.primary,.pdpInfo .add,.buyRow .add,.filterToggle,.stHomeCtaBtn{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(249,133,139,.55)}
+.primary:hover,.add:hover,.stHero .btn.primary:hover,.pdpInfo .add:hover,.buyRow .add:hover,.filterToggle:hover,.stHomeCtaBtn:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff;box-shadow:0 12px 28px -8px rgba(249,133,139,.6)}
 .primary:disabled,.add:disabled{opacity:.55}
 .stHero--video .btn.primary{background:var(--coral);border-color:var(--coral);color:#fff}
 .stHero--video .btn.primary:hover{background:var(--coral-hover);border-color:var(--coral-hover);color:#fff}
@@ -59,4 +59,4 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(prefers-reduced-motion:reduce){.brandLogo,.brandUspIcon{animation:none;transition:none}}
 
 /* Coral actions always use white labels, including contextual links and nested text. */
-:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay):not(:disabled),:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay):not(:disabled) :is(span,b,strong,em,svg){color:#fff!important;-webkit-text-fill-color:#fff}
+:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay,.stHomeCtaBtn):not(:disabled),:is(.primary,.add,.filterToggle,.tab.active,.stCtaBtn,.stPlay,.stHomeCtaBtn):not(:disabled) :is(span,b,strong,em,svg){color:#fff!important;-webkit-text-fill-color:#fff}
