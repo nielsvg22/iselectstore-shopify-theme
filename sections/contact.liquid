@@ -52,7 +52,7 @@
       <h3>{{ 'contact.direct_contact' | t }}</h3>
       {% if section.settings.whatsapp %}<a href="https://wa.me/{{ section.settings.whatsapp }}" target="_blank" rel="noopener" class="btn primary" style="width:100%;justify-content:center;margin-bottom:14px">{{ 'contact.whatsapp' | t }}</a>{% endif %}
       {% if section.settings.phone %}<div class="sumRow"><span>{{ 'contact.phone' | t }}</span><b>{{ section.settings.phone }}</b></div>{% endif %}
-      <div class="sumRow"><span>{{ 'contact.email' | t }}</span><b>{{ shop.email }}</b></div>
+      <div class="sumRow"><span>{{ 'contact.email' | t }}</span><b>{{ section.settings.email | default: shop.email }}</b></div>
       {% if section.settings.address %}<div class="sumRow" style="margin-bottom:0"><span>{{ 'contact.address' | t }}</span><b style="text-align:right">{{ section.settings.address }}</b></div>{% endif %}
       <p style="color:var(--muted);font-size:12.5px;margin-top:16px">{{ 'contact.visit_note' | t }}</p>
     </aside>
@@ -65,6 +65,7 @@
   "settings": [
     { "type": "text", "id": "whatsapp", "label": "WhatsApp nummer (bv. 31643295022)" },
     { "type": "text", "id": "phone", "label": "Telefoonnummer" },
+    { "type": "text", "id": "email", "label": "E-mailadres", "info": "Leeg = het e-mailadres van je Shopify-account." },
     { "type": "text", "id": "address", "label": "Adres" }
   ],
   "presets": [{ "name": "Contact" }]

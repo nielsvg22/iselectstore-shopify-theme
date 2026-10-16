@@ -50,6 +50,8 @@ document.addEventListener('scroll', function () {
   if (!bar) return;
   var pairs = bar.querySelectorAll('.topPair');
   if (pairs.length < 2) return;
+  var mq = window.matchMedia('(min-width: 901px)');
+  if (mq.matches) return; // desktop toont alle USP's naast elkaar, geen rotatie nodig
   var i = 0;
   setInterval(function () {
     pairs[i].classList.remove('is-active');
@@ -347,12 +349,19 @@ if (filterClose && filterSidebar) {
     { name: pick(modelStrings, 'macbook', 'MacBook Air/Pro (M1 of nieuwer)') },
     { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)') }
   ];
+  var STORAGE = ['64 GB', '128 GB', '256 GB', '512 GB', '1 TB', pick(ti, 'storage_other', 'Anders / weet ik niet')];
   var CONDITIONS = [
     { name: pick(conditionStrings, 'like_new', 'Zoals nieuw') },
     { name: pick(conditionStrings, 'light_wear', 'Lichte gebruikssporen') },
     { name: pick(conditionStrings, 'visible_wear', 'Zichtbare slijtage') },
     { name: pick(conditionStrings, 'damaged', 'Beschadigd, werkt nog') }
   ];
+  var ACCESSORIES = [
+    pick(ti, 'accessories_yes', 'Ja, doosje en kabel aanwezig'),
+    pick(ti, 'accessories_partial', 'Gedeeltelijk (alleen toestel of alleen doosje)'),
+    pick(ti, 'accessories_no', 'Nee, alleen het toestel')
+  ];
+  var TOTAL_STEPS = 5;
   var state = { step: 1 };
 
   function build() {
@@ -376,31 +385,82 @@ if (filterClose && filterSidebar) {
     if (ov) ov.classList.remove('open');
     document.body.classList.remove('locked');
   }
+  function stepHeader(step, labelKey, vars) {
+    return '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: step, total: TOTAL_STEPS })) + '</p><h3>' + esc(tpl(pick(ti, labelKey, ''), vars || {})) + '</h3>';
+  }
+  function optionGrid(options, onPick) {
+    var grid = document.createElement('div');
+    grid.className = 'tiGrid';
+    grid.innerHTML = options.map(function (label, i) { return '<button class="tiOption" data-i="' + i + '">' + esc(label) + '</button>'; }).join('');
+    grid.querySelectorAll('.tiOption').forEach(function (btn) {
+      btn.addEventListener('click', function () { onPick(parseInt(btn.dataset.i, 10)); });
+    });
+    return grid;
+  }
+  function backButton(toStep) {
+    var btn = document.createElement('button');
+    btn.className = 'tiBack';
+    btn.innerHTML = '← ' + esc(pick(ti, 'back', 'Terug'));
+    btn.addEventListener('click', function () { state.step = toStep; render(); });
+    return btn;
+  }
   function render() {
     var body = document.getElementById('tiBody');
+    body.innerHTML = '';
     if (state.step === 1) {
-      body.innerHTML = '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: 1, total: 3 })) + '</p><h3>' + esc(pick(ti, 'choose_model', '')) + '</h3><div class="tiGrid">' +
-        MODELS.map(function (m, i) { return '<button class="tiOption" data-i="' + i + '">' + m.name + '</button>'; }).join('') + '</div>';
-      body.querySelectorAll('.tiOption').forEach(function (btn) {
-        btn.addEventListener('click', function () { state.model = MODELS[parseInt(btn.dataset.i, 10)]; state.step = 2; render(); });
-      });
+      body.insertAdjacentHTML('beforeend', stepHeader(1, 'choose_model'));
+      body.appendChild(optionGrid(MODELS.map(function (m) { return m.name; }), function (i) {
+        state.model = MODELS[i]; state.step = 2; render();
+      }));
     } else if (state.step === 2) {
-      body.innerHTML = '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: 2, total: 3 })) + '</p><h3>' + esc(tpl(pick(ti, 'condition_question', ''), { model: state.model.name })) + '</h3><div class="tiGrid">' +
-        CONDITIONS.map(function (c, i) { return '<button class="tiOption" data-i="' + i + '">' + c.name + '</button>'; }).join('') +
-        '</div><button class="tiBack" id="tiBack1">← ' + esc(pick(ti, 'back', 'Terug')) + '</button>';
-      body.querySelector('#tiBack1').addEventListener('click', function () { state.step = 1; render(); });
-      body.querySelectorAll('.tiOption').forEach(function (btn) {
-        btn.addEventListener('click', function () { state.condition = CONDITIONS[parseInt(btn.dataset.i, 10)]; state.step = 3; render(); });
-      });
+      body.insertAdjacentHTML('beforeend', stepHeader(2, 'storage_question', { model: state.model.name }));
+      body.appendChild(optionGrid(STORAGE, function (i) {
+        state.storage = STORAGE[i]; state.step = 3; render();
+      }));
+      body.appendChild(backButton(1));
+    } else if (state.step === 3) {
+      body.insertAdjacentHTML('beforeend', stepHeader(3, 'condition_question', { model: state.model.name }));
+      body.appendChild(optionGrid(CONDITIONS.map(function (c) { return c.name; }), function (i) {
+        state.condition = CONDITIONS[i]; state.step = 4; render();
+      }));
+      body.appendChild(backButton(2));
+    } else if (state.step === 4) {
+      body.insertAdjacentHTML('beforeend', stepHeader(4, 'accessories_question'));
+      body.appendChild(optionGrid(ACCESSORIES, function (i) {
+        state.accessories = ACCESSORIES[i]; state.step = 5; render();
+      }));
+      body.appendChild(backButton(3));
     } else {
+      var vars = { model: state.model.name, storage: state.storage, condition: state.condition.name, accessories: state.accessories };
       var waNumber = pick(ti, 'whatsapp_number', '31643295022');
-      var waMessage = tpl(pick(ti, 'whatsapp_message', ''), { model: state.model.name, condition: state.condition.name });
+      var waMessage = tpl(pick(ti, 'whatsapp_message', ''), vars);
       var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage);
-      body.innerHTML = '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p>' +
-        '<p class="tiNote">' + esc(tpl(pick(ti, 'note', ''), { model: state.model.name, condition: state.condition.name })) + '</p>' +
-        '<a class="btn primary" style="width:100%;justify-content:center" href="' + esc(waUrl) + '" target="_blank" rel="noopener">' + esc(pick(ti, 'whatsapp_cta', '')) + ' →</a>' +
-        '<button class="tiBack" id="tiBack2">← ' + esc(pick(ti, 'restart', '')) + '</button>';
-      body.querySelector('#tiBack2').addEventListener('click', function () { state = { step: 1 }; render(); });
+      var rows = [
+        [pick(ti, 'summary_model', 'Toestel'), state.model.name],
+        [pick(ti, 'summary_storage', 'Opslag'), state.storage],
+        [pick(ti, 'summary_condition', 'Conditie'), state.condition.name],
+        [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories]
+      ];
+      body.insertAdjacentHTML('beforeend',
+        '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p>' +
+        '<div class="tiSummary">' + rows.map(function (r) {
+          return '<div class="tiSummaryRow"><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></div>';
+        }).join('') + '</div>' +
+        '<p class="tiNote">' + esc(pick(ti, 'note', '')) + '</p>'
+      );
+      var waLink = document.createElement('a');
+      waLink.className = 'btn primary';
+      waLink.style.cssText = 'width:100%;justify-content:center';
+      waLink.href = waUrl;
+      waLink.target = '_blank';
+      waLink.rel = 'noopener';
+      waLink.textContent = pick(ti, 'whatsapp_cta', '') + ' →';
+      body.appendChild(waLink);
+      var restartBtn = document.createElement('button');
+      restartBtn.className = 'tiBack';
+      restartBtn.innerHTML = '← ' + esc(pick(ti, 'restart', ''));
+      restartBtn.addEventListener('click', function () { state = { step: 1 }; render(); });
+      body.appendChild(restartBtn);
     }
   }
   document.addEventListener('click', function (e) {
