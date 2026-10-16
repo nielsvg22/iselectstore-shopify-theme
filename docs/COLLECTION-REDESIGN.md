@@ -76,3 +76,7 @@ Na feedback over de grote presentatie is uitsluitend desktop-CSS compacter gemaa
 De volledige collectie-browsertest slaagt opnieuw op 1920/1536/1440/1280/1024/768/390 px, inclusief maxima voor kaart-/titelblokhoogte, eerste rij en banner, filtering/sortering/paginering, lege collecties, zonder JavaScript en nul JS-fouten. Back-up van de voorgaande live CSS: `artifacts/collection-compact-before/assets/collection.css`.
 
 De eigenaar heeft na de compactere uitvoering expliciet drie producten per rij gekozen, ook op grote desktops. CSS en browserverwachtingen zijn daarop aangepast; de banner volgt na product 3. Native filterconfiguratie en vereiste toegang staan in `docs/NATIVE-FILTER-SETUP.md`.
+
+## Filtertoegang alsnog gevonden
+
+Na het expliciete toegangsverzoek is de bestaande Shopify CLI-adminsessie gecontroleerd: de officiële Admin GraphQL API geeft hiermee wel product-/metafieldtoegang, terwijl de customer-account-app dit niet heeft. Drie ontbrekende brondefinities zijn live aangemaakt zonder productwaarden te veranderen. De daadwerkelijke Search & Discovery-activatie blijft een afzonderlijke beheerhandeling; status, bronkwaliteit en definitie-IDs staan in `docs/NATIVE-FILTER-SETUP.md`. De desktop-CSS is na de keuze voor drie kolommen opnieuw live teruggelezen en op GitHub bevestigd.

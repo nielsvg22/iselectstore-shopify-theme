@@ -15,16 +15,30 @@ Filterbronnen worden in Shopify beheerd via de gratis **Search & Discovery → F
 | Conditie | Productmetaveld `custom.condition`, indien gedefinieerd en gevuld |
 | Batterijconditie (optioneel) | Productmetaveld `custom.battery_percentage`, indien gedefinieerd en gevuld |
 
-Beschikbaarheid en prijs behouden. Vermijd dubbele bronnen voor hetzelfde kenmerk. Kies voor kleur/opslag de daadwerkelijk gebruikte bron; de live waarden en definities konden met de huidige toegang niet worden geïnventariseerd. De hierboven genoemde keys komen uit de bestaande Shopify-thema-/importcode en zijn geen bevestiging dat alle productieproducten die velden al gevuld hebben.
+Beschikbaarheid en prijs behouden. Vermijd dubbele bronnen voor hetzelfde kenmerk. Kies voor kleur/opslag de daadwerkelijk gebruikte bron; de inventaris hieronder beschrijft de inmiddels bevestigde waarden en definities. De hierboven genoemde keys komen uit de bestaande Shopify-thema-/importcode en zijn geen bevestiging dat alle productieproducten die velden al gevuld hebben.
 
 Als een veld niet als bron wordt aangeboden: controleer in **Instellingen → Aangepaste gegevens → Producten** of de definitie bestaat en een door Shopify ondersteund filtertype heeft. Controleer daarna of producten echte waarden hebben. Geen model/conditie/kleuren uit titels afleiden en automatisch overschrijven; individuele producten behouden hun eigen gegevens.
 
 Na opslaan levert Shopify deze filters automatisch aan de al gepubliceerde sidebar. Afhankelijk van catalogus/indexering verschijnt een bron alleen bij collecties met relevante waarden. Controleer één filter, combinaties, sortering en pagina 2; verwijder daarna alle filters.
 
-## Toegang en status
+## Toegang en status — bijgewerkt na toegangsverzoek
 
-De bestaande CLI kan het live thema lezen/publiceren. De geïnstalleerde account-app heeft klant-/orderscopes en geen `read_products`/`write_products` of interactieve Search & Discovery-beheersessie. Een echte Admin API-productquery is eerder geweigerd met `ACCESS_DENIED`. De officiële Liquid-console wordt bovendien door het storefrontwachtwoord geblokkeerd. Deze toegangen mogen niet worden voorgesteld als toegang tot filterconfiguratie.
+De account-app heeft geen productrechten, maar de reeds geautoriseerde Shopify CLI-adminsessie bleek wel toegang tot de officiële Admin GraphQL API te hebben. Met deze sessie zijn de echte productgegevens en metafielddefinities geïnventariseerd. Er zijn geen nieuwe apprechten aangevraagd of credentials gepubliceerd.
 
-Er zijn in deze opdracht geen filterinstellingen geactiveerd of productgegevens gewijzigd. Met de huidige middelen is de resterende concrete handeling door de winkelbeheerder: de bovengenoemde bronnen selecteren en opslaan in Search & Discovery. Geen extra app-abonnement nodig.
+Er zijn 85 actieve producten, waarvan 30 online gepubliceerd. Van de 30 gepubliceerde producten hebben 25 opslaggegevens en 24 batterijgegevens. Model en kleur ontbreken als aparte metafields. Eén van de gepubliceerde conditiewaarden is `Zwart`; die is niet automatisch gecorrigeerd. De oudere, bredere productinventaris bevat nog meer ongeschikte conditiewaarden. Maak geen filters uit producttitels of kleuren onder het label conditie.
+
+De volgende ontbrekende definities zijn via de officiële `metafieldDefinitionCreate`-mutatie aangemaakt, met dezelfde bestaande datatype en storefronttoegang `PUBLIC_READ`:
+
+| Bron | Definitie-ID | Status |
+| --- | --- | --- |
+| `custom.storage_gb` | `1600663126407` | Aangemaakt: Opslagcapaciteit (GB), integer |
+| `custom.condition` | `1600663159175` | Aangemaakt: Conditie, tekst; eerst vervuilde waarde beoordelen |
+| `custom.battery_percentage` | `1600663191943` | Aangemaakt: Batterijconditie (%), integer |
+
+De productmetafieldwaarden van alle 85 actieve producten zijn vóór en na de mutaties vergeleken en zijn ongewijzigd. Er zijn geen productnamen, prijzen, voorraad, varianten of individuele productwaarden gewijzigd. Lokale audit/back-up staat in de genegeerde map `artifacts/filter-configuration/`.
+
+Deze definities voorbereiden is **niet hetzelfde als filters activeren**. De beschikbare API-sessie geeft geen toegang tot het beheer van Search & Discovery (ook de query naar geïnstalleerde apps geeft `ACCESS_DENIED`). Er is geen gedocumenteerde openbare mutatie gevonden waarmee de actieve Search & Discovery-filters via deze koppeling gewijzigd kunnen worden. Er zijn geen geraden Shopify-interne configuratievelden of schijnfilters geschreven.
+
+De resterende handeling door de winkelbeheerder: **Apps → Search & Discovery → Filters → Filter toevoegen → Bron**, selecteer Producttype en de aangemaakte productmetavelden, sla op. Controleer vóór Conditie de onjuiste waarde. De storefront toont de bronnen automatisch zodra Shopify ze activeert. Model/kleur worden pas zinvol na correcte aparte brongegevens; daarvoor zijn geen waarden verzonnen.
 
 Officiële Shopify-instructies: https://help.shopify.com/nl/manual/online-store/search-and-discovery/filters
