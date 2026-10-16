@@ -44,12 +44,15 @@
     "account_aria": "Account",
     "cart_aria": "Winkelwagen",
     "menu_aria": "Menu",
+    "formerly": "voorheen BestBuyPhone",
     "mobile_cta": "Bekijk voorraad →",
     "top": {
-      "original_products": "Originele Apple producten",
+      "original_products": "Alleen originele onderdelen",
+      "product_photos": "Gedetailleerde productfoto's",
+      "best_price": "Beste prijs, altijd kwaliteit",
       "battery_condition": "Exacte batterijconditie",
-      "warranty": "6–12 maanden garantie",
-      "trade_in": "Inruil mogelijk"
+      "trade_in": "Inruil mogelijk",
+      "warranty": "6–12 maanden garantie"
     }
   },
   "footer": {
@@ -231,6 +234,8 @@
     "real_photos": "Echte foto's van dit toestel",
     "zoom_aria": "Foto vergroten",
     "image_unavailable": "Afbeelding niet beschikbaar",
+    "accessory_note_original": "Origineel Apple product",
+    "accessory_note_screenprotector": "De screenprotector is alvast netjes aangebracht.",
     "link_guarantee": "Wat valt onder de garantie?",
     "link_condition": "Wat betekent deze conditie?",
     "guarantee_link_cta": "Bekijk garantievoorwaarden →",
@@ -320,9 +325,10 @@
       "condition_question": "In welke conditie is je {{ model }}?",
       "back": "Terug",
       "restart": "Opnieuw beginnen",
-      "estimated": "Geschatte inruilwaarde",
-      "note": "Voor je {{ model }} in staat \"{{ condition }}\". Dit is een indicatie — de definitieve waarde bepalen we na persoonlijke beoordeling.",
-      "whatsapp_cta": "Vraag deze inruilwaarde aan via WhatsApp",
+      "estimated": "Jouw inruil-aanvraag",
+      "note": "Toestel: {{ model }} — Conditie: {{ condition }}. Stuur dit via WhatsApp door en we doen je persoonlijk een bod.",
+      "whatsapp_cta": "Stuur aanvraag via WhatsApp",
+      "whatsapp_message": "Hoi! Ik wil graag mijn toestel inruilen.\nModel: {{ model }}\nConditie: {{ condition }}\nKunnen jullie een bod doen?",
       "close_aria": "Sluiten"
     },
     "models": {
@@ -359,7 +365,7 @@
     "phone": "Telefoon",
     "email": "E-mail",
     "address": "Adres",
-    "visit_note": "Bezoek op afspraak. We reageren doorgaans binnen 24 uur."
+    "visit_note": "Bezoek en afhalen zijn uitsluitend mogelijk op afspraak. We reageren doorgaans binnen 24 uur."
   },
   "faq": {
     "eyebrow": "Hulp nodig?",
@@ -443,7 +449,7 @@
   },
   "inventory_notify": {
     "title": "Ontvang een melding wanneer dit product weer beschikbaar is",
-    "description": "Vul je e-mailadres in. We sturen je één bericht zodra dit model en opslag weer op voorraad is.",
+    "description": "Vul je e-mailadres in. We sturen je één bericht zodra precies dit model, deze opslag en deze uitvoering weer op voorraad is.",
     "email_placeholder": "email",
     "email_aria": "E-mailadres",
     "submit": "Houd mij op de hoogte",
@@ -480,13 +486,15 @@
       },
       "2": {
         "title": "Hoe lang geldt de garantie?",
-        "answer": "De garantietermijn verschilt per toestel en staat altijd vermeld bij het toestel dat je koopt."
+        "answer": "We bieden 6 tot 12 maanden garantie op onze toestellen — de exacte termijn staat bij het toestel vermeld. Geldt er nog fabrieksgarantie van Apple? Dan gebruik je die eerst; zodra die verloopt, start onze eigen garantie vanaf je aankoopdatum."
       },
       "3": {
-        "title": "Wat valt wel onder de garantie?"
+        "title": "Wat valt wel onder de garantie?",
+        "answer": "Defecten door een fabricagefout repareren we kosteloos, en we sturen het toestel gratis naar je terug. Softwareproblemen lossen we persoonlijk op, eventueel met een fabrieksreset in overleg met jou."
       },
       "4": {
-        "title": "Wat valt niet onder de garantie?"
+        "title": "Wat valt niet onder de garantie?",
+        "answer": "Val-, stoot-, druk- en waterschade, schade door vervuiling of onjuiste reiniging, en schade na een reparatie door een derde partij die het toestel zonder toestemming van de fabrikant heeft geopend."
       },
       "5": {
         "title": "Hoe meld je een probleem?",

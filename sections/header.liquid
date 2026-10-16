@@ -1,13 +1,14 @@
 {% assign portal_default_url = routes.search_url | append: '?view=mijn-account' %}
 {% if pages['mijn-account'] != blank %}{% assign portal_default_url = pages['mijn-account'].url %}{% endif %}
 {% assign portal_url = section.settings.account_portal_url | default: portal_default_url %}
-<div class="top"><div class="topin">
-  <span>{{ 'header.top.original_products' | t }}</span><span>{{ 'header.top.battery_condition' | t }}</span><span>{{ 'header.top.warranty' | t }}</span><span>{{ 'header.top.trade_in' | t }}</span>
-</div></div>
 
 <header id="siteHeader"><div class="nav">
   <a class="logo" href="{{ routes.root_url }}">
     {% render 'brand-logo', loading: 'eager' %}
+    {% if section.settings.show_bestbuyphone_logo %}
+      <span class="logoFormerly" aria-hidden="true"></span>
+      <img class="logoBbp" src="{{ 'bestbuyphone-logo-temp.png' | asset_url }}" width="149" height="44" alt="{{ 'header.formerly' | t }}" title="{{ 'header.formerly' | t }}" loading="eager" decoding="async">
+    {% endif %}
   </a>
   <nav class="links">
     <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
@@ -25,9 +26,26 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>
     </a>
     <a class="ic" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_aria' | t }}"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l1 14H3ZM8 7V6a4 4 0 0 1 8 0v1"/></svg><span class="count">{{ cart.item_count }}</span></a>
+    {% if shop.enabled_locales.size > 1 %}
+      <a class="ic icLang" href="#language-selector" aria-label="{{ 'language_selector.label' | t }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      </a>
+    {% endif %}
     <button class="burger" id="burger" aria-label="{{ 'header.menu_aria' | t }}"><span></span><span></span><span></span></button>
   </div>
 </div></header>
+
+<div class="top" id="uspBar"><div class="topin">
+  <div class="topPair is-active">
+    <span>{{ 'header.top.original_products' | t }}</span><span>{{ 'header.top.product_photos' | t }}</span>
+  </div>
+  <div class="topPair">
+    <span>{{ 'header.top.best_price' | t }}</span><span>{{ 'header.top.battery_condition' | t }}</span>
+  </div>
+  <div class="topPair">
+    <span>{{ 'header.top.trade_in' | t }}</span><span>{{ 'header.top.warranty' | t }}</span>
+  </div>
+</div></div>
 
 <nav class="mnav" id="mnav">
   <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
@@ -38,6 +56,7 @@
   <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
   {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
   <a href="{{ portal_url | escape }}">{{ 'header.nav.account' | t }}</a>
+  {% if shop.enabled_locales.size > 1 %}<a href="#language-selector">{{ 'language_selector.label' | t }}</a>{% endif %}
   <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.mobile_cta' | t }}</a>
 </nav>
 
@@ -57,7 +76,14 @@
   "name": "Header",
   "settings": [
     { "type": "collection", "id": "shop_collection", "label": "Voorraad-collectie (koppeling 'Voorraad' in menu)" },
-    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Leeg = pagina mijn-account indien aanwezig, anders het klantenportaal in het thema." }
+    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Leeg = pagina mijn-account indien aanwezig, anders het klantenportaal in het thema." },
+    {
+      "type": "checkbox",
+      "id": "show_bestbuyphone_logo",
+      "label": "Toon 'voorheen BestBuyPhone'-logo naast het iSelectStore-logo",
+      "info": "Tijdelijk, zodat bezoekers herkennen dat iSelectStore de nieuwe naam van BestBuyPhone is. Later uitzetten.",
+      "default": true
+    }
   ]
 }
 {% endschema %}

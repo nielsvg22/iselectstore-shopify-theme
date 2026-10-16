@@ -1,8 +1,17 @@
-{% comment %} Verwacht: accessory (product) {% endcomment %}
+{% comment %}
+  Verwacht: accessory (product)
+  Toont een vaste, duidelijke notitie i.p.v. de (vaak lege/afgekapte)
+  productbeschrijving: screenprotectors zijn al aangebracht bij levering,
+  overige accessoires zijn originele Apple-producten.
+{% endcomment %}
 {% assign av = accessory.selected_or_first_available_variant %}
+{% assign acc_note = 'product_page.accessory_note_original' | t %}
+{% if accessory.handle contains 'screenprotector' or accessory.handle contains 'screen-protector' %}
+  {% assign acc_note = 'product_page.accessory_note_screenprotector' | t %}
+{% endif %}
 <label class="accessory">
   <input type="checkbox" data-variant-id="{{ av.id }}" data-price="{{ av.price }}">
   <span class="accCheck"></span>
-  <span class="accInfo"><b>{{ accessory.title }}</b><small>{{ accessory.description | strip_html | truncate: 60 }}</small></span>
+  <span class="accInfo"><b>{{ accessory.title }}</b><small>{{ acc_note }}</small></span>
   <span class="accPrice">+ {{ av.price | money }}</span>
 </label>

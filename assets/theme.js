@@ -44,6 +44,20 @@ document.addEventListener('scroll', function () {
   if (h) h.classList.toggle('scrolled', window.scrollY > 4);
 }, { passive: true });
 
+// USP-balk: roteert elke 3.5s naar het volgende paar USP's
+(function () {
+  var bar = document.getElementById('uspBar');
+  if (!bar) return;
+  var pairs = bar.querySelectorAll('.topPair');
+  if (pairs.length < 2) return;
+  var i = 0;
+  setInterval(function () {
+    pairs[i].classList.remove('is-active');
+    i = (i + 1) % pairs.length;
+    pairs[i].classList.add('is-active');
+  }, 3500);
+})();
+
 // Mobile menu
 var burger = document.getElementById('burger');
 var mnav = document.getElementById('mnav');
@@ -325,22 +339,21 @@ if (filterClose && filterSidebar) {
   }
 
   var MODELS = [
-    { name: 'iPhone 13', value: 180 },
-    { name: 'iPhone 14', value: 240 },
-    { name: 'iPhone 15', value: 320 },
-    { name: 'iPhone 16', value: 420 },
-    { name: pick(modelStrings, 'ipad', 'iPad (2020 of nieuwer)'), value: 150 },
-    { name: pick(modelStrings, 'macbook', 'MacBook Air/Pro (M1 of nieuwer)'), value: 280 },
-    { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)'), value: 90 }
+    { name: 'iPhone 13' },
+    { name: 'iPhone 14' },
+    { name: 'iPhone 15' },
+    { name: 'iPhone 16' },
+    { name: pick(modelStrings, 'ipad', 'iPad (2020 of nieuwer)') },
+    { name: pick(modelStrings, 'macbook', 'MacBook Air/Pro (M1 of nieuwer)') },
+    { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)') }
   ];
   var CONDITIONS = [
-    { name: pick(conditionStrings, 'like_new', 'Zoals nieuw'), mult: 1 },
-    { name: pick(conditionStrings, 'light_wear', 'Lichte gebruikssporen'), mult: .85 },
-    { name: pick(conditionStrings, 'visible_wear', 'Zichtbare slijtage'), mult: .65 },
-    { name: pick(conditionStrings, 'damaged', 'Beschadigd, werkt nog'), mult: .4 }
+    { name: pick(conditionStrings, 'like_new', 'Zoals nieuw') },
+    { name: pick(conditionStrings, 'light_wear', 'Lichte gebruikssporen') },
+    { name: pick(conditionStrings, 'visible_wear', 'Zichtbare slijtage') },
+    { name: pick(conditionStrings, 'damaged', 'Beschadigd, werkt nog') }
   ];
   var state = { step: 1 };
-  function fmt(n) { return '€ ' + Math.round(n); }
 
   function build() {
     var overlay = document.createElement('div');
@@ -380,10 +393,12 @@ if (filterClose && filterSidebar) {
         btn.addEventListener('click', function () { state.condition = CONDITIONS[parseInt(btn.dataset.i, 10)]; state.step = 3; render(); });
       });
     } else {
-      var est = state.model.value * state.condition.mult;
-      body.innerHTML = '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p><div class="tiEstimate">' + fmt(est) + '</div>' +
+      var waNumber = pick(ti, 'whatsapp_number', '31643295022');
+      var waMessage = tpl(pick(ti, 'whatsapp_message', ''), { model: state.model.name, condition: state.condition.name });
+      var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage);
+      body.innerHTML = '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p>' +
         '<p class="tiNote">' + esc(tpl(pick(ti, 'note', ''), { model: state.model.name, condition: state.condition.name })) + '</p>' +
-        '<a class="btn primary" style="width:100%;justify-content:center" href="https://wa.me/31643295022" target="_blank" rel="noopener">' + esc(pick(ti, 'whatsapp_cta', '')) + ' →</a>' +
+        '<a class="btn primary" style="width:100%;justify-content:center" href="' + esc(waUrl) + '" target="_blank" rel="noopener">' + esc(pick(ti, 'whatsapp_cta', '')) + ' →</a>' +
         '<button class="tiBack" id="tiBack2">← ' + esc(pick(ti, 'restart', '')) + '</button>';
       body.querySelector('#tiBack2').addEventListener('click', function () { state = { step: 1 }; render(); });
     }

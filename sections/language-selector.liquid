@@ -4,7 +4,7 @@
 {% endcomment %}
 
 {% if shop.enabled_locales.size > 1 %}
-  <section class="language-selector" data-section-id="{{ section.id }}">
+  <section class="language-selector" id="language-selector" data-section-id="{{ section.id }}">
     <div class="wrap">
       <div class="language-selector__inner">
         {% form 'localization', class: 'language-selector__form' %}
@@ -24,7 +24,7 @@
   </section>
 
   <style>
-    .language-selector { padding: 18px 0; }
+    .language-selector { padding: 18px 0; scroll-margin-top: 140px; }
     .language-selector__inner {
       display: flex;
       align-items: center;

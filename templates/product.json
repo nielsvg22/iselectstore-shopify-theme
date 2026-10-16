@@ -16,7 +16,11 @@
         "ribbon_text": "Nieuw binnen!",
         "accessory_1": "screenprotector-iphone-15-pro-tempered-glass",
         "accessory_2": "usb-c-naar-usb-c-oplaadkabel-1-m",
-        "accessory_3": "20w-usb-c-adapter-oplader"
+        "accessory_3": "20w-usb-c-adapter-oplader",
+        "show_guarantee_link": true,
+        "guarantee_page": "garantie",
+        "show_condition_link": true,
+        "condition_page": "condities"
       }
     }
   },

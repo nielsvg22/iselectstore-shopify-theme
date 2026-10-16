@@ -44,12 +44,15 @@
     "account_aria": "Account",
     "cart_aria": "Cart",
     "menu_aria": "Menu",
+    "formerly": "formerly BestBuyPhone",
     "mobile_cta": "View shop →",
     "top": {
-      "original_products": "Original Apple products",
+      "original_products": "Original parts only",
+      "product_photos": "Detailed product photos",
+      "best_price": "Best price, always quality",
       "battery_condition": "Exact battery health",
-      "warranty": "6–12 months warranty",
-      "trade_in": "Trade-in available"
+      "trade_in": "Trade-in available",
+      "warranty": "6–12 months warranty"
     }
   },
   "footer": {
@@ -231,6 +234,8 @@
     "real_photos": "Real photos of this device",
     "zoom_aria": "Zoom photo",
     "image_unavailable": "Image unavailable",
+    "accessory_note_original": "Original Apple product",
+    "accessory_note_screenprotector": "The screen protector has already been neatly applied.",
     "link_guarantee": "What does the warranty cover?",
     "link_condition": "What does this condition mean?",
     "guarantee_link_cta": "See warranty terms →",
@@ -320,9 +325,10 @@
       "condition_question": "What condition is your {{ model }} in?",
       "back": "Back",
       "restart": "Start over",
-      "estimated": "Estimated trade-in value",
-      "note": "For your {{ model }} in \"{{ condition }}\" condition. This is an estimate — the final value is determined after a personal assessment.",
-      "whatsapp_cta": "Request this trade-in value via WhatsApp",
+      "estimated": "Your trade-in request",
+      "note": "Device: {{ model }} — Condition: {{ condition }}. Send this via WhatsApp and we'll make you a personal offer.",
+      "whatsapp_cta": "Send request via WhatsApp",
+      "whatsapp_message": "Hi! I'd like to trade in my device.\nModel: {{ model }}\nCondition: {{ condition }}\nCan you make me an offer?",
       "close_aria": "Close"
     },
     "models": {
@@ -359,7 +365,7 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
-    "visit_note": "Visits by appointment. We usually reply within 24 hours."
+    "visit_note": "Visits and pick-ups are by appointment only. We usually reply within 24 hours."
   },
   "faq": {
     "eyebrow": "Need help?",
@@ -443,7 +449,7 @@
   },
   "inventory_notify": {
     "title": "Get a notification when this product is available again",
-    "description": "Enter your email address. We'll send you one message as soon as this model and storage is back in stock.",
+    "description": "Enter your email address. We'll send you one message as soon as this exact model, storage and configuration is back in stock.",
     "email_placeholder": "email",
     "email_aria": "Email address",
     "submit": "Notify me when available",
@@ -480,13 +486,15 @@
       },
       "2": {
         "title": "How long does the warranty last?",
-        "answer": "The warranty period depends on the device and is always listed next to the device you buy."
+        "answer": "We offer 6 to 12 months of warranty on our devices — the exact period is listed on the device page. If Apple's factory warranty still applies, you use that first; once it expires, our own warranty starts from your purchase date."
       },
       "3": {
-        "title": "What is covered by the warranty?"
+        "title": "What is covered by the warranty?",
+        "answer": "Defects caused by a manufacturing fault are repaired free of charge, and we ship the device back to you for free. Software issues are resolved personally, including a factory reset if needed, always in consultation with you."
       },
       "4": {
-        "title": "What is not covered by the warranty?"
+        "title": "What is not covered by the warranty?",
+        "answer": "Drop, impact, pressure and water damage, damage from dirt or improper cleaning, and damage after a repair by a third party who opened the device without the manufacturer's approval."
       },
       "5": {
         "title": "How do I report an issue?",

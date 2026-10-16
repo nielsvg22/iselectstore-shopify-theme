@@ -1,12 +1,19 @@
 {% comment %}
-  WebwinkelKeur widget section
-  - Laadt alleen als WEBWINKELKEUR_SHOP_ID is geconfigureerd
-  - Gebruikt officiële WebwinkelKeur widget code
+  WebwinkelKeur reviewwidget.
+  - Toont de officiële <valued-widget>-embedcode die WebwinkelKeur zelf
+    genereert in hun dashboard (Widgets → Ontvang de code). Dat custom
+    element rendert pas zodra de bijbehorende loader geladen is — en die
+    loader wordt automatisch toegevoegd door de gratis "WebwinkelKeur" app
+    uit de Shopify App Store (WebwinkelKeur raadt voor Shopify zelf die app
+    aan i.p.v. een handmatig <script>-tag, en levert daar geen los
+    installatiescript voor). Zodra die app geïnstalleerd is, "activeert"
+    deze tag vanzelf — er hoeft dan niets aan deze sectie te veranderen.
+    Webwinkel-ID bij installatie van de app: zie thema-instellingen.
 {% endcomment %}
 
-{% assign shop_id = section.settings.shop_id | default: settings.webwinkelkeur_shop_id %}
+{% assign embed = section.settings.widget_embed %}
 
-{% if shop_id != blank %}
+{% if embed != blank %}
   <section class="webwinkelkeur" data-section-id="{{ section.id }}">
     <div class="wrap">
       {% assign wkw_heading_default = 'webwinkelkeur.heading_default' | t %}
@@ -19,21 +26,13 @@
           </div>
         </div>
       {% endif %}
-      <div id="webwinkelkeur-widget" style="min-height:120px;"></div>
+      <div class="wwkWidget">{{ embed }}</div>
     </div>
   </section>
 
-  <script>
-    (function () {
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.webwinkelkeur.nl/widget.js?id={{ shop_id }}';
-      document.body.appendChild(s);
-    })();
-  </script>
-
   <style>
     .webwinkelkeur { background: var(--ivory); }
+    .wwkWidget { display: flex; justify-content: center; }
   </style>
 {% endif %}
 
@@ -42,8 +41,18 @@
   "name": "WebwinkelKeur",
   "settings": [
     { "type": "text", "id": "heading", "label": "Titel" },
-    { "type": "text", "id": "shop_id", "label": "WebwinkelKeur shop ID", "info": "Als leeg wordt de waarde uit thema-instellingen gebruikt." }
+    {
+      "type": "html",
+      "id": "widget_embed",
+      "label": "Widget-embedcode",
+      "info": "De <valued-widget>-code uit het WebwinkelKeur-dashboard (Widgets → Ontvang de code). Rendert pas zodra de gratis WebwinkelKeur Shopify-app is geïnstalleerd."
+    }
   ],
+  "default": {
+    "settings": {
+      "widget_embed": "<valued-widget layout=\"reviews\" size=\"medium\" align=\"center\" theme=\"light\"></valued-widget>"
+    }
+  },
   "presets": [
     { "name": "WebwinkelKeur" }
   ]

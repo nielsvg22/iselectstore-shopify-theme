@@ -102,7 +102,8 @@
         "type": "text",
         "id": "webwinkelkeur_shop_id",
         "label": "WebwinkelKeur shop ID",
-        "info": "Alleen cijfers. Leeg = widget wordt niet geladen."
+        "default": "1219253",
+        "info": "Alleen ter referentie — vul dit ID in bij het installeren van de gratis WebwinkelKeur-app (Shopify App Store). De reviewwidget zelf wordt beheerd in de WebwinkelKeur-sectie."
       },
       {
         "type": "text",
