@@ -94,6 +94,52 @@ if (searchClose && searchOverlay) {
   searchOverlay.addEventListener('click', function (e) { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
 }
 
+// Live zoeksuggesties (Shopify predictive search) onder het zoekveld
+(function () {
+  var input = document.querySelector('.shopSearchInput');
+  var box = document.querySelector('[data-search-suggest]');
+  if (!input || !box) return;
+  var debounceTimer;
+  var currentRequest = 0;
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function hide() { box.hidden = true; box.innerHTML = ''; }
+  function render(products) {
+    if (!products.length) { hide(); return; }
+    box.innerHTML = products.map(function (p) {
+      var img = p.image ? '<img src="' + escapeHtml(p.image) + '" alt="" width="44" height="44">' : '<span class="searchSuggest__noimg"></span>';
+      return '<a class="searchSuggest__item" href="' + escapeHtml(p.url) + '">' + img +
+        '<span class="searchSuggest__info"><b>' + escapeHtml(p.title) + '</b><small>' + escapeHtml(p.price) + '</small></span></a>';
+    }).join('');
+    box.hidden = false;
+  }
+  input.addEventListener('input', function () {
+    var term = input.value.trim();
+    clearTimeout(debounceTimer);
+    if (term.length < 2) { hide(); return; }
+    debounceTimer = setTimeout(function () {
+      var requestId = ++currentRequest;
+      fetch('/search/suggest.json?q=' + encodeURIComponent(term) + '&resources[type]=product&resources[limit]=6&resources[options][fields]=title,product_type')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (requestId !== currentRequest) return; // verouderd antwoord, negeren
+          var products = ((data.resources && data.resources.results && data.resources.results.products) || []).map(function (p) {
+            return { title: p.title, url: p.url, image: p.featured_image && p.featured_image.url, price: p.price };
+          });
+          render(products);
+        })
+        .catch(function () { hide(); });
+    }, 250);
+  });
+  document.addEventListener('click', function (e) {
+    if (!box.contains(e.target) && e.target !== input) hide();
+  });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+})();
+
 // Category tab filter (client-side, among rendered cards)
 var tabs = document.querySelectorAll('#catTabs .tab');
 if (tabs.length) {

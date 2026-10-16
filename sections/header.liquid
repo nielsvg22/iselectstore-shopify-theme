@@ -65,8 +65,9 @@
     <button type="button" class="tiClose" id="searchClose" aria-label="{{ 'general.search.close_aria' | t }}">×</button>
     <p class="tiEyebrow">{{ 'general.search.aria' | t }}</p>
     <h3>{{ 'general.search.title' | t }}</h3>
-    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="{{ 'general.search.input_placeholder' | t }}" value="{{ search.terms | escape }}" autofocus>
+    <input type="search" name="q" class="shopSearchInput" style="width:100%" placeholder="{{ 'general.search.input_placeholder' | t }}" value="{{ search.terms | escape }}" autofocus autocomplete="off">
     <input type="hidden" name="type" value="product">
+    <div class="searchSuggest" data-search-suggest hidden></div>
     <button type="submit" class="btn primary" style="width:100%;margin-top:14px;justify-content:center">{{ 'general.search.cta' | t }}</button>
   </div>
 </form>
