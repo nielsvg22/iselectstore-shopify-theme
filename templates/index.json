@@ -259,6 +259,7 @@
         "review-9",
         "review-10"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "subtext": ""
@@ -275,7 +276,7 @@
       "type": "webwinkelkeur",
       "settings": {
         "heading": "",
-        "shop_id": ""
+        "widget_embed": ""
       }
     },
     "whyus": {
@@ -296,9 +297,9 @@
     "products",
     "proof",
     "storycta",
+    "webwinkelkeur",
     "reviews",
     "tradein",
-    "webwinkelkeur",
     "whyus"
   ]
 }
