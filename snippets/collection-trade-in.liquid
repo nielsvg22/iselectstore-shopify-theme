@@ -1,0 +1,31 @@
+{% comment %}Reusable grid promotion. Uses the existing trade-in estimator if no real page/URL is configured.{% endcomment %}
+{% liquid
+  assign trade_destination = settings.trade_url
+  if trade_destination == blank
+    if pages.inruilen != blank
+      assign trade_destination = pages.inruilen.url
+    elsif pages.inruil != blank
+      assign trade_destination = pages.inruil.url
+    endif
+  endif
+%}
+<aside class="collectionTrade" aria-labelledby="CollectionTradeTitle-{{ section_id }}" data-collection-trade>
+  <div class="collectionTradeCopy">
+    <p class="eyebrow">Een volgende stap voor jouw iPhone</p>
+    <h2 id="CollectionTradeTitle-{{ section_id }}">{{ settings.trade_title | default: 'Ruil je oude iPhone in. Bespaar op je volgende.' | escape }}</h2>
+    <p>{{ settings.trade_description | default: 'Geef je huidige iPhone een tweede leven en ontdek de mogelijkheden om voordeliger te upgraden.' | escape }}</p>
+    {% if trade_destination != blank %}
+      <a class="btn primary" href="{{ trade_destination | escape }}">{{ settings.trade_cta | default: 'Ontdek de inruilmogelijkheden' | escape }} <span aria-hidden="true">→</span></a>
+    {% else %}
+      <button type="button" class="btn primary js-tradein-trigger">{{ settings.trade_cta | default: 'Ontdek de inruilmogelijkheden' | escape }} <span aria-hidden="true">→</span></button>
+      <noscript>{% if pages.contact != blank %}<a class="link" href="{{ pages.contact.url }}">Neem contact op over inruilen</a>{% else %}<p>Schakel JavaScript in om de bestaande inruilmodule te openen.</p>{% endif %}</noscript>
+    {% endif %}
+  </div>
+  <div class="collectionTradeVisual">
+    {% if settings.trade_image != blank %}
+      <img src="{{ settings.trade_image | image_url: width: 600 }}" width="600" height="600" loading="lazy" decoding="async" alt="{{ settings.trade_image.alt | default: 'iPhone inruilen bij iSelectStore' | escape }}">
+    {% else %}
+      <img src="{{ 'category-iphone.webp' | asset_url }}" width="744" height="790" loading="lazy" decoding="async" alt="iPhone">
+    {% endif %}
+  </div>
+</aside>
