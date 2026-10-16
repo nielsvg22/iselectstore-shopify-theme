@@ -35,61 +35,62 @@
 .collectionPagination a:hover{border-color:var(--coral)}
 .collectionTrade,.collectionSpecs,.collectionStock{display:none}
 @media(min-width:901px){
- .collectionHero{background:var(--ivory);padding:32px 0 38px;border-bottom:1px solid var(--line)}
+ .collectionHero{background:var(--ivory);padding:18px 0 22px;border-bottom:1px solid var(--line)}
  .collectionHero::before,.collectionHero::after{display:none}
- .collectionHero h1{color:var(--navy);font-size:clamp(34px,3vw,46px);line-height:1.14;max-width:900px}
- .collectionHero p,.collectionHero .collectionDescription{color:var(--muted);max-width:760px;font-size:14px;line-height:1.65}
- .collectionHero p.eyebrow{color:var(--navy);font-size:11px;letter-spacing:.14em;margin-bottom:10px}
- .collectionHero .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:22px}
- .collectionHero .wrap,.collectionListing>.wrap{max-width:1600px;padding-inline:32px}
- .collectionLayout{grid-template-columns:230px minmax(0,1fr);gap:28px}
- .collectionFilters{padding:20px;box-shadow:none;max-height:calc(100dvh - var(--header-h) - 48px);overflow:auto;scrollbar-width:thin}
+ .collectionHero h1{color:var(--navy);font-size:clamp(28px,2.4vw,34px);line-height:1.14;max-width:900px}
+ .collectionHero p,.collectionHero .collectionDescription{color:var(--muted);max-width:850px;font-size:13px;line-height:1.6}
+ .collectionHero p.eyebrow{color:var(--navy);font-size:11px;letter-spacing:.14em;margin-bottom:6px}
+ .collectionHero .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
+ .collectionHero .wrap,.collectionListing>.wrap{max-width:1480px;padding-inline:32px}
+ .collectionLayout{grid-template-columns:220px minmax(0,1fr);gap:24px}
+ .collectionListing{padding-top:24px}
+ .collectionFilters{padding:18px;box-shadow:none;max-height:calc(100dvh - var(--header-h) - 48px);overflow:auto;scrollbar-width:thin}
  .collectionFilterHeading{align-items:start;flex-direction:column;gap:8px;margin-bottom:16px}
- .collectionToolbar{align-items:stretch;flex-wrap:wrap;gap:16px;margin-bottom:22px}
+ .collectionToolbar{align-items:stretch;flex-wrap:wrap;gap:14px;margin-bottom:16px}
  .collectionToolbar .searchRow{max-width:330px;min-width:180px;flex:1}
  .collectionToolbar .shopSearchInput{font-size:13px;box-shadow:none;min-height:46px}
  .collectionToolbar .toolbarRow{flex-wrap:wrap;justify-content:space-between;gap:12px;flex:1}
  .collectionSort .sortSelect{font-size:13px;box-shadow:none;min-height:46px;padding-inline:14px}
  .collectionToolbar .resultCount{font-size:12px}
  .products.collectionGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch}
- .collectionGrid>.collectionCard{min-width:0;padding:14px;border-radius:20px;transition-delay:0s!important;box-shadow:0 3px 12px -8px rgba(31,48,73,.14)}
+ .collectionGrid>.collectionCard{min-width:0;padding:12px;border-radius:18px;transition-delay:0s!important;box-shadow:0 3px 12px -8px rgba(31,48,73,.14)}
  .collectionGrid>.collectionCard:hover{transform:translateY(-3px);border-color:#d8dee5;box-shadow:0 14px 28px -20px rgba(31,48,73,.3)}
- .collectionGrid .collectionCard>a:not(.add){border-radius:14px;background:var(--ivory);aspect-ratio:1}
- .collectionGrid .collectionCard img{object-fit:contain;padding:16px}
- .collectionGrid .collectionCard .badge{top:24px;left:24px;max-width:calc(100% - 48px);font-size:10px;overflow-wrap:anywhere;pointer-events:none}
- .collectionGrid .collectionCard h3{font-size:15px;line-height:1.45;margin:16px 0 7px;min-height:4.35em;overflow-wrap:anywhere;font-family:var(--font-heading);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .collectionGrid .collectionCard>a:not(.add){border-radius:14px;background:var(--ivory);aspect-ratio:auto;height:200px}
+ .collectionGrid .collectionCard img{object-fit:contain;padding:12px}
+ .collectionGrid .collectionCard .badge{top:22px;left:22px;max-width:calc(100% - 44px);font-size:10px;overflow-wrap:anywhere;pointer-events:none}
+ .collectionGrid .collectionCard h3{font-size:14px;line-height:1.4;margin:10px 0 6px;min-height:2.8em;overflow-wrap:anywhere;font-family:var(--font-heading);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
  .collectionGrid .collectionCard .meta{font-size:11px;line-height:1.65;min-height:3.3em;overflow-wrap:anywhere}
- .collectionSpecs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:10px;color:var(--navy)}
+ .collectionSpecs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;font-size:10px;color:var(--navy)}
  .collectionSpecs:empty{display:none}
  .collectionSpecs>span{background:var(--ivory);border:1px solid var(--line);padding:4px 7px;border-radius:7px;overflow-wrap:anywhere}
- .collectionStock{display:flex;align-items:center;gap:6px;margin:14px 0 0;color:var(--navy);font-size:11px}
+ .collectionStock{display:flex;align-items:center;gap:6px;margin:8px 0 0;color:var(--navy);font-size:11px}
  .collectionStock>span{width:6px;height:6px;flex:none;border-radius:50%;background:var(--coral)}
  .collectionStock--sold{color:var(--muted)}
  .collectionStock--sold>span{background:var(--muted)}
- .collectionGrid .collectionCard .price{margin:12px 0 16px;flex-wrap:wrap;gap:6px;align-items:center;margin-top:auto;padding-top:12px}
+ .collectionGrid .collectionCard .price{margin:8px 0 10px;flex-wrap:wrap;gap:6px;align-items:center;margin-top:auto;padding-top:8px}
  .collectionGrid .collectionCard .price b{font-size:22px}
  .collectionGrid .collectionCard .old{font-size:11px}
  .collectionGrid .collectionCard .add{font-size:12px;padding:12px 8px;min-height:44px;margin-top:0}
- .collectionTrade{grid-column:1/-1;grid-row:2;min-width:0;min-height:310px;grid-template-columns:minmax(0,1fr) 30%;align-items:stretch;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(120deg,var(--ivory),#fff 60%,var(--lightpink));margin:8px 0}
+ .collectionTrade{grid-column:1/-1;grid-row:2;min-width:0;min-height:210px;grid-template-columns:minmax(0,1fr) 30%;align-items:stretch;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(120deg,var(--ivory),#fff 60%,var(--lightpink));margin:8px 0}
  .collectionGrid:has(>.collectionCard:nth-of-type(2))>.collectionTrade{display:grid}
- .collectionTradeCopy{align-self:center;padding:28px}
+ .collectionTradeCopy{align-self:center;padding:22px 24px}
  .collectionTrade .eyebrow{font-size:10px;line-height:1.5;margin-bottom:10px;letter-spacing:.08em;color:var(--navy)}
- .collectionTrade h2{font-size:clamp(23px,2.1vw,31px);line-height:1.2;letter-spacing:-.025em;max-width:530px;margin:0 0 12px;text-wrap:balance}
- .collectionTradeCopy>p:not(.eyebrow){font-size:12px;line-height:1.7;color:var(--muted);max-width:470px;margin:0 0 20px}
+ .collectionTrade h2{font-size:clamp(21px,1.8vw,26px);line-height:1.2;letter-spacing:-.025em;max-width:530px;margin:0 0 12px;text-wrap:balance}
+ .collectionTradeCopy>p:not(.eyebrow){font-size:12px;line-height:1.7;color:var(--muted);max-width:470px;margin:0 0 14px}
  .collectionTrade .btn{font-size:12px;padding:13px 19px;min-height:46px;white-space:normal;text-align:center;cursor:pointer}
  .collectionTradeVisual{position:relative;min-width:0;overflow:hidden}
  .collectionTradeVisual img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 }
-@media(min-width:1200px){
+@media(min-width:1100px){
  .products.collectionGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
  .collectionGrid:has(>.collectionCard:nth-of-type(2))>.collectionTrade{display:none}
  .collectionGrid:has(>.collectionCard:nth-of-type(3))>.collectionTrade{display:grid}
 }
-@media(min-width:1600px){
+@media(min-width:1440px){
  .products.collectionGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
  .collectionGrid:has(>.collectionCard:nth-of-type(3))>.collectionTrade{display:none}
  .collectionGrid:has(>.collectionCard:nth-of-type(4))>.collectionTrade{display:grid}
- .collectionLayout{grid-template-columns:240px minmax(0,1fr);gap:32px}
+ .collectionLayout{grid-template-columns:220px minmax(0,1fr);gap:24px}
 }
 @media(max-width:900px){
  .collectionToolbar .toolbarRow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
