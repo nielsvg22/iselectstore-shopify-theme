@@ -336,6 +336,8 @@
       "cycles_placeholder": "Bijv. 350",
       "cycles_unknown": "Weet ik niet",
       "parts_question": "Zijn er ooit onderdelen aan de {{ model }} vervangen?",
+      "parts_detail_question": "Welke onderdelen zijn er vervangen?",
+      "parts_detail_placeholder": "Bijv. scherm, batterij, camera…",
       "sim_question": "Heeft de {{ model }} een fysieke simkaart-ingang?",
       "screen_question": "Heb je altijd een hoes en screenprotector gebruikt, en is het scherm nog vrij van krassen?",
       "yes": "Ja",

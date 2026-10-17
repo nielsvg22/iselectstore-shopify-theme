@@ -336,6 +336,8 @@
       "cycles_placeholder": "E.g. 350",
       "cycles_unknown": "Not sure",
       "parts_question": "Have any parts ever been replaced on the {{ model }}?",
+      "parts_detail_question": "Which parts were replaced?",
+      "parts_detail_placeholder": "E.g. screen, battery, camera…",
       "sim_question": "Does the {{ model }} have a physical SIM slot?",
       "screen_question": "Have you always used a case and screen protector, and is the screen still scratch-free?",
       "yes": "Yes",

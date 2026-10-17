@@ -541,54 +541,74 @@ if (filterClose && filterSidebar) {
     } else if (state.step === 6) {
       body.insertAdjacentHTML('beforeend', stepHeader('parts_question', { model: state.model.name }));
       body.appendChild(optionGrid(YES_NO, function (i) {
-        state.parts = YES_NO[i]; state.step = 7; state.display = 7; render();
+        state.parts = YES_NO[i];
+        if (i === 0) {
+          state.step = 65; state.display = state.display + 1;
+        } else {
+          state.partsDetail = '';
+          state.partsBackStep = 6; state.partsBackDisplay = state.display;
+          state.step = 7; state.display = state.display + 1;
+        }
+        render();
       }));
-      body.appendChild(backButton(5, 5));
+      body.appendChild(backButton(5, state.display - 1));
+    } else if (state.step === 65) {
+      body.insertAdjacentHTML('beforeend', stepHeader('parts_detail_question'));
+      body.appendChild(textStep(pick(ti, 'parts_detail_placeholder', ''), {
+        onSubmit: function (val) {
+          if (!val) return;
+          state.partsDetail = val;
+          state.partsBackStep = 65; state.partsBackDisplay = state.display;
+          state.step = 7; state.display = state.display + 1;
+          render();
+        }
+      }));
+      body.appendChild(backButton(6, state.display - 1));
     } else if (state.step === 7) {
       body.insertAdjacentHTML('beforeend', stepHeader('sim_question', { model: state.model.name }));
       body.appendChild(optionGrid(YES_NO, function (i) {
-        state.sim = YES_NO[i]; state.step = 8; state.display = 8; render();
+        state.sim = YES_NO[i]; state.step = 8; state.display = state.display + 1; render();
       }));
-      body.appendChild(backButton(6, 6));
+      body.appendChild(backButton(state.partsBackStep, state.partsBackDisplay));
     } else if (state.step === 8) {
       body.insertAdjacentHTML('beforeend', stepHeader('screen_question'));
       body.appendChild(optionGrid(YES_NO, function (i) {
         if (i === 0) {
           state.screen = YES_NO[0]; state.damage = '';
-          state.screenBackStep = 8; state.screenBackDisplay = 8;
-          state.step = 10; state.display = 9;
+          state.screenBackStep = 8; state.screenBackDisplay = state.display;
+          state.step = 10; state.display = state.display + 1;
         } else {
-          state.step = 9; state.display = 9;
+          state.step = 9; state.display = state.display + 1;
         }
         render();
       }));
-      body.appendChild(backButton(7, 7));
+      body.appendChild(backButton(7, state.display - 1));
     } else if (state.step === 9) {
       body.insertAdjacentHTML('beforeend', stepHeader('scratches_question'));
       body.appendChild(optionGrid(SCRATCHES, function (i) {
         state.screen = SCRATCHES[i];
         if (i === 2) {
-          state.step = 95; state.display = 10;
+          state.step = 95; state.display = state.display + 1;
         } else {
           state.damage = '';
-          state.screenBackStep = 9; state.screenBackDisplay = 9;
-          state.step = 10; state.display = 10;
+          state.screenBackStep = 9; state.screenBackDisplay = state.display;
+          state.step = 10; state.display = state.display + 1;
         }
         render();
       }));
-      body.appendChild(backButton(8, 8));
+      body.appendChild(backButton(8, state.display - 1));
     } else if (state.step === 95) {
       body.insertAdjacentHTML('beforeend', stepHeader('damage_question'));
       body.appendChild(textStep(pick(ti, 'damage_placeholder', ''), {
         onSubmit: function (val) {
           if (!val) return;
           state.damage = val;
-          state.screenBackStep = 95; state.screenBackDisplay = 10;
-          state.step = 10; state.display = 11;
+          state.screenBackStep = 95; state.screenBackDisplay = state.display;
+          state.step = 10; state.display = state.display + 1;
           render();
         }
       }));
-      body.appendChild(backButton(9, 9));
+      body.appendChild(backButton(9, state.display - 1));
     } else if (state.step === 10) {
       body.insertAdjacentHTML('beforeend', stepHeader('accessories_question'));
       body.appendChild(optionGrid(ACCESSORIES, function (i) {
@@ -608,7 +628,7 @@ if (filterClose && filterSidebar) {
         color: state.color,
         battery: state.batteryPct + '%',
         cycles: state.cycles || pick(ti, 'cycles_unknown', 'Weet ik niet'),
-        parts: state.parts,
+        parts: state.parts + (state.partsDetail ? ' — ' + state.partsDetail : ''),
         sim: state.sim,
         screen: state.screen,
         accessories: state.accessories,
@@ -624,7 +644,7 @@ if (filterClose && filterSidebar) {
         [pick(ti, 'summary_color', 'Kleur'), state.color],
         [pick(ti, 'summary_battery', 'Batterijconditie'), vars.battery],
         [pick(ti, 'summary_cycles', 'Laadcycli'), vars.cycles],
-        [pick(ti, 'summary_parts', 'Onderdelen vervangen'), state.parts],
+        [pick(ti, 'summary_parts', 'Onderdelen vervangen'), vars.parts],
         [pick(ti, 'summary_sim', 'Fysieke simkaart'), state.sim],
         [pick(ti, 'summary_screen', 'Scherm'), state.screen + (state.damage ? ' — ' + state.damage : '')],
         [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories],
