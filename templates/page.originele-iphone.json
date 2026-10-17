@@ -30,6 +30,10 @@
         "alignment": "image_left"
       }
     },
+    "issues": {
+      "type": "original-parts-issues",
+      "settings": {}
+    },
     "benefits": {
       "type": "story-values",
       "blocks": {
@@ -152,6 +156,7 @@
   "order": [
     "main",
     "explain",
+    "issues",
     "benefits",
     "compare",
     "restwaarde",

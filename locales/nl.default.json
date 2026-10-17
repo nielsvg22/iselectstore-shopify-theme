@@ -461,6 +461,23 @@
       }
     }
   },
+  "original_parts_issues": {
+    "eyebrow": "Let op",
+    "heading": "Veelvoorkomende problemen bij niet-originele onderdelen",
+    "intro": "Op de tweedehandsmarkt worden veel iPhones verkocht als refurbished, zonder dat duidelijk wordt vermeld dat ze niet-originele onderdelen van derde partijen bevatten. Die kunnen er netjes uitzien, maar zorgen in de praktijk voor lagere prestaties, verminderde betrouwbaarheid en een kortere levensduur.",
+    "items": {
+      "1": "Sneller slijtende of opgezwollen accu's",
+      "2": "iOS-waarschuwingen zoals \"Onbekend onderdeel\"",
+      "3": "Lagere schermkwaliteit, afwijkende kleuren en dikkere randen van het scherm",
+      "4": "Tragere touchscreenrespons en een lagere refresh-rate",
+      "5": "LCD-schermen in plaats van OLED bij modellen die origineel OLED hebben",
+      "6": "Oververhitting na onprofessionele reparaties",
+      "7": "Verminderde waterbestendigheid",
+      "8": "Stof achter het cameraglas",
+      "9": "Compatibiliteitsproblemen na iOS-updates"
+    },
+    "outro": "Een smartphone is tegenwoordig essentieel. Betrouwbaarheid is dus geen luxe, maar een vereiste — daarom bouwen wij nooit met aftermarket-onderdelen."
+  },
   "authenticity_compare": {
     "heading_default": "Onderdelen kiezen",
     "sub_default": "Originele Apple onderdelen of aftermarket onderdelen.",

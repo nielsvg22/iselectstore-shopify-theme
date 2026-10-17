@@ -587,6 +587,10 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .accLink:hover{text-decoration:underline}
 
 /* ===== Garantiepagina ===== */
+.opiList{display:flex;flex-direction:column;gap:12px;margin:28px 0;padding:0;list-style:none}
+.opiList li{display:flex;align-items:flex-start;gap:12px;font-size:14.5px;line-height:1.5;color:var(--navy)}
+.opiList svg{width:19px;height:19px;flex:none;margin-top:1px;color:var(--coral-ink)}
+.opiOutro{font-size:14.5px;line-height:1.7;color:var(--muted);font-weight:600}
 .giList{display:flex;flex-direction:column;gap:14px}
 .giItem{display:flex;gap:16px;align-items:flex-start;padding:22px;background:#fff;border:1px solid var(--line);border-radius:20px}
 .giNum{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}

@@ -461,6 +461,23 @@
       }
     }
   },
+  "original_parts_issues": {
+    "eyebrow": "Heads up",
+    "heading": "Common issues with non-original parts",
+    "intro": "Many secondhand iPhones are sold as \"refurbished\" without making it clear that they contain non-original parts from third parties. These can look fine on the outside, but in practice lead to lower performance, reduced reliability and a shorter lifespan.",
+    "items": {
+      "1": "Faster-wearing or swollen batteries",
+      "2": "iOS warnings such as \"Unknown part\"",
+      "3": "Lower screen quality, off colors and thicker screen bezels",
+      "4": "Slower touchscreen response and a lower refresh rate",
+      "5": "LCD screens instead of OLED on models that originally shipped with OLED",
+      "6": "Overheating after unprofessional repairs",
+      "7": "Reduced water resistance",
+      "8": "Dust behind the camera glass",
+      "9": "Compatibility problems after iOS updates"
+    },
+    "outro": "A smartphone is essential these days. Reliability isn't a luxury — it's a requirement, which is why we never build with aftermarket parts."
+  },
   "authenticity_compare": {
     "heading_default": "Choose your parts",
     "sub_default": "Original Apple parts or aftermarket parts.",
