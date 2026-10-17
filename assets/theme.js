@@ -94,6 +94,20 @@ if (searchClose && searchOverlay) {
   searchOverlay.addEventListener('click', function (e) { if (e.target === searchOverlay) searchOverlay.classList.remove('open'); });
 }
 
+// Batterijconditie-uitleg popup (productpagina)
+var batteryInfoOverlay = document.getElementById('batteryInfoOverlay');
+var batteryInfoClose = document.getElementById('batteryInfoClose');
+if (batteryInfoOverlay) {
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.js-battery-info-trigger')) {
+      e.preventDefault();
+      batteryInfoOverlay.classList.add('open');
+    }
+  });
+  if (batteryInfoClose) batteryInfoClose.addEventListener('click', function () { batteryInfoOverlay.classList.remove('open'); });
+  batteryInfoOverlay.addEventListener('click', function (e) { if (e.target === batteryInfoOverlay) batteryInfoOverlay.classList.remove('open'); });
+}
+
 // Live zoeksuggesties (Shopify predictive search) onder het zoekveld
 (function () {
   var input = document.querySelector('.shopSearchInput');
@@ -366,7 +380,6 @@ if (filterClose && filterSidebar) {
   var TS = (window.themeStrings && window.themeStrings.strings) || {};
   var ti = TS.tradeIn || {};
   var modelStrings = TS.tradeInModels || {};
-  var conditionStrings = TS.tradeInConditions || {};
 
   function pick(map, key, fallback) {
     return (map && map[key]) || fallback;
@@ -396,17 +409,11 @@ if (filterClose && filterSidebar) {
     { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)') }
   ];
   var STORAGE = ['64 GB', '128 GB', '256 GB', '512 GB', '1 TB', pick(ti, 'storage_other', 'Anders / weet ik niet')];
-  var BATTERY = [
-    pick(ti, 'battery_90_100', '90–100%'),
-    pick(ti, 'battery_80_89', '80–89%'),
-    pick(ti, 'battery_below_80', 'Minder dan 80%'),
-    pick(ti, 'battery_unknown', 'Weet ik niet')
-  ];
-  var CONDITIONS = [
-    { name: pick(conditionStrings, 'like_new', 'Zoals nieuw') },
-    { name: pick(conditionStrings, 'light_wear', 'Lichte gebruikssporen') },
-    { name: pick(conditionStrings, 'visible_wear', 'Zichtbare slijtage') },
-    { name: pick(conditionStrings, 'damaged', 'Beschadigd, werkt nog') }
+  var YES_NO = [pick(ti, 'yes', 'Ja'), pick(ti, 'no', 'Nee')];
+  var SCRATCHES = [
+    pick(ti, 'scratches_light', 'Enkele lichte krasjes'),
+    pick(ti, 'scratches_heavy', 'Veel krasjes'),
+    pick(ti, 'scratches_broken', 'Kapot')
   ];
   var ACCESSORIES = [
     pick(ti, 'accessories_yes', 'Ja, doosje en kabel aanwezig'),
@@ -418,8 +425,7 @@ if (filterClose && filterSidebar) {
     pick(ti, 'icloud_no', 'Nee, nog niet'),
     pick(ti, 'icloud_unsure', 'Weet ik niet')
   ];
-  var TOTAL_STEPS = 7;
-  var state = { step: 1 };
+  var state = { step: 1, display: 1 };
 
   function build() {
     var overlay = document.createElement('div');
@@ -431,7 +437,7 @@ if (filterClose && filterSidebar) {
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
   }
   function open() {
-    state = { step: 1 };
+    state = { step: 1, display: 1 };
     if (!document.getElementById('tiOverlay')) build();
     render();
     document.getElementById('tiOverlay').classList.add('open');
@@ -442,8 +448,8 @@ if (filterClose && filterSidebar) {
     if (ov) ov.classList.remove('open');
     document.body.classList.remove('locked');
   }
-  function stepHeader(step, labelKey, vars) {
-    return '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: step, total: TOTAL_STEPS })) + '</p><h3>' + esc(tpl(pick(ti, labelKey, ''), vars || {})) + '</h3>';
+  function stepHeader(labelKey, vars) {
+    return '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: state.display })) + '</p><h3>' + esc(tpl(pick(ti, labelKey, ''), vars || {})) + '</h3>';
   }
   function optionGrid(options, onPick) {
     var grid = document.createElement('div');
@@ -454,59 +460,160 @@ if (filterClose && filterSidebar) {
     });
     return grid;
   }
-  function backButton(toStep) {
+  function backButton(toStep, toDisplay) {
     var btn = document.createElement('button');
     btn.className = 'tiBack';
     btn.innerHTML = '← ' + esc(pick(ti, 'back', 'Terug'));
-    btn.addEventListener('click', function () { state.step = toStep; render(); });
+    btn.addEventListener('click', function () { state.step = toStep; state.display = toDisplay; render(); });
     return btn;
+  }
+  function textStep(placeholder, opts) {
+    opts = opts || {};
+    var wrap = document.createElement('div');
+    wrap.className = 'tiTextStep';
+    var input = document.createElement('input');
+    input.type = opts.numeric ? 'number' : 'text';
+    if (opts.numeric) { input.min = 0; input.max = opts.max || 999999; }
+    input.className = 'tiInput';
+    input.placeholder = placeholder;
+    wrap.appendChild(input);
+    var btnRow = document.createElement('div');
+    btnRow.className = 'tiTextActions';
+    var goBtn = document.createElement('button');
+    goBtn.type = 'button';
+    goBtn.className = 'btn primary';
+    goBtn.style.cssText = 'width:100%;justify-content:center';
+    goBtn.textContent = pick(ti, 'continue_label', 'Doorgaan');
+    goBtn.addEventListener('click', function () { opts.onSubmit(input.value.trim()); });
+    btnRow.appendChild(goBtn);
+    if (opts.skippable) {
+      var skipBtn = document.createElement('button');
+      skipBtn.type = 'button';
+      skipBtn.className = 'tiBack';
+      skipBtn.textContent = pick(ti, 'skip', 'Overslaan');
+      skipBtn.addEventListener('click', function () { opts.onSubmit(''); });
+      btnRow.appendChild(skipBtn);
+    }
+    wrap.appendChild(btnRow);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); opts.onSubmit(input.value.trim()); } });
+    setTimeout(function () { input.focus(); }, 50);
+    return wrap;
   }
   function render() {
     var body = document.getElementById('tiBody');
     body.innerHTML = '';
     if (state.step === 1) {
-      body.insertAdjacentHTML('beforeend', stepHeader(1, 'choose_model'));
+      body.insertAdjacentHTML('beforeend', stepHeader('choose_model'));
       body.appendChild(optionGrid(MODELS.map(function (m) { return m.name; }), function (i) {
-        state.model = MODELS[i]; state.step = 2; render();
+        state.model = MODELS[i]; state.step = 2; state.display = 2; render();
       }));
     } else if (state.step === 2) {
-      body.insertAdjacentHTML('beforeend', stepHeader(2, 'storage_question', { model: state.model.name }));
+      body.insertAdjacentHTML('beforeend', stepHeader('storage_question', { model: state.model.name }));
       body.appendChild(optionGrid(STORAGE, function (i) {
-        state.storage = STORAGE[i]; state.step = 3; render();
+        state.storage = STORAGE[i]; state.step = 3; state.display = 3; render();
       }));
-      body.appendChild(backButton(1));
+      body.appendChild(backButton(1, 1));
     } else if (state.step === 3) {
-      body.insertAdjacentHTML('beforeend', stepHeader(3, 'battery_question', { model: state.model.name }));
-      body.appendChild(optionGrid(BATTERY, function (i) {
-        state.battery = BATTERY[i]; state.step = 4; render();
+      body.insertAdjacentHTML('beforeend', stepHeader('color_question', { model: state.model.name }));
+      body.appendChild(textStep(pick(ti, 'color_placeholder', ''), {
+        onSubmit: function (val) { if (!val) return; state.color = val; state.step = 4; state.display = 4; render(); }
       }));
-      body.appendChild(backButton(2));
+      body.appendChild(backButton(2, 2));
     } else if (state.step === 4) {
-      body.insertAdjacentHTML('beforeend', stepHeader(4, 'condition_question', { model: state.model.name }));
-      body.appendChild(optionGrid(CONDITIONS.map(function (c) { return c.name; }), function (i) {
-        state.condition = CONDITIONS[i]; state.step = 5; render();
+      body.insertAdjacentHTML('beforeend', stepHeader('battery_exact_question', { model: state.model.name }));
+      body.appendChild(textStep(pick(ti, 'battery_exact_placeholder', ''), {
+        numeric: true,
+        onSubmit: function (val) {
+          var n = parseInt(val, 10);
+          if (!val || isNaN(n) || n < 0 || n > 100) return;
+          state.batteryPct = n; state.step = 5; state.display = 5; render();
+        }
       }));
-      body.appendChild(backButton(3));
+      body.appendChild(backButton(3, 3));
     } else if (state.step === 5) {
-      body.insertAdjacentHTML('beforeend', stepHeader(5, 'accessories_question'));
-      body.appendChild(optionGrid(ACCESSORIES, function (i) {
-        state.accessories = ACCESSORIES[i]; state.step = 6; render();
+      body.insertAdjacentHTML('beforeend', stepHeader('cycles_question'));
+      body.appendChild(textStep(pick(ti, 'cycles_placeholder', ''), {
+        numeric: true,
+        skippable: true,
+        onSubmit: function (val) { state.cycles = val || ''; state.step = 6; state.display = 6; render(); }
       }));
-      body.appendChild(backButton(4));
+      body.appendChild(backButton(4, 4));
     } else if (state.step === 6) {
-      body.insertAdjacentHTML('beforeend', stepHeader(6, 'icloud_question'));
-      body.appendChild(optionGrid(ICLOUD, function (i) {
-        state.icloud = ICLOUD[i]; state.step = 7; render();
+      body.insertAdjacentHTML('beforeend', stepHeader('parts_question', { model: state.model.name }));
+      body.appendChild(optionGrid(YES_NO, function (i) {
+        state.parts = YES_NO[i]; state.step = 7; state.display = 7; render();
       }));
-      body.appendChild(backButton(5));
+      body.appendChild(backButton(5, 5));
+    } else if (state.step === 7) {
+      body.insertAdjacentHTML('beforeend', stepHeader('sim_question', { model: state.model.name }));
+      body.appendChild(optionGrid(YES_NO, function (i) {
+        state.sim = YES_NO[i]; state.step = 8; state.display = 8; render();
+      }));
+      body.appendChild(backButton(6, 6));
+    } else if (state.step === 8) {
+      body.insertAdjacentHTML('beforeend', stepHeader('screen_question'));
+      body.appendChild(optionGrid(YES_NO, function (i) {
+        if (i === 0) {
+          state.screen = YES_NO[0]; state.damage = '';
+          state.screenBackStep = 8; state.screenBackDisplay = 8;
+          state.step = 10; state.display = 9;
+        } else {
+          state.step = 9; state.display = 9;
+        }
+        render();
+      }));
+      body.appendChild(backButton(7, 7));
+    } else if (state.step === 9) {
+      body.insertAdjacentHTML('beforeend', stepHeader('scratches_question'));
+      body.appendChild(optionGrid(SCRATCHES, function (i) {
+        state.screen = SCRATCHES[i];
+        if (i === 2) {
+          state.step = 95; state.display = 10;
+        } else {
+          state.damage = '';
+          state.screenBackStep = 9; state.screenBackDisplay = 9;
+          state.step = 10; state.display = 10;
+        }
+        render();
+      }));
+      body.appendChild(backButton(8, 8));
+    } else if (state.step === 95) {
+      body.insertAdjacentHTML('beforeend', stepHeader('damage_question'));
+      body.appendChild(textStep(pick(ti, 'damage_placeholder', ''), {
+        onSubmit: function (val) {
+          if (!val) return;
+          state.damage = val;
+          state.screenBackStep = 95; state.screenBackDisplay = 10;
+          state.step = 10; state.display = 11;
+          render();
+        }
+      }));
+      body.appendChild(backButton(9, 9));
+    } else if (state.step === 10) {
+      body.insertAdjacentHTML('beforeend', stepHeader('accessories_question'));
+      body.appendChild(optionGrid(ACCESSORIES, function (i) {
+        state.accessories = ACCESSORIES[i]; state.step = 11; state.display = state.display + 1; render();
+      }));
+      body.appendChild(backButton(state.screenBackStep, state.screenBackDisplay));
+    } else if (state.step === 11) {
+      body.insertAdjacentHTML('beforeend', stepHeader('icloud_question'));
+      body.appendChild(optionGrid(ICLOUD, function (i) {
+        state.icloud = ICLOUD[i]; state.step = 12; render();
+      }));
+      body.appendChild(backButton(10, state.display - 1));
     } else {
       var vars = {
         model: state.model.name,
         storage: state.storage,
-        battery: state.battery,
-        condition: state.condition.name,
+        color: state.color,
+        battery: state.batteryPct + '%',
+        cycles: state.cycles || pick(ti, 'cycles_unknown', 'Weet ik niet'),
+        parts: state.parts,
+        sim: state.sim,
+        screen: state.screen,
         accessories: state.accessories,
-        icloud: state.icloud
+        icloud: state.icloud,
+        damage_line: state.damage ? tpl(pick(ti, 'whatsapp_damage_line', ''), { damage: state.damage }) : ''
       };
       var waNumber = pick(ti, 'whatsapp_number', '31643295022');
       var waMessage = tpl(pick(ti, 'whatsapp_message', ''), vars);
@@ -514,8 +621,12 @@ if (filterClose && filterSidebar) {
       var rows = [
         [pick(ti, 'summary_model', 'Toestel'), state.model.name],
         [pick(ti, 'summary_storage', 'Opslag'), state.storage],
-        [pick(ti, 'summary_battery', 'Batterijconditie'), state.battery],
-        [pick(ti, 'summary_condition', 'Conditie'), state.condition.name],
+        [pick(ti, 'summary_color', 'Kleur'), state.color],
+        [pick(ti, 'summary_battery', 'Batterijconditie'), vars.battery],
+        [pick(ti, 'summary_cycles', 'Laadcycli'), vars.cycles],
+        [pick(ti, 'summary_parts', 'Onderdelen vervangen'), state.parts],
+        [pick(ti, 'summary_sim', 'Fysieke simkaart'), state.sim],
+        [pick(ti, 'summary_screen', 'Scherm'), state.screen + (state.damage ? ' — ' + state.damage : '')],
         [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories],
         [pick(ti, 'summary_icloud', 'iCloud/Vind mijn uitgezet'), state.icloud]
       ];
@@ -537,7 +648,7 @@ if (filterClose && filterSidebar) {
       var restartBtn = document.createElement('button');
       restartBtn.className = 'tiBack';
       restartBtn.innerHTML = '← ' + esc(pick(ti, 'restart', ''));
-      restartBtn.addEventListener('click', function () { state = { step: 1 }; render(); });
+      restartBtn.addEventListener('click', function () { state = { step: 1, display: 1 }; render(); });
       body.appendChild(restartBtn);
     }
   }

@@ -4,11 +4,13 @@
   (custom → app--428689915905--mkt) en toont de rij alleen als er een waarde is.
 
   Params:
-    product  verplicht
-    key      metafield-key
-    label    locale-sleutel voor het label
-    format   optioneel: storage | percent | warranty | boolean | wide
-    types    optioneel: pipe-lijst met toegestane producttypen
+    product     verplicht
+    key         metafield-key
+    label       locale-sleutel voor het label
+    format      optioneel: storage | percent | warranty | boolean | wide
+    types       optioneel: pipe-lijst met toegestane producttypen
+    help_label  optioneel: locale-sleutel voor een klein "uitleg"-linkje achter de waarde
+    help_class  optioneel: CSS-klasse op dat linkje (JS hangt hier de popup-trigger aan)
 {% endcomment %}
 {%- capture row_value -%}
   {%- if format == 'wide' -%}
@@ -21,6 +23,6 @@
 {%- if row_value != blank -%}
   <div class="specRow{% if format == 'wide' %} specRow--wide{% endif %}">
     <small>{{ label | t }}</small>
-    <b>{{ row_value }}</b>
+    <b>{{ row_value }}{% if help_label != blank %} <button type="button" class="specHelp {{ help_class }}">{{ help_label | t }}</button>{% endif %}</b>
   </div>
 {%- endif -%}

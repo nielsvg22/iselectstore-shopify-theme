@@ -208,6 +208,7 @@
     "low_stock": "Only 1 left in stock — this exact device is unique",
     "spec_storage": "Storage",
     "spec_battery": "Battery condition",
+    "battery_help_link": "What does battery capacity mean?",
     "spec_condition": "Condition",
     "spec_warranty": "Warranty",
     "spec_warranty_unit": "months",
@@ -323,16 +324,30 @@
     "banner_cta": "Start trade-in value →",
     "banner_image_alt": "Trade in Apple products",
     "modal": {
-      "step_of": "Step {{ current }} of {{ total }}",
+      "step_of": "Step {{ current }}",
       "choose_model": "Which device do you want to trade in?",
       "storage_question": "How much storage does your {{ model }} have?",
       "storage_other": "Other / not sure",
-      "battery_question": "What's the battery health of your {{ model }}?",
-      "battery_90_100": "90–100%",
-      "battery_80_89": "80–89%",
-      "battery_below_80": "Below 80%",
-      "battery_unknown": "Not sure",
-      "condition_question": "What condition is your {{ model }} in?",
+      "color_question": "What color is your {{ model }}?",
+      "color_placeholder": "E.g. midnight, starlight, space grey…",
+      "battery_exact_question": "What's the exact battery health of your {{ model }}? (in %)",
+      "battery_exact_placeholder": "E.g. 87",
+      "cycles_question": "Roughly how many charge cycles does the battery have? (optional)",
+      "cycles_placeholder": "E.g. 350",
+      "cycles_unknown": "Not sure",
+      "parts_question": "Have any parts ever been replaced on the {{ model }}?",
+      "sim_question": "Does the {{ model }} have a physical SIM slot?",
+      "screen_question": "Have you always used a case and screen protector, and is the screen still scratch-free?",
+      "yes": "Yes",
+      "no": "No",
+      "scratches_question": "How would you describe the screen's condition?",
+      "scratches_light": "A few light scratches",
+      "scratches_heavy": "Lots of scratches",
+      "scratches_broken": "Broken",
+      "damage_question": "What exactly is broken?",
+      "damage_placeholder": "E.g. cracked screen, no display, camera not working…",
+      "continue": "Continue",
+      "skip": "Skip",
       "accessories_question": "Do you still have the box and cable?",
       "accessories_yes": "Yes, box and cable included",
       "accessories_partial": "Partly (device only or box only)",
@@ -346,25 +361,24 @@
       "estimated": "Your trade-in request",
       "summary_model": "Device",
       "summary_storage": "Storage",
+      "summary_color": "Color",
       "summary_battery": "Battery health",
-      "summary_condition": "Condition",
+      "summary_cycles": "Charge cycles",
+      "summary_parts": "Parts replaced",
+      "summary_sim": "Physical SIM",
+      "summary_screen": "Screen",
       "summary_accessories": "Box/accessories",
       "summary_icloud": "iCloud/Find My signed out",
       "note": "Send these details via WhatsApp and we'll make you a personal offer. If iCloud is still signed in, please sign out before handing in the device — we can't take it over without that.",
       "whatsapp_cta": "Send request via WhatsApp",
-      "whatsapp_message": "👋 *Trade-in request – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Storage:* {{ storage }}\n🔋 *Battery health:* {{ battery }}\n✨ *Condition:* {{ condition }}\n📦 *Box/accessories:* {{ accessories }}\n☁️ *iCloud signed out:* {{ icloud }}\n──────────────\nCan you make me an offer? 🙏",
+      "whatsapp_message": "👋 *Trade-in request – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Storage:* {{ storage }}\n🎨 *Color:* {{ color }}\n🔋 *Battery health:* {{ battery }}\n🔁 *Charge cycles:* {{ cycles }}\n🔧 *Parts replaced:* {{ parts }}\n📶 *Physical SIM:* {{ sim }}\n🖼️ *Screen:* {{ screen }}{{ damage_line }}\n📦 *Box/accessories:* {{ accessories }}\n☁️ *iCloud signed out:* {{ icloud }}\n──────────────\nCan you make me an offer? 🙏",
+      "whatsapp_damage_line": "\n💥 *Damage:* {{ damage }}",
       "close_aria": "Close"
     },
     "models": {
       "ipad": "iPad (2020 or newer)",
       "macbook": "MacBook Air/Pro (M1 or newer)",
       "watch": "Apple Watch (Series 6 or newer)"
-    },
-    "conditions": {
-      "like_new": "Like new",
-      "light_wear": "Light signs of use",
-      "visible_wear": "Visible wear",
-      "damaged": "Damaged, still works"
     }
   },
   "webwinkelkeur": {
@@ -499,6 +513,41 @@
   "language_selector": {
     "label": "Language",
     "button": "Change"
+  },
+  "battery_info": {
+    "eyebrow": "Battery condition",
+    "heading": "Always clear, always honest",
+    "modal_close_aria": "Close",
+    "intro": "Battery condition shows how much capacity the battery still has compared to new. 100% means like new, 90% means 90% of the original runtime remains. If an iPhone used to last 10 hours, at 90% that's roughly 9 hours.",
+    "items": {
+      "1": {
+        "title": "What does this mean for you?",
+        "answer": "<p>All iPhones function normally at a battery condition above 80%.</p><ul><li>90% or higher → strong battery</li><li>85–90% → still very usable</li><li>Below 80% → drains faster and may be slightly slower</li></ul><p>Important: even below 80%, an iPhone keeps working normally.</p>"
+      },
+      "2": {
+        "title": "How fast does a battery wear out?",
+        "answer": "<p>Average use: ± 5% per year. Heavy use: up to ± 10% per year. So you usually have plenty of time before a replacement is needed.</p>"
+      },
+      "3": {
+        "title": "Replacing the battery, whenever you want",
+        "answer": "<p>A battery can always be replaced. Apple's advice: replace around 80%. Cost: ± €100, done via Apple or an authorized repairer. So you're never \"stuck\" with a lower battery condition.</p>"
+      },
+      "4": {
+        "title": "Our advice",
+        "answer": "<p>Are you a heavy user and don't feel like replacing the battery any time soon? Then choose a higher battery condition. Not a heavy user? An iPhone around 85–90% is a great choice — you can always have the battery replaced later.</p>"
+      }
+    },
+    "tips_heading": "How to keep your battery healthy",
+    "tips": {
+      "1": "Avoid extreme heat or cold — heat is a battery's biggest enemy.",
+      "2": "You don't need to always charge to 100%; staying between 20% and 80% is gentlest on the battery.",
+      "3": "Use an original or MFi-certified charger and cable.",
+      "4": "Keep iOS up to date — Apple optimizes charging behavior through software updates."
+    },
+    "page_cta": "See the full explanation →",
+    "contact_title": "Questions about battery condition?",
+    "contact_text": "We're happy to help you figure out which battery condition fits your use.",
+    "contact_cta": "Get in touch →"
   },
   "guarantee_page": {
     "eyebrow": "Warranty",

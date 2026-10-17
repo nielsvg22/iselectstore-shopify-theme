@@ -1,0 +1,97 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb">
+    <a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span>
+    <span style="color:#fff">{{ page.title }}</span>
+  </div>
+  <p class="eyebrow">{{ 'battery_info.eyebrow' | t }}</p>
+  {% assign heading_default = 'battery_info.heading' | t %}
+  <h1>{{ section.settings.heading | default: heading_default }}</h1>
+</div></section>
+
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: page.title, url_2: page.url
+%}
+
+<section><div class="wrap reveal" style="max-width:900px">
+  {% if page.content != blank %}
+    <div class="sub" style="font-size:16px;line-height:1.7;margin-bottom:32px">{{ page.content }}</div>
+  {% else %}
+    <p class="sub" style="font-size:16px;line-height:1.7;margin-bottom:32px">{{ 'battery_info.intro' | t }}</p>
+  {% endif %}
+
+  <div class="giList">
+    {% for block in section.blocks %}
+      {% assign title_key = 'battery_info.items.' | append: forloop.index | append: '.title' %}
+      {% assign answer_key = 'battery_info.items.' | append: forloop.index | append: '.answer' %}
+      {% assign title_default = title_key | t %}
+      {% assign answer_default = answer_key | t %}
+      {% if title_default contains 'translation missing' %}{% assign title_default = '' %}{% endif %}
+      {% if answer_default contains 'translation missing' %}{% assign answer_default = '' %}{% endif %}
+      {% assign item_title = block.settings.title | default: title_default %}
+      {% assign item_answer = block.settings.answer | default: answer_default %}
+      {% if item_answer != blank %}
+        <article class="giItem" {{ block.shopify_attributes }}>
+          <div class="giNum">{{ forloop.index }}</div>
+          <div class="giBody">
+            <h2>{{ item_title }}</h2>
+            <div class="giText">{{ item_answer }}</div>
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+
+    <article class="giItem">
+      <div class="giNum">{{ section.blocks.size | plus: 1 }}</div>
+      <div class="giBody">
+        <h2>{{ 'battery_info.tips_heading' | t }}</h2>
+        <div class="giText">
+          <ul style="margin:0;padding-left:20px">
+            {% for i in (1..4) %}
+              {% assign tip_key = 'battery_info.tips.' | append: i %}
+              {% assign tip = tip_key | t %}
+              {% unless tip contains 'translation missing' %}<li>{{ tip }}</li>{% endunless %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  {% assign contact_page = section.settings.contact_page %}
+  {% assign contact_title_default = 'battery_info.contact_title' | t %}
+  {% assign contact_text_default = 'battery_info.contact_text' | t %}
+  <div class="giContact">
+    <div>
+      <h2>{{ section.settings.contact_title | default: contact_title_default }}</h2>
+      <p>{{ section.settings.contact_text | default: contact_text_default }}</p>
+    </div>
+    {% if contact_page != blank %}
+      <a class="btn primary" href="{{ contact_page.url }}">{{ 'battery_info.contact_cta' | t }}</a>
+    {% endif %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Batterijconditie-info",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "page", "id": "contact_page", "label": "Contactpagina (knop)" },
+    { "type": "text", "id": "contact_title", "label": "Titel contactblok" },
+    { "type": "textarea", "id": "contact_text", "label": "Tekst contactblok" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Onderwerp",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Vraag / kop" },
+        { "type": "richtext", "id": "answer", "label": "Antwoord" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Batterijconditie-info" }]
+}
+{% endschema %}

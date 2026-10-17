@@ -55,7 +55,7 @@
 {% endcomment %}
 {% capture device_rows %}
   {% render 'spec-row', product: product, key: 'storage_gb', label: 'product_page.spec_storage', format: 'storage', types: 'iPhone|iPad|MacBook|iMac|Mac mini' %}
-  {% render 'spec-row', product: product, key: 'battery_percentage', label: 'product_page.spec_battery', format: 'percent', types: 'iPhone|iPad|MacBook|Apple Watch' %}
+  {% render 'spec-row', product: product, key: 'battery_percentage', label: 'product_page.spec_battery', format: 'percent', types: 'iPhone|iPad|MacBook|Apple Watch', help_label: 'product_page.battery_help_link', help_class: 'js-battery-info-trigger' %}
   {% render 'spec-row', product: product, key: 'color', label: 'product_page.field_color' %}
   {% render 'spec-row', product: product, key: 'sim_type', label: 'product_page.field_sim', types: 'iPhone|iPad' %}
   {% render 'spec-row', product: product, key: 'wifi_cellular', label: 'product_page.field_wifi_cellular', types: 'iPad' %}
@@ -339,6 +339,8 @@
   </button>
   <span class="lightboxCounter" id="lightboxCounter"></span>
 </div>
+
+{% render 'battery-info-modal' %}
 
 {% schema %}
 {

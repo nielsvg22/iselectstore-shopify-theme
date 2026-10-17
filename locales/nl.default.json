@@ -208,6 +208,7 @@
     "low_stock": "Nog maar 1 op voorraad — dit exacte toestel is uniek",
     "spec_storage": "Opslag",
     "spec_battery": "Batterijconditie",
+    "battery_help_link": "Wat houdt batterijcapaciteit in?",
     "spec_condition": "Conditie",
     "spec_warranty": "Garantie",
     "spec_warranty_unit": "maanden",
@@ -323,16 +324,30 @@
     "banner_cta": "Start inruilwaarde →",
     "banner_image_alt": "Apple producten inruilen",
     "modal": {
-      "step_of": "Stap {{ current }} van {{ total }}",
+      "step_of": "Stap {{ current }}",
       "choose_model": "Welk toestel wil je inruilen?",
       "storage_question": "Hoeveel opslag heeft je {{ model }}?",
       "storage_other": "Anders / weet ik niet",
-      "battery_question": "Wat is de batterijconditie van je {{ model }}?",
-      "battery_90_100": "90–100%",
-      "battery_80_89": "80–89%",
-      "battery_below_80": "Minder dan 80%",
-      "battery_unknown": "Weet ik niet",
-      "condition_question": "In welke conditie is je {{ model }}?",
+      "color_question": "Welke kleur heeft je {{ model }}?",
+      "color_placeholder": "Bijv. middernacht, sterrenlicht, space grey…",
+      "battery_exact_question": "Wat is de exacte batterijconditie van je {{ model }}? (in %)",
+      "battery_exact_placeholder": "Bijv. 87",
+      "cycles_question": "Hoeveel laadcycli heeft de batterij ongeveer? (optioneel)",
+      "cycles_placeholder": "Bijv. 350",
+      "cycles_unknown": "Weet ik niet",
+      "parts_question": "Zijn er ooit onderdelen aan de {{ model }} vervangen?",
+      "sim_question": "Heeft de {{ model }} een fysieke simkaart-ingang?",
+      "screen_question": "Heb je altijd een hoes en screenprotector gebruikt, en is het scherm nog vrij van krassen?",
+      "yes": "Ja",
+      "no": "Nee",
+      "scratches_question": "Hoe zou je de staat van het scherm omschrijven?",
+      "scratches_light": "Enkele lichte krasjes",
+      "scratches_heavy": "Veel krasjes",
+      "scratches_broken": "Kapot",
+      "damage_question": "Wat is er precies kapot?",
+      "damage_placeholder": "Bijv. gebarsten scherm, geen beeld, camera werkt niet…",
+      "continue": "Doorgaan",
+      "skip": "Overslaan",
       "accessories_question": "Heb je het doosje en de kabel nog?",
       "accessories_yes": "Ja, doosje en kabel aanwezig",
       "accessories_partial": "Gedeeltelijk (alleen toestel of alleen doosje)",
@@ -346,25 +361,24 @@
       "estimated": "Jouw inruil-aanvraag",
       "summary_model": "Toestel",
       "summary_storage": "Opslag",
+      "summary_color": "Kleur",
       "summary_battery": "Batterijconditie",
-      "summary_condition": "Conditie",
+      "summary_cycles": "Laadcycli",
+      "summary_parts": "Onderdelen vervangen",
+      "summary_sim": "Fysieke simkaart",
+      "summary_screen": "Scherm",
       "summary_accessories": "Doosje/toebehoren",
       "summary_icloud": "iCloud/Vind mijn uitgezet",
       "note": "Stuur deze gegevens via WhatsApp door en we doen je persoonlijk een bod. Staat iCloud nog aan? Zet die dan vast uit voor je het toestel inlevert — zonder dat kunnen we het niet overnemen.",
       "whatsapp_cta": "Stuur aanvraag via WhatsApp",
-      "whatsapp_message": "👋 *Inruilaanvraag – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Opslag:* {{ storage }}\n🔋 *Batterijconditie:* {{ battery }}\n✨ *Conditie:* {{ condition }}\n📦 *Doosje/toebehoren:* {{ accessories }}\n☁️ *iCloud uitgezet:* {{ icloud }}\n──────────────\nKunnen jullie een bod doen? 🙏",
+      "whatsapp_message": "👋 *Inruilaanvraag – iSelectStore*\n──────────────\n📱 *Model:* {{ model }}\n💾 *Opslag:* {{ storage }}\n🎨 *Kleur:* {{ color }}\n🔋 *Batterijconditie:* {{ battery }}\n🔁 *Laadcycli:* {{ cycles }}\n🔧 *Onderdelen vervangen:* {{ parts }}\n📶 *Fysieke simkaart:* {{ sim }}\n🖼️ *Scherm:* {{ screen }}{{ damage_line }}\n📦 *Doosje/toebehoren:* {{ accessories }}\n☁️ *iCloud uitgezet:* {{ icloud }}\n──────────────\nKunnen jullie een bod doen? 🙏",
+      "whatsapp_damage_line": "\n💥 *Schade:* {{ damage }}",
       "close_aria": "Sluiten"
     },
     "models": {
       "ipad": "iPad (2020 of nieuwer)",
       "macbook": "MacBook Air/Pro (M1 of nieuwer)",
       "watch": "Apple Watch (Series 6 of nieuwer)"
-    },
-    "conditions": {
-      "like_new": "Zoals nieuw",
-      "light_wear": "Lichte gebruikssporen",
-      "visible_wear": "Zichtbare slijtage",
-      "damaged": "Beschadigd, werkt nog"
     }
   },
   "webwinkelkeur": {
@@ -499,6 +513,41 @@
   "language_selector": {
     "label": "Taal",
     "button": "Wijzig"
+  },
+  "battery_info": {
+    "eyebrow": "Batterijconditie",
+    "heading": "Altijd duidelijk, altijd eerlijk",
+    "modal_close_aria": "Sluiten",
+    "intro": "De batterijconditie laat zien hoeveel capaciteit de batterij nog heeft ten opzichte van nieuw. 100% betekent als nieuw, 90% betekent dat er nog 90% van de originele gebruiksduur over is. Ging een iPhone eerst 10 uur mee, dan is dat bij 90% ongeveer 9 uur.",
+    "items": {
+      "1": {
+        "title": "Wat betekent dit voor jou?",
+        "answer": "<p>Alle iPhones functioneren normaal bij een batterijconditie boven de 80%.</p><ul><li>90% of hoger → sterke batterij</li><li>85–90% → nog steeds zeer goed bruikbaar</li><li>Onder 80% → sneller leeg en mogelijk iets minder snel</li></ul><p>Belangrijk: ook onder de 80% blijft een iPhone gewoon normaal werken.</p>"
+      },
+      "2": {
+        "title": "Hoe snel slijt een batterij?",
+        "answer": "<p>Gemiddeld gebruik: ± 5% per jaar. Intensief gebruik: tot ± 10% per jaar. Je hebt dus vaak nog ruim de tijd voordat vervanging nodig is.</p>"
+      },
+      "3": {
+        "title": "Batterij vervangen, wanneer jij wil",
+        "answer": "<p>Een batterij is altijd te vervangen. Advies van Apple: vervangen rond 80%. Kosten: ± €100, uit te voeren via Apple of een erkende reparateur. Je zit dus nooit vast aan een lagere batterijconditie.</p>"
+      },
+      "4": {
+        "title": "Ons advies",
+        "answer": "<p>Ben je een intensieve gebruiker en heb je geen zin om de batterij op korte termijn te vervangen? Kies dan voor een hogere batterijconditie. Ben je geen grootgebruiker, dan is een iPhone rond de 85–90% een prima keuze — je kunt de batterij altijd later nog laten vervangen.</p>"
+      }
+    },
+    "tips_heading": "Zo houd je je batterij gezond",
+    "tips": {
+      "1": "Vermijd extreme hitte of kou — warmte is de grootste vijand van een batterij.",
+      "2": "Je hoeft niet altijd tot 100% op te laden; tussen 20% en 80% is het mildst voor de batterij.",
+      "3": "Gebruik een originele of MFi-gecertificeerde lader en kabel.",
+      "4": "Houd iOS up-to-date — Apple optimaliseert laadgedrag met software-updates."
+    },
+    "page_cta": "Bekijk de volledige uitleg →",
+    "contact_title": "Nog vragen over de batterijconditie?",
+    "contact_text": "We denken graag met je mee over welke batterijconditie bij jouw gebruik past.",
+    "contact_cta": "Neem contact op →"
   },
   "guarantee_page": {
     "eyebrow": "Garantie",

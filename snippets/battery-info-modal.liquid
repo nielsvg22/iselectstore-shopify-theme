@@ -1,0 +1,38 @@
+{% comment %}
+  Popup met uitleg over batterijconditie, geopend via de knop die
+  spec-row.liquid toont achter de batterijconditie-waarde op de
+  productpagina (class js-battery-info-trigger, zie assets/theme.js).
+  Dezelfde locale-content staat ook op de volledige pagina
+  (sections/battery-info.liquid), zodat er maar één bron van tekst is.
+{% endcomment %}
+<div class="tiOverlay" id="batteryInfoOverlay">
+  <div class="tiModal" style="max-width:560px">
+    <button type="button" class="tiClose" id="batteryInfoClose" aria-label="{{ 'battery_info.modal_close_aria' | t }}">×</button>
+    <p class="tiEyebrow">{{ 'battery_info.eyebrow' | t }}</p>
+    <h3>{{ 'battery_info.heading' | t }}</h3>
+    <div class="biText">
+      <p>{{ 'battery_info.intro' | t }}</p>
+      {% for i in (1..4) %}
+        {% assign title_key = 'battery_info.items.' | append: i | append: '.title' %}
+        {% assign answer_key = 'battery_info.items.' | append: i | append: '.answer' %}
+        {% assign item_title = title_key | t %}
+        {% assign item_answer = answer_key | t %}
+        {% unless item_title contains 'translation missing' %}
+          <h4>{{ item_title }}</h4>
+          {{ item_answer }}
+        {% endunless %}
+      {% endfor %}
+      <h4>{{ 'battery_info.tips_heading' | t }}</h4>
+      <ul>
+        {% for i in (1..4) %}
+          {% assign tip_key = 'battery_info.tips.' | append: i %}
+          {% assign tip = tip_key | t %}
+          {% unless tip contains 'translation missing' %}<li>{{ tip }}</li>{% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% if pages['batterijconditie'] %}
+      <a class="btn primary" href="{{ pages['batterijconditie'].url }}" style="margin-top:6px">{{ 'battery_info.page_cta' | t }}</a>
+    {% endif %}
+  </div>
+</div>
