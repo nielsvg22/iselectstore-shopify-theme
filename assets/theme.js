@@ -574,7 +574,7 @@ if (filterClose && filterSidebar) {
       body.insertAdjacentHTML('beforeend', stepHeader('screen_question'));
       body.appendChild(optionGrid(YES_NO, function (i) {
         if (i === 0) {
-          state.screen = YES_NO[0]; state.damage = '';
+          state.screen = pick(ti, 'screen_no_scratches', 'Krasvrij'); state.damage = '';
           state.screenBackStep = 8; state.screenBackDisplay = state.display;
           state.step = 10; state.display = state.display + 1;
         } else {

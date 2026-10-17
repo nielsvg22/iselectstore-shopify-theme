@@ -340,6 +340,7 @@
       "parts_detail_placeholder": "Bijv. scherm, batterij, camera…",
       "sim_question": "Heeft de {{ model }} een fysieke simkaart-ingang?",
       "screen_question": "Heb je altijd een hoes en screenprotector gebruikt, en is het scherm nog vrij van krassen?",
+      "screen_no_scratches": "Krasvrij, altijd hoes en screenprotector gebruikt",
       "yes": "Ja",
       "no": "Nee",
       "scratches_question": "Hoe zou je de staat van het scherm omschrijven?",

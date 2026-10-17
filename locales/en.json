@@ -340,6 +340,7 @@
       "parts_detail_placeholder": "E.g. screen, battery, camera…",
       "sim_question": "Does the {{ model }} have a physical SIM slot?",
       "screen_question": "Have you always used a case and screen protector, and is the screen still scratch-free?",
+      "screen_no_scratches": "Scratch-free, always used a case and screen protector",
       "yes": "Yes",
       "no": "No",
       "scratches_question": "How would you describe the screen's condition?",
