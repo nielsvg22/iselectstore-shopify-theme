@@ -25,7 +25,7 @@
     <div class="stConceptCopy reveal" style="transition-delay:.12s">
       <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
       <h2>{{ section.settings.heading | default: heading_default }}</h2>
-      <div class="stRich">{{ section.settings.text | default: text_default }}</div>
+      <div class="stRich">{% if section.settings.text != blank %}{{ section.settings.text }}{% else %}<p>{{ text_default }}</p>{% endif %}</div>
       <ul class="stPoints">
         {% for block in section.blocks %}
           {% assign pt_title_key = 'story_page.concept.points.' | append: forloop.index | append: '.title' %}

@@ -22,6 +22,24 @@
   {% endif %}
 
   <div class="giList">
+    <article class="giItem">
+      <div class="giNum">1</div>
+      <div class="giBody">
+        <h2>{{ 'battery_info.meaning_title' | t }}</h2>
+        <div class="giText">
+          <p>{{ 'battery_info.meaning_text' | t }}</p>
+          <ul style="margin:0 0 10px;padding-left:20px">
+            {% for i in (1..3) %}
+              {% assign tier_key = 'battery_info.tiers.' | append: i %}
+              {% assign tier = tier_key | t %}
+              {% unless tier contains 'translation missing' %}<li>{{ tier }}</li>{% endunless %}
+            {% endfor %}
+          </ul>
+          <p>{{ 'battery_info.meaning_note' | t }}</p>
+        </div>
+      </div>
+    </article>
+
     {% for block in section.blocks %}
       {% assign title_key = 'battery_info.items.' | append: forloop.index | append: '.title' %}
       {% assign answer_key = 'battery_info.items.' | append: forloop.index | append: '.answer' %}
@@ -33,7 +51,7 @@
       {% assign item_answer = block.settings.answer | default: answer_default %}
       {% if item_answer != blank %}
         <article class="giItem" {{ block.shopify_attributes }}>
-          <div class="giNum">{{ forloop.index }}</div>
+          <div class="giNum">{{ forloop.index | plus: 1 }}</div>
           <div class="giBody">
             <h2>{{ item_title }}</h2>
             <div class="giText">{{ item_answer }}</div>
@@ -43,7 +61,7 @@
     {% endfor %}
 
     <article class="giItem">
-      <div class="giNum">{{ section.blocks.size | plus: 1 }}</div>
+      <div class="giNum">{{ section.blocks.size | plus: 2 }}</div>
       <div class="giBody">
         <h2>{{ 'battery_info.tips_heading' | t }}</h2>
         <div class="giText">

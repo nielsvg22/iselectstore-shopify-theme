@@ -6,10 +6,9 @@
       "blocks": {
         "item-1": { "type": "item", "settings": {} },
         "item-2": { "type": "item", "settings": {} },
-        "item-3": { "type": "item", "settings": {} },
-        "item-4": { "type": "item", "settings": {} }
+        "item-3": { "type": "item", "settings": {} }
       },
-      "block_order": ["item-1", "item-2", "item-3", "item-4"]
+      "block_order": ["item-1", "item-2", "item-3"]
     }
   },
   "order": ["main"]

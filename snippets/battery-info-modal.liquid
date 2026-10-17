@@ -12,14 +12,24 @@
     <h3>{{ 'battery_info.heading' | t }}</h3>
     <div class="biText">
       <p>{{ 'battery_info.intro' | t }}</p>
-      {% for i in (1..4) %}
+      <h4>{{ 'battery_info.meaning_title' | t }}</h4>
+      <p>{{ 'battery_info.meaning_text' | t }}</p>
+      <ul>
+        {% for i in (1..3) %}
+          {% assign tier_key = 'battery_info.tiers.' | append: i %}
+          {% assign tier = tier_key | t %}
+          {% unless tier contains 'translation missing' %}<li>{{ tier }}</li>{% endunless %}
+        {% endfor %}
+      </ul>
+      <p>{{ 'battery_info.meaning_note' | t }}</p>
+      {% for i in (1..3) %}
         {% assign title_key = 'battery_info.items.' | append: i | append: '.title' %}
         {% assign answer_key = 'battery_info.items.' | append: i | append: '.answer' %}
         {% assign item_title = title_key | t %}
         {% assign item_answer = answer_key | t %}
         {% unless item_title contains 'translation missing' %}
           <h4>{{ item_title }}</h4>
-          {{ item_answer }}
+          <p>{{ item_answer }}</p>
         {% endunless %}
       {% endfor %}
       <h4>{{ 'battery_info.tips_heading' | t }}</h4>

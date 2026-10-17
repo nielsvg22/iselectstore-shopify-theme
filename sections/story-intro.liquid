@@ -10,7 +10,9 @@
       <p class="eyebrow">{{ section.settings.eyebrow | default: eyebrow_default }}</p>
       <h2>{{ section.settings.heading | default: heading_default }}</h2>
       <div class="stRich stRich--lead">{{ section.settings.intro | default: intro_default }}</div>
-      <div class="stRich">{{ section.settings.body | default: body_default }}</div>
+      <div class="stRich">
+        {% if section.settings.body != blank %}{{ section.settings.body }}{% else %}{% for para in body_default | split: "\n\n" %}<p>{{ para }}</p>{% endfor %}{% endif %}
+      </div>
       {% if page.content != blank %}
         <div class="stRich stRich--page">{{ page.content }}</div>
       {% endif %}

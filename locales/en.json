@@ -416,19 +416,19 @@
     "items": {
       "1": {
         "question": "Are your iPhones original or refurbished?",
-        "answer": "<p>All our devices are original premium pre-owned Apple products: not refurbished and without replaced parts.</p>"
+        "answer": "All our devices are original premium pre-owned Apple products: not refurbished and without replaced parts."
       },
       "2": {
         "question": "How is battery health determined?",
-        "answer": "<p>We measure battery capacity with the original Apple diagnostic tools and clearly list this percentage on every product.</p>"
+        "answer": "We measure battery capacity with the original Apple diagnostic tools and clearly list this percentage on every product."
       },
       "3": {
         "question": "What does the warranty cover?",
-        "answer": "<p>Every device comes with 6 to 12 months of warranty, depending on the product.</p>"
+        "answer": "Every device comes with 6 to 12 months of warranty, depending on the product."
       },
       "4": {
         "question": "Can I trade in my old device?",
-        "answer": "<p>Sure! Use our trade-in estimator for an indication of the value.</p>"
+        "answer": "Sure! Use our trade-in estimator for an indication of the value."
       }
     }
   },
@@ -538,22 +538,26 @@
     "heading": "Always clear, always honest",
     "modal_close_aria": "Close",
     "intro": "Battery condition shows how much capacity the battery still has compared to new. 100% means like new, 90% means 90% of the original runtime remains. If an iPhone used to last 10 hours, at 90% that's roughly 9 hours.",
+    "meaning_title": "What does this mean for you?",
+    "meaning_text": "All iPhones function normally at a battery condition above 80%.",
+    "tiers": {
+      "1": "90% or higher → strong battery",
+      "2": "85–90% → still very usable",
+      "3": "Below 80% → drains faster and may be slightly slower"
+    },
+    "meaning_note": "Important: even below 80%, an iPhone keeps working normally.",
     "items": {
       "1": {
-        "title": "What does this mean for you?",
-        "answer": "<p>All iPhones function normally at a battery condition above 80%.</p><ul><li>90% or higher → strong battery</li><li>85–90% → still very usable</li><li>Below 80% → drains faster and may be slightly slower</li></ul><p>Important: even below 80%, an iPhone keeps working normally.</p>"
+        "title": "How fast does a battery wear out?",
+        "answer": "Average use: ± 5% per year. Heavy use: up to ± 10% per year. So you usually have plenty of time before a replacement is needed."
       },
       "2": {
-        "title": "How fast does a battery wear out?",
-        "answer": "<p>Average use: ± 5% per year. Heavy use: up to ± 10% per year. So you usually have plenty of time before a replacement is needed.</p>"
+        "title": "Replacing the battery, whenever you want",
+        "answer": "A battery can always be replaced. Apple's advice: replace around 80%. Cost: ± €100, done via Apple or an authorized repairer. So you're never \"stuck\" with a lower battery condition."
       },
       "3": {
-        "title": "Replacing the battery, whenever you want",
-        "answer": "<p>A battery can always be replaced. Apple's advice: replace around 80%. Cost: ± €100, done via Apple or an authorized repairer. So you're never \"stuck\" with a lower battery condition.</p>"
-      },
-      "4": {
         "title": "Our advice",
-        "answer": "<p>Are you a heavy user and don't feel like replacing the battery any time soon? Then choose a higher battery condition. Not a heavy user? An iPhone around 85–90% is a great choice — you can always have the battery replaced later.</p>"
+        "answer": "Are you a heavy user and don't feel like replacing the battery any time soon? Then choose a higher battery condition. Not a heavy user? An iPhone around 85–90% is a great choice — you can always have the battery replaced later."
       }
     },
     "tips_heading": "How to keep your battery healthy",
@@ -632,7 +636,7 @@
       "eyebrow": "Why we exist",
       "heading_default": "Not mass refurbished. Carefully chosen.",
       "intro_default": "iSelectStore started with a simple frustration: anyone looking for a second-hand iPhone runs into stacks of generic devices, vague photos and condition descriptions that tell you nothing.",
-      "body_default": "<p>We do it differently. We only take in what we would want to use ourselves, personally inspect every device and photograph the exact unit you actually receive. We list battery health and condition per device — no averages and no surprises afterwards.</p><p>That keeps the range small and accurate, with a fair price-quality ratio and always someone you can actually reach.</p>"
+      "body_default": "We do it differently. We only take in what we would want to use ourselves, personally inspect every device and photograph the exact unit you actually receive. We list battery health and condition per device — no averages and no surprises afterwards.\n\nThat keeps the range small and accurate, with a fair price-quality ratio and always someone you can actually reach."
     },
     "values": {
       "eyebrow": "Why we select",
@@ -660,7 +664,7 @@
     "concept": {
       "eyebrow": "The brand mark",
       "heading_default": "One central point, one selection",
-      "text_default": "<p>Our brand mark is built around a central point. It stands for how we work: from a single overview we pick the units that meet our standards, and we leave the rest alone.</p>",
+      "text_default": "Our brand mark is built around a central point. It stands for how we work: from a single overview we pick the units that meet our standards, and we leave the rest alone.",
       "points": {
         "1": {
           "title": "Out of a larger supply",
@@ -764,7 +768,7 @@
     "work_alt": "An iPhone held in gloves, photographed for its product listing",
     "eyebrow": "Transparency first",
     "heading": "Always 100% original Apple parts",
-    "text": "<p>We photograph every device individually — including a screenshot of the actual battery health — so you know exactly what you're buying. No stock photos, no surprises.</p>",
+    "text": "We photograph every device individually — including a screenshot of the actual battery health — so you know exactly what you're buying. No stock photos, no surprises.",
     "device_alt": "Real product photo",
     "battery_alt": "Battery health screenshot",
     "checks": {

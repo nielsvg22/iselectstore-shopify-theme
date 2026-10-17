@@ -416,19 +416,19 @@
     "items": {
       "1": {
         "question": "Zijn jullie iPhones origineel of refurbished?",
-        "answer": "<p>Al onze toestellen zijn originele premium pre-owned Apple-producten: niet refurbished en zonder vervangen onderdelen.</p>"
+        "answer": "Al onze toestellen zijn originele premium pre-owned Apple-producten: niet refurbished en zonder vervangen onderdelen."
       },
       "2": {
         "question": "Hoe wordt de batterijconditie bepaald?",
-        "answer": "<p>We meten de batterijcapaciteit met de originele Apple-diagnosetools en vermelden dit percentage duidelijk bij elk product.</p>"
+        "answer": "We meten de batterijcapaciteit met de originele Apple-diagnosetools en vermelden dit percentage duidelijk bij elk product."
       },
       "3": {
         "question": "Wat houdt de garantie in?",
-        "answer": "<p>Elk toestel wordt geleverd met 6 tot 12 maanden garantie, afhankelijk van het product.</p>"
+        "answer": "Elk toestel wordt geleverd met 6 tot 12 maanden garantie, afhankelijk van het product."
       },
       "4": {
         "question": "Kan ik mijn oude toestel inruilen?",
-        "answer": "<p>Zeker! Gebruik onze inruil-waardeschatter voor een indicatie van de waarde.</p>"
+        "answer": "Zeker! Gebruik onze inruil-waardeschatter voor een indicatie van de waarde."
       }
     }
   },
@@ -538,22 +538,26 @@
     "heading": "Altijd duidelijk, altijd eerlijk",
     "modal_close_aria": "Sluiten",
     "intro": "De batterijconditie laat zien hoeveel capaciteit de batterij nog heeft ten opzichte van nieuw. 100% betekent als nieuw, 90% betekent dat er nog 90% van de originele gebruiksduur over is. Ging een iPhone eerst 10 uur mee, dan is dat bij 90% ongeveer 9 uur.",
+    "meaning_title": "Wat betekent dit voor jou?",
+    "meaning_text": "Alle iPhones functioneren normaal bij een batterijconditie boven de 80%.",
+    "tiers": {
+      "1": "90% of hoger → sterke batterij",
+      "2": "85–90% → nog steeds zeer goed bruikbaar",
+      "3": "Onder 80% → sneller leeg en mogelijk iets minder snel"
+    },
+    "meaning_note": "Belangrijk: ook onder de 80% blijft een iPhone gewoon normaal werken.",
     "items": {
       "1": {
-        "title": "Wat betekent dit voor jou?",
-        "answer": "<p>Alle iPhones functioneren normaal bij een batterijconditie boven de 80%.</p><ul><li>90% of hoger → sterke batterij</li><li>85–90% → nog steeds zeer goed bruikbaar</li><li>Onder 80% → sneller leeg en mogelijk iets minder snel</li></ul><p>Belangrijk: ook onder de 80% blijft een iPhone gewoon normaal werken.</p>"
+        "title": "Hoe snel slijt een batterij?",
+        "answer": "Gemiddeld gebruik: ± 5% per jaar. Intensief gebruik: tot ± 10% per jaar. Je hebt dus vaak nog ruim de tijd voordat vervanging nodig is."
       },
       "2": {
-        "title": "Hoe snel slijt een batterij?",
-        "answer": "<p>Gemiddeld gebruik: ± 5% per jaar. Intensief gebruik: tot ± 10% per jaar. Je hebt dus vaak nog ruim de tijd voordat vervanging nodig is.</p>"
+        "title": "Batterij vervangen, wanneer jij wil",
+        "answer": "Een batterij is altijd te vervangen. Advies van Apple: vervangen rond 80%. Kosten: ± €100, uit te voeren via Apple of een erkende reparateur. Je zit dus nooit vast aan een lagere batterijconditie."
       },
       "3": {
-        "title": "Batterij vervangen, wanneer jij wil",
-        "answer": "<p>Een batterij is altijd te vervangen. Advies van Apple: vervangen rond 80%. Kosten: ± €100, uit te voeren via Apple of een erkende reparateur. Je zit dus nooit vast aan een lagere batterijconditie.</p>"
-      },
-      "4": {
         "title": "Ons advies",
-        "answer": "<p>Ben je een intensieve gebruiker en heb je geen zin om de batterij op korte termijn te vervangen? Kies dan voor een hogere batterijconditie. Ben je geen grootgebruiker, dan is een iPhone rond de 85–90% een prima keuze — je kunt de batterij altijd later nog laten vervangen.</p>"
+        "answer": "Ben je een intensieve gebruiker en heb je geen zin om de batterij op korte termijn te vervangen? Kies dan voor een hogere batterijconditie. Ben je geen grootgebruiker, dan is een iPhone rond de 85–90% een prima keuze — je kunt de batterij altijd later nog laten vervangen."
       }
     },
     "tips_heading": "Zo houd je je batterij gezond",
@@ -632,7 +636,7 @@
       "eyebrow": "Waarom wij bestaan",
       "heading_default": "Geen massale refurbished. Zorgvuldig gekozen.",
       "intro_default": "iSelectStore begon met een simpel frustratiepunt: wie een tweedehands iPhone zoekt, komt stapels generieke toestellen tegen, vage foto's en conditiebeschrijvingen die niets zeggen.",
-      "body_default": "<p>Wij doen het anders. We nemen alleen in wat we zelf zouden willen gebruiken, controleren elk toestel persoonlijk en fotograferen het exemplaar dat je daadwerkelijk ontvangt. Batterijconditie en staat vermelden we per toestel — geen gemiddelden en geen verrassingen achteraf.</p><p>Zo blijft het aanbod klein en kloppend, met een eerlijke prijs-kwaliteitverhouding en altijd iemand die je gewoon te spreken krijgt.</p>"
+      "body_default": "Wij doen het anders. We nemen alleen in wat we zelf zouden willen gebruiken, controleren elk toestel persoonlijk en fotograferen het exemplaar dat je daadwerkelijk ontvangt. Batterijconditie en staat vermelden we per toestel — geen gemiddelden en geen verrassingen achteraf.\n\nZo blijft het aanbod klein en kloppend, met een eerlijke prijs-kwaliteitverhouding en altijd iemand die je gewoon te spreken krijgt."
     },
     "values": {
       "eyebrow": "Waarom wij selecteren",
@@ -660,7 +664,7 @@
     "concept": {
       "eyebrow": "Het beeldmerk",
       "heading_default": "Eén centraal punt, één selectie",
-      "text_default": "<p>Ons beeldmerk is opgebouwd rondom een centraal punt. Dat staat voor onze manier van werken: vanuit één overzicht kiezen we de exemplaren die aan onze eisen voldoen, en de rest laten we liggen.</p>",
+      "text_default": "Ons beeldmerk is opgebouwd rondom een centraal punt. Dat staat voor onze manier van werken: vanuit één overzicht kiezen we de exemplaren die aan onze eisen voldoen, en de rest laten we liggen.",
       "points": {
         "1": {
           "title": "Uit een groter aanbod",
@@ -764,7 +768,7 @@
     "work_alt": "Een iPhone in handschoenen, gefotografeerd voor de productpresentatie",
     "eyebrow": "Transparantie voorop",
     "heading": "Altijd 100% originele Apple-onderdelen",
-    "text": "<p>Elk toestel fotograferen we apart — inclusief een screenshot van de werkelijke batterijconditie — zodat je precies ziet wat je koopt. Geen stockbeeld, geen verrassingen.</p>",
+    "text": "Elk toestel fotograferen we apart — inclusief een screenshot van de werkelijke batterijconditie — zodat je precies ziet wat je koopt. Geen stockbeeld, geen verrassingen.",
     "device_alt": "Echte productfoto",
     "battery_alt": "Screenshot van de batterijconditie",
     "checks": {
