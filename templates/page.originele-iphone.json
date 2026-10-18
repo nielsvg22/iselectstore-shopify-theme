@@ -177,6 +177,7 @@
         "intro": "<p>Een iPhone met originele onderdelen behoudt zijn waarde beter.</p>",
         "body": "<p>Bij inruil of verkoop krijg je meer terug, omdat je de zekerheid hebt van originele staat en een betrouwbare werking.</p>",
         "image": "shopify://shop_images/iselectstore-batterij-restwaarde-bijgesneden-v2.jpg",
+        "image_fit": "contain",
         "alignment": "image_left"
       }
     },
