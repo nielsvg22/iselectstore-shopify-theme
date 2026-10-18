@@ -237,6 +237,7 @@
         {% assign feature_warranty = feature_warranty | strip %}
         {% if feature_warranty != blank %}<div class="pdpFeature">{% render 'brand-usp', icon: 'warranty' %}{{ 'product_page.feature_warranty' | t: months: feature_warranty }}</div>{% endif %}
       </div>
+      <p class="pdpShippingNote">{{ 'header.top.shipping' | t }}</p>
 
       {% assign show_guarantee_link = false %}
       {% if section.settings.show_guarantee_link and guarantee_page != blank %}{% assign show_guarantee_link = true %}{% endif %}

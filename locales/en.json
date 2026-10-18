@@ -53,10 +53,11 @@
       "battery_condition": "Exact battery health",
       "trade_in": "Trade-in available",
       "warranty": "6–12 months warranty",
-      "shipping": "Order before 5pm, delivered tomorrow"
+      "shipping": "Usually ordered before 5pm, delivered tomorrow"
     }
   },
   "footer": {
+    "formerly": "Formerly",
     "headings": {
       "iphones": "iPhones",
       "information": "Information",

@@ -53,10 +53,11 @@
       "battery_condition": "Exacte batterijconditie",
       "trade_in": "Inruil mogelijk",
       "warranty": "6–12 maanden garantie",
-      "shipping": "Voor 17:00 besteld, morgen in huis"
+      "shipping": "Meestal voor 17:00 besteld, morgen in huis"
     }
   },
   "footer": {
+    "formerly": "Voorheen",
     "headings": {
       "iphones": "iPhones",
       "information": "Informatie",

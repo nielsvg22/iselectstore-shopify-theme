@@ -26,7 +26,8 @@
           sizes="(max-width: 899px) 92vw, 460px"
           width="900" height="1100"
           alt="{{ section.settings.image.alt | default: shop.name | escape }}"
-          loading="lazy">
+          loading="lazy"
+          {% if section.settings.image_fit == 'contain' %}style="aspect-ratio:auto;height:auto"{% endif %}>
       {% else %}
         <div class="stStoryGraphic" aria-hidden="true">
           <span class="stG g1"></span>
@@ -48,6 +49,17 @@
     { "type": "richtext", "id": "intro", "label": "Introtekst" },
     { "type": "richtext", "id": "body", "label": "Bodytekst" },
     { "type": "image_picker", "id": "image", "label": "Afbeelding" },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Afbeelding bijsnijden",
+      "options": [
+        { "value": "cover", "label": "Vullen (bijsnijden, vast 4:5-kader)" },
+        { "value": "contain", "label": "Eigen formaat (vult het blok volledig, niet bijgesneden)" }
+      ],
+      "default": "cover",
+      "info": "Gebruik 'Eigen formaat' voor screenshots/mockups die niet afgesneden mogen worden en geen lege ruimte mogen tonen."
+    },
     {
       "type": "select",
       "id": "alignment",

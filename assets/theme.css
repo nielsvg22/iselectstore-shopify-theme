@@ -34,8 +34,6 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .logo .mark{width:20px;height:20px}
 .logo-strong{font-weight:800}
 .logo-light{font-weight:500}
-.logoFormerly{width:1px;height:22px;background:var(--line);margin:0 2px;display:inline-block}
-.logoBbp{height:28px;width:auto;opacity:.85}
 .links{display:flex;gap:34px;justify-content:center;flex:1;font-size:13px;font-weight:500;color:var(--navy)}
 .links a{opacity:.85;transition:opacity .2s}.links a:hover{opacity:1}
 .icons{display:flex;gap:20px;align-items:center;color:var(--navy)}
@@ -50,7 +48,7 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-.mnav{position:fixed;inset:0;z-index:55;background:rgba(255,255,255,.98);backdrop-filter:blur(30px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;
+.mnav{position:fixed;inset:0;z-index:55;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);will-change:opacity,transform;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;
   opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
 .mnav.open{opacity:1;visibility:visible;transform:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .mnav a{font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--navy);padding:14px 0}
@@ -204,6 +202,9 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .footerLogo{color:#fff !important;font-size:23px;gap:10px}
 .footerMark{width:26px;height:26px;color:#fff;flex:none}
 .footerTagline{margin-top:14px;color:rgba(255,255,255,.85)}
+.footerFormerly{display:flex;align-items:center;gap:8px;margin-top:14px;padding:6px 12px;background:#fff;border-radius:980px;width:fit-content}
+.footerFormerly span{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--navy);text-transform:uppercase}
+.footerFormerly img{height:16px;width:auto}
 
 .socialRow{display:flex;gap:10px;margin-top:18px}
 .socialIc{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);display:grid;place-items:center;color:#fff;transition:background .2s,color .2s,transform .2s}
@@ -307,6 +308,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .pdpFeatures{display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:1px solid var(--line)}
 .pdpFeature{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--ink)}
 .pdpFeature svg{width:18px;height:18px;color:var(--coral);flex:none;margin-top:1px}
+.pdpShippingNote{color:var(--muted);font-size:12px;margin:10px 0 0;padding-top:10px}
 
 .accordion{border-top:1px solid var(--line);margin-top:8px}
 .accItem{border-bottom:1px solid var(--line)}
@@ -512,8 +514,6 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
  .burger{display:block;justify-self:start}
  .logo{justify-self:center;min-width:0;max-width:100%;overflow:hidden}
  .icons{justify-self:end;margin-left:0}
- .logoFormerly{height:18px}
- .logoBbp{height:20px}
  .icLang{display:none}
  .ic::before,.burger::before{content:'';position:absolute;inset:-13px}
  .heroIn{grid-template-columns:1fr;text-align:center;min-height:auto;padding-top:56px}

@@ -6,10 +6,6 @@
   <button class="burger" id="burger" aria-label="{{ 'header.menu_aria' | t }}"><span></span><span></span><span></span></button>
   <a class="logo" href="{{ routes.root_url }}">
     {% render 'brand-logo', loading: 'eager' %}
-    {% if section.settings.show_bestbuyphone_logo %}
-      <span class="logoFormerly" aria-hidden="true"></span>
-      <img class="logoBbp" src="{{ 'bestbuyphone-logo-temp.png' | asset_url }}" width="149" height="44" alt="{{ 'header.formerly' | t }}" title="{{ 'header.formerly' | t }}" loading="eager" decoding="async">
-    {% endif %}
   </a>
   <nav class="links">
     <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
@@ -45,9 +41,6 @@
   <div class="topPair">
     <span>{{ 'header.top.trade_in' | t }}</span><span>{{ 'header.top.warranty' | t }}</span>
   </div>
-  <div class="topPair">
-    <span>{{ 'header.top.shipping' | t }}</span>
-  </div>
 </div></div>
 
 <nav class="mnav" id="mnav">
@@ -80,14 +73,7 @@
   "name": "Header",
   "settings": [
     { "type": "collection", "id": "shop_collection", "label": "Voorraad-collectie (koppeling 'Voorraad' in menu)" },
-    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Leeg = pagina mijn-account indien aanwezig, anders het klantenportaal in het thema." },
-    {
-      "type": "checkbox",
-      "id": "show_bestbuyphone_logo",
-      "label": "Toon 'voorheen BestBuyPhone'-logo naast het iSelectStore-logo",
-      "info": "Tijdelijk, zodat bezoekers herkennen dat iSelectStore de nieuwe naam van BestBuyPhone is. Later uitzetten.",
-      "default": true
-    }
+    { "type": "url", "id": "account_portal_url", "label": "Klantenportaal URL", "info": "Leeg = pagina mijn-account indien aanwezig, anders het klantenportaal in het thema." }
   ]
 }
 {% endschema %}
