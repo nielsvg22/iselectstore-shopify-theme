@@ -14,25 +14,33 @@
       "settings": {
         "heading": "Waarom originele Apple-producten het verschil maken.",
         "subtext": "Originele Apple-producten bieden de kwaliteit, prestaties en betrouwbaarheid die je van Apple mag verwachten. Precies zoals Apple het bedoeld heeft.",
-        "image": "shopify://shop_images/iselectstore-authentic-lineup.png",
+        "intro": "",
+        "image": "shopify://shop_images/IMG_9787_3.jpg",
         "cta_primary_label": "Bekijk onze voorraad →",
-        "cta_secondary_label": "Lees onze belofte"
+        "cta_primary_link": "",
+        "cta_secondary_label": "Lees onze belofte",
+        "cta_secondary_link": ""
       }
     },
     "explain": {
       "type": "story-intro",
       "settings": {
         "eyebrow": "Originele staat",
-        "heading": "Wat is een iPhone in originele staat?",
-        "intro": "<p>Een iPhone in originele staat is voorzien van originele onderdelen van Apple en door Apple gecertificeerde componenten.</p>",
-        "body": "<p>Dit betekent dat het scherm, de batterij, camera's en andere onderdelen nog origineel zijn en naar behoren functioneren, precies zoals Apple het heeft ontworpen.</p>",
-        "image": "shopify://shop_images/iselectstore-authentic-hand.png",
+        "heading": "Wat is een Apple product in originele staat?",
+        "intro": "<p>Een origineel Apple product is een toestel dat voldoet aan de kwaliteitsstandaard van Apple. Dat betekent dat de iPhone uitsluitend is opgebouwd uit&nbsp;<strong>originele Apple-gecertificeerde onderdelen</strong>.</p><p>Indien er onderdelen zijn vervangen, gebeurt dit uitsluitend met&nbsp;<strong>gecertificeerde componenten</strong>&nbsp;die volledig compatibel zijn met het toestel. Hierdoor blijven prestaties, betrouwbaarheid en functionaliteit gewaarborgd.</p>",
+        "body": "",
+        "image": "shopify://shop_images/IMG_0754_5.jpg",
         "alignment": "image_left"
       }
     },
     "issues": {
       "type": "original-parts-issues",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "intro": "Op de tweedehandsmarkt worden veel Apple producten verkocht als refurbished, zonder dat duidelijk wordt vermeld wat voor soort onderdelen er worden gebruikt en wat er precies aan vervangen of gerepareerd is Deze toestellen kunnen er netjes uitzien, maar zorgen in de praktijk vaak voor lagere prestaties, verminderde betrouwbaarheid en een kortere levensduur.",
+        "outro": "Bijvoorbeeld een smartphone is tegenwoordig essentieel. Betrouwbaarheid is dus geen luxe, maar een vereiste — daarom bouwen wij nooit met aftermarket-onderdelen."
+      }
     },
     "benefits": {
       "type": "story-values",
@@ -40,15 +48,15 @@
         "value-1": {
           "type": "value",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z'></path></svg>",
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z\"></path></svg>",
             "title": "Betrouwbaarheid",
-            "text": "Originele onderdelen zijn uitvoerig getest door Apple."
+            "text": "Originele onderdelen, alleen door Apple goedgekeurd"
           }
         },
         "value-2": {
           "type": "value",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'></circle><path d='M12 8v4l3 2'></path></svg>",
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"></circle><path d=\"M12 8v4l3 2\"></path></svg>",
             "title": "Optimale prestaties",
             "text": "Je iPhone werkt zoals het bedoeld is, zonder beperkingen."
           }
@@ -56,7 +64,7 @@
         "value-3": {
           "type": "value",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='18' height='10' rx='2'></rect><line x1='22' y1='10' x2='22' y2='14'></line></svg>",
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"7\" width=\"18\" height=\"10\" rx=\"2\"></rect><line x1=\"22\" y1=\"10\" x2=\"22\" y2=\"14\"></line></svg>",
             "title": "Langere levensduur",
             "text": "Originele componenten gaan langer mee."
           }
@@ -64,7 +72,7 @@
         "value-4": {
           "type": "value",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'></circle><path d='M8.5 12.5l2.5 2.5 5-5'></path></svg>",
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"></circle><path d=\"M8.5 12.5l2.5 2.5 5-5\"></path></svg>",
             "title": "Volledige compatibiliteit",
             "text": "Geen foutmeldingen en altijd compatibel met iOS en alle functies."
           }
@@ -88,37 +96,61 @@
         "row-1": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='8' r='6'></circle><path d='M8.5 13.5L7 22l5-3 5 3-1.5-8.5'></path></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"6\"></circle><path d=\"M8.5 13.5L7 22l5-3 5 3-1.5-8.5\"></path></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         },
         "row-2": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='7' y='2' width='10' height='20' rx='2'></rect><line x1='11' y1='18' x2='13' y2='18'></line></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"7\" y=\"2\" width=\"10\" height=\"20\" rx=\"2\"></rect><line x1=\"11\" y1=\"18\" x2=\"13\" y2=\"18\"></line></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         },
         "row-3": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='18' height='10' rx='2'></rect><line x1='22' y1='10' x2='22' y2='14'></line><line x1='8' y1='9' x2='8' y2='15'></line><line x1='5' y1='12' x2='11' y2='12'></line></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"7\" width=\"18\" height=\"10\" rx=\"2\"></rect><line x1=\"22\" y1=\"10\" x2=\"22\" y2=\"14\"></line><line x1=\"8\" y1=\"9\" x2=\"8\" y2=\"15\"></line><line x1=\"5\" y1=\"12\" x2=\"11\" y2=\"12\"></line></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         },
         "row-4": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'></path></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"></circle><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"></path></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         },
         "row-5": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z'></path><path d='M9 12l2 2 4-4'></path></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z\"></path><path d=\"M9 12l2 2 4-4\"></path></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         },
         "row-6": {
           "type": "row",
           "settings": {
-            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><ellipse cx='12' cy='6' rx='8' ry='3'></ellipse><path d='M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6'></path><path d='M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6'></path></svg>"
+            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"12\" cy=\"6\" rx=\"8\" ry=\"3\"></ellipse><path d=\"M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6\"></path><path d=\"M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6\"></path></svg>",
+            "label": "",
+            "description": "",
+            "good_text": "",
+            "bad_text": ""
           }
         }
       },
@@ -130,7 +162,12 @@
         "row-5",
         "row-6"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "",
+        "subtext": "",
+        "info_label": "",
+        "info_link": ""
+      }
     },
     "restwaarde": {
       "type": "story-intro",
@@ -149,7 +186,10 @@
         "eyebrow": "Onze missie",
         "heading": "Onze belofte",
         "text": "Alleen de prestaties en betrouwbaarheid zoals Apple het bedoeld heeft.",
-        "button_label": "Bekijk onze voorraad →"
+        "button_label": "Bekijk onze voorraad →",
+        "button_link": "",
+        "show_button": true,
+        "video_file_url": ""
       }
     }
   },
