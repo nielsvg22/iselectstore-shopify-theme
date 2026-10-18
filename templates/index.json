@@ -173,6 +173,13 @@
         "button_link": ""
       }
     },
+    "webwinkelkeur": {
+      "type": "webwinkelkeur",
+      "settings": {
+        "heading": "",
+        "widget_embed": ""
+      }
+    },
     "reviews": {
       "type": "reviews",
       "blocks": {
@@ -268,15 +275,8 @@
     "tradein": {
       "type": "trade-in-banner",
       "settings": {
-        "heading": "",
+        "heading": "Je oude  Apple prodcuct inruilen?",
         "subtext": ""
-      }
-    },
-    "webwinkelkeur": {
-      "type": "webwinkelkeur",
-      "settings": {
-        "heading": "",
-        "widget_embed": ""
       }
     },
     "whyus": {
