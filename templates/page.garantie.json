@@ -11,41 +11,64 @@
   "sections": {
     "main": {
       "type": "guarantee-info",
-      "settings": { "contact_page": "contact" },
       "blocks": {
-        "item-1": {
-          "type": "item",
-          "settings": {}
-        },
         "item-2": {
           "type": "item",
-          "settings": {}
-        },
-        "item-3": {
-          "type": "item",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "answer": "<p>iSelectStore biedt 6 tot 12 maanden garantie, afhankelijk van het toestel. Nieuwe en vrijwel nieuwe toestellen hebben altijd 12 maanden garantie. De exacte periode staat op de productpagina. Apple-producten hebben mogelijk ook fabrieksgarantie van Apple. Gebruik deze garantie eerst door rechtstreeks contact op te nemen met Apple (0800)0200570. Wanneer de Apple-garantie is verlopen, geldt de garantie van iSelectStore vanaf aankoopdatum.</p>"
+          }
         },
         "item-4": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "title": "Wat valt wel onder de garantie?",
+            "answer": "<p>Een defect dat bij normaal gebruik ontstaat en niet is veroorzaakt door schade van buitenaf, kan onder de garantie vallen. Denk bijvoorbeeld aan een technisch defect dat niet door vallen, vocht of verkeerd gebruik is ontstaan. <strong>Eigenlijk valt alles onder de garantie behalve de onderstaande punten:</strong></p><p></p>"
+          }
         },
         "item-5": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "title": "Wat valt niet onder garantie",
+            "answer": "<p>De volgende schades en situaties vallen <strong>buiten</strong> onze garantie:</p><ul><li><strong>Val-, stoot-, druk- en waterschade</strong>: Schade door fysieke impact of vloeistoffen is uitgesloten van garantie.</li><li><strong>Vuilschade en overmatige vervuiling</strong>: Als vervuiling de werking van het toestel beïnvloedt, of als het toestel verkeerd wordt schoongemaakt, vervalt de garantie.</li><li><strong>Onbevoegde reparaties</strong>: Wanneer het toestel geopend of gerepareerd is door een derde partij zonder goedkeuring van de fabrikant, kan de garantie niet meer worden geclaimd.</li><li><strong>Niet aantoonbare defecten</strong>: een defect moet aantoonbaar zijn voordat er garantie kan worden verleend.</li></ul>"
+          }
         },
         "item-6": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "title": "Hoe verloopt een garantieaanvraag?",
+            "answer": "<p>We proberen eerst samen met jou het probleem op afstand op te lossen, bijvoorbeeld via WhatsApp of telefoon. Lukt dat niet, dan kan het nodig zijn het toestel verder te onderzoeken.</p><p>Als het probleem na herstel nog aanwezig is en het toestel niet te repareren is, bespreken we een passende oplossing. Dat kan vervanging of terugbetaling van het aankoopbedrag zijn.</p>"
+          }
+        },
+        "item_aKLnHf": {
+          "type": "item",
+          "settings": {
+            "title": "Wat als mijn toestel niet te repareren is?",
+            "answer": "<p>Als het toestel niet te repareren is, bekijken we of er een vergelijkbaar vervangend toestel beschikbaar is. Is dat er niet, dan bespreken we de beschikbare alternatieven met je.</p><p>Kies je een vervangend toestel met een hogere prijs, dan kan een bijbetaling gelden. Kies je een toestel met een lagere prijs, dan krijg je het prijsverschil terug. Is er geen passende oplossing beschikbaar, dan kan het aankoopbedrag worden terugbetaald.</p>"
+          }
+        },
+        "item_A6aJfp": {
+          "type": "item",
+          "settings": {
+            "title": "Waarom kan een softwareherstel nodig zijn?",
+            "answer": "<p>Sommige problemen worden veroorzaakt door software of instellingen die zijn meegekomen vanuit een eerder toestel of een reservekopie. Daarom kan een volledig softwareherstel nodig zijn, waarbij je het toestel opnieuw instelt zonder een reservekopie terug te zetten.</p><p>We kunnen je hierbij begeleiden of het herstel voor je uitvoeren. Kun je dit zelf doen, dan kan dat de afhandeling versnellen en ben je je toestel mogelijk minder lang kwijt. Maak vooraf een reservekopie van je gegevens: bij een softwareherstel wordt het toestel gewist.</p><p>Blijft het probleem daarna bestaan, dan onderzoeken we of er sprake is van een hardwaredefect en of dit onder de garantie valt.</p><h2></h2>"
+          }
         }
       },
       "block_order": [
-        "item-1",
         "item-2",
-        "item-3",
         "item-4",
         "item-5",
-        "item-6"
-      ]
+        "item-6",
+        "item_aKLnHf",
+        "item_A6aJfp"
+      ],
+      "settings": {
+        "heading": "",
+        "contact_page": "contact",
+        "contact_title": "",
+        "contact_text": ""
+      }
     }
   },
   "order": [
