@@ -11,7 +11,12 @@
       <h2>{{ section.settings.heading | default: heading_default }}</h2>
       <div class="stRich stRich--lead">{{ section.settings.intro | default: intro_default }}</div>
       <div class="stRich">
-        {% if section.settings.body != blank %}{{ section.settings.body }}{% else %}{% for para in body_default | split: "\n\n" %}<p>{{ para }}</p>{% endfor %}{% endif %}
+        {% if section.settings.body != blank %}
+          {{ section.settings.body }}
+        {% else %}
+          {% assign body_paras = body_default | split: '\n\n' %}
+          {% for para in body_paras %}<p>{{ para }}</p>{% endfor %}
+        {% endif %}
       </div>
       {% if page.content != blank %}
         <div class="stRich stRich--page">{{ page.content }}</div>
@@ -54,8 +59,8 @@
       "id": "image_fit",
       "label": "Afbeelding bijsnijden",
       "options": [
-        { "value": "cover", "label": "Vullen (bijsnijden, vast 4:5-kader)" },
-        { "value": "contain", "label": "Eigen formaat (vult het blok volledig, niet bijgesneden)" }
+        { "value": "cover", "label": "Vullen (bijsnijden, 4:5-kader)" },
+        { "value": "contain", "label": "Eigen formaat (niet bijsnijden)" }
       ],
       "default": "cover",
       "info": "Gebruik 'Eigen formaat' voor screenshots/mockups die niet afgesneden mogen worden en geen lege ruimte mogen tonen."
