@@ -400,14 +400,22 @@ if (filterClose && filterSidebar) {
   }
 
   var MODELS = [
-    { name: 'iPhone 13' },
-    { name: 'iPhone 14' },
-    { name: 'iPhone 15' },
-    { name: 'iPhone 16' },
-    { name: pick(modelStrings, 'ipad', 'iPad (2020 of nieuwer)') },
-    { name: pick(modelStrings, 'macbook', 'MacBook Air/Pro (M1 of nieuwer)') },
-    { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)') }
+    { name: 'iPhone 13', category: 'phone' },
+    { name: 'iPhone 14', category: 'phone' },
+    { name: 'iPhone 15', category: 'phone' },
+    { name: 'iPhone 16', category: 'phone' },
+    { name: pick(modelStrings, 'ipad', 'iPad (2020 of nieuwer)'), category: 'tablet' },
+    { name: pick(modelStrings, 'macbook', 'MacBook Air/Pro (M1 of nieuwer)'), category: 'laptop' },
+    { name: pick(modelStrings, 'watch', 'Apple Watch (Series 6 of nieuwer)'), category: 'watch' }
   ];
+  // MacBooks en Apple Watches hebben geen fysieke simkaart-sleuf in de
+  // gangbare betekenis van deze vraag — die stap wordt voor die categorieën
+  // overgeslagen. De schermvraag wordt per categorie geformuleerd (zie
+  // screen_question_laptop): een MacBook draagt geen hoes/screenprotector,
+  // maar heeft wel een toetsenbord/trackpad om naar te vragen.
+  function simRelevant() {
+    return !!state.model && state.model.category !== 'laptop' && state.model.category !== 'watch';
+  }
   var STORAGE = ['64 GB', '128 GB', '256 GB', '512 GB', '1 TB', pick(ti, 'storage_other', 'Anders / weet ik niet')];
   var YES_NO = [pick(ti, 'yes', 'Ja'), pick(ti, 'no', 'Nee')];
   var SCRATCHES = [
@@ -547,7 +555,7 @@ if (filterClose && filterSidebar) {
         } else {
           state.partsDetail = '';
           state.partsBackStep = 6; state.partsBackDisplay = state.display;
-          state.step = 7; state.display = state.display + 1;
+          state.step = simRelevant() ? 7 : 8; state.display = state.display + 1;
         }
         render();
       }));
@@ -559,7 +567,7 @@ if (filterClose && filterSidebar) {
           if (!val) return;
           state.partsDetail = val;
           state.partsBackStep = 65; state.partsBackDisplay = state.display;
-          state.step = 7; state.display = state.display + 1;
+          state.step = simRelevant() ? 7 : 8; state.display = state.display + 1;
           render();
         }
       }));
@@ -571,10 +579,14 @@ if (filterClose && filterSidebar) {
       }));
       body.appendChild(backButton(state.partsBackStep, state.partsBackDisplay));
     } else if (state.step === 8) {
-      body.insertAdjacentHTML('beforeend', stepHeader('screen_question'));
+      var isLaptop = state.model.category === 'laptop';
+      body.insertAdjacentHTML('beforeend', stepHeader(isLaptop ? 'screen_question_laptop' : 'screen_question', { model: state.model.name }));
       body.appendChild(optionGrid(YES_NO, function (i) {
         if (i === 0) {
-          state.screen = pick(ti, 'screen_no_scratches', 'Krasvrij'); state.damage = '';
+          state.screen = isLaptop
+            ? pick(ti, 'screen_no_scratches_laptop', 'Krasvrij')
+            : pick(ti, 'screen_no_scratches', 'Krasvrij');
+          state.damage = '';
           state.screenBackStep = 8; state.screenBackDisplay = state.display;
           state.step = 10; state.display = state.display + 1;
         } else {
@@ -582,7 +594,11 @@ if (filterClose && filterSidebar) {
         }
         render();
       }));
-      body.appendChild(backButton(7, state.display - 1));
+      if (simRelevant()) {
+        body.appendChild(backButton(7, state.display - 1));
+      } else {
+        body.appendChild(backButton(state.partsBackStep, state.partsBackDisplay));
+      }
     } else if (state.step === 9) {
       body.insertAdjacentHTML('beforeend', stepHeader('scratches_question'));
       body.appendChild(optionGrid(SCRATCHES, function (i) {
@@ -616,7 +632,7 @@ if (filterClose && filterSidebar) {
       }));
       body.appendChild(backButton(state.screenBackStep, state.screenBackDisplay));
     } else if (state.step === 11) {
-      body.insertAdjacentHTML('beforeend', stepHeader('icloud_question'));
+      body.insertAdjacentHTML('beforeend', stepHeader('icloud_question', { model: state.model.name }));
       body.appendChild(optionGrid(ICLOUD, function (i) {
         state.icloud = ICLOUD[i]; state.step = 12; render();
       }));
@@ -629,7 +645,7 @@ if (filterClose && filterSidebar) {
         battery: state.batteryPct + '%',
         cycles: state.cycles || pick(ti, 'cycles_unknown', 'Weet ik niet'),
         parts: state.parts + (state.partsDetail ? ' — ' + state.partsDetail : ''),
-        sim: state.sim,
+        sim: state.sim || '',
         screen: state.screen,
         accessories: state.accessories,
         icloud: state.icloud,
@@ -637,6 +653,13 @@ if (filterClose && filterSidebar) {
       };
       var waNumber = pick(ti, 'whatsapp_number', '31643295022');
       var waMessage = tpl(pick(ti, 'whatsapp_message', ''), vars);
+      // Geen simkaart-vraag gesteld (MacBook/Apple Watch) -> die regel ook
+      // niet in het WhatsApp-bericht laten staan.
+      if (!state.sim) {
+        waMessage = waMessage.split('\n').filter(function (line) {
+          return line.indexOf('📶') === -1;
+        }).join('\n');
+      }
       var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMessage);
       var rows = [
         [pick(ti, 'summary_model', 'Toestel'), state.model.name],
@@ -644,12 +667,12 @@ if (filterClose && filterSidebar) {
         [pick(ti, 'summary_color', 'Kleur'), state.color],
         [pick(ti, 'summary_battery', 'Batterijconditie'), vars.battery],
         [pick(ti, 'summary_cycles', 'Laadcycli'), vars.cycles],
-        [pick(ti, 'summary_parts', 'Onderdelen vervangen'), vars.parts],
-        [pick(ti, 'summary_sim', 'Fysieke simkaart'), state.sim],
-        [pick(ti, 'summary_screen', 'Scherm'), state.screen + (state.damage ? ' — ' + state.damage : '')],
-        [pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories],
-        [pick(ti, 'summary_icloud', 'iCloud/Vind mijn uitgezet'), state.icloud]
+        [pick(ti, 'summary_parts', 'Onderdelen vervangen'), vars.parts]
       ];
+      if (state.sim) rows.push([pick(ti, 'summary_sim', 'Fysieke simkaart'), state.sim]);
+      rows.push([pick(ti, 'summary_screen', 'Scherm'), state.screen + (state.damage ? ' — ' + state.damage : '')]);
+      rows.push([pick(ti, 'summary_accessories', 'Doosje/toebehoren'), state.accessories]);
+      rows.push([pick(ti, 'summary_icloud', 'iCloud/Vind mijn uitgezet'), state.icloud]);
       body.insertAdjacentHTML('beforeend',
         '<p class="tiEyebrow">' + esc(pick(ti, 'estimated', '')) + '</p>' +
         '<div class="tiSummary">' + rows.map(function (r) {
