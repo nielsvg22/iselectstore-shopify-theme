@@ -7,7 +7,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
 body{margin:0;font-family:'Poppins',-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-body.locked{overflow:hidden}
+body.locked{overflow:hidden;position:fixed;left:0;right:0;width:100%}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 button{font:inherit}

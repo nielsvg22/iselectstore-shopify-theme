@@ -60,6 +60,24 @@ document.addEventListener('scroll', function () {
   }, 3500);
 })();
 
+// `body.locked{overflow:hidden}` alone does not stop iOS Safari from
+// scrolling the page behind a fixed full-screen overlay — the background
+// still drags, which (confirmed on video) pulls the sticky header's higher
+// z-index over the open mobile menu mid-scroll. Pinning body at its current
+// scroll offset with position:fixed actually blocks it; restore the offset
+// on close. Shared by every overlay below that locks scroll.
+var bodyScrollY = 0;
+function lockBodyScroll() {
+  bodyScrollY = window.scrollY;
+  document.body.style.top = -bodyScrollY + 'px';
+  document.body.classList.add('locked');
+}
+function unlockBodyScroll() {
+  document.body.classList.remove('locked');
+  document.body.style.top = '';
+  window.scrollTo(0, bodyScrollY);
+}
+
 // Mobile menu
 var burger = document.getElementById('burger');
 var mnav = document.getElementById('mnav');
@@ -67,13 +85,13 @@ if (burger && mnav) {
   burger.addEventListener('click', function () {
     var open = mnav.classList.toggle('open');
     burger.classList.toggle('open', open);
-    document.body.classList.toggle('locked', open);
+    if (open) lockBodyScroll(); else unlockBodyScroll();
   });
   mnav.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function () {
       mnav.classList.remove('open');
       burger.classList.remove('open');
-      document.body.classList.remove('locked');
+      unlockBodyScroll();
     });
   });
 }
@@ -281,11 +299,11 @@ document.querySelectorAll('.thumb').forEach(function (t) {
     index = activeIndex();
     render();
     lightbox.classList.add('open');
-    document.body.classList.add('locked');
+    lockBodyScroll();
   }
   function closeLightbox() {
     lightbox.classList.remove('open');
-    document.body.classList.remove('locked');
+    unlockBodyScroll();
   }
   function go(dir) {
     index = (index + dir + images.length) % images.length;
@@ -365,13 +383,13 @@ var filterClose = document.getElementById('filterClose');
 if (filterToggle && filterSidebar) {
   filterToggle.addEventListener('click', function () {
     filterSidebar.classList.add('open');
-    document.body.classList.add('locked');
+    lockBodyScroll();
   });
 }
 if (filterClose && filterSidebar) {
   filterClose.addEventListener('click', function () {
     filterSidebar.classList.remove('open');
-    document.body.classList.remove('locked');
+    unlockBodyScroll();
   });
 }
 
@@ -449,12 +467,12 @@ if (filterClose && filterSidebar) {
     if (!document.getElementById('tiOverlay')) build();
     render();
     document.getElementById('tiOverlay').classList.add('open');
-    document.body.classList.add('locked');
+    lockBodyScroll();
   }
   function close() {
     var ov = document.getElementById('tiOverlay');
     if (ov) ov.classList.remove('open');
-    document.body.classList.remove('locked');
+    unlockBodyScroll();
   }
   function stepHeader(labelKey, vars) {
     return '<p class="tiEyebrow">' + esc(tpl(pick(ti, 'step_of', ''), { current: state.display })) + '</p><h3>' + esc(tpl(pick(ti, labelKey, ''), vars || {})) + '</h3>';
