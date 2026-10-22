@@ -35,7 +35,7 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .logo-strong{font-weight:800}
 .logo-light{font-weight:500}
 .links{display:flex;gap:34px;justify-content:center;flex:1;font-size:13px;font-weight:500;color:var(--navy)}
-.links a{opacity:.85;transition:opacity .2s}.links a:hover{opacity:1}
+.links a{opacity:.85;transition:opacity .2s;white-space:nowrap}.links a:hover{opacity:1}
 .icons{display:flex;gap:20px;align-items:center;color:var(--navy)}
 .ic{width:18px;height:18px;display:grid;place-items:center;opacity:.85;cursor:pointer;transition:opacity .2s,transform .2s;background:none;border:0;padding:0;color:inherit;position:relative}
 .ic:hover{opacity:1;transform:scale(1.08)}

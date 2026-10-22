@@ -275,7 +275,7 @@
     "tradein": {
       "type": "trade-in-banner",
       "settings": {
-        "heading": "Je oude  Apple prodcuct inruilen?",
+        "heading": "Je oude Apple product inruilen?",
         "subtext": ""
       }
     },
@@ -292,9 +292,9 @@
   "order": [
     "hero",
     "trust",
+    "products",
     "freshstock",
     "categories",
-    "products",
     "proof",
     "storycta",
     "webwinkelkeur",

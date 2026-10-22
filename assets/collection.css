@@ -7,8 +7,13 @@
 .stockOrderPending>.stockOrderStatus{position:absolute;top:24px;left:0;right:0;text-align:center}
 .stockOrderPending>.collectionPagination{visibility:hidden}
 .collectionHero .breadcrumb>span:last-child{color:inherit}
-.collectionDescription{max-width:700px;color:rgba(255,255,255,.75)}
-.collectionDescription p{margin:0}
+/* Compacter op mobiel: banner + filterbalk namen anders te veel ruimte in
+   voor je bij de producten bent (feedback — de beschrijvingstekst is
+   inmiddels helemaal weg, dit houdt verder nog de titel compact).
+   Desktop blijft ongewijzigd (zie de @media(min-width:901px) hieronder,
+   die wint daarboven). */
+.collectionHero{padding:clamp(26px,6vw,36px) 0}
+.collectionHero h1{font-size:clamp(23px,5vw,28px);margin:0}
 .collectionFilterHeading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
 .collectionFilterHeading h2{font-size:16px;margin:0;letter-spacing:-.02em}
 .collectionFilterHeading a{font-size:11px;color:var(--muted);text-decoration:underline}
@@ -44,7 +49,6 @@
  .collectionHero{background:var(--ivory);padding:18px 0 22px;border-bottom:1px solid var(--line)}
  .collectionHero::before,.collectionHero::after{display:none}
  .collectionHero h1{color:var(--navy);font-size:clamp(28px,2.4vw,34px);line-height:1.14;max-width:900px}
- .collectionHero p,.collectionHero .collectionDescription{color:var(--muted);max-width:850px;font-size:13px;line-height:1.6}
  .collectionHero p.eyebrow{color:var(--navy);font-size:11px;letter-spacing:.14em;margin-bottom:6px}
  .collectionHero .breadcrumb{font-size:12px;color:var(--muted);margin-bottom:12px}
  .collectionHero .wrap,.collectionListing>.wrap{max-width:1480px;padding-inline:32px}

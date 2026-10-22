@@ -18,7 +18,7 @@
         "cta_video": "",
         "cta_down": "",
         "image": "shopify://shop_images/iselectstore-unboxing-coral.jpg",
-        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.HD-720p-1.6Mbps-97455412.mp4"
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/707c8056ba4749e0ac9fa6d832e3b139/707c8056ba4749e0ac9fa6d832e3b139.SD-480p-1.5Mbps-98518046.mp4"
       }
     },
     "values": {
@@ -138,8 +138,8 @@
       "type": "story-video",
       "settings": {
         "eyebrow": "",
-        "heading": "",
-        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.HD-720p-1.6Mbps-97455412.mp4",
+        "heading": "Het verhaal achter iSelectStore",
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/707c8056ba4749e0ac9fa6d832e3b139/707c8056ba4749e0ac9fa6d832e3b139.SD-480p-1.5Mbps-98518046.mp4",
         "video_url": "",
         "poster": "shopify://shop_images/iselectstore-story-video-poster.jpg",
         "badge": "",
@@ -207,7 +207,7 @@
         "button_label": "",
         "button_link": "",
         "show_button": true,
-        "video_file_url": "https://cdn.shopify.com/videos/c/vp/288b1b4d67574015b4de023c1fde7486/288b1b4d67574015b4de023c1fde7486.SD-480p-0.9Mbps-97455412.mp4"
+        "video_file_url": "https://cdn.shopify.com/videos/c/vp/707c8056ba4749e0ac9fa6d832e3b139/707c8056ba4749e0ac9fa6d832e3b139.SD-480p-1.5Mbps-98518046.mp4"
       }
     }
   },

@@ -1,7 +1,12 @@
 {{ 'hero-desktop.css' | asset_url | stylesheet_tag }}
 <section class="hero hero--showcase"><div class="heroIn">
   <div class="heroCopy">
-    <div class="eye">{{ section.settings.eyebrow | default: "selected by us, ready for you" }}</div>
+    {% comment %}
+      Geen eyebrow-regel hier (bv. "selected by us, ready for you") — die
+      tagline staat al bovenaan de pagina onder het logo in de header,
+      dubbelop op de homepage-hero zelf (feedback: geeft meer ruimte om
+      sneller bij de producten te komen).
+    {% endcomment %}
     {% assign heading_default = 'hero.heading_default' | t %}
     {% assign heading_accent_default = 'hero.heading_accent_default' | t %}
     {% assign subtext_default = 'hero.subtext_default' | t %}
