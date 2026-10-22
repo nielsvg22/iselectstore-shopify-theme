@@ -149,7 +149,7 @@
     "trade_enable_js": "Schakel JavaScript in om de bestaande inruilmodule te openen.",
     "trade_image_alt": "iPhone inruilen bij iSelectStore",
     "stock_order": {
-      "newest": "Nieuwste eerst · beschikbaar vooraan",
+      "newest": "Nieuwste eerst",
       "loading": "De nieuwste beschikbare producten worden geladen…",
       "error": "De automatische voorraadvolgorde kon niet worden geladen. Je ziet de standaardvolgorde. Probeer de pagina opnieuw te laden.",
       "pagination": "Paginering"

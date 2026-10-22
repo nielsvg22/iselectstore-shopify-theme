@@ -149,7 +149,7 @@
     "trade_enable_js": "Enable JavaScript to open the trade-in tool.",
     "trade_image_alt": "Trade in an iPhone at iSelectStore",
     "stock_order": {
-      "newest": "Newest first · available first",
+      "newest": "Newest first",
       "loading": "Loading the newest available products…",
       "error": "The automatic stock order could not be loaded. The standard order is shown. Please reload the page.",
       "pagination": "Pagination"
