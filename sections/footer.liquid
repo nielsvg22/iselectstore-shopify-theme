@@ -55,20 +55,139 @@
     </div>
   </div>
 
-  <div class="newsletter">
+  {% comment %}
+    Voorraadmelding i.p.v. een generieke nieuwsbrief: bezoeker kiest een
+    model + opslag (geen productpagina om de identiteit van af te leiden,
+    dus de modellenlijst komt live uit /api/inventory/models zodat de
+    waarde exact overeenkomt met wat resolveProductIdentity() later
+    gebruikt — zie INVENTORY_NOTIFICATIONS.md in de backend-repo). Zelfde
+    backend-endpoint (/api/inventory/subscribe) en foutmeldingen
+    (themeStrings.inventoryErrors) als het bestaande formulier op
+    uitverkochte productpagina's (snippets/inventory-notification-form.liquid).
+  {% endcomment %}
+  {% assign wa_backend = settings.stock_notify_backend_url | default: 'https://iselectstore-marktplaats-app.vercel.app' %}
+  <div class="newsletter" data-footer-notify data-backend="{{ wa_backend | escape }}">
     <div><b>{{ 'footer.newsletter.title' | t }}</b><p>{{ 'footer.newsletter.subtext' | t }}</p></div>
-    {% form 'customer', id: 'footerNewsletter' %}
-      {% if form.posted_successfully? %}
-        <span class="newsletterDone">{{ 'footer.newsletter.thanks' | t }}</span>
-      {% else %}
-        <input type="hidden" name="contact[tags]" value="newsletter">
-        <div class="newsletterForm">
-          <input type="email" name="contact[email]" placeholder="{{ 'footer.newsletter.placeholder' | t }}" required>
-          <button class="btn primary" type="submit">{{ 'footer.newsletter.cta' | t }}</button>
-        </div>
-      {% endif %}
-    {% endform %}
+    <form class="newsletterForm" data-footer-notify-form>
+      <select class="footerNotifySelect" name="model" required aria-label="{{ 'footer.newsletter.model_placeholder' | t }}" data-footer-notify-model disabled>
+        <option value="">{{ 'footer.newsletter.model_loading' | t }}</option>
+      </select>
+      <select class="footerNotifySelect" name="storage" aria-label="{{ 'footer.newsletter.storage_placeholder' | t }}" data-footer-notify-storage>
+        <option value="">{{ 'footer.newsletter.storage_placeholder' | t }}</option>
+        <option value="8GB">8 GB</option>
+        <option value="16GB">16 GB</option>
+        <option value="32GB">32 GB</option>
+        <option value="64GB">64 GB</option>
+        <option value="128GB">128 GB</option>
+        <option value="256GB">256 GB</option>
+        <option value="512GB">512 GB</option>
+        <option value="1TB">1 TB</option>
+      </select>
+      <input type="email" name="email" placeholder="{{ 'footer.newsletter.placeholder' | t }}" required autocomplete="email" data-footer-notify-email>
+      <button class="btn primary" type="submit" data-footer-notify-submit>{{ 'footer.newsletter.cta' | t }}</button>
+    </form>
+    <p class="newsletterMsg" data-footer-notify-msg role="status" hidden></p>
   </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-footer-notify]');
+      if (!root) return;
+      var backend = root.dataset.backend;
+      var form = root.querySelector('[data-footer-notify-form]');
+      var modelSelect = root.querySelector('[data-footer-notify-model]');
+      var storageSelect = root.querySelector('[data-footer-notify-storage]');
+      var emailInput = root.querySelector('[data-footer-notify-email]');
+      var submitBtn = root.querySelector('[data-footer-notify-submit]');
+      var msg = root.querySelector('[data-footer-notify-msg]');
+
+      var loadingLabel = {{ 'footer.newsletter.loading' | t | json }};
+      var submitLabel = {{ 'footer.newsletter.cta' | t | json }};
+      var thanksText = {{ 'footer.newsletter.thanks' | t | json }};
+      var modelLoadingText = {{ 'footer.newsletter.model_loading' | t | json }};
+      var modelPlaceholder = {{ 'footer.newsletter.model_placeholder' | t | json }};
+      var genericError = {{ 'inventory_notify.errors.generic' | t | json }};
+
+      function codeMessage(code) {
+        var strings = (window.themeStrings && window.themeStrings.inventoryErrors) || {};
+        return (code && strings[code]) || null;
+      }
+
+      fetch(backend.replace(/\/$/, '') + '/api/inventory/models')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || data.ok !== true || !Array.isArray(data.models) || !data.models.length) throw new Error('empty');
+          var groups = {};
+          var order = [];
+          data.models.forEach(function (pair) {
+            if (!groups[pair.productType]) { groups[pair.productType] = []; order.push(pair.productType); }
+            groups[pair.productType].push(pair.model);
+          });
+          var html = '<option value="">' + modelPlaceholder + '</option>';
+          order.forEach(function (type) {
+            html += '<optgroup label="' + type.replace(/"/g, '&quot;') + '">';
+            groups[type].forEach(function (model) {
+              var safe = model.replace(/"/g, '&quot;');
+              html += '<option value="' + safe + '" data-type="' + type.replace(/"/g, '&quot;') + '">' + safe + '</option>';
+            });
+            html += '</optgroup>';
+          });
+          modelSelect.innerHTML = html;
+          modelSelect.disabled = false;
+        })
+        .catch(function () {
+          modelSelect.innerHTML = '<option value="">' + modelLoadingText + '</option>';
+        });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var modelOption = modelSelect.options[modelSelect.selectedIndex];
+        var productType = modelOption ? modelOption.dataset.type : '';
+        var model = modelSelect.value;
+        var storage = storageSelect.value;
+        if (!productType || !model) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = loadingLabel;
+        msg.hidden = true;
+        msg.classList.remove('is-error', 'is-info');
+
+        fetch(backend.replace(/\/$/, '') + '/api/inventory/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailInput.value, productType: productType, model: model, storage: storage })
+        })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (data) {
+              if (!r.ok || data.ok !== true) throw new Error(codeMessage(data.code) || data.error || '');
+              return data;
+            });
+          })
+          .then(function (data) {
+            var code = data.code;
+            msg.hidden = false;
+            if (code && code !== 'ok') {
+              msg.classList.add('is-info');
+              msg.textContent = codeMessage(code) || thanksText;
+            } else {
+              msg.textContent = thanksText;
+            }
+            form.reset();
+            modelSelect.selectedIndex = 0;
+            storageSelect.selectedIndex = 0;
+          })
+          .catch(function (err) {
+            msg.hidden = false;
+            msg.classList.add('is-error');
+            msg.textContent = (err && err.message) || genericError;
+          })
+          .then(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitLabel;
+          });
+      });
+    })();
+  </script>
 
   <div class="footerBadges">
     <span>★★★★★ {{ section.settings.rating | default: "9,8/10" }} {{ 'footer.badges.reviews_suffix' | t }}</span>

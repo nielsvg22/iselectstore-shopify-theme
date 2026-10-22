@@ -76,10 +76,14 @@
     },
     "newsletter": {
       "title": "Stay in the loop",
-      "subtext": "Get notified as soon as new devices arrive.",
+      "subtext": "Pick a model and storage — we'll let you know as soon as it's back in stock.",
+      "model_placeholder": "Choose a model",
+      "model_loading": "Loading models…",
+      "storage_placeholder": "Choose storage",
       "placeholder": "your@email.com",
       "cta": "Sign up →",
-      "thanks": "Thanks! We'll let you know as soon as new devices arrive."
+      "loading": "Sending…",
+      "thanks": "Thanks! We'll let you know as soon as this model is back in stock."
     },
     "badges": {
       "reviews_suffix": "on WebwinkelKeur",

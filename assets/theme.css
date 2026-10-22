@@ -229,10 +229,17 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .newsletter{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#fff;border:0;border-radius:24px;padding:26px 30px;margin-top:46px;box-shadow:0 26px 54px -26px rgba(140,30,45,.5)}
 .newsletter b{color:var(--navy);font-size:15px;display:block;margin-bottom:4px}
 .newsletter p{color:var(--muted);font-size:13px;margin:0}
-.newsletterForm{display:flex;gap:10px}
-.newsletterForm input{padding:12px 16px;border:1.5px solid var(--line);border-radius:980px;font-family:inherit;font-size:16px;min-width:220px}
-.newsletterForm input:focus{outline:none;border-color:var(--coral)}
+.newsletterForm{display:flex;flex-wrap:wrap;gap:10px}
+.newsletterForm input,.newsletterForm select{padding:12px 16px;border:1.5px solid var(--line);border-radius:980px;font-family:inherit;font-size:16px;color:var(--ink);background:#fff}
+.newsletterForm select{padding-right:48px}
+.newsletterForm input{min-width:220px;flex:1}
+.newsletterForm select{min-width:150px}
+.newsletterForm input:focus,.newsletterForm select:focus{outline:none;border-color:var(--coral)}
+.newsletterForm select:disabled{color:var(--muted)}
 .newsletterDone{color:var(--coral-ink);font-weight:600;font-size:14px}
+.newsletterMsg{width:100%;margin:12px 0 0;font-size:13px;font-weight:600;color:var(--navy)}
+.newsletterMsg.is-error{color:#dc2626}
+.newsletterMsg.is-info{color:var(--coral-ink)}
 
 .footerBadges{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.85);font-size:12.5px;font-weight:600}
 .footerBadges span:first-child{color:#ffe57f}
@@ -246,7 +253,8 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 @media(max-width:640px){
  .newsletter{flex-direction:column;align-items:stretch;text-align:center;flex-wrap:nowrap}
  .newsletterForm{flex-direction:column}
- .newsletterForm input{min-width:0}
+ .newsletterForm input,.newsletterForm select{min-width:0}
+ .newsletterForm .btn{width:100%;padding-inline:26px 28px}
  .freshStockViewAll{width:100%;text-align:center}
  .freshStockInfo{padding-right:0}
  .freshStockArrow{display:none}

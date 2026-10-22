@@ -76,10 +76,14 @@
     },
     "newsletter": {
       "title": "Blijf op de hoogte",
-      "subtext": "Ontvang een seintje zodra er nieuwe toestellen binnenkomen.",
+      "subtext": "Kies een model en opslag — we laten het je weten zodra het weer op voorraad is.",
+      "model_placeholder": "Kies een model",
+      "model_loading": "Modellen laden…",
+      "storage_placeholder": "Kies opslag",
       "placeholder": "jouw@email.nl",
       "cta": "Aanmelden →",
-      "thanks": "Bedankt! We laten je weten zodra er nieuwe toestellen binnenkomen."
+      "loading": "Bezig…",
+      "thanks": "Bedankt! We laten je weten zodra dit model weer op voorraad is."
     },
     "badges": {
       "reviews_suffix": "op WebwinkelKeur",
