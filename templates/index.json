@@ -292,9 +292,9 @@
   "order": [
     "hero",
     "trust",
-    "products",
     "freshstock",
     "categories",
+    "products",
     "proof",
     "storycta",
     "webwinkelkeur",
