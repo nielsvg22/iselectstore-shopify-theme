@@ -29,7 +29,11 @@
         "faq-14": { "type": "faq", "settings": {} },
         "faq-15": { "type": "faq", "settings": {} },
         "faq-16": { "type": "faq", "settings": {} },
-        "faq-17": { "type": "faq", "settings": {} }
+        "faq-17": { "type": "faq", "settings": {} },
+        "faq-18": { "type": "faq", "settings": {} },
+        "faq-19": { "type": "faq", "settings": {} },
+        "faq-20": { "type": "faq", "settings": {} },
+        "faq-21": { "type": "faq", "settings": {} }
       },
       "block_order": [
         "faq-1",
@@ -48,7 +52,11 @@
         "faq-14",
         "faq-15",
         "faq-16",
-        "faq-17"
+        "faq-17",
+        "faq-18",
+        "faq-19",
+        "faq-20",
+        "faq-21"
       ]
     }
   },
