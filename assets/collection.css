@@ -108,8 +108,13 @@
  .collectionToolbar .filterToggle{order:0;width:100%;min-height:48px;justify-content:center;border-radius:12px;font-size:14px;padding:10px;box-shadow:none}
  .collectionFilterCount{display:inline-grid;place-items:center;min-width:22px;height:22px;padding-inline:5px;border-radius:50%;background:#fff;color:var(--navy);font-size:12px}
  .collectionSort{order:1;position:relative;min-width:0}
- .collectionSort .sortSelect{width:100%;min-width:0;min-height:48px;padding:17px 24px 3px 12px;font-size:16px;border-radius:12px;white-space:nowrap;text-overflow:ellipsis;box-shadow:none}
- .collectionSortLabel{position:absolute;left:13px;top:5px;width:auto;height:auto;margin:0;padding:0;clip-path:none;overflow:visible;white-space:normal;font-size:10px;color:var(--muted);pointer-events:none}
+ /* Geen zwevend label boven de select (was het "Sorteer producten"-label op
+    top:5px) — mobiele Safari respecteert de top-zware padding niet en
+    centreert de geselecteerde tekst toch over de volle hoogte, waardoor
+    hij over het label heen liep. Label blijft screen-reader-only
+    (.collectionSrOnly uit de markup), select krijgt gewoon verticaal
+    gecentreerde tekst. */
+ .collectionSort .sortSelect{width:100%;min-width:0;min-height:48px;padding:0 24px 0 12px;font-size:16px;border-radius:12px;white-space:nowrap;text-overflow:ellipsis;box-shadow:none}
  .collectionFilters .filterCloseBtn{min-height:44px}
  .collectionFilters{padding-top:max(18px,env(safe-area-inset-top));padding-bottom:calc(36px + env(safe-area-inset-bottom))}
  .collectionTrade{display:none!important}
