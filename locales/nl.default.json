@@ -435,6 +435,58 @@
       "4": {
         "question": "Kan ik mijn oude toestel inruilen?",
         "answer": "Zeker! Gebruik onze inruil-waardeschatter voor een indicatie van de waarde."
+      },
+      "5": {
+        "question": "Waarom zijn jullie zo voordelig?",
+        "answer": "We hebben lage overheadkosten, kopen toestellen rechtstreeks per stuk in bij particulieren en richten ons puur op de in- en verkoop — geen refurbishment of reparatiewerkplaats ernaast. Daardoor combineren we scherpe prijzen met een eerlijk omschreven, hoge batterijconditie."
+      },
+      "6": {
+        "question": "Batterijconditie: wat kun je concreet verwachten?",
+        "answer": "De batterijconditie laat zien hoeveel capaciteit de batterij nog heeft ten opzichte van nieuw: 100% is als nieuw, 90% betekent dat er nog 90% van de originele gebruiksduur over is. Alle iPhones functioneren normaal boven de 80%; gemiddeld gebruik kost ongeveer 5% per jaar, intensief gebruik tot 10%. Een batterij is altijd te vervangen, via Apple of een erkende reparateur, voor ongeveer €100 — je zit dus nooit vast aan een lagere conditie."
+      },
+      "7": {
+        "question": "Wat valt wel en niet onder de garantie?",
+        "answer": "Een fabricagefout of ander defect dat bij normaal gebruik ontstaat, valt onder de garantie en wordt kosteloos verholpen. Val-, stoot-, druk- en waterschade, overmatige vervuiling en reparaties door een niet-erkende derde partij vallen buiten de garantie."
+      },
+      "8": {
+        "question": "Verkopen jullie de producten inclusief btw?",
+        "answer": "De meeste van onze iPhones zijn tweedehands margegoederen: daarover wordt geen btw gerekend, wat de prijs voor particulieren aantrekkelijker maakt (bedrijven kunnen in dat geval geen btw terugvorderen). Verkopen we een toestel waarop wél btw van toepassing is, dan vermelden we dat duidelijk bij het product."
+      },
+      "9": {
+        "question": "Waar vind ik de verschillen tussen iPhone-modellen?",
+        "answer": "Op de Apple-website kun je onder iPhone → Vergelijk de modellen eenvoudig naast elkaar leggen op specificaties."
+      },
+      "10": {
+        "question": "Is er nog ruimte op de prijs?",
+        "answer": "We hanteren vaste, scherp gecalculeerde prijzen. Heb je elders een beter aanbod gezien? Laat het ons weten, dan kijken we er graag naar."
+      },
+      "11": {
+        "question": "Koopadvies nodig?",
+        "answer": "Kijk voor modelspecifieke vragen eerst op de Apple-website. Blijf je twijfelen, bel ons dan gerust — uitleg geven gaat via de telefoon vaak net wat makkelijker dan via een bericht."
+      },
+      "12": {
+        "question": "Kun je een video van het toestel sturen voor ik koop?",
+        "answer": "Zeker, stuur ons een WhatsApp-bericht en we sturen een video. Let erop dat gebruikssporen op foto's vaak duidelijker lijken dan in het echt: de productfoto's worden met direct licht genomen, wat krasjes extra laat opvallen. Zodra het scherm aanstaat, vallen de meeste lichte krasjes al een stuk minder op. Toch niet naar wens? Dan kan het toestel binnen 14 dagen retour."
+      },
+      "13": {
+        "question": "Heb ik retourrecht?",
+        "answer": "Ja, je mag je aankoop binnen 14 dagen zonder opgave van reden retourneren. De kosten van het terugsturen zijn voor eigen rekening, tenzij er sprake is van een fabricagefout."
+      },
+      "14": {
+        "question": "Welke conditie-aanduidingen gebruiken jullie?",
+        "answer": "We beoordelen elk toestel op dezelfde vier niveaus: Als nieuw, Zeer nette staat, Nette staat en Zichtbare gebruikssporen. De exacte staat van jouw toestel staat altijd duidelijk op de productpagina, inclusief foto's van het echte exemplaar dat je ontvangt."
+      },
+      "15": {
+        "question": "Is een batterijconditie van 85% laag?",
+        "answer": "Dat hangt af van het model en je gebruik. Een iPhone mini met 85% voelt anders dan een Pro Max met 85%, omdat de Pro Max simpelweg een grotere batterij heeft. Gebruik je je telefoon intensief voor bijvoorbeeld navigatie, video of sociale media, dan is een hogere conditie prettiger; ben je een lichte gebruiker, dan is 85-90% vaak ruim voldoende — en is de batterij later altijd nog te vervangen."
+      },
+      "16": {
+        "question": "Waar komen jullie toestellen vandaan?",
+        "answer": "Al onze toestellen worden eerlijk ingekocht bij particulieren en vooraf gecontroleerd. Toestellen belanden om allerlei redenen op de tweedehandsmarkt: mensen willen het nieuwste model, hebben meer opslag nodig, of verkopen om financiële redenen — zo komen er regelmatig ook nieuwe of nauwelijks gebruikte toestellen bij ons terecht."
+      },
+      "17": {
+        "question": "Heeft mijn toestel een fysieke simkaart, eSIM, of beide — en is hij simlockvrij?",
+        "answer": "Staat er geen 'e-sim' in de producttitel, dan heeft het toestel een fysieke simkaartsleuf (naast eSIM-ondersteuning). Staat 'e-sim' wel in de titel, dan werkt het toestel met eSIM; bij nieuwere modellen zoals de iPhone Air is dat zelfs de enige optie. Al onze toestellen zijn simlockvrij."
       }
     }
   },

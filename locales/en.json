@@ -435,6 +435,58 @@
       "4": {
         "question": "Can I trade in my old device?",
         "answer": "Sure! Use our trade-in estimator for an indication of the value."
+      },
+      "5": {
+        "question": "Why are you so affordable?",
+        "answer": "We keep overhead low, buy devices directly from individuals, and focus purely on buying and selling — no refurbishment or repair workshop on the side. That lets us combine sharp prices with an honestly stated, high battery health."
+      },
+      "6": {
+        "question": "Battery health: what can you expect?",
+        "answer": "Battery health shows how much capacity the battery still has compared to new: 100% is like new, 90% means 90% of the original usage time remains. All iPhones work normally above 80%; average use costs about 5% per year, heavy use up to 10%. A battery can always be replaced, through Apple or an authorized repairer, for around €100 — so you're never stuck with a lower health percentage."
+      },
+      "7": {
+        "question": "What's covered by the warranty, and what isn't?",
+        "answer": "A manufacturing defect or other fault that occurs under normal use is covered and fixed free of charge. Drop, impact, pressure and water damage, excessive dirt, and repairs by an unauthorized third party are not covered."
+      },
+      "8": {
+        "question": "Do your prices include VAT?",
+        "answer": "Most of our iPhones are second-hand margin goods: no VAT is charged on these, which makes the price more attractive for individuals (businesses can't reclaim VAT in that case). If we do sell a device where VAT applies, we state that clearly on the product."
+      },
+      "9": {
+        "question": "Where can I compare iPhone models?",
+        "answer": "On Apple's own website, under iPhone → Compare, you can easily compare models by specification."
+      },
+      "10": {
+        "question": "Is there any room on the price?",
+        "answer": "We work with fixed, carefully calculated prices. Found a better offer elsewhere? Let us know and we'll happily take a look."
+      },
+      "11": {
+        "question": "Need buying advice?",
+        "answer": "For model-specific questions, check Apple's website first. Still unsure? Give us a call — explaining things over the phone is often easier than by message."
+      },
+      "12": {
+        "question": "Can you send a video of the device before I buy?",
+        "answer": "Sure, send us a WhatsApp message and we'll send one over. Keep in mind that marks often look more visible in photos than in person: our product photos are taken under direct light, which makes small scratches stand out more. Once the screen is on, most light scratches are barely noticeable. Still not happy with it? You can return the device within 14 days."
+      },
+      "13": {
+        "question": "Do I have a right to return?",
+        "answer": "Yes, you can return your purchase within 14 days without giving a reason. Return shipping is at your own cost, unless there's a manufacturing defect."
+      },
+      "14": {
+        "question": "What condition grades do you use?",
+        "answer": "We grade every device on the same four levels: Like new, Very good condition, Good condition, and Visible signs of use. The exact condition of your device is always shown clearly on the product page, including photos of the actual unit you'll receive."
+      },
+      "15": {
+        "question": "Is 85% battery health low?",
+        "answer": "It depends on the model and how you use it. An iPhone mini at 85% feels different from a Pro Max at 85%, simply because the Pro Max has a larger battery. If you use your phone heavily — navigation, video, social media — a higher health percentage is nicer to have; light users often find 85-90% plenty, and the battery can always be replaced later."
+      },
+      "16": {
+        "question": "Where do your devices come from?",
+        "answer": "All our devices are bought fairly from individuals and checked beforehand. Devices end up on the second-hand market for all kinds of reasons: people want the newest model, need more storage, or sell for financial reasons — which is how newer or barely used devices regularly end up with us."
+      },
+      "17": {
+        "question": "Does my device have a physical SIM, eSIM, or both — and is it SIM-lock free?",
+        "answer": "If the product title doesn't say \"e-sim\", the device has a physical SIM slot (alongside eSIM support). If \"e-sim\" is in the title, the device works with eSIM; for newer models like the iPhone Air that's the only option. All our devices are SIM-lock free."
       }
     }
   },
