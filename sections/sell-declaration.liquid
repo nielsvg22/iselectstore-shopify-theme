@@ -2,7 +2,7 @@
   <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">Verkoop aanmelden</span></div>
   <p class="eyebrow">Inkoopverklaring</p>
   <h1>{{ section.settings.heading | default: 'Verkoop je toestel aan ons' }}</h1>
-  <p>{{ section.settings.subtext | default: 'Vul onderstaande inkoopverklaring volledig in. Zodra we je aanmelding hebben ontvangen, nemen we contact met je op om de verkoop af te ronden.' }}</p>
+  <p>{{ section.settings.subtext | default: 'Heb je je toestel al aan ons verkocht? Vul hieronder de inkoopverklaring in ter bevestiging van de afgesproken verkoop.' }}</p>
 </div></section>
 
 {% assign bc_home = 'general.breadcrumb_home' | t %}
@@ -81,12 +81,8 @@
     </div>
 
     <aside class="cartSummary">
-      <h3>Hoe werkt het?</h3>
-      <div class="steps">
-        <div class="step"><span class="stepNum">1</span><p><b>Formulier invullen</b>Vul je gegevens, het toestel en de verkoopprijs in.</p></div>
-        <div class="step"><span class="stepNum">2</span><p><b>Wij nemen contact op</b>We controleren je aanmelding en plannen de overdracht.</p></div>
-        <div class="step"><span class="stepNum">3</span><p><b>Toestel overdragen</b>Je levert het toestel in en ontvangt direct je betaling.</p></div>
-      </div>
+      <h3>Bedankt voor het indienen</h3>
+      <p style="color:var(--muted);font-size:13.5px;line-height:1.6;margin:0 0 18px">Deze verklaring is voor toestellen waarvan de verkoop al rond is. Vul 'm in ter bevestiging, inclusief je handtekening.</p>
       {% if settings.whatsapp_number %}
       <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" rel="noopener" class="btn primary" style="width:100%;justify-content:center;margin-bottom:14px">Liever eerst appen? →</a>
       {% endif %}
@@ -211,8 +207,8 @@
         form.innerHTML =
           '<div class="orderDone" style="padding:30px 0">' +
           '<div class="checkIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>' +
-          '<h2 style="font-size:22px">Aanmelding ontvangen!</h2>' +
-          '<p>Bedankt voor je inkoopverklaring. We nemen binnen 24 uur contact met je op om de verkoop af te ronden.</p>' +
+          '<h2 style="font-size:22px">Bedankt voor het indienen!</h2>' +
+          '<p>We hebben je inkoopverklaring ontvangen. Je krijgt zo een kopie per e-mail.</p>' +
           '</div>';
       })
       .catch(function () {
