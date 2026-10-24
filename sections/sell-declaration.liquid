@@ -1,0 +1,237 @@
+<section class="shopHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">Verkoop aanmelden</span></div>
+  <p class="eyebrow">Inkoopverklaring</p>
+  <h1>{{ section.settings.heading | default: 'Verkoop je toestel aan ons' }}</h1>
+  <p>{{ section.settings.subtext | default: 'Vul onderstaande inkoopverklaring volledig in. Zodra we je aanmelding hebben ontvangen, nemen we contact met je op om de verkoop af te ronden.' }}</p>
+</div></section>
+
+{% assign bc_home = 'general.breadcrumb_home' | t %}
+{% render 'breadcrumb-jsonld',
+  name_1: bc_home, url_1: routes.root_url,
+  name_2: 'Verkoop aanmelden', url_2: request.path
+%}
+
+{% assign sell_backend = settings.stock_notify_backend_url | default: 'https://iselectstore-marktplaats-app.vercel.app' %}
+
+<section><div class="wrap reveal">
+  <div class="cartLayout">
+    <div>
+      <form class="sellForm" id="sellDeclarationForm" data-sell-form data-backend="{{ sell_backend | escape }}" novalidate>
+
+        <div class="checkoutBlock">
+          <h3>Jouw gegevens</h3>
+          <div class="formGrid">
+            <input name="voornaam" placeholder="Voornaam" autocomplete="given-name" required>
+            <input name="achternaam" placeholder="Achternaam" autocomplete="family-name" required>
+          </div>
+          <div class="formGrid" style="margin-top:12px">
+            <input type="email" name="email" placeholder="E-mailadres (optioneel)" autocomplete="email">
+            <input name="datumVerkoop" type="date" required>
+          </div>
+          <div class="formRow" style="margin-top:12px">
+            <input name="adres" placeholder="Adres" autocomplete="street-address" required>
+          </div>
+          <div class="formGrid" style="margin-top:12px">
+            <input name="postcode" placeholder="Postcode" autocomplete="postal-code" required>
+            <input name="woonplaats" placeholder="Woonplaats" autocomplete="address-level2" required>
+          </div>
+        </div>
+
+        <div class="checkoutBlock">
+          <h3>Welk product verkoop je?</h3>
+          <div class="formRow">
+            <input name="product" placeholder="Bijv. iPhone 15 Pro 256GB blauw" required>
+            <p class="formHint">Schrijf het product, model, opslag en kleur volledig uit. Indien mogelijk graag ook het serienummer noteren.</p>
+          </div>
+          <div class="formRow" style="margin-top:12px">
+            <input name="bedrag" type="number" min="0" step="0.01" placeholder="Voor welk bedrag verkoop je het toestel? (€)" required>
+          </div>
+        </div>
+
+        <div class="checkoutBlock">
+          <h3>Verklaringen</h3>
+          <div class="declareList">
+            <label class="declareItem">
+              <input type="checkbox" name="verklaringEigenaar" required>
+              <span>Hierbij verklaar ik als verkoper dat ik de rechtmatige eigenaar ben van de in deze inkoopverklaring vermelde goederen, geen omzetbelasting heb afgetrokken met betrekking tot deze levering, en minstens 18 jaar oud ben.</span>
+            </label>
+            <label class="declareItem">
+              <input type="checkbox" name="verklaringAbonnement" required>
+              <span>Daarnaast verklaar ik als verkoper dat, indien de in de inkoopverklaring vermelde goederen op abonnement zijn afgesloten, ik het openstaande toestelkrediet zal afbetalen.</span>
+            </label>
+            <label class="declareItem">
+              <input type="checkbox" name="verklaringThuiskopie" required>
+              <span>Ook verklaar ik dat het toestel wat ik verkoop een Nederlands toestel is waar al wettelijke thuiskopieheffing over betaald is.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="checkoutBlock">
+          <h3>Handtekening</h3>
+          <canvas class="sigPad" id="sellSigPad" width="340" height="110" aria-label="Teken hier je handtekening"></canvas>
+          <div class="sigRow" style="margin-top:10px">
+            <button type="button" class="sigClear" id="sellSigClear">Handtekening wissen</button>
+            <span class="sigEmpty" id="sellSigStatus">Nog niet ondertekend</span>
+          </div>
+        </div>
+
+        <p class="newsletterMsg" data-sell-msg role="status" hidden></p>
+        <button class="add" type="submit" data-sell-submit style="width:100%;height:52px;font-size:15px">Versturen →</button>
+      </form>
+    </div>
+
+    <aside class="cartSummary">
+      <h3>Hoe werkt het?</h3>
+      <div class="steps">
+        <div class="step"><span class="stepNum">1</span><p><b>Formulier invullen</b>Vul je gegevens, het toestel en de verkoopprijs in.</p></div>
+        <div class="step"><span class="stepNum">2</span><p><b>Wij nemen contact op</b>We controleren je aanmelding en plannen de overdracht.</p></div>
+        <div class="step"><span class="stepNum">3</span><p><b>Toestel overdragen</b>Je levert het toestel in en ontvangt direct je betaling.</p></div>
+      </div>
+      {% if settings.whatsapp_number %}
+      <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" rel="noopener" class="btn primary" style="width:100%;justify-content:center;margin-bottom:14px">Liever eerst appen? →</a>
+      {% endif %}
+      {% if settings.whatsapp_number %}<div class="sumRow"><span>Telefoon</span><b>+{{ settings.whatsapp_number }}</b></div>{% endif %}
+      <div class="sumRow" style="margin-bottom:0"><span>E-mail</span><b>{{ shop.email }}</b></div>
+      <p style="color:var(--muted);font-size:12.5px;margin-top:16px">Je gegevens worden alleen gebruikt om deze verkoop af te handelen.</p>
+    </aside>
+  </div>
+</div></section>
+
+<script>
+(function () {
+  var root = document.querySelector('[data-sell-form]');
+  if (!root) return;
+  var backend = (root.dataset.backend || '').replace(/\/$/, '');
+
+  var canvas = document.getElementById('sellSigPad');
+  var ctx = canvas.getContext('2d');
+  var sigStatus = document.getElementById('sellSigStatus');
+  var hasDrawn = false;
+  var drawing = false;
+  var sigDataUrl = '';
+
+  function resize() {
+    var ratio = window.devicePixelRatio || 1;
+    var rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+    ctx.scale(ratio, ratio);
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#1f3049';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function pos(e) {
+    var rect = canvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+  canvas.addEventListener('pointerdown', function (e) {
+    drawing = true;
+    var p = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!drawing) return;
+    var p = pos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    if (!hasDrawn) {
+      hasDrawn = true;
+      sigStatus.textContent = 'Handtekening vastgelegd';
+    }
+  });
+  window.addEventListener('pointerup', function () {
+    if (!drawing) return;
+    drawing = false;
+    sigDataUrl = hasDrawn ? canvas.toDataURL('image/png') : '';
+  });
+  document.getElementById('sellSigClear').addEventListener('click', function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasDrawn = false;
+    sigDataUrl = '';
+    sigStatus.textContent = 'Nog niet ondertekend';
+    sigStatus.style.color = '';
+  });
+
+  var form = document.getElementById('sellDeclarationForm');
+  var msg = form.querySelector('[data-sell-msg]');
+  var submitBtn = form.querySelector('[data-sell-submit]');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    if (!hasDrawn) {
+      sigStatus.textContent = 'Zet hierboven je handtekening voordat je verstuurt';
+      sigStatus.style.color = 'var(--coral-ink)';
+      canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    var fd = new FormData(form);
+    var payload = {
+      voornaam: fd.get('voornaam'),
+      achternaam: fd.get('achternaam'),
+      email: fd.get('email'),
+      adres: fd.get('adres'),
+      postcode: fd.get('postcode'),
+      woonplaats: fd.get('woonplaats'),
+      datumVerkoop: fd.get('datumVerkoop'),
+      product: fd.get('product'),
+      bedrag: fd.get('bedrag'),
+      verklaringEigenaar: !!fd.get('verklaringEigenaar'),
+      verklaringAbonnement: !!fd.get('verklaringAbonnement'),
+      verklaringThuiskopie: !!fd.get('verklaringThuiskopie'),
+      handtekening: sigDataUrl,
+    };
+
+    submitBtn.disabled = true;
+    msg.hidden = true;
+
+    fetch(backend + '/api/inkoopverklaring/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (res) {
+        if (!res.ok) {
+          msg.hidden = false;
+          msg.textContent = (res.data && res.data.error) || 'Er ging iets mis. Probeer het later opnieuw.';
+          msg.style.color = 'var(--coral-ink)';
+          submitBtn.disabled = false;
+          return;
+        }
+        form.innerHTML =
+          '<div class="orderDone" style="padding:30px 0">' +
+          '<div class="checkIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>' +
+          '<h2 style="font-size:22px">Aanmelding ontvangen!</h2>' +
+          '<p>Bedankt voor je inkoopverklaring. We nemen binnen 24 uur contact met je op om de verkoop af te ronden.</p>' +
+          '</div>';
+      })
+      .catch(function () {
+        msg.hidden = false;
+        msg.textContent = 'Er ging iets mis. Controleer je internetverbinding en probeer het opnieuw.';
+        msg.style.color = 'var(--coral-ink)';
+        submitBtn.disabled = false;
+      });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Verkoop-aanmelden formulier",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "subtext", "label": "Subtekst" }
+  ],
+  "presets": [{ "name": "Verkoop-aanmelden formulier" }]
+}
+{% endschema %}

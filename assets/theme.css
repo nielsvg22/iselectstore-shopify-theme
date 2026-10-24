@@ -387,6 +387,25 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .payOption input{accent-color:var(--coral);width:16px;height:16px}
 .payOption:has(input:checked){border-color:var(--coral);background:#fdeceb}
 
+.formRow textarea,.formRow select{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;color:var(--ink);background:#fff}
+.formRow select:focus,.formRow textarea:focus{outline:none;border-color:var(--coral)}
+.formHint{margin:6px 0 0;font-size:12px;color:var(--muted)}
+.declareList{display:flex;flex-direction:column;gap:12px}
+.declareItem{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.declareItem:has(input:checked){border-color:var(--coral);background:#fdeceb}
+.declareItem input{accent-color:var(--coral);width:17px;height:17px;flex:none;margin-top:2px}
+.declareItem span{font-size:13px;line-height:1.5;color:var(--ink)}
+.sigPad{border:1.5px dashed var(--line);border-radius:14px;background:#fff;touch-action:none;cursor:crosshair;width:100%;max-width:340px;height:110px;display:block}
+.sigRow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sigClear{background:none;border:0;color:var(--coral);font-weight:600;font-size:13px;cursor:pointer;padding:0}
+.sigEmpty{font-size:12px;color:var(--muted)}
+.steps{display:flex;flex-direction:column;gap:14px;margin:0 0 20px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.stepNum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+.step b{display:block;color:var(--navy);font-size:13.5px;margin-bottom:2px}
+.sellForm .newsletterMsg{margin:14px 0 0;font-size:13px}
+
 .miniCartItem{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
 .miniCartItem img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:none;background:#fff}
 .miniCartItem .info{flex:1;color:var(--navy);font-weight:600}
