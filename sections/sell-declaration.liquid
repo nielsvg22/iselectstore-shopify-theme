@@ -13,12 +13,31 @@
 
 {% assign sell_backend = settings.stock_notify_backend_url | default: 'https://ucwekluofewm5m92pdptoxbh.85.190.105.138.sslip.io' %}
 
-<section><div class="wrap" style="padding-top:28px;padding-bottom:0">
+{% comment %}
+  Compacter op desktop: deze inkoopverklaring heeft veel velden, dus de
+  ruime checkout-stijl (die ook de echte winkelwagen/afrekenen gebruikt)
+  geeft hier te veel lucht. Scoped onder #sellDeclarationSection zodat
+  cartLayout/checkoutBlock/formGrid elders ongemoeid blijven.
+{% endcomment %}
+<style>
+  @media (min-width: 769px) {
+    #sellDeclarationSection .cartLayout { gap: 28px; }
+    #sellDeclarationSection .checkoutBlock { margin-bottom: 18px; }
+    #sellDeclarationSection .checkoutBlock h3 { margin: 0 0 10px; }
+    #sellDeclarationSection .formRow, #sellDeclarationSection .formGrid { gap: 10px; }
+    #sellDeclarationSection .formRow input, #sellDeclarationSection .formGrid input { padding: 10px 14px; }
+    #sellDeclarationSection .declareList { gap: 8px; }
+    #sellDeclarationSection .declareItem { padding: 10px 14px; }
+    #sellDeclarationSection .cartSummary { padding: 20px; }
+  }
+</style>
+
+<section><div class="wrap" style="padding-top:20px;padding-bottom:0">
   <p style="margin:0 0 2px;font-weight:700;color:var(--navy);font-size:15px">iSelectStore</p>
   <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.5">Oude Apeldoornseweg 45-067<br>7333 NR Apeldoorn</p>
 </div></section>
 
-<section><div class="wrap reveal">
+<section id="sellDeclarationSection"><div class="wrap reveal" style="padding-top:16px">
   <div class="cartLayout">
     <div>
       <form class="sellForm" id="sellDeclarationForm" data-sell-form data-backend="{{ sell_backend | escape }}" novalidate>
