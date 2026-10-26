@@ -230,7 +230,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .newsletter b{color:var(--navy);font-size:15px;display:block;margin-bottom:4px}
 .newsletter p{color:var(--muted);font-size:13px;margin:0}
 .newsletterForm{display:flex;flex-wrap:wrap;gap:10px}
-.newsletterForm input,.newsletterForm select{padding:12px 16px;border:1.5px solid var(--line);border-radius:980px;font-family:inherit;font-size:16px;color:var(--ink);background:#fff;flex:1 1 150px;min-width:0;max-width:100%}
+.newsletterForm input,.newsletterForm select{padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;color:var(--ink);background:#fff;flex:1 1 150px;min-width:0;max-width:100%}
 .newsletterForm select{padding-right:48px}
 .newsletterForm input{flex-basis:220px}
 .newsletterForm input:focus,.newsletterForm select:focus{outline:none;border-color:var(--coral)}
