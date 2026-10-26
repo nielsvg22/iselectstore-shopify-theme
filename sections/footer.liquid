@@ -106,6 +106,7 @@
       var submitLabel = {{ 'footer.newsletter.cta' | t | json }};
       var thanksText = {{ 'footer.newsletter.thanks' | t | json }};
       var modelLoadingText = {{ 'footer.newsletter.model_loading' | t | json }};
+      var modelErrorText = {{ 'footer.newsletter.model_error' | t | json }};
       var modelPlaceholder = {{ 'footer.newsletter.model_placeholder' | t | json }};
       var genericError = {{ 'inventory_notify.errors.generic' | t | json }};
 
@@ -114,31 +115,52 @@
         return (code && strings[code]) || null;
       }
 
-      fetch(backend.replace(/\/$/, '') + '/api/inventory/models')
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (!data || data.ok !== true || !Array.isArray(data.models) || !data.models.length) throw new Error('empty');
-          var groups = {};
-          var order = [];
-          data.models.forEach(function (pair) {
-            if (!groups[pair.productType]) { groups[pair.productType] = []; order.push(pair.productType); }
-            groups[pair.productType].push(pair.model);
-          });
-          var html = '<option value="">' + modelPlaceholder + '</option>';
-          order.forEach(function (type) {
-            html += '<optgroup label="' + type.replace(/"/g, '&quot;') + '">';
-            groups[type].forEach(function (model) {
-              var safe = model.replace(/"/g, '&quot;');
-              html += '<option value="' + safe + '" data-type="' + type.replace(/"/g, '&quot;') + '">' + safe + '</option>';
+      function loadModels(attemptsLeft) {
+        fetch(backend.replace(/\/$/, '') + '/api/inventory/models')
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (!data || data.ok !== true || !Array.isArray(data.models) || !data.models.length) throw new Error('empty');
+            var groups = {};
+            var order = [];
+            data.models.forEach(function (pair) {
+              if (!groups[pair.productType]) { groups[pair.productType] = []; order.push(pair.productType); }
+              groups[pair.productType].push(pair.model);
             });
-            html += '</optgroup>';
+            var html = '<option value="">' + modelPlaceholder + '</option>';
+            order.forEach(function (type) {
+              html += '<optgroup label="' + type.replace(/"/g, '&quot;') + '">';
+              groups[type].forEach(function (model) {
+                var safe = model.replace(/"/g, '&quot;');
+                html += '<option value="' + safe + '" data-type="' + type.replace(/"/g, '&quot;') + '">' + safe + '</option>';
+              });
+              html += '</optgroup>';
+            });
+            modelSelect.innerHTML = html;
+            modelSelect.disabled = false;
+          })
+          .catch(function () {
+            // A transient network hiccup shouldn't permanently strand the
+            // visitor on "Modellen laden…" — retry a couple of times, then
+            // fall back to a clickable retry instead of a dead-looking state.
+            if (attemptsLeft > 0) {
+              setTimeout(function () { loadModels(attemptsLeft - 1); }, 1500);
+              return;
+            }
+            modelSelect.innerHTML = '<option value="">' + modelErrorText + '</option>';
+            modelSelect.disabled = false;
+            modelSelect.dataset.retry = '1';
           });
-          modelSelect.innerHTML = html;
-          modelSelect.disabled = false;
-        })
-        .catch(function () {
+      }
+      loadModels(2);
+
+      modelSelect.addEventListener('mousedown', function () {
+        if (modelSelect.dataset.retry === '1') {
+          delete modelSelect.dataset.retry;
+          modelSelect.disabled = true;
           modelSelect.innerHTML = '<option value="">' + modelLoadingText + '</option>';
-        });
+          loadModels(2);
+        }
+      });
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();

@@ -80,6 +80,7 @@
       "subtext": "Pick a model and storage — we'll let you know as soon as it's back in stock.",
       "model_placeholder": "Choose a model",
       "model_loading": "Loading models…",
+      "model_error": "Couldn't load models — tap to retry",
       "storage_placeholder": "Choose storage",
       "placeholder": "your@email.com",
       "cta": "Sign up →",
