@@ -1,4 +1,4 @@
-<section class="shopHero"><div class="wrap">
+<section class="shopHero sellHero"><div class="wrap">
   <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'general.breadcrumb_home' | t }}</a><span>/</span><span style="color:#fff">Verkoop aanmelden</span></div>
   <p class="eyebrow">Inkoopverklaring</p>
   <h1>{{ section.settings.heading | default: 'Verkoop je toestel aan ons' }}</h1>
@@ -20,24 +20,31 @@
   cartLayout/checkoutBlock/formGrid elders ongemoeid blijven.
 {% endcomment %}
 <style>
+  .sellHero { padding: 22px 0 !important; }
+  .sellHero .breadcrumb { margin-bottom: 8px; }
+  .sellHero h1 { font-size: clamp(22px, 3.2vw, 30px); margin: 0 0 4px; }
+  .sellHero p { font-size: 14px; }
+
   @media (min-width: 769px) {
     #sellDeclarationSection .cartLayout { gap: 28px; }
-    #sellDeclarationSection .checkoutBlock { margin-bottom: 18px; }
-    #sellDeclarationSection .checkoutBlock h3 { margin: 0 0 10px; }
-    #sellDeclarationSection .formRow, #sellDeclarationSection .formGrid { gap: 10px; }
-    #sellDeclarationSection .formRow input, #sellDeclarationSection .formGrid input { padding: 10px 14px; }
-    #sellDeclarationSection .declareList { gap: 8px; }
-    #sellDeclarationSection .declareItem { padding: 10px 14px; }
-    #sellDeclarationSection .cartSummary { padding: 20px; }
+    #sellDeclarationSection .checkoutBlock { margin-bottom: 14px; }
+    #sellDeclarationSection .checkoutBlock h3 { margin: 0 0 8px; }
+    #sellDeclarationSection .formRow, #sellDeclarationSection .formGrid { gap: 8px; }
+    #sellDeclarationSection .formRow input, #sellDeclarationSection .formGrid input { padding: 9px 14px; }
+    #sellDeclarationSection .declareList { gap: 6px; }
+    #sellDeclarationSection .declareItem { padding: 8px 14px; }
+    #sellDeclarationSection .declareItem span { line-height: 1.35; }
+    #sellDeclarationSection .cartSummary { padding: 18px; }
+    #sellDeclarationSection .sigPad { height: 90px; }
   }
 </style>
 
-<section><div class="wrap" style="padding-top:20px;padding-bottom:0">
+<section style="padding:14px 0 0"><div class="wrap">
   <p style="margin:0 0 2px;font-weight:700;color:var(--navy);font-size:15px">iSelectStore</p>
   <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.5">Oude Apeldoornseweg 45-067<br>7333 NR Apeldoorn</p>
 </div></section>
 
-<section id="sellDeclarationSection"><div class="wrap reveal" style="padding-top:16px">
+<section id="sellDeclarationSection" style="padding:12px 0 36px"><div class="wrap reveal">
   <div class="cartLayout">
     <div>
       <form class="sellForm" id="sellDeclarationForm" data-sell-form data-backend="{{ sell_backend | escape }}" novalidate>
