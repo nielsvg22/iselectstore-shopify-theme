@@ -109,7 +109,7 @@
         "type": "text",
         "id": "stock_notify_backend_url",
         "label": "Backend app URL (voorraadmeldingen)",
-        "default": "https://iselectstore-marktplaats-app.vercel.app"
+        "default": "https://ucwekluofewm5m92pdptoxbh.85.190.105.138.sslip.io"
       }
     ]
   },
