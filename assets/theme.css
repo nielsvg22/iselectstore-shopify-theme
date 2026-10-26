@@ -250,10 +250,10 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 
 @media(max-width:900px){ .footerBrand{grid-column:1/-1} }
 @media(max-width:640px){
- .newsletter{flex-direction:column;align-items:stretch;text-align:center;flex-wrap:nowrap}
- .newsletterForm{flex-direction:column}
- .newsletterForm input,.newsletterForm select{min-width:0}
- .newsletterForm .btn{width:100%;padding-inline:26px 28px}
+ .newsletter{flex-direction:column;align-items:stretch;text-align:center;flex-wrap:nowrap;padding:22px 22px;gap:14px}
+ .newsletterForm{flex-direction:column;gap:8px}
+ .newsletterForm input,.newsletterForm select{min-width:0;padding:11px 14px}
+ .newsletterForm .btn{width:100%;padding-inline:26px 28px;padding-block:12px}
  .freshStockViewAll{width:100%;text-align:center}
  .freshStockInfo{padding-right:0}
  .freshStockArrow{display:none}
