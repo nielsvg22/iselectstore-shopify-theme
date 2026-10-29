@@ -82,17 +82,22 @@ function unlockBodyScroll() {
 var burger = document.getElementById('burger');
 var mnav = document.getElementById('mnav');
 if (burger && mnav) {
+  var mnavOverlay = document.getElementById('mnavOverlay');
+  var mnavClose = document.getElementById('mnavClose');
+  var closeMnav = function () {
+    mnav.classList.remove('open');
+    burger.classList.remove('open');
+    unlockBodyScroll();
+  };
   burger.addEventListener('click', function () {
     var open = mnav.classList.toggle('open');
     burger.classList.toggle('open', open);
     if (open) lockBodyScroll(); else unlockBodyScroll();
   });
+  if (mnavOverlay) mnavOverlay.addEventListener('click', closeMnav);
+  if (mnavClose) mnavClose.addEventListener('click', closeMnav);
   mnav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      mnav.classList.remove('open');
-      burger.classList.remove('open');
-      unlockBodyScroll();
-    });
+    a.addEventListener('click', closeMnav);
   });
 }
 

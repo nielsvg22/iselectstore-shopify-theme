@@ -40,18 +40,26 @@
   <div class="topPair"><span>{{ 'header.top.warranty' | t }}</span></div>
 </div></div>
 
-<nav class="mnav" id="mnav">
-  <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
-  <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
-  {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
-  {% if pages['over-ons'] %}<a href="{{ pages['over-ons'].url }}">{{ 'header.nav.our_story' | t }}</a>{% endif %}
-  {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
-  <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
-  {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
-  <a href="{{ portal_url | escape }}">{{ 'header.nav.account' | t }}</a>
-  {% if shop.enabled_locales.size > 1 %}<a href="#language-selector">{{ 'language_selector.label' | t }}</a>{% endif %}
-  <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.mobile_cta' | t }}</a>
-</nav>
+<div class="mnav" id="mnav">
+  <div class="mnavOverlay" id="mnavOverlay"></div>
+  <div class="mnavPanel">
+    <button type="button" class="mnavClose" id="mnavClose" aria-label="{{ 'general.search.close_aria' | t }}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+    </button>
+    <nav class="mnavLinks">
+      <a href="{{ routes.root_url }}">{{ 'header.nav.home' | t }}</a>
+      <a href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.nav.stock' | t }}</a>
+      {% if pages['originele-iphone'] %}<a href="{{ pages['originele-iphone'].url }}">{{ 'header.nav.original_iphone' | t }}</a>{% endif %}
+      {% if pages['over-ons'] %}<a href="{{ pages['over-ons'].url }}">{{ 'header.nav.our_story' | t }}</a>{% endif %}
+      {% if pages.faq %}<a href="{{ pages.faq.url }}">{{ 'header.nav.faq' | t }}</a>{% endif %}
+      <a class="js-tradein-trigger" href="#">{{ 'header.nav.trade_in' | t }}</a>
+      {% if pages.contact %}<a href="{{ pages.contact.url }}">{{ 'header.nav.contact' | t }}</a>{% endif %}
+      <a href="{{ portal_url | escape }}">{{ 'header.nav.account' | t }}</a>
+      {% if shop.enabled_locales.size > 1 %}<a href="#language-selector">{{ 'language_selector.label' | t }}</a>{% endif %}
+      <a class="primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'header.mobile_cta' | t }}</a>
+    </nav>
+  </div>
+</div>
 
 <form action="{{ routes.search_url }}" method="get" role="search" class="tiOverlay" id="searchOverlay">
   <div class="tiModal" style="max-width:560px">
