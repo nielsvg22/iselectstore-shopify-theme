@@ -48,7 +48,7 @@ header.scrolled{box-shadow:0 1px 0 rgba(31,48,73,.06),0 8px 24px -12px rgba(31,4
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-.mnav{position:fixed;inset:0;z-index:55;visibility:hidden;transition:visibility 0s .38s}
+.mnav{position:fixed;inset:0;z-index:65;visibility:hidden;transition:visibility 0s .38s}
 .mnav.open{visibility:visible;transition:visibility 0s}
 .mnavOverlay{position:absolute;inset:0;background:rgba(15,24,35,0);transition:background .32s var(--ease);pointer-events:none}
 .mnav.open .mnavOverlay{background:rgba(15,24,35,.4);pointer-events:auto}
