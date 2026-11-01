@@ -818,5 +818,14 @@
       "2": "Unique photos per individual device",
       "3": "Battery health always visible before you buy"
     }
+  },
+  "blog": {
+    "eyebrow": "News & tips",
+    "empty_title": "No articles yet",
+    "empty_text": "Our articles about refurbished devices, tips and news will appear here soon.",
+    "read_more": "Read more",
+    "previous_article": "Previous article",
+    "next_article": "Next article",
+    "back_to_blog": "Back to blog"
   }
 }

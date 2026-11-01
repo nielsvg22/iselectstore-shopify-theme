@@ -1,0 +1,37 @@
+<section class="shopHero collectionHero"><div class="wrap">
+  <div class="breadcrumb">
+    <a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span aria-hidden="true">/</span>
+    <a href="{{ blog.url }}">{{ blog.title | escape }}</a><span aria-hidden="true">/</span>
+    <span>{{ article.title | escape }}</span>
+  </div>
+  <p class="eyebrow">{{ article.published_at | date: '%-d %B %Y' }}{% if article.author != blank %} — {{ article.author }}{% endif %}</p>
+  <h1>{{ article.title | escape }}</h1>
+</div></section>
+
+<section class="collectionListing"><div class="wrap">
+  <article class="articleBody">
+    {% if article.image %}
+      <img class="articleImg" src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | default: article.title | escape }}" width="1200" height="{{ 1200 | divided_by: article.image.aspect_ratio }}">
+    {% endif %}
+    <div class="articleContent">
+      {{ article.content }}
+    </div>
+    {% if article.tags.size > 0 %}
+      <div class="articleTags">
+        {% for tag in article.tags %}<span class="articleTag">{{ tag }}</span>{% endfor %}
+      </div>
+    {% endif %}
+  </article>
+  <div class="articleNav">
+    {% if blog.previous_article %}<a href="{{ blog.previous_article }}">← {{ 'blog.previous_article' | t }}</a>{% endif %}
+    <a href="{{ blog.url }}">{{ 'blog.back_to_blog' | t }}</a>
+    {% if blog.next_article %}<a href="{{ blog.next_article }}">{{ 'blog.next_article' | t }} →</a>{% endif %}
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Artikel",
+  "settings": []
+}
+{% endschema %}

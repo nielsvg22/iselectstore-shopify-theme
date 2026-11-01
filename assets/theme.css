@@ -146,6 +146,31 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 .card img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:10px}
 .badge{position:absolute;top:26px;left:26px;z-index:2;display:inline-flex;align-items:center;background:var(--coral);color:#fff;padding:5px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.01em;width:fit-content;box-shadow:0 8px 20px -8px rgba(249,133,139,.6)}
 .card h3{font-size:16.5px;line-height:1.3;margin:14px 0 4px;font-weight:600;letter-spacing:-.01em;color:var(--navy)}
+
+.blogGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.blogCard{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;color:inherit}
+.blogCard:hover{transform:translateY(-6px);box-shadow:0 26px 44px -22px rgba(31,48,73,.24);border-color:transparent}
+.blogCardImg{aspect-ratio:16/9;background:var(--soft);overflow:hidden}
+.blogCardImg img{width:100%;height:100%;object-fit:cover;display:block}
+.blogCardBody{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
+.blogCardDate{font-size:12px;color:var(--muted);margin:0;text-transform:uppercase;letter-spacing:.02em}
+.blogCardBody h3{font-size:18px;line-height:1.3;margin:0;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
+.blogCardExcerpt{font-size:14px;line-height:1.5;color:var(--muted);margin:0}
+.blogCardLink{font-size:13px;font-weight:700;color:var(--coral-ink);margin-top:4px}
+
+.articleBody{max-width:760px;margin:0 auto 32px}
+.articleImg{width:100%;border-radius:22px;margin-bottom:32px;object-fit:cover;max-height:460px}
+.articleContent{font-size:16px;line-height:1.75;color:var(--ink)}
+.articleContent h2{color:var(--navy);font-size:24px;margin:36px 0 14px}
+.articleContent h3{color:var(--navy);font-size:19px;margin:28px 0 10px}
+.articleContent p{margin:0 0 18px}
+.articleContent img{max-width:100%;border-radius:16px;margin:20px 0}
+.articleContent a{color:var(--coral-ink);text-decoration:underline}
+.articleTags{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.articleTag{background:var(--soft);color:var(--navy);font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px}
+.articleNav{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;font-weight:600;color:var(--navy)}
+.articleNav a:hover{color:var(--coral-ink)}
+@media(max-width:640px){.articleNav{flex-direction:column;gap:10px}}
 .meta{color:var(--muted);font-size:12.5px}
 .price{display:flex;gap:9px;align-items:baseline;margin:11px 0 14px}
 .price b{font-size:22px;font-weight:700;letter-spacing:-.01em;color:var(--navy)}

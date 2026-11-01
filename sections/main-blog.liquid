@@ -1,0 +1,51 @@
+<section class="shopHero collectionHero"><div class="wrap">
+  <div class="breadcrumb"><a href="{{ routes.root_url }}">{{ 'collection.breadcrumb_home' | t }}</a><span aria-hidden="true">/</span><span>{{ blog.title | escape }}</span></div>
+  <p class="eyebrow">{{ 'blog.eyebrow' | t }}</p>
+  <h1>{{ blog.title | escape }}</h1>
+</div></section>
+
+{% paginate blog.articles by 12 %}
+<section class="collectionListing"><div class="wrap">
+  {% if blog.articles.size == 0 %}
+    <div class="noResults"><h2>{{ 'blog.empty_title' | t }}</h2><p>{{ 'blog.empty_text' | t }}</p></div>
+  {% else %}
+    <div class="blogGrid">
+      {% for article in blog.articles %}
+        <a class="blogCard" href="{{ article.url }}">
+          <div class="blogCardImg">
+            {% if article.image %}
+              <img src="{{ article.image | image_url: width: 640 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy" width="640" height="{{ 640 | divided_by: article.image.aspect_ratio }}">
+            {% else %}
+              {% render 'brand-logo' %}
+            {% endif %}
+          </div>
+          <div class="blogCardBody">
+            <p class="blogCardDate">{{ article.published_at | date: '%-d %B %Y' }}</p>
+            <h3>{{ article.title | escape }}</h3>
+            {% if article.excerpt != blank %}
+              <p class="blogCardExcerpt">{{ article.excerpt | strip_html | truncate: 120 }}</p>
+            {% else %}
+              <p class="blogCardExcerpt">{{ article.content | strip_html | truncate: 120 }}</p>
+            {% endif %}
+            <span class="blogCardLink">{{ 'blog.read_more' | t }} →</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if paginate.pages > 1 %}
+    <nav class="collectionPagination" aria-label="{{ 'collection.stock_order.pagination' | t }}">
+      {% if paginate.previous %}<a href="{{ paginate.previous.url }}" aria-label="{{ 'collection.previous_page' | t }}">←</a>{% endif %}
+      {% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% else %}<span aria-current="page">{{ part.title }}</span>{% endif %}{% endfor %}
+      {% if paginate.next %}<a href="{{ paginate.next.url }}" aria-label="{{ 'collection.next_page' | t }}">→</a>{% endif %}
+    </nav>
+  {% endif %}
+</div></section>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

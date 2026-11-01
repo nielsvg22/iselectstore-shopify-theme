@@ -818,5 +818,14 @@
       "2": "Unieke foto's per individueel toestel",
       "3": "Batterijconditie altijd zichtbaar vóór aankoop"
     }
+  },
+  "blog": {
+    "eyebrow": "Nieuws & tips",
+    "empty_title": "Nog geen artikelen",
+    "empty_text": "Hier verschijnen binnenkort onze artikelen over refurbished toestellen, tips en nieuws.",
+    "read_more": "Lees meer",
+    "previous_article": "Vorig artikel",
+    "next_article": "Volgend artikel",
+    "back_to_blog": "Terug naar blog"
   }
 }
