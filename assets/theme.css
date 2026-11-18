@@ -940,7 +940,7 @@ a.stProofTitle:hover{color:var(--coral)}
 .stHomeCtaBtn{margin-top:28px;background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 12px 26px -14px rgba(31,48,73,.55)}
 .stHomeCtaBtn:hover{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 16px 32px -14px rgba(249,133,139,.6)}
 
-.stHowWeWorkSection{padding-top:8px}
+.stHowWeWorkSection{padding-top:40px}
 .stHowWeWork{display:flex;align-items:center;gap:clamp(32px,5vw,56px);flex-wrap:wrap}
 .stHowWeWorkMedia{position:relative;flex:1 1 480px;min-width:300px}
 .stHowWeWorkMedia>*{width:100%;max-width:640px;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -26px rgba(31,48,73,.4);background:#000;display:block}
