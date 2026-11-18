@@ -947,7 +947,8 @@ a.stProofTitle:hover{color:var(--coral)}
 .stHowWeWorkPlay{position:relative;border:0;padding:0;cursor:pointer;background:#000}
 .stHowWeWorkPlay img{display:block;width:100%;height:auto}
 .stHowWeWorkPlayIcon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(18,33,63,.1)}
-.stHowWeWorkPlayIcon svg{width:30px;height:30px;color:var(--navy);background:#fff;border-radius:50%;padding:22px;box-shadow:0 12px 30px -14px rgba(0,0,0,.4)}
+.stHowWeWorkPlayCircle{display:flex;align-items:center;justify-content:center;width:74px;height:74px;border-radius:50%;background:#fff;box-shadow:0 12px 30px -14px rgba(0,0,0,.4)}
+.stHowWeWorkPlayCircle svg{width:28px;height:28px;color:var(--navy)}
 #howWeWorkVideo{aspect-ratio:16/9;object-fit:contain}
 .stHowWeWorkVideoHidden{display:none!important}
 .stHowWeWorkCopy{flex:1 1 320px;min-width:280px}
