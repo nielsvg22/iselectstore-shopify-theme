@@ -259,16 +259,21 @@ document.querySelectorAll('.accHead').forEach(function (h) {
   });
 });
 
-// Homepage "Zie hoe wij werken" — lazy video (src only set on click)
+// Homepage "Zie hoe wij werken" — autoplay (muted) + geluid-toggle
 (function () {
-  var playBtn = document.getElementById('howWeWorkPlay');
   var video = document.getElementById('howWeWorkVideo');
-  if (!playBtn || !video) return;
-  playBtn.addEventListener('click', function () {
-    if (!video.src) video.src = video.dataset.src;
-    playBtn.style.display = 'none';
-    video.classList.remove('stHowWeWorkVideoHidden');
-    video.play().catch(function () {});
+  var soundBtn = document.getElementById('howWeWorkSound');
+  if (!video || !soundBtn) return;
+  // Autoplay met geluid wordt door browsers altijd geweigerd — expliciet
+  // opnieuw proberen af te spelen voor browsers die de autoplay-attribuut
+  // soms negeren zolang muted niet ook via JS gezet is.
+  video.muted = true;
+  video.play().catch(function () {});
+
+  soundBtn.addEventListener('click', function () {
+    video.muted = !video.muted;
+    soundBtn.classList.toggle('isUnmuted', !video.muted);
+    soundBtn.setAttribute('aria-pressed', String(!video.muted));
   });
 })();
 

@@ -1,9 +1,10 @@
 {% comment %}
-  "Zie hoe wij werken" — homepage-sectie met de bedrijfsvideo, lazy-loaded
-  net als de video-miniatuur in de productgalerij (sections/main-product.liquid):
-  alleen de posterafbeelding laadt mee met de pagina, het videobestand pas
-  bij klik op de afspeelknop. Zichtbaar op zowel mobiel als desktop (in
-  tegenstelling tot stHomeStoryMedia, die op mobiel verborgen wordt).
+  "Zie hoe wij werken" — homepage-sectie met de bedrijfsvideo. Speelt
+  automatisch af zodra de pagina laadt (gemuted — browsers staan autoplay
+  met geluid nooit toe), met een knop om geluid aan te zetten. Bewust
+  gekozen door de klant, ook al laadt het videobestand hierdoor altijd mee
+  met de pagina (in tegenstelling tot de klik-om-te-laden video-miniatuur
+  in de productgalerij, sections/main-product.liquid, die wel lazy blijft).
 {% endcomment %}
 
 {% if section.settings.video %}
@@ -11,15 +12,13 @@
   <section class="stSection stHowWeWorkSection"><div class="wrap">
     <div class="stHowWeWork reveal">
       <div class="stHowWeWorkMedia">
-        <button type="button" class="stHowWeWorkPlay" id="howWeWorkPlay" aria-label="{{ 'home_how_we_work.play_aria' | t }}">
-          <img src="{{ poster_url | image_url: width: 900 }}" width="900" height="{{ 900 | divided_by: poster_url.aspect_ratio | default: 506 }}" alt="{{ 'home_how_we_work.play_aria' | t }}" loading="lazy">
-          <span class="stHowWeWorkPlayIcon" aria-hidden="true">
-            <span class="stHowWeWorkPlayCircle">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-          </span>
+        <video id="howWeWorkVideo" autoplay muted loop playsinline preload="auto" poster="{{ poster_url | image_url: width: 900 }}">
+          <source src="{{ section.settings.video.sources.last.url }}" type="video/mp4">
+        </video>
+        <button type="button" class="stHowWeWorkSound" id="howWeWorkSound" aria-label="{{ 'home_how_we_work.sound_on_aria' | t }}" aria-pressed="false">
+          <svg class="iconMuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <svg class="iconSound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5.5a9 9 0 0 1 0 13"/></svg>
         </button>
-        <video id="howWeWorkVideo" class="stHowWeWorkVideoHidden" controls playsinline preload="none" data-src="{{ section.settings.video.sources.last.url }}"></video>
       </div>
       <div class="stHowWeWorkCopy">
         <span class="stHomeCtaMark" aria-hidden="true">{% render 'icon-mark', size: 26 %}</span>
