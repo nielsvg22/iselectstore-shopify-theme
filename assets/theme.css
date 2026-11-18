@@ -315,6 +315,12 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .thumb img{width:100%;height:100%;object-fit:contain;object-position:center;padding:6px}
 .thumb.active{border-color:var(--coral)}
 .thumb:hover{transform:translateY(-2px)}
+.thumbVideo{position:relative}
+.thumbPlayIcon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(18,33,63,.35);pointer-events:none}
+.thumbPlayIcon svg{width:20px;height:20px;color:#fff}
+#mainVideo{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.mainVideoHidden{display:none!important}
+.mainImgHidden{display:none!important}
 
 .pdpInfo b.brand{color:var(--coral-ink);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px}
 .pdpInfo h1{font-size:clamp(28px,3.4vw,38px);margin:0 0 10px}

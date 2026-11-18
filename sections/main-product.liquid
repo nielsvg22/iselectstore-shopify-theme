@@ -105,18 +105,39 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
         </button>
         <img id="mainImg" src="{{ product.featured_image | image_url: width: 900 }}" data-full="{{ product.featured_image | image_url: width: 1800 }}" width="900" height="900" alt="{{ product.featured_image.alt | default: product.title | escape }}" onerror="this.classList.add('imgBroken')" onload="this.classList.remove('imgBroken')">
+        {% if section.settings.gallery_video %}
+          {% comment %} Geen src hier — theme.js zet die pas bij klik op de video-miniatuur, zodat het videobestand nooit meeladt met de rest van de pagina. {% endcomment %}
+          <video id="mainVideo" class="mainVideoHidden" controls playsinline preload="none"></video>
+        {% endif %}
         <div class="imgFallback" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg>
           <span>{{ 'product_page.image_unavailable' | t }}</span>
         </div>
       </div>
-      {% if product.media.size > 1 %}
+      {% if product.media.size > 1 or section.settings.gallery_video %}
         <div class="thumbs">
           {% for media in product.media %}
             <div class="thumb{% if forloop.first %} active{% endif %}" data-img="{{ media | image_url: width: 900 }}" data-full="{{ media | image_url: width: 1800 }}">
               <img src="{{ media | image_url: width: 200 }}" width="200" height="200" alt="{{ product.title | escape }} ({{ forloop.index }})">
             </div>
           {% endfor %}
+          {% if section.settings.gallery_video %}
+            {% comment %}
+              Zelfde video op elke productpagina (geen per-product veld) — op
+              klant Twan's expliciete verzoek via WhatsApp: "bij elk product"
+              zonder de pagina trager te maken. data-video blijft leeg tot
+              klik (zie theme.js), zodat het grote videobestand nooit
+              meeladt bij het laden van de pagina zelf — alleen de kleine
+              poster-thumbnail (200px) kost iets.
+            {% endcomment %}
+            {% assign gallery_video_poster_url = section.settings.gallery_video_poster | default: section.settings.gallery_video.preview_image %}
+            <div class="thumb thumbVideo" data-video-src="{{ section.settings.gallery_video.sources.last.url }}" aria-label="{{ 'product_page.video_thumb_aria' | t }}">
+              <img src="{{ gallery_video_poster_url | image_url: width: 200 }}" width="200" height="200" alt="{{ 'product_page.video_thumb_aria' | t }}">
+              <span class="thumbPlayIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </div>
+          {% endif %}
         </div>
       {% endif %}
       {% if section.settings.show_real_photos %}
@@ -357,6 +378,9 @@
     { "type": "page", "id": "condition_page", "label": "Conditiepagina" },
     { "type": "checkbox", "id": "show_condition_link", "label": "Link naar conditiepagina tonen", "default": true },
     { "type": "textarea", "id": "condition_text", "label": "Conditie-uitleg (accordeon)" },
+    { "type": "header", "content": "Video in fotogalerij" },
+    { "type": "video", "id": "gallery_video", "label": "Video (laatste miniatuur, op elke productpagina)" },
+    { "type": "image_picker", "id": "gallery_video_poster", "label": "Voorbeeldafbeelding (poster) voor de video-miniatuur" },
     { "type": "header", "content": "Weergave" },
     { "type": "checkbox", "id": "show_general_specs", "label": "Accordeon 'Algemene specificaties' tonen", "default": true },
     { "type": "checkbox", "id": "show_real_photos", "label": "Label 'Echte foto's van dit toestel' tonen", "default": true },

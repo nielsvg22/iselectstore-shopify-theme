@@ -265,7 +265,31 @@ document.querySelectorAll('.thumb').forEach(function (t) {
     document.querySelectorAll('.thumb').forEach(function (x) { x.classList.remove('active'); });
     t.classList.add('active');
     var main = document.getElementById('mainImg');
-    if (main) { main.src = t.dataset.img; main.dataset.full = t.dataset.full; }
+    var video = document.getElementById('mainVideo');
+
+    if (t.classList.contains('thumbVideo')) {
+      // Lazy: the <source> is only created now, on click — the video file
+      // itself is never requested just from loading the product page.
+      if (video) {
+        if (!video.src) {
+          video.src = t.dataset.videoSrc;
+        }
+        video.classList.remove('mainVideoHidden');
+        video.play().catch(function () {});
+      }
+      if (main) main.classList.add('mainImgHidden');
+      return;
+    }
+
+    if (video) {
+      video.pause();
+      video.classList.add('mainVideoHidden');
+    }
+    if (main) {
+      main.classList.remove('mainImgHidden');
+      main.src = t.dataset.img;
+      main.dataset.full = t.dataset.full;
+    }
   });
 });
 
@@ -281,7 +305,7 @@ document.querySelectorAll('.thumb').forEach(function (t) {
   var prevBtn = document.getElementById('lightboxPrev');
   var nextBtn = document.getElementById('lightboxNext');
   var zoomBtn = document.getElementById('galleryZoom');
-  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb'));
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb:not(.thumbVideo)'));
   var images = thumbs.length ? thumbs.map(function (t) { return t.dataset.full; }) : [mainImg.dataset.full];
   var index = 0;
 
