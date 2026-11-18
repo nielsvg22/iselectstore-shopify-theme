@@ -16,7 +16,10 @@
       <a class="btn primary" href="{{ section.settings.shop_collection.url | default: routes.all_products_collection_url }}">{{ 'hero.cta_primary' | t }}</a>
       <a class="btn" href="#categorie">{{ 'hero.cta_secondary' | t }}</a>
     </div>
-    <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: "607" }} {{ 'hero.review_suffix' | t }}</span></div>
+    {% comment %} Valt terug op shop.metafields.custom.rating_average/review_count — automatisch bijgewerkt door lib/webwinkelkeur/sync.ts (dagelijkse cron), zodat dit nooit meer handmatig aangepast hoeft te worden. {% endcomment %}
+    {% assign dyn_rating = shop.metafields.custom.rating_average | append: '/10' %}
+    {% assign dyn_count = shop.metafields.custom.review_count %}
+    <div class="rating"><span class="stars">★★★★★</span><b>{{ section.settings.rating | default: dyn_rating | default: "9,8/10" }}</b><span>{{ section.settings.review_count | default: dyn_count | default: "607" }} {{ 'hero.review_suffix' | t }}</span></div>
   </div>
   {% if section.settings.image %}
     <div class="heroImg heroMobileMedia"><img src="{{ section.settings.image | image_url: width: 900 }}" width="900" height="900" alt="{{ section.settings.image.alt | default: shop.name }}" loading="eager"></div>

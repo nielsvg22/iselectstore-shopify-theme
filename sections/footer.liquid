@@ -212,9 +212,11 @@
     })();
   </script>
 
+  {% assign dyn_rating = shop.metafields.custom.rating_average | append: '/10' %}
+  {% assign dyn_count = shop.metafields.custom.review_count %}
   <div class="footerBadges">
-    <span>★★★★★ {{ section.settings.rating | default: "9,8/10" }} {{ 'footer.badges.reviews_suffix' | t }}</span>
-    <span>{{ section.settings.review_count | default: "607+" }} {{ 'footer.badges.reviews_count_suffix' | t }}</span>
+    <span>★★★★★ {{ section.settings.rating | default: dyn_rating | default: "9,8/10" }} {{ 'footer.badges.reviews_suffix' | t }}</span>
+    <span>{{ section.settings.review_count | default: dyn_count | default: "607+" }} {{ 'footer.badges.reviews_count_suffix' | t }}</span>
     {% if section.settings.kvk %}<span>{{ 'footer.badges.kvk' | t }} {{ section.settings.kvk }}</span>{% endif %}
     {% if section.settings.btw %}<span>{{ 'footer.badges.btw' | t }} {{ section.settings.btw }}</span>{% endif %}
   </div>

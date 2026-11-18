@@ -151,7 +151,9 @@
     <div class="pdpInfo">
       <b class="brand">{{ shop.name | default: 'Apple' }}{% if product.type %} · {{ product.type }}{% endif %}</b>
       <h1>{{ product.title }}</h1>
-      <div class="pdpRating"><span class="stars">★★★★★</span><span>{% if section.settings.rating != blank %}{{ section.settings.rating }}{% else %}{{ 'product_page.rating_default' | t }}{% endif %}</span></div>
+      {% assign reviews_word = 'footer.badges.reviews_count_suffix' | t %}
+      {% assign dyn_rating_full = shop.metafields.custom.rating_average | append: '/10 · ' | append: shop.metafields.custom.review_count | append: ' ' | append: reviews_word %}
+      <div class="pdpRating"><span class="stars">★★★★★</span><span>{% if section.settings.rating != blank %}{{ section.settings.rating }}{% elsif shop.metafields.custom.rating_average != blank %}{{ dyn_rating_full }}{% else %}{{ 'product_page.rating_default' | t }}{% endif %}</span></div>
 
       <div class="pdpPrice">
         <b>{{ current_variant.price | money }}</b>

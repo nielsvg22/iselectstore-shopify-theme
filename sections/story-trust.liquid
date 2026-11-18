@@ -12,11 +12,13 @@
     </div>
   </div>
 
+  {% assign dyn_rating = shop.metafields.custom.rating_average | append: '/10' %}
+  {% assign dyn_count = shop.metafields.custom.review_count %}
   <div class="stTrustCard reveal">
     <div class="stScore">
       <span class="stStars" aria-hidden="true">★★★★★</span>
-      <b>{{ section.settings.rating | default: '9,8/10' }}</b>
-      <span class="stScoreMeta">{{ section.settings.review_count | default: '607' }} {{ reviews_suffix }}</span>
+      <b>{{ section.settings.rating | default: dyn_rating | default: '9,8/10' }}</b>
+      <span class="stScoreMeta">{{ section.settings.review_count | default: dyn_count | default: '607' }} {{ reviews_suffix }}</span>
     </div>
 
     <div class="stProofs">

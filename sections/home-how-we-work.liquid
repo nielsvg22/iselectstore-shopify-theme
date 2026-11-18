@@ -26,9 +26,11 @@
         <h2>{{ section.settings.heading | default: 'home_how_we_work.heading' | t }}</h2>
         <p class="sub">{{ section.settings.text | default: 'home_how_we_work.text' | t }}</p>
         {% if section.settings.show_rating %}
+          {% assign reviews_word = 'footer.badges.reviews_count_suffix' | t %}
+          {% assign dyn_rating_full = shop.metafields.custom.rating_average | append: '/10 · ' | append: shop.metafields.custom.review_count | append: ' WebwinkelKeur-' | append: reviews_word %}
           <div class="stHowWeWorkRating">
             <span class="stars" aria-hidden="true">★★★★★</span>
-            <span>{{ section.settings.rating_text | default: 'home_how_we_work.rating_default' | t }}</span>
+            <span>{% if section.settings.rating_text != blank %}{{ section.settings.rating_text }}{% elsif shop.metafields.custom.rating_average != blank %}{{ dyn_rating_full }}{% else %}{{ 'home_how_we_work.rating_default' | t }}{% endif %}</span>
           </div>
         {% endif %}
       </div>
