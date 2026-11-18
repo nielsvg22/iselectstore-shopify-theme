@@ -299,8 +299,7 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 
 .pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
 .gallery{position:sticky;top:calc(var(--header-h) + 24px)}
-.galleryMain{position:relative;width:100%;border-radius:28px;overflow:hidden;background:var(--soft);border:1px solid var(--line);aspect-ratio:1;max-height:min(82vh,760px)}
-.galleryMain:has(#mainVideo:not(.mainVideoHidden)){aspect-ratio:9/13}
+.galleryMain{position:relative;width:100%;border-radius:28px;overflow:hidden;background:var(--soft);border:1px solid var(--line);aspect-ratio:1;max-height:min(70vh,640px)}
 .galleryMain img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;padding:10px;transition:opacity .3s;cursor:zoom-in}
 .galleryMain img.imgBroken{display:none}
 .galleryMain .imgFallback{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);font-size:13px;text-align:center;padding:24px}
@@ -313,12 +312,13 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .thumbs{display:flex;gap:10px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
 .thumbs::-webkit-scrollbar{display:none}
 .thumb{width:76px;height:76px;border-radius:14px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--soft);flex:none;transition:border-color .2s,transform .2s}
+.thumb.thumbVideo{width:108px;height:108px}
 .thumb img{width:100%;height:100%;object-fit:contain;object-position:center;padding:6px}
 .thumb.active{border-color:var(--coral)}
 .thumb:hover{transform:translateY(-2px)}
 .thumbVideo{position:relative}
 .thumbPlayIcon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(18,33,63,.35);pointer-events:none}
-.thumbPlayIcon svg{width:20px;height:20px;color:#fff}
+.thumbPlayIcon svg{width:26px;height:26px;color:#fff}
 #mainVideo{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 .mainVideoHidden{display:none!important}
 .mainImgHidden{display:none!important}
