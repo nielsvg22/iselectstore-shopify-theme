@@ -259,11 +259,34 @@ document.querySelectorAll('.accHead').forEach(function (h) {
   });
 });
 
+// Video-retargeting: publiceert milestone-events (25/50/75/95%) voor de
+// custom pixels (Meta/Google), zodat er later remarketing-doelgroepen op
+// gebouwd kunnen worden ("mensen die 50%+ van de video keken"). Doet niets
+// zolang er geen custom pixel naar 'video_engaged' luistert — puur voorbereiding.
+function trackVideoEngagement(video, videoName) {
+  if (!video) return;
+  var seen = {};
+  var milestones = [25, 50, 75, 95];
+  video.addEventListener('timeupdate', function () {
+    if (!video.duration) return;
+    var percent = (video.currentTime / video.duration) * 100;
+    milestones.forEach(function (m) {
+      if (percent >= m && !seen[m]) {
+        seen[m] = true;
+        if (window.Shopify && window.Shopify.analytics && typeof window.Shopify.analytics.publish === 'function') {
+          window.Shopify.analytics.publish('video_engaged', { video: videoName, percent: m });
+        }
+      }
+    });
+  });
+}
+
 // Homepage "Zie hoe wij werken" — autoplay (muted) + geluid-toggle
 (function () {
   var video = document.getElementById('howWeWorkVideo');
   var soundBtn = document.getElementById('howWeWorkSound');
   if (!video || !soundBtn) return;
+  trackVideoEngagement(video, 'homepage_how_we_work');
   // Autoplay met geluid wordt door browsers altijd geweigerd — expliciet
   // opnieuw proberen af te spelen voor browsers die de autoplay-attribuut
   // soms negeren zolang muted niet ook via JS gezet is.
@@ -291,6 +314,7 @@ document.querySelectorAll('.thumb').forEach(function (t) {
       if (video) {
         if (!video.src) {
           video.src = t.dataset.videoSrc;
+          trackVideoEngagement(video, 'product_gallery');
         }
         video.classList.remove('mainVideoHidden');
         video.play().catch(function () {});

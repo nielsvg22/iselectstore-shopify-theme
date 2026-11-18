@@ -43,6 +43,12 @@
       if (name === 'product_added_to_cart') fbq('track', 'AddToCart', { content_ids: [data.cartLine?.merchandise?.productVariant?.id], content_type: 'product', value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
       if (name === 'checkout_started') fbq('track', 'InitiateCheckout');
       if (name === 'checkout_completed') fbq('track', 'Purchase', { value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
+
+      // Video-retargeting: custom event per kijk-milestone (25/50/75/95%),
+      // gepubliceerd door assets/theme.js (trackVideoEngagement). Voorbereiding
+      // voor een Meta-doelgroep "VideoView, percent >= 50" — nog niet actief
+      // totdat deze doelgroep handmatig in Meta Ads Manager wordt aangemaakt.
+      if (name === 'video_engaged') fbq('trackCustom', 'VideoView', { content_name: data.video, percent_watched: data.percent });
     });
   })();
 </script>

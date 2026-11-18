@@ -47,6 +47,11 @@
       if (name === 'product_added_to_cart') gtag('event', 'add_to_cart', { value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
       if (name === 'checkout_started') gtag('event', 'begin_checkout');
       if (name === 'checkout_completed') gtag('event', 'purchase', { transaction_id: data.checkout?.order?.id, value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
+
+      // Video-retargeting: voorbereiding voor een Google Ads-segment op basis
+      // van dit event ("video_progress", video_percent >= 50) — nog niet
+      // actief totdat dit segment handmatig in Google Ads wordt aangemaakt.
+      if (name === 'video_engaged') gtag('event', 'video_progress', { video_title: data.video, video_percent: data.percent });
     });
   })();
 </script>
