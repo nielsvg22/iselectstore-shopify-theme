@@ -798,6 +798,13 @@
     "text": "A look behind the scenes: how we select, inspect and transparently present Apple products.",
     "button": "Read our story →"
   },
+  "home_how_we_work": {
+    "eyebrow": "How we work",
+    "heading": "See how we work",
+    "text": "iSelectStore shows how every device is checked and selected before it reaches you.",
+    "play_aria": "Play video — how we work",
+    "rating_default": "9.8/10 · 650 WebwinkelKeur reviews"
+  },
   "fresh_stock": {
     "eyebrow": "Just arrived",
     "heading": "Fresh in stock",

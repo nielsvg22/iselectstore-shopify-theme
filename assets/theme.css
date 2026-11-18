@@ -940,6 +940,22 @@ a.stProofTitle:hover{color:var(--coral)}
 .stHomeCtaBtn{margin-top:28px;background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 12px 26px -14px rgba(31,48,73,.55)}
 .stHomeCtaBtn:hover{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 16px 32px -14px rgba(249,133,139,.6)}
 
+.stHowWeWorkSection{padding-top:8px}
+.stHowWeWork{display:flex;align-items:center;gap:clamp(32px,5vw,56px);flex-wrap:wrap}
+.stHowWeWorkMedia{position:relative;flex:1 1 480px;min-width:300px}
+.stHowWeWorkMedia>*{width:100%;max-width:640px;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -26px rgba(31,48,73,.4);background:#000;display:block}
+.stHowWeWorkPlay{position:relative;border:0;padding:0;cursor:pointer;background:#000}
+.stHowWeWorkPlay img{display:block;width:100%;height:auto}
+.stHowWeWorkPlayIcon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(18,33,63,.1)}
+.stHowWeWorkPlayIcon svg{width:30px;height:30px;color:var(--navy);background:#fff;border-radius:50%;padding:22px;box-shadow:0 12px 30px -14px rgba(0,0,0,.4)}
+#howWeWorkVideo{aspect-ratio:16/9;object-fit:contain}
+.stHowWeWorkVideoHidden{display:none!important}
+.stHowWeWorkCopy{flex:1 1 320px;min-width:280px}
+.stHowWeWorkCopy h2{margin-bottom:12px;font-size:clamp(26px,3.2vw,34px)}
+.stHowWeWorkCopy .sub{font-size:16px;line-height:1.7;max-width:42ch;margin:0}
+.stHowWeWorkRating{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;font-weight:700;color:var(--muted)}
+.stHowWeWorkRating .stars{color:#f5a623}
+
 /* Homepage: bewijsfoto's (echte foto + batterij-screenshot) */
 .proof{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:center}
 .proofMedia{position:relative;aspect-ratio:4/5;max-width:440px}

@@ -259,6 +259,19 @@ document.querySelectorAll('.accHead').forEach(function (h) {
   });
 });
 
+// Homepage "Zie hoe wij werken" — lazy video (src only set on click)
+(function () {
+  var playBtn = document.getElementById('howWeWorkPlay');
+  var video = document.getElementById('howWeWorkVideo');
+  if (!playBtn || !video) return;
+  playBtn.addEventListener('click', function () {
+    if (!video.src) video.src = video.dataset.src;
+    playBtn.style.display = 'none';
+    video.classList.remove('stHowWeWorkVideoHidden');
+    video.play().catch(function () {});
+  });
+})();
+
 // Product gallery thumbnails
 document.querySelectorAll('.thumb').forEach(function (t) {
   t.addEventListener('click', function () {

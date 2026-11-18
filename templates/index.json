@@ -83,6 +83,17 @@
       ],
       "settings": {}
     },
+    "howwework": {
+      "type": "home-how-we-work",
+      "settings": {
+        "video": "shopify://files/videos/Iselectstore High.mp4",
+        "eyebrow": "",
+        "heading": "",
+        "text": "",
+        "show_rating": true,
+        "rating_text": ""
+      }
+    },
     "freshstock": {
       "type": "fresh-stock",
       "disabled": true,
@@ -292,6 +303,7 @@
   "order": [
     "hero",
     "trust",
+    "howwework",
     "freshstock",
     "categories",
     "products",

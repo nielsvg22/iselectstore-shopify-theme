@@ -1,0 +1,52 @@
+{% comment %}
+  "Zie hoe wij werken" — homepage-sectie met de bedrijfsvideo, lazy-loaded
+  net als de video-miniatuur in de productgalerij (sections/main-product.liquid):
+  alleen de posterafbeelding laadt mee met de pagina, het videobestand pas
+  bij klik op de afspeelknop. Zichtbaar op zowel mobiel als desktop (in
+  tegenstelling tot stHomeStoryMedia, die op mobiel verborgen wordt).
+{% endcomment %}
+
+{% if section.settings.video %}
+  {% assign poster_url = section.settings.video_poster | default: section.settings.video.preview_image %}
+  <section class="stSection stHowWeWorkSection"><div class="wrap">
+    <div class="stHowWeWork reveal">
+      <div class="stHowWeWorkMedia">
+        <button type="button" class="stHowWeWorkPlay" id="howWeWorkPlay" aria-label="{{ 'home_how_we_work.play_aria' | t }}">
+          <img src="{{ poster_url | image_url: width: 900 }}" width="900" height="{{ 900 | divided_by: poster_url.aspect_ratio | default: 506 }}" alt="{{ 'home_how_we_work.play_aria' | t }}" loading="lazy">
+          <span class="stHowWeWorkPlayIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
+        <video id="howWeWorkVideo" class="stHowWeWorkVideoHidden" controls playsinline preload="none" data-src="{{ section.settings.video.sources.last.url }}"></video>
+      </div>
+      <div class="stHowWeWorkCopy">
+        <span class="stHomeCtaMark" aria-hidden="true">{% render 'icon-mark', size: 26 %}</span>
+        <p class="eyebrow">{{ section.settings.eyebrow | default: 'home_how_we_work.eyebrow' | t }}</p>
+        <h2>{{ section.settings.heading | default: 'home_how_we_work.heading' | t }}</h2>
+        <p class="sub">{{ section.settings.text | default: 'home_how_we_work.text' | t }}</p>
+        {% if section.settings.show_rating %}
+          <div class="stHowWeWorkRating">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>{{ section.settings.rating_text | default: 'home_how_we_work.rating_default' | t }}</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div></section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Homepage — Hoe wij werken",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video" },
+    { "type": "image_picker", "id": "video_poster", "label": "Voorbeeldafbeelding (poster)", "info": "Leeg gebruikt de preview-afbeelding van de video zelf." },
+    { "type": "text", "id": "eyebrow", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Titel" },
+    { "type": "textarea", "id": "text", "label": "Tekst" },
+    { "type": "checkbox", "id": "show_rating", "label": "WebwinkelKeur-waardering tonen", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Waarderingstekst" }
+  ],
+  "presets": [{ "name": "Homepage — Hoe wij werken" }]
+}
+{% endschema %}
