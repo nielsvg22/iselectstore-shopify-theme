@@ -312,13 +312,12 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .thumbs{display:flex;gap:10px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
 .thumbs::-webkit-scrollbar{display:none}
 .thumb{width:76px;height:76px;border-radius:14px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--soft);flex:none;transition:border-color .2s,transform .2s}
-.thumb.thumbVideo{width:108px;height:108px}
 .thumb img{width:100%;height:100%;object-fit:contain;object-position:center;padding:6px}
 .thumb.active{border-color:var(--coral)}
 .thumb:hover{transform:translateY(-2px)}
 .thumbVideo{position:relative}
 .thumbPlayIcon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(18,33,63,.35);pointer-events:none}
-.thumbPlayIcon svg{width:26px;height:26px;color:#fff}
+.thumbPlayIcon svg{width:20px;height:20px;color:#fff}
 #mainVideo{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 .mainVideoHidden{display:none!important}
 .mainImgHidden{display:none!important}
