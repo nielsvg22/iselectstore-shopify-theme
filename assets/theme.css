@@ -248,6 +248,8 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .footer a:hover{color:#fff}
 .footer a.js-tradein-trigger{cursor:pointer}
 .footerContact{margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
+.footerContactRow{display:flex !important;align-items:flex-start;gap:9px;line-height:1.5 !important;padding:3px 0}
+.footerContactIcon{width:15px;height:15px;flex:none;margin-top:2px;color:rgba(255,255,255,.65)}
 .footerLogo{color:#fff !important;font-size:23px;gap:10px}
 .footerMark{width:26px;height:26px;color:#fff;flex:none}
 .footerTagline{margin-top:14px;color:rgba(255,255,255,.85)}
