@@ -28,12 +28,14 @@
           "shop_collection": "",
           "brand_text": "",
           "whatsapp": "",
-          "phone": "",
-          "address": "",
+          "phone": "+31 6 43295022",
+          "email": "info@bestbuyphone.nl",
+          "address": "Oude Apeldoornseweg 45-067, 7333 NR Apeldoorn (open op afspraak)",
           "rating": "",
           "review_count": "",
-          "kvk": "",
-          "btw": ""
+          "kvk": "84268891",
+          "btw": "NL003937269B13",
+          "iban": "NL79BUNQ2065773790"
         }
       }
     },

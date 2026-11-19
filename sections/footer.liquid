@@ -51,8 +51,9 @@
     <div>
       <h4>{{ 'footer.headings.contact' | t }}</h4>
       <p>{{ section.settings.phone }}</p>
-      <p>{{ shop.email }}</p>
+      <p>{{ section.settings.email | default: shop.email }}</p>
       <p>{{ section.settings.address }}</p>
+      {% if section.settings.iban != blank %}<p>{{ 'footer.badges.iban' | t }} {{ section.settings.iban }}</p>{% endif %}
     </div>
   </div>
 
@@ -253,11 +254,13 @@
     },
     { "type": "text", "id": "whatsapp", "label": "WhatsApp nummer (bv. 31643295022)" },
     { "type": "text", "id": "phone", "label": "Telefoonnummer" },
+    { "type": "text", "id": "email", "label": "E-mailadres", "info": "Leeg gebruikt het standaard shop-e-mailadres." },
     { "type": "text", "id": "address", "label": "Adres" },
     { "type": "text", "id": "rating", "label": "Reviewscore (bv. 9,8/10)" },
     { "type": "text", "id": "review_count", "label": "Aantal reviews (bv. 607+)" },
     { "type": "text", "id": "kvk", "label": "KVK-nummer" },
-    { "type": "text", "id": "btw", "label": "BTW-nummer" }
+    { "type": "text", "id": "btw", "label": "BTW-nummer" },
+    { "type": "text", "id": "iban", "label": "IBAN" }
   ]
 }
 {% endschema %}
