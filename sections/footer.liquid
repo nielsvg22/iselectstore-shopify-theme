@@ -50,10 +50,12 @@
 
     <div>
       <h4>{{ 'footer.headings.contact' | t }}</h4>
-      <p>{{ section.settings.phone }}</p>
-      <p>{{ section.settings.email | default: shop.email }}</p>
-      <p>{{ section.settings.address }}</p>
-      {% if section.settings.iban != blank %}<p>{{ 'footer.badges.iban' | t }} {{ section.settings.iban }}</p>{% endif %}
+      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><span>{{ section.settings.phone }}</span></p>
+      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span>{{ section.settings.email | default: shop.email }}</span></p>
+      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>{{ section.settings.address }}</span></p>
+      {% if section.settings.iban != blank %}
+        <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>{{ 'footer.badges.iban' | t }} {{ section.settings.iban }}</span></p>
+      {% endif %}
     </div>
   </div>
 
@@ -71,8 +73,69 @@
   <div class="newsletter" data-footer-notify data-backend="{{ wa_backend | escape }}">
     <div><b>{{ 'footer.newsletter.title' | t }}</b><p>{{ 'footer.newsletter.subtext' | t }}</p></div>
     <form class="newsletterForm" data-footer-notify-form>
-      <select class="footerNotifySelect" name="model" required aria-label="{{ 'footer.newsletter.model_placeholder' | t }}" data-footer-notify-model disabled>
-        <option value="">{{ 'footer.newsletter.model_loading' | t }}</option>
+      {% comment %}
+        Statische lijst (geen netwerkafhankelijkheid, laadt dus altijd) —
+        wordt op de achtergrond stilletjes bijgewerkt met de live lijst uit
+        /api/inventory/models zodra die beschikbaar is, maar werkt ook
+        prima als dat verzoek faalt.
+      {% endcomment %}
+      <select class="footerNotifySelect" name="model" required aria-label="{{ 'footer.newsletter.model_placeholder' | t }}" data-footer-notify-model>
+        <option value="">{{ 'footer.newsletter.model_placeholder' | t }}</option>
+        <optgroup label="iPhone">
+          <option value="iPhone 13" data-type="iPhone">iPhone 13</option>
+          <option value="iPhone 14" data-type="iPhone">iPhone 14</option>
+          <option value="iPhone 14 plus" data-type="iPhone">iPhone 14 plus</option>
+          <option value="iPhone 14 Pro" data-type="iPhone">iPhone 14 Pro</option>
+          <option value="iPhone 14 Pro Max" data-type="iPhone">iPhone 14 Pro Max</option>
+          <option value="iPhone 15" data-type="iPhone">iPhone 15</option>
+          <option value="iPhone 15 plus" data-type="iPhone">iPhone 15 plus</option>
+          <option value="iPhone 15 Pro" data-type="iPhone">iPhone 15 Pro</option>
+          <option value="iPhone 15 Pro Max" data-type="iPhone">iPhone 15 Pro Max</option>
+          <option value="iPhone 16" data-type="iPhone">iPhone 16</option>
+          <option value="iPhone 16 Plus" data-type="iPhone">iPhone 16 Plus</option>
+          <option value="iPhone 16 Pro" data-type="iPhone">iPhone 16 Pro</option>
+          <option value="iPhone 16 Pro Max" data-type="iPhone">iPhone 16 Pro Max</option>
+          <option value="iPhone 16E" data-type="iPhone">iPhone 16E</option>
+          <option value="iPhone 17" data-type="iPhone">iPhone 17</option>
+          <option value="iPhone 17 Air" data-type="iPhone">iPhone 17 Air</option>
+          <option value="iPhone 17 Pro" data-type="iPhone">iPhone 17 Pro</option>
+          <option value="iPhone 17 Pro Max" data-type="iPhone">iPhone 17 Pro Max</option>
+          <option value="iPhone 17e" data-type="iPhone">iPhone 17e</option>
+          <option value="iPhone Air" data-type="iPhone">iPhone Air</option>
+          <option value="iPhone SE 2022" data-type="iPhone">iPhone SE 2022</option>
+        </optgroup>
+        <optgroup label="iPad">
+          <option value="iPad 9e" data-type="iPad">iPad 9e</option>
+          <option value="iPad 11e" data-type="iPad">iPad 11e</option>
+          <option value="iPad Air" data-type="iPad">iPad Air</option>
+          <option value="iPad Air 4e" data-type="iPad">iPad Air 4e</option>
+          <option value="iPad Air 5e" data-type="iPad">iPad Air 5e</option>
+          <option value="iPad mini" data-type="iPad">iPad mini</option>
+          <option value="iPad mini 7e" data-type="iPad">iPad mini 7e</option>
+          <option value="iPad Pro 11 inch M2" data-type="iPad">iPad Pro 11 inch M2</option>
+          <option value="iPad Pro 12,9 inch M2" data-type="iPad">iPad Pro 12,9 inch M2</option>
+        </optgroup>
+        <optgroup label="MacBook">
+          <option value="MacBook Air M1" data-type="MacBook">MacBook Air M1</option>
+          <option value="MacBook Air M2" data-type="MacBook">MacBook Air M2</option>
+          <option value="MacBook Air 13 inch M2" data-type="MacBook">MacBook Air 13 inch M2</option>
+          <option value="MacBook Air M3" data-type="MacBook">MacBook Air M3</option>
+          <option value="MacBook Air M4" data-type="MacBook">MacBook Air M4</option>
+          <option value="MacBook Pro 14 inch M1 Pro" data-type="MacBook">MacBook Pro 14 inch M1 Pro</option>
+          <option value="MacBook Pro 16 inch M1 max" data-type="MacBook">MacBook Pro 16 inch M1 max</option>
+          <option value="MacBook Pro M3" data-type="MacBook">MacBook Pro M3</option>
+        </optgroup>
+        <optgroup label="Apple Watch">
+          <option value="Apple Watch SE" data-type="Apple Watch">Apple Watch SE</option>
+          <option value="Apple Watch Series 9" data-type="Apple Watch">Apple Watch Series 9</option>
+          <option value="Apple Watch Ultra 2" data-type="Apple Watch">Apple Watch Ultra 2</option>
+        </optgroup>
+        <optgroup label="iMac">
+          <option value="iMac 24 inch M1" data-type="iMac">iMac 24 inch M1</option>
+        </optgroup>
+        <optgroup label="Mac mini">
+          <option value="Mac Mini M1" data-type="Mac mini">Mac Mini M1</option>
+        </optgroup>
       </select>
       <select class="footerNotifySelect" name="storage" aria-label="{{ 'footer.newsletter.storage_placeholder' | t }}" data-footer-notify-storage>
         <option value="">{{ 'footer.newsletter.storage_placeholder' | t }}</option>
@@ -106,8 +169,6 @@
       var loadingLabel = {{ 'footer.newsletter.loading' | t | json }};
       var submitLabel = {{ 'footer.newsletter.cta' | t | json }};
       var thanksText = {{ 'footer.newsletter.thanks' | t | json }};
-      var modelLoadingText = {{ 'footer.newsletter.model_loading' | t | json }};
-      var modelErrorText = {{ 'footer.newsletter.model_error' | t | json }};
       var modelPlaceholder = {{ 'footer.newsletter.model_placeholder' | t | json }};
       var genericError = {{ 'inventory_notify.errors.generic' | t | json }};
 
@@ -116,7 +177,13 @@
         return (code && strings[code]) || null;
       }
 
-      function loadModels(attemptsLeft) {
+      // De lijst hierboven is statisch en werkt altijd zonder netwerk. Hier
+      // proberen we 'm eenmalig, stil op de achtergrond te verversen met de
+      // live lijst — als dat lukt is de lijst exact up-to-date met de
+      // voorraad; als het faalt (netwerkhapering) blijft gewoon de statische
+      // lijst staan, de bezoeker merkt daar niets van.
+      function refreshModelsSilently() {
+        var previousValue = modelSelect.value;
         fetch(backend.replace(/\/$/, '') + '/api/inventory/models')
           .then(function (r) { return r.json(); })
           .then(function (data) {
@@ -137,31 +204,13 @@
               html += '</optgroup>';
             });
             modelSelect.innerHTML = html;
-            modelSelect.disabled = false;
+            if (previousValue) modelSelect.value = previousValue;
           })
           .catch(function () {
-            // A transient network hiccup shouldn't permanently strand the
-            // visitor on "Modellen laden…" — retry a couple of times, then
-            // fall back to a clickable retry instead of a dead-looking state.
-            if (attemptsLeft > 0) {
-              setTimeout(function () { loadModels(attemptsLeft - 1); }, 1500);
-              return;
-            }
-            modelSelect.innerHTML = '<option value="">' + modelErrorText + '</option>';
-            modelSelect.disabled = false;
-            modelSelect.dataset.retry = '1';
+            // Niets doen — de statische lijst staat er al en blijft bruikbaar.
           });
       }
-      loadModels(2);
-
-      modelSelect.addEventListener('mousedown', function () {
-        if (modelSelect.dataset.retry === '1') {
-          delete modelSelect.dataset.retry;
-          modelSelect.disabled = true;
-          modelSelect.innerHTML = '<option value="">' + modelLoadingText + '</option>';
-          loadModels(2);
-        }
-      });
+      refreshModelsSilently();
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
