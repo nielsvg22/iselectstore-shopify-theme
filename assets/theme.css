@@ -242,13 +242,12 @@ h2{font-size:clamp(27px,4vw,40px);letter-spacing:-.025em;margin:0 0 6px;font-wei
 footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-gradient(155deg,#f9858b 0%,#ef6570 52%,#e25562 100%);color:#fff}
 .siteFooter .wrap{position:relative;z-index:1}
 .footerGiantMark{position:absolute;right:-70px;bottom:-95px;width:400px;height:400px;color:#fff;opacity:.1;pointer-events:none;z-index:0}
-.footer{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:34px}
-.footer h4{margin:0 0 14px;font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.09em}
-.footer p,.footer a{display:block;color:rgba(255,255,255,.82);font-size:13px;line-height:2;margin:0;transition:color .2s}
+.footer{display:grid;grid-template-columns:1.5fr repeat(2,1fr);gap:34px}
+.footer h4,.footerContact h4{margin:0 0 14px;font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.09em}
+.footer p,.footer a,.footerContact p{display:block;color:rgba(255,255,255,.82);font-size:13px;line-height:2;margin:0;transition:color .2s}
 .footer a:hover{color:#fff}
 .footer a.js-tradein-trigger{cursor:pointer}
-.footerContactRow{display:flex !important;align-items:flex-start;gap:9px;line-height:1.5 !important;padding:3px 0}
-.footerContactIcon{width:15px;height:15px;flex:none;margin-top:2px;color:rgba(255,255,255,.65)}
+.footerContact{margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28)}
 .footerLogo{color:#fff !important;font-size:23px;gap:10px}
 .footerMark{width:26px;height:26px;color:#fff;flex:none}
 .footerTagline{margin-top:14px;color:rgba(255,255,255,.85)}

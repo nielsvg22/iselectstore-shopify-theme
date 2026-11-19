@@ -47,22 +47,6 @@
       {% if pages['algemene-voorwaarden'] %}<a href="{{ pages['algemene-voorwaarden'].url }}">{{ 'footer.links.terms' | t }}</a>{% endif %}
       {% for policy in shop.policies %}<a href="{{ policy.url }}">{{ policy.title }}</a>{% endfor %}
     </div>
-
-    <div>
-      <h4>{{ 'footer.headings.contact' | t }}</h4>
-      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><span>{{ section.settings.phone }}</span></p>
-      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span>{{ section.settings.email | default: shop.email }}</span></p>
-      <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>{{ section.settings.address }}</span></p>
-      {% if section.settings.iban != blank %}
-        <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>{{ 'footer.badges.iban' | t }} {{ section.settings.iban }}</span></p>
-      {% endif %}
-      {% if section.settings.kvk != blank %}
-        <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg><span>{{ 'footer.badges.kvk' | t }} {{ section.settings.kvk }}</span></p>
-      {% endif %}
-      {% if section.settings.btw != blank %}
-        <p class="footerContactRow"><svg class="footerContactIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7h6M9 12h6M9 17h4"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg><span>{{ 'footer.badges.btw' | t }} {{ section.settings.btw }}</span></p>
-      {% endif %}
-    </div>
   </div>
 
   {% comment %}
@@ -267,6 +251,16 @@
       });
     })();
   </script>
+
+  <div class="footerContact">
+    <h4>{{ 'footer.headings.contact' | t }}</h4>
+    <p>{{ section.settings.phone }}</p>
+    <p>{{ section.settings.email | default: shop.email }}</p>
+    <p>{{ section.settings.address }}</p>
+    {% if section.settings.iban != blank %}<p>{{ 'footer.badges.iban' | t }} {{ section.settings.iban }}</p>{% endif %}
+    {% if section.settings.kvk != blank %}<p>{{ 'footer.badges.kvk' | t }} {{ section.settings.kvk }}</p>{% endif %}
+    {% if section.settings.btw != blank %}<p>{{ 'footer.badges.btw' | t }} {{ section.settings.btw }}</p>{% endif %}
+  </div>
 
   {% assign dyn_rating = shop.metafields.custom.rating_average | append: '/10' %}
   {% assign dyn_count = shop.metafields.custom.review_count %}
