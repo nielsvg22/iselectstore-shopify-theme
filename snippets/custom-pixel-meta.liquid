@@ -1,8 +1,13 @@
 {% comment %}
-  Custom pixel code voor Meta Pixel via Shopify Customer Events.
+  Custom pixel voor het video-retargeting-event, via Shopify Customer Events.
   Kopieer de inhoud van dit snippet naar:
   Shopify Admin → Instellingen → Customer Events → Custom pixel toevoegen
-  Plak deze code in het pixel-veld en koppel aan de juiste Customer Events.
+
+  Stuurt BEWUST alleen het 'video_engaged'-event door — niet PageView,
+  ViewContent, AddToCart, InitiateCheckout of Purchase. Die standaard-events
+  worden al gedekt door Shopify's eigen "Facebook & Instagram"-kanaal-app
+  (Server + Web toegang, al actief in Customer Events). Nog een keer
+  hetzelfde via fbq() zou die events dubbel tellen in Meta Ads/Events Manager.
 {% endcomment %}
 
 {% if settings.meta_pixel_id != blank %}
@@ -24,31 +29,15 @@
       return window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.userCanBeTracked();
     }
 
-    if (consentAccepted()) {
-      loadFbPixel();
-      fbq('track', 'PageView');
-    }
-
     window.Shopify = window.Shopify || {};
     window.Shopify.customerEvents = window.Shopify.customerEvents || [];
     window.Shopify.customerEvents.push(function (event) {
       if (!consentAccepted()) return;
+      if (event.name !== 'video_engaged') return;
       if (!window.fbq) loadFbPixel();
 
-      var name = event.name;
       var data = event.data || {};
-
-      if (name === 'page_viewed') fbq('track', 'PageView');
-      if (name === 'product_viewed') fbq('track', 'ViewContent', { content_ids: [data.productVariant?.id], content_type: 'product', value: data.productVariant?.price?.amount, currency: data.productVariant?.price?.currencyCode });
-      if (name === 'product_added_to_cart') fbq('track', 'AddToCart', { content_ids: [data.cartLine?.merchandise?.productVariant?.id], content_type: 'product', value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
-      if (name === 'checkout_started') fbq('track', 'InitiateCheckout');
-      if (name === 'checkout_completed') fbq('track', 'Purchase', { value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
-
-      // Video-retargeting: custom event per kijk-milestone (25/50/75/95%),
-      // gepubliceerd door assets/theme.js (trackVideoEngagement). Voorbereiding
-      // voor een Meta-doelgroep "VideoView, percent >= 50" — nog niet actief
-      // totdat deze doelgroep handmatig in Meta Ads Manager wordt aangemaakt.
-      if (name === 'video_engaged') fbq('trackCustom', 'VideoView', { content_name: data.video, percent_watched: data.percent });
+      fbq('trackCustom', 'VideoView', { content_name: data.video, percent_watched: data.percent });
     });
   })();
 </script>

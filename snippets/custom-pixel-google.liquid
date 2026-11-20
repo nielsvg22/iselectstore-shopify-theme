@@ -1,8 +1,13 @@
 {% comment %}
-  Custom pixel code voor Google Analytics 4 + Google Ads via Shopify Customer Events.
+  Custom pixel voor het video-retargeting-event, via Shopify Customer Events.
   Kopieer de inhoud van dit snippet naar:
   Shopify Admin → Instellingen → Customer Events → Custom pixel toevoegen
-  Plak deze code in het pixel-veld en koppel aan de juiste Customer Events.
+
+  Stuurt BEWUST alleen het 'video_engaged'-event door — niet page_view,
+  view_item, add_to_cart, begin_checkout of purchase. Die standaard-events
+  worden al gedekt door Shopify's eigen "Google & YouTube"-kanaal-app
+  (Server + Web toegang, al actief in Customer Events). Nog een keer
+  hetzelfde via gtag() zou die events dubbel tellen in Analytics/Ads.
 {% endcomment %}
 
 {% if settings.google_analytics_id != blank or settings.google_ads_id != blank %}
@@ -28,30 +33,15 @@
       return window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.userCanBeTracked();
     }
 
-    if (consentAccepted()) {
-      loadGtag();
-      gtag('event', 'page_view');
-    }
-
     window.Shopify = window.Shopify || {};
     window.Shopify.customerEvents = window.Shopify.customerEvents || [];
     window.Shopify.customerEvents.push(function (event) {
       if (!consentAccepted()) return;
+      if (event.name !== 'video_engaged') return;
       if (!window.gtag) loadGtag();
 
-      var name = event.name;
       var data = event.data || {};
-
-      if (name === 'page_viewed') gtag('event', 'page_view');
-      if (name === 'product_viewed') gtag('event', 'view_item', { value: data.productVariant?.price?.amount, currency: data.productVariant?.price?.currencyCode });
-      if (name === 'product_added_to_cart') gtag('event', 'add_to_cart', { value: data.cartLine?.cost?.totalAmount?.amount, currency: data.cartLine?.cost?.totalAmount?.currencyCode });
-      if (name === 'checkout_started') gtag('event', 'begin_checkout');
-      if (name === 'checkout_completed') gtag('event', 'purchase', { transaction_id: data.checkout?.order?.id, value: data.checkout?.totalPrice?.amount, currency: data.checkout?.totalPrice?.currencyCode });
-
-      // Video-retargeting: voorbereiding voor een Google Ads-segment op basis
-      // van dit event ("video_progress", video_percent >= 50) — nog niet
-      // actief totdat dit segment handmatig in Google Ads wordt aangemaakt.
-      if (name === 'video_engaged') gtag('event', 'video_progress', { video_title: data.video, video_percent: data.percent });
+      gtag('event', 'video_progress', { video_title: data.video, video_percent: data.percent });
     });
   })();
 </script>
