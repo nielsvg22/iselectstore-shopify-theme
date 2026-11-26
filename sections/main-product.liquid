@@ -155,21 +155,45 @@
       {% assign dyn_rating_full = shop.metafields.custom.rating_average | append: '/10 · ' | append: shop.metafields.custom.review_count | append: ' ' | append: reviews_word %}
       <div class="pdpRating"><span class="stars">★★★★★</span><span>{% if section.settings.rating != blank %}{{ section.settings.rating }}{% elsif shop.metafields.custom.rating_average != blank %}{{ dyn_rating_full }}{% else %}{{ 'product_page.rating_default' | t }}{% endif %}</span></div>
 
+      {% assign device_types = 'iPhone,iPad,MacBook,Apple Watch,iMac,Mac mini' | split: ',' %}
+      {% assign is_device = false %}
+      {% for t in device_types %}
+        {% if product.type == t %}{% assign is_device = true %}{% endif %}
+      {% endfor %}
+
       <div class="pdpPrice">
         <b>{{ current_variant.price | money }}</b>
         {% if current_variant.compare_at_price > current_variant.price %}
           <span class="old">{{ current_variant.compare_at_price | money }}</span>
+        {% endif %}
+        {% if is_device %}
+          <span class="margeBadge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            {{ 'product_page.margin_scheme' | t }}
+          </span>
         {% endif %}
         {% if current_variant.compare_at_price > current_variant.price %}
           {% assign saving = current_variant.compare_at_price | minus: current_variant.price %}
           <span class="pdpSaving">{{ 'product_page.saving_prefix' | t }} {{ saving | money }}</span>
         {% endif %}
       </div>
+      {% assign original_retail_price = product.metafields.custom.original_retail_price %}
+      {% if is_device and original_retail_price != blank %}
+        <p class="pdpWasNew">{{ 'product_page.was_new' | t }} <strong>{{ original_retail_price | times: 100 | money }}</strong></p>
+      {% endif %}
+      {% if is_device %}
+        <p class="pdpMarginNote">{{ 'product_page.margin_scheme_note' | t }}</p>
+      {% endif %}
       {% if current_variant.available == false %}
         <p class="stockNote stockNote--sold">{{ 'products.product.sold_out' | t }}</p>
       {% elsif current_variant.inventory_management and current_variant.inventory_quantity <= 1 %}
         <p class="stockNote">{{ 'product_page.low_stock' | t }}</p>
       {% endif %}
+
+      <div class="pdpShipBox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>
+        <span>{{ 'header.top.shipping' | t }}</span>
+      </div>
 
       {% if device_rows != blank %}
         <div class="specs">
@@ -245,7 +269,16 @@
           </button>
         </div>
       {% endform %}
-      <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:26px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
+      <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:14px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
+
+      <div class="pdpPayRow" aria-hidden="true">
+        <img src="{{ 'payment-visa.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-mastercard.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-maestro.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-paypal.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-bancontact.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-ideal-wero.png' | asset_url }}" alt="" loading="lazy" width="26" height="26" class="pdpPayRow__square">
+      </div>
 
       <div class="pdpFeatures">
         {% if product.type != blank %}{% assign feature_product_type = product.type %}{% else %}{% assign feature_product_type = 'product_page.apple_product_default' | t %}{% endif %}
@@ -260,7 +293,6 @@
         {% assign feature_warranty = feature_warranty | strip %}
         {% if feature_warranty != blank %}<div class="pdpFeature">{% render 'brand-usp', icon: 'warranty' %}{{ 'product_page.feature_warranty' | t: months: feature_warranty }}</div>{% endif %}
       </div>
-      <p class="pdpShippingNote">{{ 'header.top.shipping' | t }}</p>
 
       {% assign show_guarantee_link = false %}
       {% if section.settings.show_guarantee_link and guarantee_page != blank %}{% assign show_guarantee_link = true %}{% endif %}

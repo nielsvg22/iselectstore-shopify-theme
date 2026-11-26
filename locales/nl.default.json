@@ -53,7 +53,7 @@
       "battery_condition": "Exacte batterijconditie",
       "trade_in": "Inruil mogelijk",
       "warranty": "6–12 maanden garantie",
-      "shipping": "Meestal voor 17:00 besteld, morgen in huis"
+      "shipping": "Meestal voor 18:30 besteld, de volgende dag in huis"
     }
   },
   "footer": {
@@ -217,6 +217,9 @@
     "saving_prefix": "Bespaar",
     "tax_note": "incl. belasting (marge) · gratis verzending",
     "low_stock": "Nog maar 1 op voorraad — dit exacte toestel is uniek",
+    "margin_scheme": "Margeregeling",
+    "was_new": "Was nieuw",
+    "margin_scheme_note": "Verkocht onder de margeregeling — geen btw op de factuur",
     "spec_storage": "Opslag",
     "spec_battery": "Batterijconditie",
     "battery_help_link": "Wat houdt batterijcapaciteit in?",

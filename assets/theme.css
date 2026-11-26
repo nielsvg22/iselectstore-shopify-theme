@@ -1,5 +1,6 @@
 :root{
   --navy:#1f3049;--coral:#f9858b;--coral-ink:#ef6570;--ivory:#f7f7f7;--anthracite:#25292d;
+  --green:#1a9b4c;--green-ink:#14532d;--green-soft:#e9f7ee;
   --ink:#25292d;--muted:#6b7280;--line:#e7e9ec;--soft:#f7f7f7;
   --lightpink:#FFE6ED;--lightblue:#E4ECF4;
   --max:1260px;--ease:cubic-bezier(.22,1,.36,1);--header-h:52px
@@ -333,6 +334,11 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .pdpPrice .old{font-size:16px}
 .pdpSaving{display:inline-block;background:#fdeceb;color:var(--coral-ink);font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;margin-bottom:26px}
 .pdpTaxNote{color:var(--muted);font-size:12.5px;margin:-18px 0 26px}
+.margeBadge{display:inline-flex;align-items:center;gap:5px;background:var(--green-soft);color:var(--green-ink);font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.margeBadge svg{width:13px;height:13px;flex:none}
+.pdpWasNew{color:var(--muted);font-size:13px;margin:0 0 4px}
+.pdpWasNew strong{color:var(--navy);font-weight:700;text-decoration:line-through}
+.pdpMarginNote{color:var(--muted);font-size:12.5px;margin:0 0 22px}
 
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:0 0 28px;padding:20px;background:var(--soft);border-radius:18px;border:1px solid var(--line)}
 .specs div{display:flex;flex-direction:column;gap:2px}
@@ -372,7 +378,13 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .pdpFeatures{display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:1px solid var(--line)}
 .pdpFeature{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--ink)}
 .pdpFeature svg{width:18px;height:18px;color:var(--coral);flex:none;margin-top:1px}
-.pdpShippingNote{color:var(--muted);font-size:12px;margin:10px 0 0;padding-top:10px}
+
+.pdpShipBox{display:flex;align-items:center;gap:10px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:0 0 22px;font-size:13px;font-weight:600;color:var(--navy)}
+.pdpShipBox svg{width:22px;height:22px;color:var(--coral);flex:none}
+
+.pdpPayRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 20px}
+.pdpPayRow img{height:22px;width:auto;border:1px solid var(--line);border-radius:5px;background:#fff;padding:2px 5px}
+.pdpPayRow img.pdpPayRow__square{padding:2px;width:26px;height:26px;object-fit:cover}
 
 .accordion{border-top:1px solid var(--line);margin-top:8px}
 .accItem{border-bottom:1px solid var(--line)}
@@ -384,8 +396,8 @@ footer{position:relative;overflow:hidden;padding:66px 0 30px;background:linear-g
 .accBody p{color:var(--muted);font-size:14px;line-height:1.7;padding:0 2px 18px;margin:0}
 .accBody ul{margin:0;padding:0 2px 18px 18px;color:var(--muted);font-size:14px;line-height:1.8}
 
-.stockNote{display:flex;align-items:center;gap:6px;color:var(--coral-ink);font-size:12.5px;font-weight:600;margin:0 0 22px}
-.stockNote::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--coral);flex:none;animation:pulse 1.6s infinite}
+.stockNote{display:flex;align-items:center;gap:6px;color:var(--green-ink);font-size:12.5px;font-weight:600;margin:0 0 22px}
+.stockNote::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);flex:none;animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 .mobileBuy{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(255,255,255,.94);backdrop-filter:blur(20px);border-top:1px solid var(--line);padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));align-items:center;gap:12px;box-shadow:0 -8px 24px -12px rgba(31,48,73,.15)}

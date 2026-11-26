@@ -53,7 +53,7 @@
       "battery_condition": "Exact battery health",
       "trade_in": "Trade-in available",
       "warranty": "6–12 months warranty",
-      "shipping": "Usually ordered before 5pm, delivered tomorrow"
+      "shipping": "Usually ordered before 6:30pm, delivered the next day"
     }
   },
   "footer": {
@@ -217,6 +217,9 @@
     "saving_prefix": "Save",
     "tax_note": "incl. tax (margin scheme) · free shipping",
     "low_stock": "Only 1 left in stock — this exact device is unique",
+    "margin_scheme": "Margin scheme",
+    "was_new": "Was new",
+    "margin_scheme_note": "Sold under the VAT margin scheme — no VAT on the invoice",
     "spec_storage": "Storage",
     "spec_battery": "Battery condition",
     "battery_help_link": "What does battery capacity mean?",
