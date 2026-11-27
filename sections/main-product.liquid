@@ -94,6 +94,7 @@
 
 <section style="padding-top:0"><div class="wrap">
   <div class="pdp">
+    <div class="pdpLeft">
     <div class="gallery">
       <div class="galleryMain">
         {% comment %} Per-product badge_text metafield wint van de algemene sectie-tekst, zodat de
@@ -149,8 +150,50 @@
       {% endif %}
     </div>
 
+      {% if device_rows != blank %}
+        <div class="specs">
+          <div class="specsHead">
+            <b>{{ 'product_page.device_heading' | t }}</b>
+            <span>{{ 'product_page.device_sub' | t }}</span>
+          </div>
+          {{ device_rows }}
+        </div>
+      {% endif %}
+
+      {% assign condition_text_default = 'product_page.condition_text_default' | t %}
+      {% assign guarantee_text_default = 'product_page.guarantee_text_default' | t %}
+      {% capture condition_body %}
+        {% if condition_display != blank %}<p class="accStrong">{{ condition_display }}</p>{% endif %}
+        <p>{{ section.settings.condition_text | default: condition_text_default }}</p>
+        {% if section.settings.show_condition_link and condition_page != blank %}
+          <a class="accLink" href="{{ condition_page.url }}">{{ 'product_page.condition_link_cta' | t }}</a>
+        {% endif %}
+      {% endcapture %}
+      {% capture guarantee_body %}
+        <p>{{ section.settings.guarantee_text | default: guarantee_text_default }}</p>
+        {% if section.settings.show_guarantee_link and guarantee_page != blank %}
+          <a class="accLink" href="{{ guarantee_page.url }}">{{ 'product_page.guarantee_link_cta' | t }}</a>
+        {% endif %}
+      {% endcapture %}
+
+      {% if section.settings.show_general_specs and general_rows != blank %}
+      <div class="specSection">
+        <h3>{{ 'product_page.accordion_specs' | t }}</h3>
+        <p class="accNote">{{ 'product_page.general_specs_sub' | t }}</p>
+        <div class="specs specs--flush">{{ general_rows }}</div>
+      </div>
+      {% endif %}
+      <div class="specSection">
+        <h3>{{ 'product_page.accordion_condition' | t }}</h3>
+        {{ condition_body }}
+      </div>
+      <div class="specSection">
+        <h3>{{ 'product_page.accordion_description' | t }}</h3>
+        {{ product.description }}
+      </div>
+    </div>
+
     <div class="pdpInfo">
-    <div class="pdpSummary">
       <b class="brand">{{ shop.name | default: 'Apple' }}{% if product.type %} · {{ product.type }}{% endif %}</b>
       <h1>{{ product.title }}</h1>
       {% assign reviews_word = 'footer.badges.reviews_count_suffix' | t %}
@@ -208,17 +251,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>
         <span>{{ 'header.top.shipping' | t }}</span>
       </div>
-    </div>
-
-      {% if device_rows != blank %}
-        <div class="specs">
-          <div class="specsHead">
-            <b>{{ 'product_page.device_heading' | t }}</b>
-            <span>{{ 'product_page.device_sub' | t }}</span>
-          </div>
-          {{ device_rows }}
-        </div>
-      {% endif %}
 
       {% comment %}
         Dynamische accessoires: bij iPhones automatisch de screenprotector die bij
@@ -321,15 +353,7 @@
         </div>
       {% endif %}
 
-      {% assign condition_text_default = 'product_page.condition_text_default' | t %}
       {% assign guarantee_text_default = 'product_page.guarantee_text_default' | t %}
-      {% capture condition_body %}
-        {% if condition_display != blank %}<p class="accStrong">{{ condition_display }}</p>{% endif %}
-        <p>{{ section.settings.condition_text | default: condition_text_default }}</p>
-        {% if section.settings.show_condition_link and condition_page != blank %}
-          <a class="accLink" href="{{ condition_page.url }}">{{ 'product_page.condition_link_cta' | t }}</a>
-        {% endif %}
-      {% endcapture %}
       {% capture guarantee_body %}
         <p>{{ section.settings.guarantee_text | default: guarantee_text_default }}</p>
         {% if section.settings.show_guarantee_link and guarantee_page != blank %}
@@ -337,46 +361,25 @@
         {% endif %}
       {% endcapture %}
 
-      <div class="belowFold">
-        <div class="belowFoldMain">
-          {% if section.settings.show_general_specs and general_rows != blank %}
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_specs' | t }}</h3>
-            <p class="accNote">{{ 'product_page.general_specs_sub' | t }}</p>
-            <div class="specs specs--flush">{{ general_rows }}</div>
-          </div>
-          {% endif %}
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_condition' | t }}</h3>
-            {{ condition_body }}
-          </div>
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_description' | t }}</h3>
-            {{ product.description }}
-          </div>
+      <div class="accordion">
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_guarantee' | t }}</div>
+          <div class="accBody">{{ guarantee_body }}</div>
         </div>
-        <div class="belowFoldSide">
-          <div class="accordion">
-            <div class="accItem">
-              <div class="accHead">{{ 'product_page.accordion_guarantee' | t }}</div>
-              <div class="accBody">{{ guarantee_body }}</div>
-            </div>
-            <div class="accItem">
-              <div class="accHead">{{ 'product_page.accordion_shipping' | t }}</div>
-              <div class="accBody"><p>{% if section.settings.shipping_text != blank %}{{ section.settings.shipping_text }}{% else %}{{ 'product_page.shipping_text_default' | t }}{% endif %}</p></div>
-            </div>
-          </div>
-          <div class="reviewsBlock">
-            <h3>{{ 'product_page.reviews_heading' | t }}</h3>
-            <p>{% if shop.metafields.custom.rating_average != blank %}<strong>{{ shop.metafields.custom.rating_average }}/10</strong> {{ 'product_page.reviews_summary' | t }} ({{ shop.metafields.custom.review_count }}){% else %}<strong>{{ 'product_page.rating_default' | t }}</strong>{% endif %}</p>
-            <a href="https://www.webwinkelkeur.nl/webshop/BestBuyPhone_1219253" target="_blank" rel="noopener">{{ 'product_page.reviews_read_all' | t }}</a>
-          </div>
-          <div class="tradeinBlock">
-            <h3>{{ 'product_page.tradein_heading' | t }}</h3>
-            <p>{{ 'product_page.tradein_sub' | t }}</p>
-            <a class="btn js-tradein-trigger" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
-          </div>
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_shipping' | t }}</div>
+          <div class="accBody"><p>{% if section.settings.shipping_text != blank %}{{ section.settings.shipping_text }}{% else %}{{ 'product_page.shipping_text_default' | t }}{% endif %}</p></div>
         </div>
+      </div>
+      <div class="reviewsBlock">
+        <h3>{{ 'product_page.reviews_heading' | t }}</h3>
+        <p>{% if shop.metafields.custom.rating_average != blank %}<strong>{{ shop.metafields.custom.rating_average }}/10</strong> {{ 'product_page.reviews_summary' | t }} ({{ shop.metafields.custom.review_count }}){% else %}<strong>{{ 'product_page.rating_default' | t }}</strong>{% endif %}</p>
+        <a href="https://www.webwinkelkeur.nl/webshop/BestBuyPhone_1219253" target="_blank" rel="noopener">{{ 'product_page.reviews_read_all' | t }}</a>
+      </div>
+      <div class="tradeinBlock">
+        <h3>{{ 'product_page.tradein_heading' | t }}</h3>
+        <p>{{ 'product_page.tradein_sub' | t }}</p>
+        <a class="btn js-tradein-trigger" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
       </div>
     </div>
   </div>
