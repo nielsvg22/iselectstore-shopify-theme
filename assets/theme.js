@@ -902,7 +902,6 @@ function makeStickyColumn(target, container) {
 }
 
 makeStickyColumn(document.querySelector('.pdpSummary'), document.querySelector('.pdpInfo'));
-makeStickyColumn(document.querySelector('.gallery'), document.querySelector('.pdp'));
 
 // Sticky add-to-cart bar: appears once the main buy button scrolls out of view
 (function () {
