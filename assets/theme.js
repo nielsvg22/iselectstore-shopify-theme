@@ -826,19 +826,19 @@ if (filterClose && filterSidebar) {
   });
 })();
 
-// Sticky product-summary column (price/CTA) on the PDP, desktop only.
+// Sticky columns on the PDP (gallery + price/CTA summary), desktop only.
 // Implemented in JS rather than `position: sticky` because this site has an
 // unresolved CSS issue (nested overflow on <html>/<body>) that silently
 // disables native sticky positioning sitewide; this fallback is immune to it.
-(function () {
-  var summary = document.querySelector('.pdpSummary');
-  var column = document.querySelector('.pdpInfo');
-  if (!summary || !column) return;
+function makeStickyColumn(target, container) {
+  if (!target || !container) return;
   var mq = window.matchMedia('(min-width: 901px)');
   var placeholder = document.createElement('div');
   placeholder.setAttribute('aria-hidden', 'true');
-  summary.parentNode.insertBefore(placeholder, summary.nextSibling);
+  target.parentNode.insertBefore(placeholder, target.nextSibling);
   var naturalHeight = 0;
+  var naturalLeft = 0;
+  var naturalWidth = 0;
   var ticking = false;
 
   function headerOffset() {
@@ -847,23 +847,26 @@ if (filterClose && filterSidebar) {
   }
 
   function reset() {
-    summary.classList.remove('isFixed', 'isBottom');
-    summary.style.top = '';
-    summary.style.left = '';
-    summary.style.width = '';
+    target.classList.remove('isFixed', 'isBottom');
+    target.style.top = '';
+    target.style.left = '';
+    target.style.width = '';
     placeholder.style.height = '0px';
   }
 
   function measure() {
     reset();
-    naturalHeight = summary.offsetHeight;
+    naturalHeight = target.offsetHeight;
+    var r = target.getBoundingClientRect();
+    naturalLeft = r.left;
+    naturalWidth = r.width;
   }
 
   function update() {
     ticking = false;
     if (!mq.matches) { reset(); return; }
     var offset = headerOffset();
-    var colRect = column.getBoundingClientRect();
+    var colRect = container.getBoundingClientRect();
 
     if (colRect.top >= offset || naturalHeight >= colRect.height) {
       reset();
@@ -871,17 +874,17 @@ if (filterClose && filterSidebar) {
     }
     placeholder.style.height = naturalHeight + 'px';
     if (colRect.bottom - naturalHeight <= offset) {
-      summary.classList.remove('isFixed');
-      summary.classList.add('isBottom');
-      summary.style.top = '';
-      summary.style.left = '0';
-      summary.style.width = colRect.width + 'px';
+      target.classList.remove('isFixed');
+      target.classList.add('isBottom');
+      target.style.top = '';
+      target.style.left = '0';
+      target.style.width = naturalWidth + 'px';
     } else {
-      summary.classList.remove('isBottom');
-      summary.classList.add('isFixed');
-      summary.style.top = offset + 'px';
-      summary.style.left = colRect.left + 'px';
-      summary.style.width = colRect.width + 'px';
+      target.classList.remove('isBottom');
+      target.classList.add('isFixed');
+      target.style.top = offset + 'px';
+      target.style.left = naturalLeft + 'px';
+      target.style.width = naturalWidth + 'px';
     }
   }
 
@@ -893,9 +896,13 @@ if (filterClose && filterSidebar) {
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   if (mq.addEventListener) mq.addEventListener('change', onResize); else mq.addListener(onResize);
+  window.addEventListener('load', onResize);
   measure();
   update();
-})();
+}
+
+makeStickyColumn(document.querySelector('.pdpSummary'), document.querySelector('.pdpInfo'));
+makeStickyColumn(document.querySelector('.gallery'), document.querySelector('.pdp'));
 
 // Sticky add-to-cart bar: appears once the main buy button scrolls out of view
 (function () {
