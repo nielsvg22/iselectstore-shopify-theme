@@ -300,10 +300,16 @@ function trackVideoEngagement(video, videoName) {
   });
 })();
 
-// Product gallery thumbnails
-document.querySelectorAll('.thumb').forEach(function (t) {
-  t.addEventListener('click', function () {
-    document.querySelectorAll('.thumb').forEach(function (x) { x.classList.remove('active'); });
+// Product gallery thumbnails (+ swipe on the main image, mobile)
+(function () {
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb'));
+  if (!thumbs.length) return;
+  var galleryMain = document.querySelector('.galleryMain');
+  var counter = document.getElementById('galleryCounter');
+  var nonVideoThumbs = thumbs.filter(function (t) { return !t.classList.contains('thumbVideo'); });
+
+  function selectThumb(t) {
+    thumbs.forEach(function (x) { x.classList.remove('active'); });
     t.classList.add('active');
     var main = document.getElementById('mainImg');
     var video = document.getElementById('mainVideo');
@@ -332,8 +338,29 @@ document.querySelectorAll('.thumb').forEach(function (t) {
       main.src = t.dataset.img;
       main.dataset.full = t.dataset.full;
     }
-  });
-});
+    if (counter) {
+      var pos = nonVideoThumbs.indexOf(t);
+      if (pos !== -1) counter.textContent = (pos + 1) + ' / ' + nonVideoThumbs.length;
+    }
+  }
+
+  thumbs.forEach(function (t) { t.addEventListener('click', function () { selectThumb(t); }); });
+
+  if (galleryMain && nonVideoThumbs.length > 1) {
+    var startX = null;
+    galleryMain.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    galleryMain.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var diff = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(diff) < 40) return;
+      var active = nonVideoThumbs.filter(function (t) { return t.classList.contains('active'); })[0] || nonVideoThumbs[0];
+      var idx = nonVideoThumbs.indexOf(active);
+      var nextIdx = (idx + (diff < 0 ? 1 : -1) + nonVideoThumbs.length) % nonVideoThumbs.length;
+      selectThumb(nonVideoThumbs[nextIdx]);
+    });
+  }
+})();
 
 // Product photo lightbox (zoom)
 (function () {
@@ -392,6 +419,15 @@ document.querySelectorAll('.thumb').forEach(function (t) {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') go(-1);
     if (e.key === 'ArrowRight') go(1);
+  });
+
+  var lbStartX = null;
+  lightbox.addEventListener('touchstart', function (e) { lbStartX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', function (e) {
+    if (lbStartX === null || images.length < 2) return;
+    var diff = e.changedTouches[0].clientX - lbStartX;
+    lbStartX = null;
+    if (Math.abs(diff) > 40) go(diff < 0 ? 1 : -1);
   });
 })();
 
@@ -788,4 +824,90 @@ if (filterClose && filterSidebar) {
     var trigger = e.target.closest('.js-tradein-trigger');
     if (trigger) { e.preventDefault(); open(); }
   });
+})();
+
+// Sticky product-summary column (price/CTA) on the PDP, desktop only.
+// Implemented in JS rather than `position: sticky` because this site has an
+// unresolved CSS issue (nested overflow on <html>/<body>) that silently
+// disables native sticky positioning sitewide; this fallback is immune to it.
+(function () {
+  var summary = document.querySelector('.pdpSummary');
+  var column = document.querySelector('.pdpInfo');
+  if (!summary || !column) return;
+  var mq = window.matchMedia('(min-width: 901px)');
+  var placeholder = document.createElement('div');
+  placeholder.setAttribute('aria-hidden', 'true');
+  summary.parentNode.insertBefore(placeholder, summary.nextSibling);
+  var naturalHeight = 0;
+  var ticking = false;
+
+  function headerOffset() {
+    var h = document.getElementById('siteHeader');
+    return (h ? h.offsetHeight : 52) + 24;
+  }
+
+  function reset() {
+    summary.classList.remove('isFixed', 'isBottom');
+    summary.style.top = '';
+    summary.style.left = '';
+    summary.style.width = '';
+    placeholder.style.height = '0px';
+  }
+
+  function measure() {
+    reset();
+    naturalHeight = summary.offsetHeight;
+  }
+
+  function update() {
+    ticking = false;
+    if (!mq.matches) { reset(); return; }
+    var offset = headerOffset();
+    var colRect = column.getBoundingClientRect();
+
+    if (colRect.top >= offset || naturalHeight >= colRect.height) {
+      reset();
+      return;
+    }
+    placeholder.style.height = naturalHeight + 'px';
+    if (colRect.bottom - naturalHeight <= offset) {
+      summary.classList.remove('isFixed');
+      summary.classList.add('isBottom');
+      summary.style.top = '';
+      summary.style.left = '0';
+      summary.style.width = colRect.width + 'px';
+    } else {
+      summary.classList.remove('isBottom');
+      summary.classList.add('isFixed');
+      summary.style.top = offset + 'px';
+      summary.style.left = colRect.left + 'px';
+      summary.style.width = colRect.width + 'px';
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  function onResize() { measure(); update(); }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize);
+  if (mq.addEventListener) mq.addEventListener('change', onResize); else mq.addListener(onResize);
+  measure();
+  update();
+})();
+
+// Sticky add-to-cart bar: appears once the main buy button scrolls out of view
+(function () {
+  var bar = document.getElementById('mobileBuy');
+  var mainBuyRow = document.querySelector('.buyRow[data-base-price]');
+  if (!bar || !mainBuyRow) return;
+  if (!('IntersectionObserver' in window)) { bar.classList.add('isVisible'); return; }
+
+  var barIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      bar.classList.toggle('isVisible', !entry.isIntersecting);
+    });
+  }, { rootMargin: '0px 0px -40% 0px' });
+  barIO.observe(mainBuyRow);
 })();
