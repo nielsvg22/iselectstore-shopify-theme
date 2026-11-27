@@ -257,6 +257,15 @@
 
       {% render 'inventory-notification-form', current_variant: current_variant %}
 
+      <div class="pdpPayRow" aria-hidden="true">
+        <img src="{{ 'payment-visa.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-mastercard.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-maestro.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-paypal.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-bancontact.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
+        <img src="{{ 'payment-ideal-wero.png' | asset_url }}" alt="" loading="lazy" width="26" height="26" class="pdpPayRow__square">
+      </div>
+
       {% form 'product', product, id: 'productForm' %}
         <input type="hidden" name="id" value="{{ current_variant.id }}">
         <div class="buyRow" data-base-price="{{ current_variant.price }}" data-currency="{{ cart.currency.iso_code }}">
@@ -269,15 +278,6 @@
           </button>
         </div>
       {% endform %}
-
-      <div class="pdpPayRow" aria-hidden="true">
-        <img src="{{ 'payment-visa.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
-        <img src="{{ 'payment-mastercard.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
-        <img src="{{ 'payment-maestro.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
-        <img src="{{ 'payment-paypal.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
-        <img src="{{ 'payment-bancontact.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
-        <img src="{{ 'payment-ideal-wero.png' | asset_url }}" alt="" loading="lazy" width="26" height="26" class="pdpPayRow__square">
-      </div>
 
       <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:14px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
 
