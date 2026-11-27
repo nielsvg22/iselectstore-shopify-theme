@@ -332,45 +332,31 @@
         {% endif %}
       {% endcapture %}
 
-      <div class="belowFold">
-        <div class="belowFoldMain">
-          {% if section.settings.show_general_specs and general_rows != blank %}
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_specs' | t }}</h3>
+      <div class="accordion">
+        <div class="accItem open">
+          <div class="accHead">{{ 'product_page.accordion_description' | t }}</div>
+          <div class="accBody">{{ product.description }}</div>
+        </div>
+        {% if section.settings.show_general_specs and general_rows != blank %}
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_specs' | t }}</div>
+          <div class="accBody">
             <p class="accNote">{{ 'product_page.general_specs_sub' | t }}</p>
             <div class="specs specs--flush">{{ general_rows }}</div>
           </div>
-          {% endif %}
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_condition' | t }}</h3>
-            {{ condition_body }}
-          </div>
-          <div class="specSection">
-            <h3>{{ 'product_page.accordion_description' | t }}</h3>
-            {{ product.description }}
-          </div>
         </div>
-        <div class="belowFoldSide">
-          <div class="accordion">
-            <div class="accItem">
-              <div class="accHead">{{ 'product_page.accordion_guarantee' | t }}</div>
-              <div class="accBody">{{ guarantee_body }}</div>
-            </div>
-            <div class="accItem">
-              <div class="accHead">{{ 'product_page.accordion_shipping' | t }}</div>
-              <div class="accBody"><p>{% if section.settings.shipping_text != blank %}{{ section.settings.shipping_text }}{% else %}{{ 'product_page.shipping_text_default' | t }}{% endif %}</p></div>
-            </div>
-          </div>
-          <div class="reviewsBlock">
-            <h3>{{ 'product_page.reviews_heading' | t }}</h3>
-            <p>{% if shop.metafields.custom.rating_average != blank %}<strong>{{ shop.metafields.custom.rating_average }}/10</strong> {{ 'product_page.reviews_summary' | t }} ({{ shop.metafields.custom.review_count }}){% else %}<strong>{{ 'product_page.rating_default' | t }}</strong>{% endif %}</p>
-            <a href="https://www.webwinkelkeur.nl/webshop/BestBuyPhone_1219253" target="_blank" rel="noopener">{{ 'product_page.reviews_read_all' | t }}</a>
-          </div>
-          <div class="tradeinBlock">
-            <h3>{{ 'product_page.tradein_heading' | t }}</h3>
-            <p>{{ 'product_page.tradein_sub' | t }}</p>
-            <a class="btn js-tradein-trigger" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
-          </div>
+        {% endif %}
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_condition' | t }}</div>
+          <div class="accBody">{{ condition_body }}</div>
+        </div>
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_guarantee' | t }}</div>
+          <div class="accBody">{{ guarantee_body }}</div>
+        </div>
+        <div class="accItem">
+          <div class="accHead">{{ 'product_page.accordion_shipping' | t }}</div>
+          <div class="accBody"><p>{% if section.settings.shipping_text != blank %}{{ section.settings.shipping_text }}{% else %}{{ 'product_page.shipping_text_default' | t }}{% endif %}</p></div>
         </div>
       </div>
     </div>
