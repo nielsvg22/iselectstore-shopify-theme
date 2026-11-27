@@ -269,7 +269,6 @@
           </button>
         </div>
       {% endform %}
-      <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:14px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
 
       <div class="pdpPayRow" aria-hidden="true">
         <img src="{{ 'payment-visa.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
@@ -279,6 +278,8 @@
         <img src="{{ 'payment-bancontact.svg' | asset_url }}" alt="" loading="lazy" width="38" height="22">
         <img src="{{ 'payment-ideal-wero.png' | asset_url }}" alt="" loading="lazy" width="26" height="26" class="pdpPayRow__square">
       </div>
+
+      <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:14px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
 
       <div class="pdpFeatures">
         {% if product.type != blank %}{% assign feature_product_type = product.type %}{% else %}{% assign feature_product_type = 'product_page.apple_product_default' | t %}{% endif %}
