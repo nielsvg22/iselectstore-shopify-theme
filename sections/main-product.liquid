@@ -243,18 +243,6 @@
         {% endif %}
       {% endif %}
 
-      {% if acc_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
-        <div class="optionGroup">
-          <label>{{ 'product_page.accessories_label' | t }}</label>
-          <div class="accessories" id="accessoryList">
-            {% if acc_1 %}{% render 'accessory-option', accessory: acc_1 %}{% endif %}
-            {% if section.settings.accessory_2 %}{% render 'accessory-option', accessory: section.settings.accessory_2 %}{% endif %}
-            {% if section.settings.accessory_3 %}{% render 'accessory-option', accessory: section.settings.accessory_3 %}{% endif %}
-          </div>
-          <div class="accTotal">{{ 'product_page.accessories_total' | t }} <b class="js-total">{{ current_variant.price | money }}</b></div>
-        </div>
-      {% endif %}
-
       {% render 'inventory-notification-form', current_variant: current_variant %}
 
       <div class="pdpPayRow" aria-hidden="true">
@@ -280,6 +268,18 @@
       {% endform %}
 
       <a class="btn js-tradein-trigger" style="width:100%;margin-bottom:14px" href="#">{{ 'product_page.trade_in_cta' | t }}</a>
+
+      {% if acc_1 or section.settings.accessory_2 or section.settings.accessory_3 %}
+        <div class="optionGroup">
+          <label>{{ 'product_page.accessories_label' | t }}</label>
+          <div class="accessories" id="accessoryList">
+            {% if acc_1 %}{% render 'accessory-option', accessory: acc_1 %}{% endif %}
+            {% if section.settings.accessory_2 %}{% render 'accessory-option', accessory: section.settings.accessory_2 %}{% endif %}
+            {% if section.settings.accessory_3 %}{% render 'accessory-option', accessory: section.settings.accessory_3 %}{% endif %}
+          </div>
+          <div class="accTotal">{{ 'product_page.accessories_total' | t }} <b class="js-total">{{ current_variant.price | money }}</b></div>
+        </div>
+      {% endif %}
 
       <div class="pdpFeatures">
         {% if product.type != blank %}{% assign feature_product_type = product.type %}{% else %}{% assign feature_product_type = 'product_page.apple_product_default' | t %}{% endif %}
